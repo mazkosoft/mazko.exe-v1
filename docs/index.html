@@ -33,6 +33,11 @@
             --fa-button-active-bg: linear-gradient(to top, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
 
             --taskbar-height: 48px; /* Define taskbar height */
+
+            /* Cursors - These will be set dynamically by JavaScript */
+            --cursor-default: auto;
+            --cursor-active: auto;
+            --cursor-pointer: pointer;
         }
 
         body {
@@ -45,8 +50,16 @@
             position: relative; /* For background animation positioning */
             width: 100vw; /* Ensure body takes full viewport width */
             height: 100vh; /* Ensure body takes full viewport height */
-            /* Custom mouse cursor - using provided images */
-            cursor: url('uploaded:hand_open.png') 10 10, default; /* Default cursor */
+            /* Custom mouse cursor styles (will be populated by JS) */
+            cursor: var(--cursor-default);
+        }
+
+        body:active {
+            cursor: var(--cursor-active);
+        }
+
+        a, button, .clickable-element {
+            cursor: var(--cursor-pointer);
         }
 
         /* Frutiger Aero style desktop background */
@@ -66,6 +79,8 @@
             opacity: 0.8; /* Slightly transparent */
             filter: brightness(0.8) contrast(1.2); /* Adjust brightness and contrast */
             z-index: 0;
+            /* Placeholder for a background image URL if user wants it */
+            /* background-image: url(var(--desktop-background-image)); */
         }
 
         /* Simulate dot matrix effect, overlaid on the background */
@@ -173,7 +188,7 @@
             font-weight: bold;
             text-shadow: 0 0 5px rgba(0, 191, 255, 0.5); /* Subtle text glow */
             box-shadow: 0 2px 10px rgba(0,0,0,0.5), inset 0 1px 6px rgba(255,255,255,0.6); /* More prominent shadow and inner highlight */
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             transition: all 0.1s ease-in-out;
             white-space: nowrap;
         }
@@ -190,10 +205,10 @@
             box-shadow: inset 0 1px 6px rgba(0,0,0,0.7), inset 0 -1px 4px rgba(255,255,255,0.4);
         }
 
-        .start-button svg {
+        .start-button .icon-image { /* Sizing for dynamically loaded image */
             width: 1.5em; /* Larger icon size */
             height: 1.5em; /* Larger icon size */
-            fill: white;
+            filter: drop-shadow(0 0 5px rgba(0, 191, 255, 0.5)); /* text-shadow equivalent for image */
         }
 
         /* Taskbar Icons (for open/minimized windows) */
@@ -219,7 +234,7 @@
             font-size: 1rem; /* Standard icon size */
             color: var(--light-blue); /* Light blue color */
             transition: all 0.2s ease;
-            cursor: url('uploaded:hand_open.png') 10 10, default; /* Default cursor */
+            cursor: default; /* Changed to default cursor */
             padding: 5px;
             border-radius: 50%; /* Circular for system icons */
         }
@@ -228,11 +243,11 @@
             background-color: rgba(255,255,255,0.1);
             transform: translateY(-1px);
         }
-        .system-tray-icon svg {
+        .system-tray-icon .icon-image { /* Sizing for dynamically loaded image */
             width: 1em;
             height: 1em;
             vertical-align: middle;
-            fill: currentColor;
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
 
         /* Desktop Icons (Shortcuts) */
@@ -252,7 +267,7 @@
             align-items: center;
             text-align: center;
             width: 80px; /* Fixed width for icon block */
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             transition: transform 0.1s ease, filter 0.1s ease, background-color 0.1s ease; /* Added background-color transition */
             padding: 5px;
             border-radius: 8px;
@@ -273,10 +288,9 @@
             box-shadow: inset 0 0 5px rgba(0,0,0,0.5);
         }
 
-        .desktop-icon svg {
+        .desktop-icon .icon-image { /* Sizing for dynamically loaded image */
             width: 48px; /* Larger icon size */
             height: 48px;
-            fill: white; /* Icon color */
             filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5)); /* Subtle shadow */
         }
 
@@ -328,16 +342,16 @@
             border-radius: 10px;
             border: 1px solid rgba(255, 255, 255, 0.3);
             box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
         }
 
-        .start-menu-header svg {
+        .start-menu-header .icon-image { /* Sizing for dynamically loaded image */
             width: 36px;
             height: 36px;
             border-radius: 50%;
             border: 1px solid white;
             margin-right: 10px;
-            fill: white;
+            /* fill: white; - This was for SVG, not needed for image */
         }
 
         .start-menu-header span {
@@ -356,7 +370,7 @@
             color: white;
             text-decoration: none;
             transition: background-color 0.2s ease, transform 0.1s ease, filter 0.2s ease;
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             font-size: 0.95rem;
             font-weight: normal; /* Lighter font weight */
             border-radius: 8px; /* More rounded for Aero style */
@@ -389,15 +403,15 @@
             box-shadow: inset 0 0 5px rgba(0,0,0,0.3);
         }
 
-        .start-menu-item svg { /* Style for SVG icons within menu items */
+        .start-menu-item .icon-image { /* Style for dynamically loaded images within menu items */
             margin-right: 12px;
             width: 1.2em; /* Slightly larger icons */
             height: 1.2em;
-            fill: var(--light-blue); /* Light blue icons */
-            transition: fill 0.2s ease;
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3)); /* Subtle glow for image */
+            transition: filter 0.2s ease;
         }
-        .start-menu-item:hover svg {
-            fill: white; /* Change icon color on hover */
+        .start-menu-item:hover .icon-image {
+            filter: brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.8)); /* Brighten and stronger glow on hover */
         }
         
         /* New style for the text label within start menu items */
@@ -429,7 +443,7 @@
             background-color: transparent; /* Transparent background */
             border: none; /* No border */
             border-radius: 8px; /* Rounded corners */
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             transition: background-color 0.2s ease, transform 0.1s ease;
             color: white; /* Icon color */
             /* Removed font-size and text-shadow as there's no text */
@@ -446,11 +460,10 @@
             background-color: rgba(255, 255, 255, 0.25); /* More pronounced active state */
         }
 
-        .start-menu-footer-button svg {
+        .start-menu-footer-button .icon-image { /* Sizing for dynamically loaded image */
             width: 24px; /* Icon size */
             height: 24px;
-            fill: white; /* Icon color */
-            /* Removed margin-bottom as there's no text */
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
 
         /* Animation for menu appearance - Adjusted for bottom-left origin */
@@ -507,7 +520,7 @@
             align-items: center;
             /* Added small border matching title bar color */
             border-bottom: 2px solid rgba(255, 255, 255, 0.8); /* Thicker, more visible border */
-            cursor: url('uploaded:hand_open.png') 10 10, grab; /* Grab cursor */
+            cursor: grab; /* Changed to grab cursor */
             border-radius: 9px 9px 0 0; /* Match window border-radius, adjusted for 3px window border */
             position: relative;
             font-size: 1rem; /* Standard title font size */
@@ -543,10 +556,10 @@
             gap: 8px; /* Space between logo and title */
         }
 
-        .os-window-title-content .window-logo {
+        .os-window-title-content .icon-image { /* Sizing for dynamically loaded image */
             width: 24px; /* Size for the M-logo */
             height: 24px;
-            fill: white;
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
 
         .os-window-title {
@@ -569,10 +582,10 @@
             justify-content: center;
             font-size: 0.8rem; /* Adjusted for SVG size */
             color: white; /* White icons */
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             transition: background-color 0.1s ease, transform 0.05s ease, box-shadow 0.1s ease;
             /* More glossy, 3D effect for control buttons */
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 5px rgba(0,0,0,0.5);
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 5px rgba(0,0,0,0.5); /* Corrected this line */
             border: 1px solid rgba(255, 255, 255, 0.6);
             background: rgba(255,255,255,0.2); /* Base white background for buttons */
         }
@@ -601,10 +614,10 @@
             filter: brightness(0.8);
             background: rgba(255,255,255,0.1); /* Darker white on active */
         }
-        .os-window-controls .control-button svg {
+        .os-window-controls .control-button .icon-image { /* Sizing for dynamically loaded image */
             width: 0.8em;
             height: 0.8em;
-            fill: white; /* White icons for Aero buttons */
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
 
         /* Window content area */
@@ -669,7 +682,7 @@
             border: 1px solid rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             overflow: hidden;
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             transition: all 0.2s ease-in-out, filter 0.2s ease, box-shadow 0.2s ease;
             box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4), inset 0 0 8px rgba(255,255,255,0.1); /* More prominent shadow and subtle inner glow */
             display: flex;
@@ -745,7 +758,7 @@
             color: white;
             border: none;
             padding: 10px;
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             font-size: 1.5rem; /* Adjusted for SVG size */
             border-radius: 50%;
             transition: background-color 0.2s ease, filter 0.2s ease;
@@ -758,10 +771,10 @@
             filter: brightness(1.2);
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
-        .work-detail-content .gallery-nav-button svg {
+        .work-detail-content .gallery-nav-button .icon-image { /* Sizing for dynamically loaded image */
             width: 1.5em;
             height: 1.5em;
-            fill: white;
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
 
         .work-detail-content .gallery-nav-button.prev {
@@ -787,7 +800,7 @@
             object-fit: cover;
             border-radius: 5px;
             border: 2px solid transparent;
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             transition: border-color 0.2s ease, transform 0.1s ease, filter 0.2s ease, box-shadow 0.2s ease;
         }
 
@@ -830,7 +843,7 @@
             border-radius: 8px; /* Rounded square */
             padding: 4px 8px;
             margin: 0 3px;
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             display: flex;
             align-items: center;
             gap: 5px;
@@ -858,15 +871,14 @@
             transform: translateY(0);
         }
 
-        .taskbar-minimized-icon svg {
+        .taskbar-minimized-icon .icon-image { /* Sizing for dynamically loaded image */
             width: 1em;
             height: 1em;
-            fill: white; /* White icons */
-            transition: fill 0.2s ease;
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
+            transition: filter 0.2s ease;
         }
-        .taskbar-minimized-icon.active svg {
-            fill: white;
-            text-shadow: 0 0 5px rgba(255,255,255,0.8);
+        .taskbar-minimized-icon.active .icon-image {
+            filter: brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.8));
         }
 
         /* Loading spinner styles */
@@ -922,7 +934,7 @@
 
         .toggle-slider {
             position: absolute;
-            cursor: url('uploaded:hand_point.png') 10 10, pointer; /* Pointer cursor */
+            cursor: pointer; /* Changed to default pointer */
             top: 0;
             left: 0;
             right: 0;
@@ -1032,7 +1044,7 @@
 </head>
 <body>
     <!-- Desktop background layer for dynamic Frutiger Aero style background -->
-    <div class="desktop-background"></div>
+    <div class="desktop-background" id="desktop-background"></div>
 
     <!-- Desktop container, simulating a screen -->
     <div class="desktop-container" id="desktop-container">
@@ -1048,35 +1060,24 @@
                 <!-- Desktop Icons (Shortcuts) -->
                 <div class="desktop-icons-container" id="desktop-icons-container">
                     <div class="desktop-icon" data-section="works" data-title-zh="我的作品集" data-title-en="My Works">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                            <path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L224 48c-11.3-15.5-32.6-19.4-48.1-8.1S157.5 54.5 161.4 70l15.6 21.3c-11.3 15.5-32.6 19.4-48.1 8.1S97.5 54.5 101.4 70l-15.6 21.3C74.5 106.8 64 121.3 64 136V480z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_works"></span>
                         <span class="desktop-icon-label" data-lang-key="worksIcon">作品集</span>
                     </div>
                     <div class="desktop-icon" data-section="characters" data-title-zh="角色库" data-title-en="Characters">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
-                            <path d="M192 256A128 128 0 1 0 64 128a128 128 0 1 0 128 128zM32 384c-17.7 0-32 14.3-32 32V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V416c0-17.7-14.3-32-32-32H32zM544 256A128 128 0 1 0 416 128a128 128 0 1 0 128 128zM368 384c-17.7 0-32 14.3-32 32V448c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V416c0-17.7-14.3-32-32-32H368z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_characters"></span>
                         <span class="desktop-icon-label" data-lang-key="charactersIcon">角色</span>
                     </div>
                     <!-- About Me icon changed to mazko.exe with M icon -->
                     <div class="desktop-icon" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO">
-                        <svg viewBox="0 0 100 100" fill="currentColor">
-                            <circle cx="50" cy="50" r="40" fill="var(--primary-blue)"/>
-                            <text x="50%" y="65%" text-anchor="middle" font-size="50" font-weight="bold" fill="white" font-family="var(--font-main)">M</text>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                         <span class="desktop-icon-label" data-lang-key="mazkoExeIcon">MAZKO</span>
                     </div>
                     <div class="desktop-icon" data-section="services" data-title-zh="服务与报价" data-title-en="Services & Pricing">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
-                            <path d="M320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32 14.3 32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V160c0-53-43-96-96-96H320zM224 256c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V288c0-17.7-14.3-32-32-32zM0 416c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V288c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64V416zM48 288c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-17.7 0-32-14.3-32-32z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_services"></span>
                         <span class="desktop-icon-label" data-lang-key="servicesIcon">服务</span>
                     </div>
                     <div class="desktop-icon" data-section="socials" data-title-zh="社交媒体" data-title-en="Social Media">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                            <path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304V416c0 17.7 14.3 32 32 32s32-14.3 32-32V304c0-53 43-96 96-96h112v64c0 12.6 7.4 24.1 19 29.2s25 3.1 34.4-5.3L501.3 234.7c19.8-17.8 19.8-48.2 0-66L341.3 29.5c-9.4-8.5-22.9-10.4-34.4-5.3z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_socials"></span>
                         <span class="desktop-icon-label" data-lang-key="socialsIcon">社交</span>
                     </div>
                 </div>
@@ -1086,34 +1087,23 @@
             <!-- Start Menu -->
             <div id="start-menu" class="start-menu hidden">
                 <div class="start-menu-header" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO"> <!-- Make header clickable to open About Me -->
-                    <svg viewBox="0 0 100 100" fill="currentColor">
-                        <circle cx="50" cy="50" r="40" fill="var(--primary-blue)"/>
-                        <text x="50%" y="65%" text-anchor="middle" font-size="50" font-weight="bold" fill="white" font-family="var(--font-main)">M</text>
-                    </svg>
+                    <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                     <span data-lang-key="profileName">MAZKO</span>
                 </div>
                 <a href="#" class="start-menu-item" data-section="works" data-lang-key="worksMenuItem" data-title-zh="我的作品集" data-title-en="My Works">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                        <path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L224 48c-11.3-15.5-32.6-19.4-48.1-8.1S157.5 54.5 161.4 70l15.6 21.3c-11.3 15.5-32.6 19.4-48.1 8.1S97.5 54.5 101.4 70l-15.6 21.3C74.5 106.8 64 121.3 64 136V480z"/>
-                    </svg>
+                    <span class="icon-placeholder" data-asset-key="icon_works"></span>
                     <span class="menu-item-label"></span>
                 </a>
                 <a href="#" class="start-menu-item" data-section="characters" data-lang-key="charactersMenuItem" data-title-zh="角色库" data-title-en="Characters">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
-                        <path d="M192 256A128 128 0 1 0 64 128a128 128 0 1 0 128 128zM32 384c-17.7 0-32 14.3-32 32V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V416c0-17.7-14.3-32-32-32H32zM544 256A128 128 0 1 0 416 128a128 128 0 1 0 128 128zM368 384c-17.7 0-32 14.3-32 32V448c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V416c0-17.7-14.3-32-32-32H368z"/>
-                    </svg>
+                    <span class="icon-placeholder" data-asset-key="icon_characters"></span>
                     <span class="menu-item-label"></span>
                 </a>
                 <a href="#" class="start-menu-item" data-section="services" data-lang-key="servicesMenuItem" data-title-zh="服务与报价" data-title-en="Services & Pricing">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
-                        <path d="M320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32 14.3 32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V160c0-53-43-96-96-96H320zM224 256c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V288c0-17.7-14.3-32-32-32zM0 416c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V288c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64V416zM48 288c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-17.7 0-32-14.3-32-32z"/>
-                    </svg>
+                    <span class="icon-placeholder" data-asset-key="icon_services"></span>
                     <span class="menu-item-label"></span>
                 </a>
                 <a href="#" class="start-menu-item" data-section="socials" data-lang-key="socialsMenuItem" data-title-zh="社交媒体" data-title-en="Social Media">
-                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                        <path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304V416c0 17.7 14.3 32 32 32s32-14.3 32-32V304c0-53 43-96 96-96h112v64c0 12.6 7.4 24.1 19 29.2s25 3.1 34.4-5.3L501.3 234.7c19.8-17.8 19.8-48.2 0-66L341.3 29.5c-9.4-8.5-22.9-10.4-34.4-5.3z"/>
-                    </svg>
+                    <span class="icon-placeholder" data-asset-key="icon_socials"></span>
                     <span class="menu-item-label"></span>
                 </a>
                 <!-- Removed the horizontal line as requested -->
@@ -1121,15 +1111,11 @@
                 <!-- Settings and Shutdown Buttons in a container, now using start-menu-footer-button class -->
                 <div class="start-menu-buttons-container">
                     <button class="start-menu-footer-button" data-section="settings" data-lang-key="settingsMenuItem" title="设置" data-title-zh="系统设置" data-title-en="Settings">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                            <path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.2-15.9 33.5c-3.8 6.4-12.9 8.6-19.5 4.7l-42.9-25.2c-1.4 2.6-2.9 5.1-4.5 7.5c-.7 1.3-1.4 2.6-2.1 3.9l-22.9 44.5c-3.1 6.1-9.4 10-16.1 10c0-12.3 2.6-24.2 7.9-35.3c1.3-2.8 2.7-5.4 4.1-8.1zM256 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_settings"></span>
                         <!-- Removed text span as requested -->
                     </button>
                     <button class="start-menu-footer-button" data-section="shutdown" data-lang-key="shutdownMenuItem" title="关闭系统" data-title-zh="关闭系统" data-title-en="Shutdown">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor">
-                            <path d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zm0 464a208 208 0 1 1 0-416 208 208 0 1 1 0 416zm-32-96c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32s-32 14.3-32 32V336c0 17.7 14.3 32 32 32z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_shutdown"></span>
                         <!-- Removed text span as requested -->
                     </button>
                 </div>
@@ -1139,10 +1125,7 @@
             <div class="taskbar" id="taskbar">
                 <!-- Start Button changed to M icon -->
                 <button class="start-button" id="start-button-taskbar">
-                    <svg viewBox="0 0 100 100" class="w-6 h-6" fill="currentColor">
-                        <circle cx="50" cy="50" r="40" fill="white"/>
-                        <text x="50%" y="65%" text-anchor="middle" font-size="50" font-weight="bold" fill="var(--primary-blue)" font-family="var(--font-main)">M</text>
-                    </svg>
+                    <span class="icon-placeholder" data-asset-key="icon_mazko_logo" id="start-button-icon-placeholder"></span>
                     <!-- <span data-lang-key="startButton">开始</span> Removed text -->
                 </button>
 
@@ -1154,17 +1137,13 @@
                 <!-- Right side system tray -->
                 <div class="system-tray">
                     <div class="system-tray-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor">
-                            <path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 64C35.8 64 0 99.8 0 144V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V336c0-17.7-14.3-32-32-32s-32 14.3-32 32v112c0 0 0 0 0 0H64c0 0 0 0 0 0c0-17.7 14.3-32 32-32H80z"/></svg>
+                        <span class="icon-placeholder" data-asset-key="icon_wifi"></span>
                     </div>
                     <div class="system-tray-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor">
-                            <path d="M576 240c0 33.3-27.1 60.3-60.3 60.3c-13.6 0-26.6-4.5-37.1-12.3l-1.8-1.3-13.4 24.5c-11.4 20.8-35.1 28.3-56.9 16.9l-13.4-7.3c-1.8 .9-3.7 1.7-5.5 2.5V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V304.5c-2.4-.7-4.7-1.5-7-2.4l-13.4 7.3c-21.8 11.4-45.5 3.9-56.9-16.9l-13.4-24.5-1.8 1.3c-10.5 7.8-23.5 12.3-37.1 12.3C27.1 300.3 0 273.3 0 240c0-26.1 16.5-48.4 39.6-56.4c4.1-1.4 7.7-3.9 10.7-7.3l1.8-2.1 13.4-24.5c11.4-20.8 35.1-28.3 56.9-16.9l13.4 7.3c1.8-.9 3.7-1.7 5.5-2.5V64c0-17.7 14.3-32 32-32s32 14.3 32 32v139.5c2.4 .7 4.7 1.5 7 2.4l13.4-7.3c21.8-11.4 45.5-3.9 56.9 16.9l13.4 24.5 1.8-1.3c10.5-7.8 23.5-12.3 37.1-12.3C548.9 180.3 576 207.3 576 240zM128 272a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm320 0a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>
+                        <span class="icon-placeholder" data-asset-key="icon_battery"></span>
                     </div>
                     <div class="system-tray-icon">
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor">
-                            <path d="M533.8 32C562.9 32 587 56.1 587 85.2V224c0 17.7-14.3 32-32 32s-32-14.3-32-32V117.3L320 288 149.3 117.3 85.2 181.5C64.1 202.6 32 188.6 32 160V85.2C32 56.1 56.1 32 85.2 32H533.8zM320 352l170.7-170.7L587 256v170.8c0 29.1-24.1 53.2-53.2 53.2H85.2C56.1 480 32 455.9 32 426.8V256l170.7-170.7L320 352z"/>
-                        </svg>
+                        <span class="icon-placeholder" data-asset-key="icon_volume"></span>
                     </div>
                     <span class="text-sm text-white opacity-80" id="current-time"></span> <!-- Time display -->
                 </div>
@@ -1174,85 +1153,118 @@
 
     <script>
         console.log('Script started parsing.'); // Added for debugging
-        // SVG Icon Definitions (Font Awesome Free SVG Paths)
-        const SVG_ICONS = {
-            'bars': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z"/></svg>`,
-            'wifi': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32h82.7L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3V192c0 17.7 14.3 32 32 32s32-14.3 32-32V32c0-17.7-14.3-32-32-32H320zM80 64C35.8 64 0 99.8 0 144V448c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V336c0-17.7-14.3-32-32-32s-32 14.3-32 32v112c0 0 0 0 0 0H64c0 0 0 0 0 0c0-17.7 14.3-32 32-32H80z"/></svg>`,
-            'battery-full': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M576 240c0 33.3-27.1 60.3-60.3 60.3c-13.6 0-26.6-4.5-37.1-12.3l-1.8-1.3-13.4 24.5c-11.4 20.8-35.1 28.3-56.9 16.9l-13.4-7.3c-1.8 .9-3.7 1.7-5.5 2.5V448c0 17.7-14.3 32-32 32s-32-14.3-32-32V304.5c-2.4-.7-4.7-1.5-7-2.4l-13.4 7.3c-21.8 11.4-45.5 3.9-56.9-16.9l-13.4-24.5-1.8 1.3c-10.5 7.8-23.5 12.3-37.1 12.3C27.1 300.3 0 273.3 0 240c0-26.1 16.5-48.4 39.6-56.4c4.1-1.4 7.7-3.9 10.7-7.3l1.8-2.1 13.4-24.5c11.4-20.8 35.1-28.3 56.9-16.9l13.4 7.3c1.8-.9 3.7-1.7 5.5-2.5V64c0-17.7 14.3-32 32-32s32 14.3 32 32v139.5c2.4 .7 4.7 1.5 7 2.4l13.4-7.3c21.8-11.4 45.5-3.9 56.9 16.9l13.4 24.5 1.8-1.3c10.5-7.8 23.5-12.3 37.1-12.3C548.9 180.3 576 207.3 576 240zM128 272a32 32 0 1 0 0-64 32 32 0 1 0 0 64zm320 0a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>`,
-            'volume-up': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor"><path d="M533.8 32C562.9 32 587 56.1 587 85.2V224c0 17.7-14.3 32-32 32s-32-14.3-32-32V117.3L320 288 149.3 117.3 85.2 181.5C64.1 202.6 32 188.6 32 160V85.2C32 56.1 56.1 32 85.2 32H533.8zM320 352l170.7-170.7L587 256v170.8c0 29.1-24.1 53.2-53.2 53.2H85.2C56.1 480 32 455.9 32 426.8V256l170.7-170.7L320 352z"/></svg>`,
-            'minus': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M432 256c0 17.7-14.3 32-32 32L48 288c-17.7 0-32-14.3-32-32s14.3-32 32-32l352 0c17.7 0 32 14.3 32 32z"/></svg>`,
-            'square': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M384 32H64C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64zM64 416V96H384V416H64z"/></svg>`,
-            'times': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" fill="currentColor"><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>`,
-            'folder': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M64 480H448c35.3 0 64-28.7 64-64V160c0-35.3-28.7-64-64-64H288c-10.1 0-19.6-4.7-25.6-12.8L224 48c-11.3-15.5-32.6-19.4-48.1-8.1S157.5 54.5 161.4 70l15.6 21.3c-11.3 15.5-32.6 19.4-48.1 8.1S97.5 54.5 101.4 70l-15.6 21.3C74.5 106.8 64 121.3 64 136V480z"/></svg>`,
-            'users': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor"><path d="M192 256A128 128 0 1 0 64 128a128 128 0 1 0 128 128zM32 384c-17.7 0-32 14.3-32 32V448c0 35.3 28.7 64 64 64H288c35.3 0 64-28.7 64-64V416c0-17.7-14.3-32-32-32H32zM544 256A128 128 0 1 0 416 128a128 128 0 1 0 128 128zM368 384c-17.7 0-32 14.3-32 32V448c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V416c0-17.7-14.3-32-32-32H368z"/></svg>`,
-            'info-circle': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM216 336h24V272H216c-13.3 0-24-10.7-24-24s10.7-24 24-24h48c13.3 0 24 10.7 24 24v88h8c13.3 0 24 10.7 24 24s-10.7 24-24 24H216c-13.3 0-24-10.7-24-24s10.7-24 24-24zm40-208a32 32 0 1 1 0 64 32 32 0 1 1 0-64z"/></svg>`,
-            'handshake': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512" fill="currentColor"><path d="M320 32c-17.7 0-32 14.3-32 32s14.3 32 32 32h96c17.7 0 32 14.3 32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V160c0-53-43-96-96-96H320zM224 256c-17.7 0-32 14.3-32 32v64c0 17.7 14.3 32 32 32s32-14.3 32-32V288c0-17.7-14.3-32-32-32zM0 416c0 35.3 28.7 64 64 64H576c35.3 0 64-28.7 64-64V288c0-35.3-28.7-64-64-64H64c-35.3 0-64 28.7-64 64V416zM48 288c0-17.7 14.3-32 32-32h32c17.7 0 32 14.3 32 32s-14.3 32-32 32H80c-17.7 0-32-14.3-32-32z"/></svg>`,
-            'share-alt': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M307 34.8c-11.5 5.1-19 16.6-19 29.2v64H176C78.8 128 0 206.8 0 304V416c0 17.7 14.3 32 32 32s32-14.3 32-32V304c0-53 43-96 96-96h112v64c0 12.6 7.4 24.1 19 29.2s25 3.1 34.4-5.3L501.3 234.7c19.8-17.8 19.8-48.2 0-66L341.3 29.5c-9.4-8.5-22.9-10.4-34.4-5.3z"/></svg>`,
-            'power-off': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M256 0a256 256 0 1 0 0 512A256 256 0 1 0 256 0zm0 464a208 208 0 1 1 0-416 208 208 0 1 1 0 416zm-32-96c17.7 0 32-14.3 32-32V160c0-17.7-14.3-32-32-32s-32 14.3-32 32V336c0 17.7 14.3 32 32 32z"/></svg>`,
-            'chevron-left': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" fill="currentColor"><path d="M9.4 278.6c-12.5-12.5-12.5-32.8 0-45.3l128-128c12.5-12.5 32.8-12.5 45.3 0s12.5 32.8 0 45.3L77.3 256 182.6 361.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0l-128-128z"/></svg>`,
-            'chevron-right': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 512" fill="currentColor"><path d="M246.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-128-128c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L178.7 256 73.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l128-128z"/></svg>`,
-            'window-restore': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M480 0H192c-26.5 0-48 21.5-48 48V96H48C21.5 96 0 117.5 0 144V464c0 26.5 21.5 48 48 48H320c26.5 0 48-21.5 48-48V416h96c26.5 0 48-21.5 48-48V48c0-26.5-21.5-48-48-48zM320 464H48V144h272V464zm144-64H368V96c0-26.5-21.5-48-48-48H192V48h272v352z"/></svg>`,
-            'cog': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M495.9 166.6c3.2 8.7 .5 18.4-6.4 24.6l-43.3 39.4c1.1 8.3 1.7 16.8 1.7 25.4s-.6 17.1-1.7 25.4l43.3 39.4c6.9 6.2 9.6 15.9 6.4 24.6c-4.4 11.9-9.7 23.2-15.9 33.5c-3.8 6.4-12.9 8.6-19.5 4.7l-42.9-25.2c-1.4 2.6-2.9 5.1-4.5 7.5c-.7 1.3-1.4 2.6-2.1 3.9l-22.9 44.5c-3.1 6.1-9.4 10-16.1 10c0-12.3 2.6-24.2 7.9-35.3c1.3-2.8 2.7-5.4 4.1-8.1zM256 288a32 32 0 1 0 0-64 32 32 0 1 0 0 64z"/></svg>`,
-            'm-logo': `<svg viewBox="0 0 100 100" fill="currentColor"><circle cx="50" cy="50" r="40" fill="var(--primary-blue)"/><text x="50%" y="65%" text-anchor="middle" font-size="50" font-weight="bold" fill="white" font-family="var(--font-main)">M</text></svg>`,
-            // Social Media Icons (placeholders for now, replace with actual paths if available)
-            'weibo': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M407 176c-11.5 5.1-19 16.6-19 29.2v64H296c-97.2 0-176 78.8-176 176v112c0 17.7 14.3 32 32 32s32-14.3 32-32V448c0-53 43-96 96-96h112v64c0 12.6 7.4 24.1 19 29.2s25 3.1 34.4-5.3L501.3 234.7c19.8-17.8 19.8-48.2 0-66L341.3 29.5c-9.4-8.5-22.9-10.4-34.4-5.3zM256 0C114.6 0 0 114.6 0 256S114.6 512 256 512 512 397.4 512 256 397.4 0 256 0zM256 464c-114.9 0-208-93.1-208-208S141.1 48 256 48s208 93.1 208 208-93.1 208-208 208z"/></svg>`, // Placeholder, ideally a Weibo specific icon
-            'instagram': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512" fill="currentColor"><path d="M224.1 128.1c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 306.6 339 243S287.7 128.1 224.1 128.1zm0 189.9c-41.1 0-74-33-74-74s32.9-74 74-74 74 33 74 74-32.9 74-74 74zm107.9-113.8c-5.1-5.1-11.8-8.1-19-8.1h-11.8c-7.2 0-14 3-19 8.1s-8.1 11.8-8.1 19v11.8c0 7.2 3 14 8.1 19s11.8 8.1 19 8.1h11.8c7.2 0 14-3 19-8.1s8.1-11.8 8.1-19v-11.8c0-7.2-3-14-8.1-19zM448 118.9V393c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V118.9c0-26.5 21.5-48 48-48h352c26.5 0 48 21.5 48 48zM400 32H48C21.5 32 0 53.5 0 80v352c0 26.5 21.5 48 48 48h352c26.5 0 48-21.5 48-48V80c0-26.5-21.5-48-48-48z"/></svg>`,
-            'artstation': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M490.8 190.4c-3.1-8.5-12.9-10.4-21.4-7.3L320 234.7V176c0-17.7-14.3-32-32-32H176c-17.7 0-32 14.3-32 32v58.7L21.2 183.1c-8.5-3.1-18.3-.4-21.4 7.3s-.4 18.3 7.3 21.4L160 256 7.1 307.2c-7.7 3.1-10.4 12.9-7.3 21.4s12.9 10.4 21.4 7.3L176 277.3V336c0 17.7 14.3 32 32 32h112c17.7 0 32-14.3 32-32v-58.7l149.2 51.6c8.5 3.1 18.3 .4 21.4-7.3s.4-18.3-7.3-21.4L352 256l142.9-51.6c7.7-3.1 10.4-12.9 7.3-21.4zM256 0C114.6 0 0 114.6 0 256S114.6 512 256 512 512 397.4 512 256 397.4 0 256 0zM256 464c-114.9 0-208-93.1-208-208S141.1 48 256 48s208 93.1 208 208-93.1 208-208 208z"/></svg>`,
-            'behance-square': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512" fill="currentColor"><path d="M576 128c0-35.3-28.7-64-64-64H64C28.7 64 0 92.7 0 128V384c0 35.3 28.7 64 64 64H512c35.3 0 64-28.7 64-64V128zM192 352c-17.7 0-32-14.3-32-32V192c0-17.7 14.3-32 32-32s32 14.3 32 32V320c0 17.7-14.3 32-32 32zm88-32c0 17.7-14.3 32-32 32H192c-17.7 0-32-14.3-32-32V192c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v128zm128-32c0 17.7-14.3 32-32 32H352c-17.7 0-32-14.3-32-32V192c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v128zm88-32c0 17.7-14.3 32-32 32h-64c-17.7 0-32-14.3-32-32V192c0-17.7 14.3-32 32-32h64c17.7 0 32 14.3 32 32v128z"/></svg>`, // Placeholder, ideally a Behance specific icon
-            'envelope': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48H48zM0 176V400c0 26.5 21.5 48 48 48H464c26.5 0 48-21.5 48-48V176L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>`,
-            'download': `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" fill="currentColor"><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32V274.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7V32zM64 352c-35.3 0-64 28.7-64 64v32c0 35.3 28.7 64 64 64H448c35.3 0 64-28.7 64-64V416c0-35.3-28.7-64-64-64H64z"/></svg>`
+
+        /**
+         * @object ASSETS
+         * @description 集中管理所有图片和图标的路径。
+         * 请将您的图片文件放置在相应的 `assets/` 文件夹中。
+         * 例如，`./assets/cursors/hand_open.png` 表示文件位于项目根目录下的 `assets/cursors/` 文件夹中。
+         * 您可以根据需要修改这些路径和文件名。
+         */
+        const ASSETS = {
+            // 光标图片 (请替换为您的 PNG 或 CUR 文件路径)
+            'cursor_default': './assets/cursors/hand_open.png',
+            'cursor_active': './assets/cursors/hand_closed.png',
+            'cursor_pointer': './assets/cursors/hand_point.png',
+
+            // 桌面图标 / 开始菜单图标 (请替换为您的 PNG/SVG 文件路径)
+            'icon_works': './assets/icons/folder.png', // 作品集文件夹图标
+            'icon_characters': './assets/icons/users.png', // 角色用户图标
+            'icon_mazko_logo': './assets/icons/mazko_logo.png', // 您的自定义 'M' 标志
+            'icon_services': './assets/icons/handshake.png', // 服务握手图标
+            'icon_socials': './assets/icons/share.png', // 社交分享图标
+
+            // 任务栏系统托盘图标 (请替换为您的 PNG/SVG 文件路径)
+            'icon_wifi': './assets/icons/wifi.png',
+            'icon_battery': './assets/icons/battery_full.png',
+            'icon_volume': './assets/icons/volume_up.png',
+
+            // 开始菜单底部按钮图标 (请替换为您的 PNG/SVG 文件路径)
+            'icon_settings': './assets/icons/cog.png', // 设置齿轮图标
+            'icon_shutdown': './assets/icons/power_off.png', // 关机电源图标
+
+            // 窗口控制按钮图标 (请替换为您的 PNG/SVG 文件路径)
+            'icon_minus': './assets/icons/minus.png', // 最小化图标
+            'icon_square': './assets/icons/square.png', // 最大化/还原图标
+            'icon_times': './assets/icons/times.png', // 关闭图标
+            'icon_window_restore': './assets/icons/window_restore.png', // 任务栏最小化窗口图标
+
+            // 画廊导航按钮图标 (请替换为您的 PNG/SVG 文件路径)
+            'icon_chevron_left': './assets/icons/chevron_left.png', // 左箭头
+            'icon_chevron_right': './assets/icons/chevron_right.png', // 右箭头
+
+            // 社交媒体图标 (特别注意：这些需要您提供对应的图像文件，以修正现有显示不正确的问题)
+            'icon_weibo': './assets/socials/weibo.png',
+            'icon_instagram': './assets/socials/instagram.png',
+            'icon_artstation': './assets/socials/artstation.png',
+            'icon_behance_square': './assets/socials/behance.png',
+            'icon_envelope': './assets/socials/envelope.png',
+
+            // 桌面背景图片 (可选：如果您想使用图片背景，取消注释并提供路径)
+            // 'desktop_background_image': './assets/backgrounds/your_desktop_bg.jpg',
         };
 
-        let currentLanguage = 'zh'; // Default language
+        /**
+         * @function getAssetUrl
+         * @param {string} assetKey - ASSETS 对象中的键名。
+         * @returns {string} 对应资产的 URL 路径。
+         * @description 从 ASSETS 对象中获取指定资产的 URL。
+         */
+        function getAssetUrl(assetKey) {
+            return ASSETS[assetKey] || ''; 
+        }
 
-        // All text content for different languages
-        const LANG_CONTENT = {
-            'zh': {
-                systemName: 'MAX OS', // New system name
-                systemVersion: 'Ver1.0', // New system version
-                welcomeMessage: '欢迎来到 MAX OS 虚拟宇宙终端',
-                startButton: '开始', // This will no longer be used for the button text
-                profileName: 'MAZKO',
-                worksIcon: '作品集',
-                charactersIcon: '角色',
-                mazkoExeIcon: 'MAZKO', // Removed .exe
-                servicesIcon: '服务',
-                socialsIcon: '社交',
-                settingsIcon: '设置', // New
-                worksMenuItem: '作品集', // Simplified for menu item label
-                charactersMenuItem: '角色', // Simplified for menu item label
-                servicesMenuItem: '服务与报价', // Simplified for menu item label
-                socialsMenuItem: '社交媒体', // Simplified for menu item label
-                settingsMenuItem: '设置', // Now a button, simplified text
-                languageMenuItem: '语言', // This will still be used for the settings window
-                shutdownMenuItem: '关闭系统', // Now a button, simplified text
-                shutdownMessage: '感谢您的访问，MAX OS 虚拟宇宙终端正在安全退出。', // Updated shutdown message
-                loadingMessage: '加载中...',
-                errorLoadingContent: '加载内容失败：',
-                unknownModule: '错误：未知模块。',
-                worksTitle: '我的作品集',
-                worksClickPrompt: '点击作品卡片查看详情...',
-                worksDetailsSuffix: ' - 详情', // New suffix for work details
-                charactersTitle: '角色设计',
-                charactersDescription: '探索我独特的PSX游戏风格卡通角色。',
-                aboutTitle: '关于 MAZKO', // Title for About Me window
-                aboutContent: `
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded. Starting asset fetch.');
+
+            // All text content for different languages
+            const LANG_CONTENT = {
+                'zh': {
+                    systemName: 'MAX OS', // New system name
+                    systemVersion: 'Ver1.0', // New system version
+                    welcomeMessage: '欢迎来到 MAX OS 虚拟宇宙终端',
+                    startButton: '开始', // This will no longer be used for the button text
+                    profileName: 'MAZKO',
+                    worksIcon: '作品集',
+                    charactersIcon: '角色',
+                    mazkoExeIcon: 'MAZKO', // Removed .exe
+                    servicesIcon: '服务',
+                    socialsIcon: '社交',
+                    settingsIcon: '设置', // New
+                    worksMenuItem: '作品集', // Simplified for menu item label
+                    charactersMenuItem: '角色', // Simplified for menu item label
+                    servicesMenuItem: '服务与报价', // Simplified for menu item label
+                    socialsMenuItem: '社交媒体', // Simplified for menu item label
+                    settingsMenuItem: '设置', // Now a button, simplified text
+                    languageMenuItem: '语言', // This will still be used for the settings window
+                    shutdownMenuItem: '关闭系统', // Now a button, simplified text
+                    shutdownMessage: '感谢您的访问，MAX OS 虚拟宇宙终端正在安全退出。', // Updated shutdown message
+                    loadingMessage: '加载中...',
+                    errorLoadingContent: '加载内容失败：',
+                    unknownModule: '错误：未知模块。',
+                    worksTitle: '我的作品集',
+                    worksClickPrompt: '点击作品卡片查看详情...',
+                    worksDetailsSuffix: ' - 详情', // New suffix for work details
+                    charactersTitle: '角色设计',
+                    charactersDescription: '探索我独特的PSX游戏风格卡通角色。',
+                    aboutTitle: '关于 MAZKO', // Title for About Me window
+                    aboutContent: `
 我是一名来自中国的 3D 艺术家与平面设计师，专注于 PSX 游戏风格卡通建模与 lowpoly 复古像素质感，同时沉浸于地下 club 文化与先锋视觉的多元融合创作。
 
 痴迷于一切突破常规的美学语言——从 ASAP Rocky MV《Tailor Swift》中的视觉张力，到《异兽魔都》的荒诞角色设定，再到《瑞克和莫蒂》的维度错乱，我将动漫叙事、街头嘻哈、复古科幻等文化基因注入作品之中，用像素颗粒与低模构建出独一无二的视觉系统。
 
 我擅长使用 Blender、Substance Painter、Zbrush、Photoshop 与 Illustrator，涵盖角色设计、CG 动画、海报、VJ、虚拟时尚与 LOGO 设计等多个领域。
-                `, // Now Markdown
-                services: {
-                    title: '服务与报价',
-                    description: '以下是我的主要服务项目及大致报价范围：', // Now Markdown
-                    categories: [
-                        {
-                            id: 'character-modeling-category',
-                            name: '角色建模服务',
-                            nameEn: 'Character Modeling Service', // Added English name for title bar
-                            shortDescription: '低多边形人物建模与复古动画服务。',
-                            detailContent: `
+                    `, // Now Markdown
+                    services: {
+                        title: '服务与报价',
+                        description: '以下是我的主要服务项目及大致报价范围：', // Now Markdown
+                        categories: [
+                            {
+                                id: 'character-modeling-category',
+                                name: '角色建模服务',
+                                nameEn: 'Character Modeling Service', // Added English name for title bar
+                                shortDescription: '低多边形人物建模与复古动画服务。',
+                                detailContent: `
 ### 👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】低边形人物建模
 **价格：** 500¥+ / 人
 我将为你的角色进行低多边形建模与设计！
@@ -1282,7 +1294,7 @@
 
 建议：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。
 
-### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】版权申明
+### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】版权申明
 所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。
 
 客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。
@@ -1292,7 +1304,7 @@
 超范围使用引发的纠纷，由客户承担全部责任。
 
 🅜 协议版本：*𝘝1.2* | 下单即视为同意全部内容
-                            ` // Now Markdown
+                            `, // Now Markdown
                         },
                         {
                             id: 'poster-design-category',
@@ -1313,7 +1325,7 @@
 提供指定格式和尺寸的图片
 
 ### [3D动态海报 1000¥+/ 张]
-**价格：** 1000¥+ / 张
+**价格：** 1000¥+/ 张
 可提供指定格式和尺寸的视频
 
 ### 📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明
@@ -1339,7 +1351,7 @@
 
 效率建议：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率
 
-### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】版权申明
+### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】版权申明
 所有成果知识产权归服务方（🅜）所有。
 
 甲方获仅限该 club 自身宣传的商用使用权（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。
@@ -1349,18 +1361,18 @@
 超范围使用引发的纠纷，由甲方承担责任。
 
 🅜 协议版本：*𝘝1.2* | 下单即视为同意全部内容
-                            ` // Now Markdown
-                        }
+                            `, // Now Markdown
+                        },
                     ]
                 },
                 socialsTitle: '社交媒体与社群',
                 socialsDescription: '欢迎通过以下平台找到我，加入我的虚拟宇宙：', // Now Markdown
                 socialsLinks: [
-                    { name: '微博', url: 'https://weibo.com/yourprofile', icon: 'weibo', nameEn: 'Weibo' }, // Added English name
-                    { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', icon: 'instagram', nameEn: 'Instagram' },
-                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', icon: 'artstation', nameEn: 'ArtStation' },
-                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', icon: 'behance-square', nameEn: 'Behance' },
-                    { name: 'Email', url: 'mailto:your.email@example.com', icon: 'envelope', nameEn: 'Email' }
+                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo', nameEn: 'Weibo' }, // Changed to iconAssetKey
+                    { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', iconAssetKey: 'icon_instagram', nameEn: 'Instagram' },
+                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', iconAssetKey: 'icon_artstation', nameEn: 'ArtStation' },
+                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', iconAssetKey: 'icon_behance_square', nameEn: 'Behance' },
+                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope', nameEn: 'Email' }
                 ],
                 settings: { // New settings content
                     title: '系统设置',
@@ -1374,7 +1386,7 @@
                     ]
                 }
             },
-            'en': {
+            'en': { // Added English content object for language switching
                 systemName: 'MAX OS',
                 systemVersion: 'Ver1.0',
                 welcomeMessage: 'Welcome to MAX OS Virtual Universe Terminal',
@@ -1382,7 +1394,7 @@
                 profileName: 'MAZKO',
                 worksIcon: 'Works',
                 charactersIcon: 'Characters',
-                mazkoExeIcon: 'MAZKO', // Removed .exe
+                mazkoExeIcon: 'MAZKO',
                 servicesIcon: 'Services',
                 socialsIcon: 'Socials',
                 settingsIcon: 'Settings',
@@ -1392,142 +1404,142 @@
                 socialsMenuItem: 'Social Media',
                 settingsMenuItem: 'Settings',
                 languageMenuItem: 'Language',
-                shutdownMenuItem: 'Shutdown System',
-                shutdownMessage: 'Thank you for visiting, MAX OS Virtual Universe Terminal is safely shutting down.', // Updated shutdown message
+                shutdownMenuItem: 'Shutdown',
+                shutdownMessage: 'Thank you for visiting, MAX OS Virtual Universe Terminal is safely exiting.',
                 loadingMessage: 'Loading...',
                 errorLoadingContent: 'Failed to load content:',
                 unknownModule: 'Error: Unknown module.',
                 worksTitle: 'My Works',
                 worksClickPrompt: 'Click on a work card to view details...',
-                worksDetailsSuffix: ' - Details', // New suffix for work details
+                worksDetailsSuffix: ' - Details',
                 charactersTitle: 'Character Design',
                 charactersDescription: 'Explore my unique PSX game style cartoon characters.',
                 aboutTitle: 'About MAZKO',
                 aboutContent: `
-I am a 3D artist and graphic designer from China, specializing in PSX game style cartoon modeling and low-poly retro pixel textures. I also immerse myself in the diverse fusion of underground club culture and avant-garde visuals.
+I am a 3D artist and graphic designer from China, specializing in PSX game-style cartoon modeling and low-poly retro pixel textures. I also immerse myself in multidisciplinary creative work that fuses underground club culture with avant-garde visuals.
 
-Obsessed with all aesthetic languages that break conventions—from ASAP Rocky's MV "Tailor Swift" to the absurd character settings in "Dorohedoro," and the dimensional chaos of "Rick and Morty," I inject cultural genes like anime narratives, street hip-hop, and retro sci-fi into my works, building a unique visual system with pixel grains and low-poly models.
+Obsessed with all aesthetic languages that break conventions – from the visual intensity in ASAP Rocky's MV "Tailor Swift," to the absurd character designs in "Dorohedoro," to the dimensional chaos of "Rick and Morty," I inject cultural genes like anime narratives, street hip-hop, and retro sci-fi into my work, constructing a unique visual system with pixel particles and low-poly models.
 
-I am proficient in Blender, Substance Painter, Zbrush, Photoshop, and Illustrator, covering various fields such as character design, CG animation, posters, VJ visuals, virtual fashion, and LOGO design.
-                `, // Now Markdown
+I am proficient in Blender, Substance Painter, Zbrush, Photoshop, and Illustrator, covering various fields such as character design, CG animation, posters, VJ, virtual fashion, and LOGO design.
+                `,
                 services: {
                     title: 'Services & Pricing',
-                    description: 'Here are my main services and estimated pricing:', // Now Markdown
+                    description: 'Below are my main services and estimated pricing ranges:',
                     categories: [
                         {
                             id: 'character-modeling-category',
-                            name: '👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】Low-Poly Character Modeling',
+                            name: 'Character Modeling Service',
                             nameEn: 'Character Modeling Service',
                             shortDescription: 'Low-poly character modeling and retro animation services.',
                             detailContent: `
 ### 👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】Low-Poly Character Modeling
-**Price:** ¥500+ / person
+**Price:** 500¥+ / person
 I will provide low-poly modeling and design for your characters!
 
-#### ▷ Basic Services:
-* Character Modeling (Low-Poly)
-* Simple Rigging
-* Rendered Video Export
+#### ▷ Basic Service Content:
+* Character modeling (low-poly)
+* Simple rigging
+* Render video export
 
-■ Deliverables: FBX / Blender / mp4
+■ Deliverable Formats: FBX / Blender / mp4
 
 ### 🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢m𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】Low-Poly Character Retro Animation
-**Price:** ¥1000+ / animation
-I will provide a complete low-poly character animation service. This includes modeling, rigging, animation setup, and rendered export, suitable for demo reels, social media character showcases, and retro scene atmosphere rendering.
+**Price:** 1000¥+ / item
+I will provide complete low-poly character animation services. This includes modeling, rigging, motion design, and render export, suitable for demo reels, social media character showcases, retro scene ambiance rendering, etc.
 
-#### ▷ Basic Services:
-* Character Modeling + Skeletal Animation Setup
-* Scene Building (customized as needed)
-* Demo Rendering (default animation length within 20 seconds)
+#### ▷ Basic Service Content:
+* Character modeling + skeletal animation setup
+* Scene construction (customized according to requirements)
+* Demo rendering (default animation length within 20 seconds)
 
-■ Deliverables: FBX / Blender / mp4
+■ Deliverable Formats: FBX / Blender / mp4
 
-### ⚠️ 【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】Special Notes
-Authorization Scope: Limited to personal non-commercial use (e.g., social sharing on WeChat / Weibo / Douyin, non-profit personal display); commercial use (brand promotion, product placement, paid content, etc.) requires prior communication, and pricing will adjust based on usage scope / duration.
+### ⚠️ 【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】
+Authorization Scope: Limited to personal non-commercial use (e.g., WeChat / Weibo / Douyin social sharing, non-profit personal display); Commercial use (brand promotion, product placement, paid content, etc.) requires prior communication, and pricing will be adjusted according to usage scope / duration.
 
-Additional Fees: For animations exceeding 20 seconds or with increased complexity (e.g., special effects / multi-character interaction), additional fees will be charged based on workload, subject to mutual agreement.
+Additional Costs: Animations exceeding 20 seconds or with increased complexity (e.g., special effects / multi-character interaction) will incur additional fees based on workload, subject to mutual confirmation.
 
-Suggestion: Providing clear reference images or inspiration greatly helps in accurately meeting your visual requirements and improving service efficiency.
+Suggestion: Providing clear reference images or inspirational directions will help to efficiently achieve your visual requirements.
 
-### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】Copyright Statement
-All intellectual property rights (models / animations / source files, etc.) belong to the service provider (🅜).
+### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】
+All deliverables (models / animations / source files, etc.) copyright belongs to the service provider (🅜).
 
-Clients only receive non-commercial use rights, prohibiting commercial use, secondary creation, resale, or authorization to third parties.
+The client only obtains non-commercial usage rights, and is prohibited from commercial use, secondary creation, resale, or authorization to third parties.
 
-For copyright transfer, a separate agreement must be signed and a fee of 3-5 times the original quote must be paid.
+For copyright transfer, a separate agreement must be signed, and 3-5 times the original quoted fee must be paid.
 
-The client is responsible for all disputes arising from unauthorized use beyond the agreed scope.
+The client shall be responsible for disputes arising from unauthorized use beyond the scope.
 
-🅜 Agreement Version: *𝘝1.2* | Placing an order implies agreement to all terms
-                            ` // Now Markdown
+🅜 Agreement Version: *𝘝1.2* | Placing an order is deemed acceptance of all content.
+                            `,
                         },
                         {
                             id: 'poster-design-category',
                             name: 'Poster Design Service',
                             nameEn: 'Poster Design Service',
-                            shortDescription: 'Flat, AI Dynamic, 3D, and 3D Dynamic Poster Design Services.',
+                            shortDescription: '2D, AI dynamic, 3D, and 3D dynamic poster design services.',
                             detailContent: `
-### [Flat Poster ¥500 / piece]
-**Price:** ¥500 / piece
+### [2D Poster 500¥ / piece]
+**Price:** 500¥ / piece
 Provides source files and images in specified formats and sizes.
 
-### [AI Dynamic Poster ¥500 / piece]
-**Price:** ¥500 / piece
+### [AI Dynamic Poster 500¥ / piece]
+**Price:** 500¥ / piece
 Provides videos and images in specified formats and sizes.
 
-### [3D Poster ¥700+/ piece]
-**Price:** ¥700+ / piece
-Provides images in specified formats and sizes.
+### [3D Poster 700¥+/ 张]
+**价格：** 700¥+ / 张
+提供指定格式和尺寸的图片
 
-### [3D Dynamic Poster ¥1000+/ piece]
-**Price:** ¥1000+ / piece
-Provides videos in specified formats and sizes.
+### [3D Dynamic Poster 1000¥+/ 张]
+**价格：** 1000¥+/ 张
+可提供指定格式和尺寸的视频
 
 ### 📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】Service Process & Delivery Instructions
-Project Start: Design begins after a 50% deposit is paid, with a turnaround time of approximately 1–2 days per piece.
+Project Start: Design begins upon receipt of a 50% deposit, with a turnaround time of approximately 1–2 days per piece.
 
-Tail Payment: After the design is finalized and confirmed by Party A, the remaining 50% balance is paid.
+Final Payment: Upon design finalization and client confirmation, the remaining 50% payment is due.
 
 Deliverables: Final product files are delivered upon receipt of the final payment.
 
 ### 🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】Revision Rules & Extra Fees
-Includes 3 free basic adjustments + 1 free major adjustment.
+Includes 3 free basic revisions + 1 free major revision.
 
-After exceeding the free basic adjustment limit, each additional basic adjustment will incur a 25% surcharge of the design fee.
+After exceeding the free basic revision limit, each additional basic revision will incur a 25% surcharge of the design fee.
 
-After exceeding the free major adjustment limit, each additional major adjustment will incur a 50% surcharge of the design fee.
+After exceeding the free major revision limit, each additional major revision will incur a 50% surcharge of the design fee.
 
-### 📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】特别说明
-基础调整：限细节优化（如文字修正、颜色微调、排版局部调整等），不涉及核心创意或框架变更
+### 📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】
+Basic Revisions: Limited to minor adjustments (e.g., text corrections, slight color adjustments, minor layout changes), not involving core creative or structural changes.
 
-重大调整：限核心方向优化（如整体风格调整、核心元素替换等），不涉及完全推翻重设计
+Major Revisions: Limited to core direction adjustments (e.g., overall style adjustment, core element replacement), not involving complete redesign.
 
-责任界定：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担
+Responsibility: Delays in project timeline and additional revisions caused by unclear client requirements, incomplete information, or repeated changes shall be borne by the client.
 
-效率建议：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率
+Efficiency Tip: Providing clear reference images or inspirational directions can significantly improve accuracy and service efficiency.
 
-### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】Copyright Statement
-All intellectual property rights (models / animations / source files, etc.) belong to the service provider (🅜).
+### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】
+All intellectual property rights of the deliverables belong to the service provider (🅜).
 
-甲方获仅限该 club 自身宣传的商用使用权（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。
+The client is granted commercial use rights strictly for their own club's promotion (including offline display, official social media promotion, etc.), and is prohibited from resale or authorization to third parties.
 
-版权转让需另签协议并付费。
+For copyright transfer, a separate agreement must be signed and paid for.
 
-超范围使用引发的纠纷，由甲方承担责任。
+The client shall be responsible for any disputes arising from unauthorized use beyond the scope.
 
-🅜 Agreement Version: *𝘝1.2* | Placing an order implies agreement to all terms
-                            ` // Now Markdown
-                        }
-                    ]
+🅜 Agreement Version: *𝘝1.2* | Placing an order is deemed acceptance of all content.
+                            `,
+                        },
+                    ],
                 },
-                socialsTitle: '社交媒体与社群',
-                socialsDescription: '欢迎通过以下平台找到我，加入我的虚拟宇宙：', // Now Markdown
+                socialsTitle: 'Social Media & Community',
+                socialsDescription: 'Find me on the following platforms and join my virtual universe:',
                 socialsLinks: [
-                    { name: '微博', url: 'https://weibo.com/yourprofile', icon: 'weibo', nameEn: 'Weibo' }, // Added English name
-                    { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', icon: 'instagram', nameEn: 'Instagram' },
-                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', icon: 'artstation', nameEn: 'ArtStation' },
-                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', icon: 'behance-square', nameEn: 'Behance' },
-                    { name: 'Email', url: 'mailto:your.email@example.com', icon: 'envelope', nameEn: 'Email' }
+                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo', nameEn: 'Weibo' }, // Changed to iconAssetKey
+                    { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', iconAssetKey: 'icon_instagram', nameEn: 'Instagram' },
+                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', iconAssetKey: 'icon_artstation', nameEn: 'ArtStation' },
+                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', iconAssetKey: 'icon_behance_square', nameEn: 'Behance' },
+                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope', nameEn: 'Email' }
                 ],
                 settings: { // New settings content
                     title: '系统设置',
@@ -1541,32 +1553,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                     ]
                 }
             }
-        };
-
-        // Helper function to get SVG HTML by name
-        function getSvgIcon(name) {
-            return SVG_ICONS[name] || '';
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Script started parsing.'); // Added for debugging
-            // JavaScript for dynamic elements (e.g., time display)
-            function updateTime() {
-                const now = new Date();
-                const hours = String(now.getHours()).padStart(2, '0');
-                const minutes = String(now.getMinutes()).padStart(2, '0');
-                const timeElement = document.getElementById('current-time');
-                if (timeElement) {
-                    timeElement.textContent = `${hours}:${minutes}`;
-                } else {
-                    console.warn('Time element not found.');
-                }
-            }
-
-            // Update time every minute
-            setInterval(updateTime, 60000); // Update every minute for HH:MM
-            // Initial call to display time immediately
-            updateTime();
+            let currentLanguage = 'zh';
 
             // Get elements for the desktop environment
             const startButton = document.getElementById('start-button-taskbar');
@@ -1574,9 +1561,10 @@ All intellectual property rights (models / animations / source files, etc.) belo
             const startMenuHeader = document.querySelector('.start-menu-header'); // Get the header
             const mainDesktopArea = document.getElementById('main-desktop-area');
             const welcomeMessage = document.getElementById('welcome-message');
-            let welcomeMessageText = document.getElementById('welcome-message-text'); // Changed from const to let
+            let welcomeMessageText = document.getElementById('welcome-message-text'); 
             const taskbarIconsContainer = document.getElementById('taskbar-icons');
             const desktopIconsContainer = document.getElementById('desktop-icons-container');
+            const desktopBackground = document.getElementById('desktop-background'); // Get desktop background element
             let highestZIndex = 5; // To manage window stacking order
 
             // Store references to open windows to re-render them on language change
@@ -1584,10 +1572,59 @@ All intellectual property rights (models / animations / source files, etc.) belo
 
             console.log('Core DOM elements and variables initialized.');
 
+            /**
+             * @function updateCursors
+             * @description 根据 ASSETS 中定义的光标路径动态更新 CSS 自定义属性，从而改变光标样式。
+             */
+            function updateCursors() {
+                const root = document.documentElement;
+                root.style.setProperty('--cursor-default', `url('${getAssetUrl('cursor_default')}'), auto`);
+                root.style.setProperty('--cursor-active', `url('${getAssetUrl('cursor_active')}'), auto`);
+                root.style.setProperty('--cursor-pointer', `url('${getAssetUrl('cursor_pointer')}'), auto`);
+                console.log('Custom cursors updated.');
+            }
+
+            /**
+             * @function renderDynamicAssets
+             * @description 遍历所有带有 data-asset-key 属性的占位符元素，并用 <img> 标签替换它们，加载对应的图片。
+             */
+            function renderDynamicAssets() {
+                document.querySelectorAll('.icon-placeholder[data-asset-key]').forEach(placeholder => {
+                    const assetKey = placeholder.dataset.assetKey;
+                    const iconUrl = getAssetUrl(assetKey);
+                    if (iconUrl) {
+                        // 如果 placeholder 已经有图片，避免重复添加
+                        if (placeholder.querySelector('img')) {
+                            placeholder.querySelector('img').src = iconUrl;
+                        } else {
+                            const img = document.createElement('img');
+                            img.src = iconUrl;
+                            img.alt = assetKey.replace('icon_', '').replace(/_/g, ' '); // 简单的 alt 文本
+                            img.classList.add('icon-image'); // 应用 CSS 中定义的通用图标样式
+                            placeholder.innerHTML = ''; // 清除任何现有内容
+                            placeholder.appendChild(img);
+                        }
+                    } else {
+                        console.warn(`Asset not found for key: ${assetKey}`);
+                        // 如果找不到资产，可以显示一个默认的破碎图标，或保持为空
+                        placeholder.innerHTML = '⚠️';
+                    }
+                });
+
+                // 检查并设置桌面背景图片（如果 ASSETS 中有定义）
+                const desktopBgImage = getAssetUrl('desktop_background_image');
+                if (desktopBgImage && desktopBackground) {
+                    desktopBackground.style.backgroundImage = `url('${desktopBgImage}')`;
+                    desktopBackground.style.opacity = '1'; // 可能需要调整不透明度，如果图片本身已经有光感
+                    desktopBackground.style.filter = 'none'; // 如果背景图片自带效果，可以移除滤镜
+                    console.log('Desktop background image applied.');
+                }
+            }
+
+
             // Function to update all UI text based on currentLanguage
             function updateUIForLanguage() {
                 const langData = LANG_CONTENT[currentLanguage];
-                const langDataEn = LANG_CONTENT['en']; // Always get English for titles
 
                 // Update welcome message
                 if (welcomeMessageText) {
@@ -1613,12 +1650,12 @@ All intellectual property rights (models / animations / source files, etc.) belo
                 // Update Start Menu Items (links and buttons)
                 document.querySelectorAll('.start-menu-item').forEach(item => {
                     const langKey = item.dataset.langKey;
-                    const chineseLabel = langData[langKey];
-                    const englishLabel = item.dataset.titleEn; // Get English title from data attribute
+                    const chineseLabel = LANG_CONTENT['zh'][langKey]; 
+                    const englishLabel = LANG_CONTENT['en'][langKey]; 
 
                     const labelSpan = item.querySelector('.menu-item-label');
                     if (labelSpan) {
-                        labelSpan.textContent = `${chineseLabel} [${englishLabel}]`; // Set the text content of the span
+                        labelSpan.textContent = `${chineseLabel} [${englishLabel}]`; 
                     }
                 });
 
@@ -1626,23 +1663,24 @@ All intellectual property rights (models / animations / source files, etc.) belo
                 document.querySelectorAll('.start-menu-footer-button').forEach(button => {
                     const langKey = button.dataset.langKey;
                     if (langKey && langData[langKey]) {
-                        // The text span is removed, but the title attribute should be updated for tooltips
                         button.title = langData[langKey];
                     }
                 });
                 
                 // Re-open/re-render all active windows
                 reopenAllWindows();
+                // Re-render all dynamic assets (icons) for current language
+                renderDynamicAssets();
             }
 
-            // Function to get window titles (Chinese and English) based on section and current language
+            // Function to get window titles (Chinese and English) based on section and currentWork/currentCategory
             function getWindowTitles(section, currentWork = null, currentCategory = null) {
                 let chineseTitle = LANG_CONTENT[currentLanguage]?.unknownModule || 'Untitled Window';
                 let englishTitle = LANG_CONTENT['en']?.unknownModule || 'Untitled Window';
 
                 if (section.startsWith('work-detail-') && currentWork) {
-                    chineseTitle = currentWork.title + LANG_CONTENT[currentLanguage].worksDetailsSuffix;
-                    englishTitle = currentWork.title + LANG_CONTENT['en'].worksDetailsSuffix; // Assuming English title is the same + English suffix
+                    chineseTitle = currentWork.title + (LANG_CONTENT[currentLanguage]?.worksDetailsSuffix || '');
+                    englishTitle = currentWork.title + (LANG_CONTENT['en']?.worksDetailsSuffix || ''); 
                 } else if (section.startsWith('service-category-') && currentCategory) {
                     chineseTitle = currentCategory.name;
                     englishTitle = currentCategory.nameEn || currentCategory.name; // Use nameEn if available, otherwise fallback
@@ -1657,20 +1695,20 @@ All intellectual property rights (models / animations / source files, etc.) belo
                         chineseTitle = desktopIcon.dataset.titleZh;
                         englishTitle = desktopIcon.dataset.titleEn;
                     } else if (startMenuItem) {
-                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; // Get from LANG_CONTENT for simplified text
-                        englishTitle = startMenuItem.dataset.titleEn;
+                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; 
+                        englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
                     } else if (startMenuFooterButton) {
-                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; // Get from LANG_CONTENT for simplified text
-                        englishTitle = startMenuFooterButton.dataset.titleEn;
+                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; 
+                        englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
                     } else if (section === 'about' && startMenuHeader) {
                         chineseTitle = startMenuHeader.dataset.titleZh;
                         englishTitle = startMenuHeader.dataset.titleEn;
                     } else if (section === 'settings') {
-                        chineseTitle = LANG_CONTENT['zh'].settings.title;
-                        englishTitle = LANG_CONTENT['en'].settings.title;
+                        chineseTitle = LANG_CONTENT['zh']?.settings?.title; 
+                        englishTitle = LANG_CONTENT['en']?.settings?.title; 
                     } else if (section === 'shutdown') {
-                        chineseTitle = LANG_CONTENT['zh'].shutdownMenuItem;
-                        englishTitle = LANG_CONTENT['en'].shutdownMenuItem;
+                        chineseTitle = LANG_CONTENT['zh']?.shutdownMenuItem; 
+                        englishTitle = LANG_CONTENT['en']?.shutdownMenuItem; 
                     }
                 }
                 return { chineseTitle, englishTitle };
@@ -1709,11 +1747,12 @@ All intellectual property rights (models / animations / source files, etc.) belo
 
                     if (winData.section.startsWith('work-detail-')) {
                         const workId = winData.windowId.replace('work-detail-', '');
-                        const worksData = await fetchContent('works');
+                        const worksData = await fetchContent('works'); // Re-fetch works data to find the work
                         currentWork = worksData.find(w => w.id === workId);
                     } else if (winData.section.startsWith('service-category-')) {
                         const categoryId = winData.windowId.replace('service-category-', '');
-                        currentCategory = LANG_CONTENT[currentLanguage].services.categories.find(cat => cat.id === categoryId);
+                        // Get category directly from LANG_CONTENT as it's static
+                        currentCategory = LANG_CONTENT[currentLanguage]?.services?.categories.find(cat => cat.id === categoryId);
                     }
 
                     const { chineseTitle, englishTitle } = getWindowTitles(winData.section, currentWork, currentCategory);
@@ -1724,25 +1763,25 @@ All intellectual property rights (models / animations / source files, etc.) belo
                             contentHTML = `
                                 <h2 class="text-xl font-bold mb-4">${chineseTitle}</h2>
                                 <div class="works-grid">
-                                    ${data.map(work => `
+                                    ${data?.map(work => `
                                         <div class="work-card" data-work-id="${work.id}">
-                                            <Image of ${work.title}>
+                                            <img src="${work.thumbnail}" alt="${work.title}">
                                             <div class="work-card-title">${work.title}</div>
                                             <div class="work-card-category">${work.category}</div>
                                         </div>
                                     `).join('')}
                                 </div>
-                                <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage].worksClickPrompt}</p>
+                                <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage]?.worksClickPrompt}</p>
                             `;
                             break;
                         case 'characters':
                             contentHTML = `
                                 <h2 class="text-xl font-bold mb-4">${chineseTitle}</h2>
-                                <p>${LANG_CONTENT[currentLanguage].charactersDescription}</p>
+                                <p>${LANG_CONTENT[currentLanguage]?.charactersDescription}</p>
                                 <div class="grid grid-cols-2 gap-4 mt-4">
-                                    ${data.map(char => `
+                                    ${data?.map(char => `
                                         <div class="flex flex-col items-center">
-                                            <Image of ${char.name}>
+                                            <img src="${char.image}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
                                             <p class="font-bold">${char.name}</p>
                                             <p class="text-sm opacity-80 text-center">${char.description}</p>
                                         </div>
@@ -1751,13 +1790,13 @@ All intellectual property rights (models / animations / source files, etc.) belo
                             `;
                             break;
                         case 'about':
-                            contentHTML = LANG_CONTENT[currentLanguage].aboutContent;
+                            contentHTML = LANG_CONTENT[currentLanguage]?.aboutContent;
                             isMarkdown = true;
                             break;
                         case 'services':
-                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage].services.description) + `
+                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.services?.description || '') + `
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                    ${data.categories.map(category => `
+                                    ${data?.categories.map(category => `
                                         <div class="service-category-card p-4 rounded-lg border border-primary-blue hover:bg-glass-bg cursor-pointer transition-all duration-200" data-category-id="${category.id}">
                                             <h3 class="font-bold text-lg text-light-blue">${category.name}</h3>
                                             <p class="text-sm opacity-80 mt-1">${category.shortDescription}</p>
@@ -1767,11 +1806,11 @@ All intellectual property rights (models / animations / source files, etc.) belo
                             `;
                             break;
                         case 'socials':
-                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage].socialsDescription) + `
+                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.socialsDescription || '') + `
                                 <div class="flex flex-wrap gap-4 mt-4">
-                                    ${data.links.map(link => `
+                                    ${data?.links.map(link => `
                                         <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
-                                            ${getSvgIcon(link.icon) ? `<span class="w-6 h-6">${getSvgIcon(link.icon)}</span>` : ''}
+                                            <span class="icon-placeholder w-6 h-6" data-asset-key="${link.iconAssetKey}"></span>
                                             <span>${link.name}</span>
                                         </a>
                                     `).join('')}
@@ -1779,11 +1818,12 @@ All intellectual property rights (models / animations / source files, etc.) belo
                             `;
                             break;
                         case 'settings': // New case for settings window
-                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage].settings.description) + `
+                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.settings?.description || '') + `
                                 <div class="flex flex-col gap-4 mt-4">
-                                    ${data.options.map(option => {
-                                        const labelText = LANG_CONTENT[currentLanguage].settings.options.find(opt => opt.id === option.id)?.label || option.label; // Use dynamic label if exists
-                                        return `
+                                    ${data?.options.map(option => {
+                                        const labelText = LANG_CONTENT[currentLanguage]?.settings?.options.find(opt => opt.id === option.id)?.label || option.label; 
+                                        if (option.type === 'toggle') {
+                                            return `
                                                 <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
                                                     <label for="${option.id}" class="text-lg">${labelText}</label>
                                                     <label class="toggle-switch">
@@ -1792,13 +1832,31 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                                     </label>
                                                 </div>
                                             `;
-                                        }).join('')}
+                                        } else if (option.type === 'language-toggle') {
+                                            return `
+                                                <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
+                                                    <span class="text-lg">${labelText}</span>
+                                                    <label class="toggle-switch">
+                                                        <input type="checkbox" id="${option.id}" ${currentLanguage === 'en' ? 'checked' : ''}>
+                                                        <span class="toggle-slider round"></span>
+                                                    </label>
+                                                </div>
+                                            `;
+                                        } else if (option.type === 'button') {
+                                            return `
+                                                <button id="${option.id}" class="py-2 px-4 rounded-lg bg-primary-blue hover:bg-dark-blue transition-colors text-white font-bold ${option.disabled ? 'opacity-50 cursor-not-allowed' : ''}" ${option.disabled ? 'disabled' : ''}>
+                                                    ${labelText}
+                                                </button>
+                                            `;
+                                        }
+                                        return '';
+                                    }).join('')}
                                 </div>
                             `;
                             break;
                         case 'service-category-character-modeling-category': 
                         case 'service-category-poster-design-category':
-                            contentHTML = currentCategory ? currentCategory.detailContent : `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage].unknownModule}</p>`;
+                            contentHTML = currentCategory ? currentCategory.detailContent : `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
                             isMarkdown = true;
                             break;
                         case 'work-detail-' + winData.windowId.replace('work-detail-', ''):
@@ -1807,16 +1865,16 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                 contentHTML = `
                                     <div class="work-detail-content">
                                         <div class="gallery-main-image-container">
-                                            <Image of ${currentWork.title}>
+                                            <img src="${currentWork.images[currentImageIndex]}" alt="${currentWork.title}" class="gallery-main-image">
                                             ${currentWork.images.length > 1 ? `
-                                                <button class="gallery-nav-button prev" data-direction="prev">${getSvgIcon('chevron-left')}</button>
-                                                <button class="gallery-nav-button next" data-direction="next">${getSvgIcon('chevron-right')}</button>
+                                                <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
+                                                <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
                                             ` : ''}
                                         </div>
                                         ${currentWork.images.length > 1 ? `
                                             <div class="gallery-thumbnails">
                                                 ${currentWork.images.map((imgSrc, index) => `
-                                                    <Image of ${currentWork.title} thumbnail ${index + 1}>
+                                                    <img src="${imgSrc}" alt="${currentWork.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
                                                 `).join('')}
                                             </div>
                                         ` : ''}
@@ -1829,7 +1887,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                     </div>
                                 `;
                             } else {
-                                contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage].unknownModule}</p>`;
+                                contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
                             }
                             break;
                         default:
@@ -1908,11 +1966,11 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                 id: 'work-001',
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
-                                thumbnail: 'uploaded:image_b6fb67.jpg', // 使用实际图片
+                                thumbnail: 'https://placehold.co/400x300/00BFFF/FFFFFF?text=Scene+1', // Updated to use placeholder
                                 images: [
-                                    'uploaded:image_b6fb67.jpg',
-                                    'uploaded:image_b75c9e.jpg',
-                                    'uploaded:preview-1-5692.jpg'
+                                    'https://placehold.co/800x600/00BFFF/FFFFFF?text=Scene+Full+1',
+                                    'https://placehold.co/800x600/007ACC/FFFFFF?text=Scene+Full+2',
+                                    'https://placehold.co/800x600/CCEEFF/000000?text=Scene+Full+3'
                                 ],
                                 description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
                                 tags: ['场景', 'PSX', 'Y2K', 'Blender']
@@ -1921,38 +1979,14 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                 id: 'work-002',
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
-                                thumbnail: 'uploaded:Digital demon card @.jpg', // 使用实际图片
+                                thumbnail: 'https://placehold.co/400x300/00BFFF/FFFFFF?text=Character+1', // Updated to use placeholder
                                 images: [
-                                    'uploaded:Digital demon card @.jpg',
-                                    'uploaded:image_b67c1c.jpg',
-                                    'uploaded:preview-1-1644.jpg'
+                                    'https://placehold.co/800x600/00BFFF/FFFFFF?text=Character+Full+1',
+                                    'https://placehold.co/800x600/007ACC/FFFFFF?text=Character+Full+2',
+                                    'https://placehold.co/800x600/CCEEFF/000000?text=Character+Full+3'
                                 ],
                                 description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
-                            },
-                            {
-                                id: 'work-003',
-                                title: '故障风海报系列',
-                                category: '平面设计 / 视觉艺术',
-                                thumbnail: 'uploaded:Pinterest.jpg', // 使用实际图片
-                                images: [
-                                    'uploaded:Pinterest.jpg',
-                                    'uploaded:(10) Pinterest (234).jpg'
-                                ],
-                                description: '一系列探索故障艺术和像素颗粒感的数字海报设计。',
-                                tags: ['海报', '故障', '像素', 'Photoshop']
-                            },
-                            {
-                                id: 'work-004',
-                                title: '虚拟时尚概念',
-                                category: '虚拟时尚 / 概念艺术',
-                                thumbnail: 'uploaded:(10) Pinterest (222).jpg', // 使用实际图片
-                                images: [
-                                    'uploaded:(10) Pinterest (222).jpg',
-                                    'uploaded:Animated UIIX Demonstration.png'
-                                ],
-                                description: '为虚拟偶像和数字世界设计的未来主义时尚系列。',
-                                tags: ['虚拟时尚', '概念艺术', '未来主义']
                             }
                         ];
                         break;
@@ -1962,13 +1996,13 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                 id: 'char-001',
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
-                                image: 'uploaded:Digital demon card @.jpg' // 使用实际图片
+                                image: 'https://placehold.co/200x200/00BFFF/FFFFFF?text=Character+A' // Updated to use placeholder
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
-                                image: 'uploaded:image_b68ac7.png' // 使用实际图片
+                                image: 'https://placehold.co/200x200/007ACC/FFFFFF?text=Character+B' // Updated to use placeholder
                             }
                         ];
                         break;
@@ -2032,7 +2066,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
 
             // Function to create and open a new window
             async function openWindow(section, chineseTitle, englishTitle, contentHTML, windowId = section, initialProps = {}, isMarkdown = false) {
-                console.log(`Attempting to open window: ${chineseTitle} [${englishTitle}] (Section: ${section}, ID: ${windowId}), Markdown: ${isMarkdown}`);
+                console.log(`Attempting to open window: ${chineseTitle} [${englishTitle}] (Section: ${section}, ID: ${windowId}, Markdown: ${isMarkdown}`);
 
                 // Hide welcome message if it's visible
                 if (welcomeMessage) {
@@ -2098,21 +2132,22 @@ All intellectual property rights (models / animations / source files, etc.) belo
                 const fullTitle = `${chineseTitle} [${englishTitle}]`;
                 windowElement.dataset.windowTitle = fullTitle; // Store the full title in dataset
 
+                // Construct window HTML dynamically, using data-asset-key for icons
                 windowElement.innerHTML = `
                     <div class="os-window-title-bar">
                         <div class="os-window-title-content">
-                            <span class="window-logo">${getSvgIcon('m-logo')}</span>
+                            <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                             <span class="os-window-title">${fullTitle}</span>
                         </div>
                         <div class="os-window-controls">
                             <div class="control-button minimize" title="最小化">
-                                ${getSvgIcon('minus')}
+                                <span class="icon-placeholder" data-asset-key="icon_minus"></span>
                             </div>
                             <div class="control-button maximize" title="最大化">
-                                ${getSvgIcon('square')}
+                                <span class="icon-placeholder" data-asset-key="icon_square"></span>
                             </div>
                             <div class="control-button close" title="关闭">
-                                ${getSvgIcon('times')}
+                                <span class="icon-placeholder" data-asset-key="icon_times"></span>
                             </div>
                         </div>
                     </div>
@@ -2126,6 +2161,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
 
                 mainDesktopArea.appendChild(windowElement); // Append to main desktop area
                 console.log(`Window "${windowId}" appended to main desktop area.`);
+                renderDynamicAssets(); // Render icons for the newly created window
 
                 // Add to map for language switching
                 openWindowsMap.set(windowId, {
@@ -2149,7 +2185,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                         isDraggingWindow = true;
                         offsetXWindow = e.clientX - windowElement.getBoundingClientRect().left;
                         offsetYWindow = e.clientY - windowElement.getBoundingClientRect().top;
-                        titleBar.style.cursor = 'url(\'uploaded:hand_closed.png\') 10 10, grabbing'; // Grabbing cursor
+                        titleBar.style.cursor = 'grabbing'; // Changed to grab cursor
                         bringToFront(windowElement); // Bring to front when dragging starts
                         console.log(`Started dragging window "${windowId}".`);
                     });
@@ -2178,7 +2214,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                 document.addEventListener('mouseup', () => {
                     if (isDraggingWindow) {
                         isDraggingWindow = false;
-                        if (titleBar) titleBar.style.cursor = 'url(\'uploaded:hand_open.png\') 10 10, grab'; // Grab cursor
+                        if (titleBar) titleBar.style.cursor = 'grab'; // Changed to grab cursor
                         console.log(`Stopped dragging window "${windowId}".`);
                     }
                 });
@@ -2267,8 +2303,9 @@ All intellectual property rights (models / animations / source files, etc.) belo
                     // Final fallback to ensure displayTitle is always a non-empty string
                     displayTitle = displayTitle.trim() || 'Untitled'; // Trim and ensure it's not empty
 
-                    taskbarIcon.innerHTML = `${getSvgIcon('window-restore')} <span>${displayTitle}</span>`;
+                    taskbarIcon.innerHTML = `<span class="icon-placeholder" data-asset-key="icon_window_restore"></span> <span>${displayTitle}</span>`;
                     taskbarIconsContainer.appendChild(taskbarIcon);
+                    renderDynamicAssets(); // Render icons for the newly created taskbar icon
 
                     taskbarIcon.addEventListener('click', () => {
                         restoreWindow(windowElement);
@@ -2294,7 +2331,8 @@ All intellectual property rights (models / animations / source files, etc.) belo
                 windowElement.style.left = windowElement.dataset.originalLeft;
                 windowElement.style.top = windowElement.dataset.originalTop;
                 windowElement.style.borderRadius = '12px'; // Restore border-radius for Aero
-                windowElement.style.boxShadow = '0 10px 30px rgba(0, 191, 255, 0.4), inset 0 0 15px rgba(255, 255, 255, 0.2)'; // Restore shadow
+                // Fix: Changed box-shadow to boxShadow for correct CSS property access
+                windowElement.style.boxShadow = '0 10px 40px rgba(0, 191, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3)'; // Restore shadow
                 bringToFront(windowElement);
                 console.log(`Window "${windowElement.dataset.windowId}" restored.`);
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
@@ -2342,8 +2380,8 @@ All intellectual property rights (models / animations / source files, etc.) belo
                         <div class="gallery-main-image-container">
                             <img src="${work.images[currentImageIndex]}" alt="${work.title}" class="gallery-main-image">
                             ${work.images.length > 1 ? `
-                                <button class="gallery-nav-button prev" data-direction="prev">${getSvgIcon('chevron-left')}</button>
-                                <button class="gallery-nav-button next" data-direction="next">${getSvgIcon('chevron-right')}</button>
+                                <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
+                                <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
                             ` : ''}
                         </div>
                         ${work.images.length > 1 ? `
@@ -2387,6 +2425,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                 }
                             });
                         }
+                        renderDynamicAssets(); // Render newly inserted icons (chevrons)
                     }
 
                     if (prevButton) {
@@ -2396,7 +2435,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                         });
                     }
                     if (nextButton) {
-                        nextButton.addEventListener('click', () => { // Fixed to nextButton
+                        nextButton.addEventListener('click', () => { 
                             currentImageIndex = (currentImageIndex + 1) % work.images.length;
                             updateGallery();
                         });
@@ -2469,20 +2508,21 @@ All intellectual property rights (models / animations / source files, etc.) belo
                     content = `
                         <div class="flex flex-col items-center justify-center h-full">
                             <div class="loading-spinner"></div>
-                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage].loadingMessage}</p>
+                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage]?.loadingMessage}</p>
                         </div>
                     `;
-                    openWindow(section, chineseTitle, englishTitle, content); // Open window with loading spinner immediately
+                    // Pass windowId to openWindow for correct targeting
+                    const openedWindow = await openWindow(section, chineseTitle, englishTitle, content, section); 
 
                     try {
                         data = await fetchContent(section); // Fetch data
                     } catch (error) {
-                        console.error(`${LANG_CONTENT[currentLanguage].errorLoadingContent} ${section}:`, error);
-                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage].errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage].unknownModule}</p>`;
+                        console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${section}:`, error);
+                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
                         // Update existing window with error message
-                        const currentWindow = document.querySelector(`.os-window[data-section="${section}"]`);
-                        if (currentWindow) {
-                            currentWindow.querySelector('.os-window-content').innerHTML = content;
+                        if (openedWindow) {
+                            openedWindow.querySelector('.os-window-content').innerHTML = content;
+                            renderDynamicAssets(); // Re-render icons after content update
                         }
                         return;
                     }
@@ -2491,9 +2531,9 @@ All intellectual property rights (models / animations / source files, etc.) belo
                     switch (section) {
                         case 'works':
                             content = `
-                                <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage].worksTitle}</h2>
+                                <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage]?.worksTitle}</h2>
                                 <div class="works-grid">
-                                    ${data.map(work => `
+                                    ${data?.map(work => `
                                         <div class="work-card" data-work-id="${work.id}">
                                             <img src="${work.thumbnail}" alt="${work.title}">
                                             <div class="work-card-title">${work.title}</div>
@@ -2501,18 +2541,17 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                         </div>
                                     `).join('')}
                                 </div>
-                                <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage].worksClickPrompt}</p>
+                                <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage]?.worksClickPrompt}</p>
                             `;
                             // Update content of existing window
-                            const worksWindow = document.querySelector(`.os-window[data-section="works"]`);
-                            if (worksWindow) {
-                                worksWindow.querySelector('.os-window-content').innerHTML = content;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 // Attach event listeners to newly created work cards
                                 setTimeout(() => { // Use setTimeout to ensure elements are rendered
-                                    worksWindow.querySelectorAll('.work-card').forEach(card => {
+                                    openedWindow.querySelectorAll('.work-card').forEach(card => {
                                         card.addEventListener('click', () => {
                                             const workId = card.dataset.workId;
-                                            const selectedWork = data.find(w => w.id === workId); // Use fetched data
+                                            const selectedWork = data?.find(w => w.id === workId); // Use fetched data
                                             if (selectedWork) {
                                                 console.log(`Work card "${workId}" clicked. Opening detail window.`);
                                                 openWorkDetail(selectedWork);
@@ -2522,14 +2561,15 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                         });
                                     });
                                 }, 100); // Small delay
+                                renderDynamicAssets(); // Re-render icons after content update
                             }
                             break;
                         case 'characters':
                             content = `
-                                <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage].charactersTitle}</h2>
-                                <p>${LANG_CONTENT[currentLanguage].charactersDescription}</p>
+                                <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage]?.charactersTitle}</h2>
+                                <p>${LANG_CONTENT[currentLanguage]?.charactersDescription}</p>
                                 <div class="grid grid-cols-2 gap-4 mt-4">
-                                    ${data.map(char => `
+                                    ${data?.map(char => `
                                         <div class="flex flex-col items-center">
                                             <img src="${char.image}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
                                             <p class="font-bold">${char.name}</p>
@@ -2538,19 +2578,23 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                     `).join('')}
                                 </div>
                             `;
-                            const charsWindow = document.querySelector(`.os-window[data-section="characters"]`);
-                            if (charsWindow) charsWindow.querySelector('.os-window-content').innerHTML = content;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
+                                renderDynamicAssets(); // Re-render icons after content update
+                            }
                             break;
                         case 'about':
-                            content = data.content;
+                            content = data?.content;
                             isMarkdown = true;
-                            const aboutWindow = document.querySelector(`.os-window[data-section="about"]`);
-                            if (aboutWindow) aboutWindow.querySelector('.os-window-content').innerHTML = marked.parse(content);
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
+                                renderDynamicAssets(); // Re-render icons after content update
+                            }
                             break;
                         case 'services':
-                            content = marked.parse(data.description) + `
+                            content = marked.parse(LANG_CONTENT[currentLanguage]?.services?.description || '') + `
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                    ${data.categories.map(category => `
+                                    ${data?.categories.map(category => `
                                         <div class="service-category-card p-4 rounded-lg border border-primary-blue hover:bg-glass-bg cursor-pointer transition-all duration-200" data-category-id="${category.id}">
                                             <h3 class="font-bold text-lg text-light-blue">${category.name}</h3>
                                             <p class="text-sm opacity-80 mt-1">${category.shortDescription}</p>
@@ -2558,15 +2602,14 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                     `).join('')}
                                 </div>
                             `;
-                            const servicesWindow = document.querySelector(`.os-window[data-section="services"]`);
-                            if (servicesWindow) {
-                                servicesWindow.querySelector('.os-window-content').innerHTML = content;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 // Attach event listeners to newly created service category cards
                                 setTimeout(() => {
-                                    servicesWindow.querySelectorAll('.service-category-card').forEach(card => {
+                                    openedWindow.querySelectorAll('.service-category-card').forEach(card => {
                                         card.addEventListener('click', () => {
                                             const categoryId = card.dataset.categoryId;
-                                            const selectedCategory = data.categories.find(cat => cat.id === categoryId);
+                                            const selectedCategory = data?.categories.find(cat => cat.id === categoryId);
                                             if (selectedCategory) {
                                                 console.log(`Service category "${categoryId}" clicked. Opening detail window.`);
                                                 openServiceCategoryDetail(selectedCategory);
@@ -2576,27 +2619,30 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                         });
                                     });
                                 }, 100);
+                                renderDynamicAssets(); // Re-render icons after content update
                             }
                             break;
                         case 'socials':
-                            content = marked.parse(data.description) + `
+                            content = marked.parse(data?.description || '') + `
                                 <div class="flex flex-wrap gap-4 mt-4">
-                                    ${data.links.map(link => `
+                                    ${data?.links.map(link => `
                                         <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
-                                            ${getSvgIcon(link.icon) ? `<span class="w-6 h-6">${getSvgIcon(link.icon)}</span>` : ''} <!-- Use SVG icon -->
+                                            <span class="icon-placeholder w-6 h-6" data-asset-key="${link.iconAssetKey}"></span> <!-- Using iconAssetKey -->
                                             <span>${link.name}</span>
                                         </a>
                                     `).join('')}
                                 </div>
                             `;
-                            const socialsWindow = document.querySelector(`.os-window[data-section="socials"]`);
-                            if (socialsWindow) socialsWindow.querySelector('.os-window-content').innerHTML = content;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
+                                renderDynamicAssets(); // Re-render icons after content update
+                            }
                             break;
                         case 'settings':
-                            content = marked.parse(data.description) + `
+                            content = marked.parse(data?.description || '') + `
                                 <div class="flex flex-col gap-4 mt-4">
-                                    ${data.options.map(option => {
-                                        const labelText = LANG_CONTENT[currentLanguage].settings.options.find(opt => opt.id === option.id)?.label || option.label;
+                                    ${data?.options.map(option => {
+                                        const labelText = LANG_CONTENT[currentLanguage]?.settings?.options.find(opt => opt.id === option.id)?.label || option.label;
                                         if (option.type === 'toggle') {
                                             return `
                                                 <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
@@ -2626,13 +2672,12 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                         }
                                         return '';
                                     }).join('')}
-                                </div>
-                            `;
-                            const settingsWindow = document.querySelector(`.os-window[data-section="settings"]`);
-                            if (settingsWindow) {
-                                settingsWindow.querySelector('.os-window-content').innerHTML = content;
+                            </div>
+                        `;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 setTimeout(() => {
-                                    const languageToggle = settingsWindow.querySelector('#language-toggle');
+                                    const languageToggle = openedWindow.querySelector('#language-toggle');
                                     if (languageToggle) {
                                         languageToggle.addEventListener('change', (e) => {
                                             const newLang = e.target.checked ? 'en' : 'zh';
@@ -2647,7 +2692,7 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                         });
                                     }
 
-                                    const desktopIconsToggle = settingsWindow.querySelector('#desktop-icons-toggle');
+                                    const desktopIconsToggle = openedWindow.querySelector('#desktop-icons-toggle');
                                     if (desktopIconsToggle) {
                                         desktopIconsToggle.addEventListener('change', (e) => {
                                             if (e.target.checked) {
@@ -2660,27 +2705,31 @@ All intellectual property rights (models / animations / source files, etc.) belo
                                         });
                                     }
                                 }, 100);
+                                renderDynamicAssets(); // Re-render icons after content update
                             }
                             break;
                         case 'shutdown':
                             content = `
-                                <h2 class="text-xl font-bold mb-4 text-red-400">${LANG_CONTENT[currentLanguage].shutdownMenuItem}...</h2>
-                                <p>${LANG_CONTENT[currentLanguage].shutdownMessage}</p>
-                                <p class="mt-4 opacity-70">${LANG_CONTENT[currentLanguage].loadingMessage.replace('加载中...', '请稍候...')}</p>
+                                <h2 class="text-xl font-bold mb-4 text-red-400">${LANG_CONTENT[currentLanguage]?.shutdownMenuItem}...</h2>
+                                <p>${LANG_CONTENT[currentLanguage]?.shutdownMessage}</p>
+                                <p class="mt-4 opacity-70">${(LANG_CONTENT[currentLanguage]?.loadingMessage || '加载中...').replace('加载中...', '请稍候...')}</p>
                             `;
-                            const shutdownWindow = document.querySelector(`.os-window[data-section="shutdown"]`);
-                            if (shutdownWindow) shutdownWindow.querySelector('.os-window-content').innerHTML = content;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
+                                renderDynamicAssets(); // Re-render icons after content update
+                            }
                             // For a real shutdown, you might redirect or show a final message
                             setTimeout(() => {
-                                console.log(LANG_CONTENT[currentLanguage].shutdownMessage);
+                                console.log(LANG_CONTENT[currentLanguage]?.shutdownMessage);
                                 mainDesktopArea.innerHTML = `<div id="welcome-message" class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <p class="text-3xl text-white opacity-70" id="welcome-message-text">${LANG_CONTENT[currentLanguage].shutdownMessage}</p>
+                                    <p class="text-3xl text-white opacity-70" id="welcome-message-text">${LANG_CONTENT[currentLanguage]?.shutdownMessage}</p>
                                 </div>`;
                                 // Clear all open windows from map and taskbar
                                 openWindowsMap.clear();
                                 taskbarIconsContainer.innerHTML = '';
                                 // Re-initialize welcome message text element
                                 welcomeMessageText = document.getElementById('welcome-message-text'); // Re-assign the element
+                                renderDynamicAssets(); // Ensure icons in shutdown message are rendered if any
                             }, 2000);
                             break;
                     }
@@ -2698,8 +2747,8 @@ All intellectual property rights (models / animations / source files, etc.) belo
 
                     const section = 'about';
                     // Directly get titles from LANG_CONTENT, as getWindowTitles is for generic sections
-                    const chineseTitle = LANG_CONTENT[currentLanguage]?.aboutTitle || '关于 MAZKO';
-                    const englishTitle = LANG_CONTENT['en']?.aboutTitle || 'About MAZKO';
+                    const chineseTitle = LANG_CONTENT[currentLanguage]?.aboutTitle;
+                    const englishTitle = LANG_CONTENT['en']?.aboutTitle;
                     
                     let content = '';
                     let data = null;
@@ -2708,32 +2757,31 @@ All intellectual property rights (models / animations / source files, etc.) belo
                     content = `
                         <div class="flex flex-col items-center justify-center h-full">
                             <div class="loading-spinner"></div>
-                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage].loadingMessage}</p>
+                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage]?.loadingMessage}</p>
                         </div>
                     `;
-                    openWindow(section, chineseTitle, englishTitle, content);
+                    const openedWindow = await openWindow(section, chineseTitle, englishTitle, content, 'about', {}, true); // Pass 'about' as windowId
 
                     try {
                         data = await fetchContent(section);
                         if (data && typeof data.content !== 'undefined') { // Added check
                             content = data.content;
-                            const aboutWindow = document.querySelector(`.os-window[data-section="about"]`);
-                            if (aboutWindow) aboutWindow.querySelector('.os-window-content').innerHTML = marked.parse(content);
+                            if (openedWindow) openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
                         } else {
                             console.error(`Fetched data for section "${section}" is invalid or missing 'content':`, data);
-                            content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage].errorLoadingContent} ${LANG_CONTENT[currentLanguage].unknownModule}</p>`;
-                            const currentWindow = document.querySelector(`.os-window[data-section="about"]`);
-                            if (currentWindow) {
-                                currentWindow.querySelector('.os-window-content').innerHTML = content;
+                            content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
+                            if (openedWindow) {
+                                openedWindow.querySelector('.os-window-content').innerHTML = content;
                             }
                         }
                     } catch (error) {
-                        console.error(`${LANG_CONTENT[currentLanguage].errorLoadingContent} ${section}:`, error);
-                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage].errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage].unknownModule}</p>`;
-                        const currentWindow = document.querySelector(`.os-window[data-section="about"]`);
-                        if (currentWindow) {
-                            currentWindow.querySelector('.os-window-content').innerHTML = content;
+                        console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${section}:`, error);
+                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
+                        if (openedWindow) {
+                            openedWindow.querySelector('.os-window-content').innerHTML = content;
                         }
+                    } finally {
+                        renderDynamicAssets(); // Ensure icons within the content are rendered
                     }
                 });
             }
@@ -2875,7 +2923,9 @@ All intellectual property rights (models / animations / source files, etc.) belo
             });
 
             // Initial UI update based on default language
-            updateUIForLanguage();
+            updateCursors(); // Set cursors initially
+            updateUIForLanguage(); // Render text and initial assets
+            renderDynamicAssets(); // Render all initial icons
             console.log('All event listeners attached and script initialization complete.');
         });
     </script>
