@@ -585,7 +585,7 @@
             cursor: pointer; /* Changed to default pointer */
             transition: background-color 0.1s ease, transform 0.05s ease, box-shadow 0.1s ease;
             /* More glossy, 3D effect for control buttons */
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 5px rgba(0,0,0,0.5); /* Corrected this line */
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 5px rgba(0,0,0,0.5);
             border: 1px solid rgba(255, 255, 255, 0.6);
             background: rgba(255,255,255,0.2); /* Base white background for buttons */
         }
@@ -1153,7 +1153,7 @@
 
     <script>
         console.log('Script started parsing.'); // Added for debugging
-
+        
         /**
          * @object ASSETS
          * @description 集中管理所有图片和图标的路径。
@@ -1214,57 +1214,54 @@
             return ASSETS[assetKey] || ''; 
         }
 
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM Content Loaded. Starting asset fetch.');
-
-            // All text content for different languages
-            const LANG_CONTENT = {
-                'zh': {
-                    systemName: 'MAX OS', // New system name
-                    systemVersion: 'Ver1.0', // New system version
-                    welcomeMessage: '欢迎来到 MAX OS 虚拟宇宙终端',
-                    startButton: '开始', // This will no longer be used for the button text
-                    profileName: 'MAZKO',
-                    worksIcon: '作品集',
-                    charactersIcon: '角色',
-                    mazkoExeIcon: 'MAZKO', // Removed .exe
-                    servicesIcon: '服务',
-                    socialsIcon: '社交',
-                    settingsIcon: '设置', // New
-                    worksMenuItem: '作品集', // Simplified for menu item label
-                    charactersMenuItem: '角色', // Simplified for menu item label
-                    servicesMenuItem: '服务与报价', // Simplified for menu item label
-                    socialsMenuItem: '社交媒体', // Simplified for menu item label
-                    settingsMenuItem: '设置', // Now a button, simplified text
-                    languageMenuItem: '语言', // This will still be used for the settings window
-                    shutdownMenuItem: '关闭系统', // Now a button, simplified text
-                    shutdownMessage: '感谢您的访问，MAX OS 虚拟宇宙终端正在安全退出。', // Updated shutdown message
-                    loadingMessage: '加载中...',
-                    errorLoadingContent: '加载内容失败：',
-                    unknownModule: '错误：未知模块。',
-                    worksTitle: '我的作品集',
-                    worksClickPrompt: '点击作品卡片查看详情...',
-                    worksDetailsSuffix: ' - 详情', // New suffix for work details
-                    charactersTitle: '角色设计',
-                    charactersDescription: '探索我独特的PSX游戏风格卡通角色。',
-                    aboutTitle: '关于 MAZKO', // Title for About Me window
-                    aboutContent: `
+        // All text content for different languages
+        const LANG_CONTENT = {
+            'zh': {
+                systemName: 'MAX OS', // New system name
+                systemVersion: 'Ver1.0', // New system version
+                welcomeMessage: '欢迎来到 MAX OS 虚拟宇宙终端',
+                startButton: '开始', // This will no longer be used for the button text
+                profileName: 'MAZKO',
+                worksIcon: '作品集',
+                charactersIcon: '角色',
+                mazkoExeIcon: 'MAZKO', // Removed .exe
+                servicesIcon: '服务',
+                socialsIcon: '社交',
+                settingsIcon: '设置', // New
+                worksMenuItem: '作品集', // Simplified for menu item label
+                charactersMenuItem: '角色', // Simplified for menu item label
+                servicesMenuItem: '服务与报价', // Simplified for menu item label
+                socialsMenuItem: '社交媒体', // Simplified for menu item label
+                settingsMenuItem: '设置', // Now a button, simplified text
+                languageMenuItem: '语言', // This will still be used for the settings window
+                shutdownMenuItem: '关闭系统', // Now a button, simplified text
+                shutdownMessage: '感谢您的访问，MAX OS 虚拟宇宙终端正在安全退出。', // Updated shutdown message
+                loadingMessage: '加载中...',
+                errorLoadingContent: '加载内容失败：',
+                unknownModule: '错误：未知模块。',
+                worksTitle: '我的作品集',
+                worksClickPrompt: '点击作品卡片查看详情...',
+                worksDetailsSuffix: ' - 详情', // New suffix for work details
+                charactersTitle: '角色设计',
+                charactersDescription: '探索我独特的PSX游戏风格卡通角色。',
+                aboutTitle: '关于 MAZKO', // Title for About Me window
+                aboutContent: `
 我是一名来自中国的 3D 艺术家与平面设计师，专注于 PSX 游戏风格卡通建模与 lowpoly 复古像素质感，同时沉浸于地下 club 文化与先锋视觉的多元融合创作。
 
 痴迷于一切突破常规的美学语言——从 ASAP Rocky MV《Tailor Swift》中的视觉张力，到《异兽魔都》的荒诞角色设定，再到《瑞克和莫蒂》的维度错乱，我将动漫叙事、街头嘻哈、复古科幻等文化基因注入作品之中，用像素颗粒与低模构建出独一无二的视觉系统。
 
 我擅长使用 Blender、Substance Painter、Zbrush、Photoshop 与 Illustrator，涵盖角色设计、CG 动画、海报、VJ、虚拟时尚与 LOGO 设计等多个领域。
-                    `, // Now Markdown
-                    services: {
-                        title: '服务与报价',
-                        description: '以下是我的主要服务项目及大致报价范围：', // Now Markdown
-                        categories: [
-                            {
-                                id: 'character-modeling-category',
-                                name: '角色建模服务',
-                                nameEn: 'Character Modeling Service', // Added English name for title bar
-                                shortDescription: '低多边形人物建模与复古动画服务。',
-                                detailContent: `
+                `, // Now Markdown
+                services: {
+                    title: '服务与报价',
+                    description: '以下是我的主要服务项目及大致报价范围：', // Now Markdown
+                    categories: [
+                        {
+                            id: 'character-modeling-category',
+                            name: '角色建模服务',
+                            nameEn: 'Character Modeling Service', // Added English name for title bar
+                            shortDescription: '低多边形人物建模与复古动画服务。',
+                            detailContent: `
 ### 👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】低边形人物建模
 **价格：** 500¥+ / 人
 我将为你的角色进行低多边形建模与设计！
@@ -1294,7 +1291,7 @@
 
 建议：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。
 
-### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】版权申明
+### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】版权申明
 所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。
 
 客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。
@@ -1325,7 +1322,7 @@
 提供指定格式和尺寸的图片
 
 ### [3D动态海报 1000¥+/ 张]
-**价格：** 1000¥+/ 张
+**价格：** 1000¥+ / 张
 可提供指定格式和尺寸的视频
 
 ### 📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明
@@ -1351,7 +1348,7 @@
 
 效率建议：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率
 
-### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】版权申明
+### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】版权申明
 所有成果知识产权归服务方（🅜）所有。
 
 甲方获仅限该 club 自身宣传的商用使用权（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。
@@ -1461,7 +1458,7 @@ Additional Costs: Animations exceeding 20 seconds or with increased complexity (
 
 Suggestion: Providing clear reference images or inspirational directions will help to efficiently achieve your visual requirements.
 
-### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】
+### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】
 All deliverables (models / animations / source files, etc.) copyright belongs to the service provider (🅜).
 
 The client only obtains non-commercial usage rights, and is prohibited from commercial use, secondary creation, resale, or authorization to third parties.
@@ -1487,13 +1484,13 @@ Provides source files and images in specified formats and sizes.
 **Price:** 500¥ / piece
 Provides videos and images in specified formats and sizes.
 
-### [3D Poster 700¥+/ 张]
-**价格：** 700¥+ / 张
-提供指定格式和尺寸的图片
+### [3D Poster 700¥+ / piece]
+**Price:** 700¥+ / piece
+Provides images in specified formats and sizes.
 
-### [3D Dynamic Poster 1000¥+/ 张]
-**价格：** 1000¥+/ 张
-可提供指定格式和尺寸的视频
+### [3D Dynamic Poster 1000¥+ / piece]
+**Price:** 1000¥+ / piece
+Provides videos in specified formats and sizes.
 
 ### 📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】Service Process & Delivery Instructions
 Project Start: Design begins upon receipt of a 50% deposit, with a turnaround time of approximately 1–2 days per piece.
@@ -1535,25 +1532,48 @@ The client shall be responsible for any disputes arising from unauthorized use b
                 socialsTitle: 'Social Media & Community',
                 socialsDescription: 'Find me on the following platforms and join my virtual universe:',
                 socialsLinks: [
-                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo', nameEn: 'Weibo' }, // Changed to iconAssetKey
+                    { name: 'Weibo', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo', nameEn: 'Weibo' }, // Changed to iconAssetKey
                     { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', iconAssetKey: 'icon_instagram', nameEn: 'Instagram' },
                     { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', iconAssetKey: 'icon_artstation', nameEn: 'ArtStation' },
                     { name: 'Behance', url: 'https://www.behance.net/yourprofile', iconAssetKey: 'icon_behance_square', nameEn: 'Behance' },
                     { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope', nameEn: 'Email' }
                 ],
-                settings: { // New settings content
-                    title: '系统设置',
-                    titleEn: 'System Settings', // Added English title
-                    description: '调整MAX OS以满足您的偏好：', // Now Markdown
+                settings: {
+                    title: 'System Settings',
+                    titleEn: 'System Settings',
+                    description: 'Adjust MAX OS to your preferences:',
                     options: [
-                        { label: '启用深色模式 (待开发)', labelEn: 'Enable Dark Mode (Coming Soon)', type: 'toggle', id: 'dark-mode-toggle', disabled: true },
-                        { label: '显示桌面图标', labelEn: 'Show Desktop Icons', type: 'toggle', id: 'desktop-icons-toggle', checked: true },
-                        { label: '语言切换', labelEn: 'Language Switch', type: 'language-toggle', id: 'language-toggle' },
-                        { label: '重置布局 (待开发)', labelEn: 'Reset Layout (Coming Soon)', type: 'button', id: 'reset-layout-button', disabled: true }
+                        { label: 'Enable Dark Mode (Coming Soon)', labelEn: 'Enable Dark Mode (Coming Soon)', type: 'toggle', id: 'dark-mode-toggle', disabled: true },
+                        { label: 'Show Desktop Icons', labelEn: 'Show Desktop Icons', type: 'toggle', id: 'desktop-icons-toggle', checked: true },
+                        { label: 'Language Switch', labelEn: 'Language Switch', type: 'language-toggle', id: 'language-toggle' },
+                        { label: 'Reset Layout (Coming Soon)', labelEn: 'Reset Layout (Coming Soon)', type: 'button', id: 'reset-layout-button', disabled: true }
                     ]
                 }
             }
-            let currentLanguage = 'zh';
+        };
+
+        let currentLanguage = 'zh'; // Moved declaration outside DOMContentLoaded
+
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Script started parsing.'); // Added for debugging
+            
+            // JavaScript for dynamic elements (e.g., time display)
+            function updateTime() {
+                const now = new Date();
+                const hours = String(now.getHours()).padStart(2, '0');
+                const minutes = String(now.getMinutes()).padStart(2, '0');
+                const timeElement = document.getElementById('current-time');
+                if (timeElement) {
+                    timeElement.textContent = `${hours}:${minutes}`;
+                } else {
+                    console.warn('Time element not found.');
+                }
+            }
+
+            // Update time every minute
+            setInterval(updateTime, 60000); // Update every minute for HH:MM
+            // Initial call to display time immediately
+            updateTime();
 
             // Get elements for the desktop environment
             const startButton = document.getElementById('start-button-taskbar');
@@ -2592,7 +2612,7 @@ The client shall be responsible for any disputes arising from unauthorized use b
                             }
                             break;
                         case 'services':
-                            content = marked.parse(LANG_CONTENT[currentLanguage]?.services?.description || '') + `
+                            content = marked.parse(data?.description || '') + `
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
                                     ${data?.categories.map(category => `
                                         <div class="service-category-card p-4 rounded-lg border border-primary-blue hover:bg-glass-bg cursor-pointer transition-all duration-200" data-category-id="${category.id}">
