@@ -1,0 +1,33 @@
+{
+  "cursors": {
+    "default": "./assets/cursors/hand_open.png",
+    "active": "./assets/cursors/hand_closed.png",
+    "pointer": "./assets/cursors/hand_point.png"
+  },
+  "icons": {
+    "works": "./assets/icons/folder.png",
+    "characters": "./assets/icons/users.png",
+    "mazko_logo": "./assets/icons/mazko_logo.png",
+    "services": "./assets/icons/handshake.png",
+    "socials": "./assets/icons/share.png",
+    "wifi": "./assets/icons/wifi.png",
+    "battery": "./assets/icons/battery_full.png",
+    "volume": "./assets/icons/volume_up.png",
+    "settings": "./assets/icons/cog.png",
+    "shutdown": "./assets/icons/power_off.png",
+    "minus": "./assets/icons/minus.png",
+    "square": "./assets/icons/square.png",
+    "times": "./assets/icons/times.png",
+    "window_restore": "./assets/icons/window_restore.png",
+    "chevron_left": "./assets/icons/chevron_left.png",
+    "chevron_right": "./assets/icons/chevron_right.png",
+    "weibo": "./assets/socials/weibo.png",
+    "instagram": "./assets/socials/instagram.png",
+    "artstation": "./assets/socials/artstation.png",
+    "behance_square": "./assets/socials/behance.png",
+    "envelope": "./assets/socials/envelope.png"
+  },
+  "backgrounds": {
+    "desktop_background_image": null
+  }
+}
