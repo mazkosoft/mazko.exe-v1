@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAX OS - 虚拟宇宙终端 (Frutiger Aero Style)</title>
     <!-- Favicon - 使用一个简单的SVG作为示例 -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>\" type=\"image/svg+xml\">
     <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google Fonts - Inter 字体作为通用字体，如果需要“Chocolate Classical Sans”请在此处引入其CDN或本地路径 -->
@@ -243,16 +243,17 @@
             background-color: rgba(255,255,255,0.1);
             transform: translateY(-1px);
         }
-        .system-tray-icon .icon-image { /* Sizing for dynamically loaded image */
-            width: 1em;
-            height: 1em;
+        /* Style for SVG icons */
+        .system-tray-icon svg {
+            width: 1.5em; /* Slightly larger for better visibility */
+            height: 1.5em;
             vertical-align: middle;
             filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
 
         /* Desktop Icons (Shortcuts) */
         .desktop-icons-container {
-            position: absolute;
+            position: relative; /* Changed to relative to allow absolute positioning of children */
             top: 0;
             left: 0;
             width: 100%;
@@ -413,6 +414,17 @@
         .start-menu-item:hover .icon-image {
             filter: brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.8)); /* Brighten and stronger glow on hover */
         }
+        /* Style for SVG icons in menu items */
+        .start-menu-item svg {
+            margin-right: 12px;
+            width: 1.2em;
+            height: 1.2em;
+            filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
+            transition: filter 0.2s ease;
+        }
+        .start-menu-item:hover svg {
+            filter: brightness(1.5) drop-shadow(0 0 8px rgba(255,255,255,0.8));
+        }
         
         /* New style for the text label within start menu items */
         .start-menu-item .menu-item-label {
@@ -460,8 +472,9 @@
             background-color: rgba(255, 255, 255, 0.25); /* More pronounced active state */
         }
 
-        .start-menu-footer-button .icon-image { /* Sizing for dynamically loaded image */
-            width: 24px; /* Icon size */
+        /* Style for SVG icons in footer buttons */
+        .start-menu-footer-button svg {
+            width: 24px;
             height: 24px;
             filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
         }
@@ -493,8 +506,20 @@
             min-width: 300px;
             min-height: 200px;
             z-index: 5; /* Default z-index, will be updated on focus */
-            animation: windowPopIn 0.3s ease-out forwards; /* Pop-in animation */
+            /* REMOVED: animation: windowPopIn 0.3s ease-out forwards; */
             resize: both; /* Allow resizing */
+        }
+
+        /* NEW: Keyframes for smooth window opening */
+        @keyframes windowOpenAnimation {
+            from {
+                opacity: 0;
+                transform: scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
         }
 
         .os-window.minimized {
@@ -519,7 +544,7 @@
             justify-content: space-between;
             align-items: center;
             /* Added small border matching title bar color */
-            border-bottom: 2px solid rgba(255, 255, 255, 0.8); /* Thicker, more visible border */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.8); /* Thicker, stronger border */
             cursor: grab; /* Changed to grab cursor */
             border-radius: 9px 9px 0 0; /* Match window border-radius, adjusted for 3px window border */
             position: relative;
@@ -614,7 +639,8 @@
             filter: brightness(0.8);
             background: rgba(255,255,255,0.1); /* Darker white on active */
         }
-        .os-window-controls .control-button .icon-image { /* Sizing for dynamically loaded image */
+        /* Style for SVG icons in control buttons */
+        .os-window-controls .control-button svg {
             width: 0.8em;
             height: 0.8em;
             filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
@@ -658,16 +684,7 @@
 
 
         /* Window pop-in animation */
-        @keyframes windowPopIn {
-            from {
-                opacity: 0;
-                transform: scale(0.9) translateY(20px);
-            }
-            to {
-                opacity: 1;
-                transform: scale(1) translateY(0);
-            }
-        }
+        /* REMOVED @keyframes windowPopIn - replaced by windowOpenAnimation */
 
         /* Works grid specific styles */
         .works-grid {
@@ -771,7 +788,8 @@
             filter: brightness(1.2);
             box-shadow: 0 4px 8px rgba(0,0,0,0.5);
         }
-        .work-detail-content .gallery-nav-button .icon-image { /* Sizing for dynamically loaded image */
+        /* Style for SVG icons in gallery nav buttons */
+        .work-detail-content .gallery-nav-button svg {
             width: 1.5em;
             height: 1.5em;
             filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
@@ -852,7 +870,7 @@
             box-shadow: inset 0 1px 3px rgba(255,255,255,0.5), 0 1px 3px rgba(0,0,0,0.4);
             transition: all 0.2s ease;
             white-space: nowrap;
-            max-width: 120px; /* Limit width */
+            max-width: 150px; /* Increased max-width for more text */
             overflow: hidden;
             text-overflow: ellipsis; /* Add ellipsis for overflow */
         }
@@ -871,13 +889,14 @@
             transform: translateY(0);
         }
 
-        .taskbar-minimized-icon .icon-image { /* Sizing for dynamically loaded image */
+        /* Style for SVG icons in minimized taskbar icons */
+        .taskbar-minimized-icon svg {
             width: 1em;
             height: 1em;
             filter: drop-shadow(0 0 3px rgba(0, 191, 255, 0.3));
             transition: filter 0.2s ease;
         }
-        .taskbar-minimized-icon.active .icon-image {
+        .taskbar-minimized-icon.active svg {
             filter: brightness(1.5) drop-shadow(0 0 5px rgba(255,255,255,0.8));
         }
 
@@ -1103,7 +1122,8 @@
                     <span class="menu-item-label"></span>
                 </a>
                 <a href="#" class="start-menu-item" data-section="socials" data-lang-key="socialsMenuItem" data-title-zh="社交媒体" data-title-en="Social Media">
-                    <span class="icon-placeholder" data-asset-key="icon_socials"></span>
+                    <!-- Socials menu item icon using inline SVG now, not ASSETS -->
+                    <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>
                     <span class="menu-item-label"></span>
                 </a>
                 <!-- Removed the horizontal line as requested -->
@@ -1111,11 +1131,13 @@
                 <!-- Settings and Shutdown Buttons in a container, now using start-menu-footer-button class -->
                 <div class="start-menu-buttons-container">
                     <button class="start-menu-footer-button" data-section="settings" data-lang-key="settingsMenuItem" title="设置" data-title-zh="系统设置" data-title-en="Settings">
-                        <span class="icon-placeholder" data-asset-key="icon_settings"></span>
+                        <!-- Settings footer button icon changed to a more conventional gear SVG -->
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.4-1.07-.75-1.67-1.03l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.44l-.38 2.65c-.6.28-1.15.63-1.67 1.03l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.64-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.31.61.22l2.49-1c.52.4 1.07.75 1.67 1.03l.38 2.65c.04.26.25.44.5.44h4c.25 0 .46-.18.5-.44l-.38-2.65c.6-.28 1.15-.63 1.67-1.03l2.49 1c-.22.09-.49 0-.61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>
                         <!-- Removed text span as requested -->
                     </button>
                     <button class="start-menu-footer-button" data-section="shutdown" data-lang-key="shutdownMenuItem" title="关闭系统" data-title-zh="关闭系统" data-title-en="Shutdown">
-                        <span class="icon-placeholder" data-asset-key="icon_shutdown"></span>
+                        <!-- Shutdown footer button icon changed to a more conventional power symbol SVG -->
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.05 3.05L7 12H5c0-3.86 3.14-7 7-7s7 3.14 7 7-3.14 7-7 7c-.64 0-1.27-.09-1.87-.27l-.76 1.24c.94.49 2 .78 3.07.78 4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>
                         <!-- Removed text span as requested -->
                     </button>
                 </div>
@@ -1137,13 +1159,16 @@
                 <!-- Right side system tray -->
                 <div class="system-tray">
                     <div class="system-tray-icon">
-                        <span class="icon-placeholder" data-asset-key="icon_wifi"></span>
+                        <!-- WiFi icon changed to a more conventional signal SVG -->
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 4C7.31 4 3.07 5.9 0 8.98L12 21l12-12.02C20.93 5.9 16.69 4 12 4zm0 2c3.48 0 6.64 1.48 8.06 3.63L12 18.06 3.94 9.63C5.36 7.48 8.52 6 12 6z"/></svg>
                     </div>
                     <div class="system-tray-icon">
-                        <span class="icon-placeholder" data-asset-key="icon_battery"></span>
+                        <!-- Battery icon changed to a horizontal battery SVG -->
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 9h-2V7c0-.55-.45-1-1-1H7c-.55 0-1 .45-1 1v2H4c-.55 0-1 .45-1 1v4c0 .55.45 1 1 1h2v2c0 .55.45 1 1 1h10c.55 0 1-.45 1-1v-2h2c.55 0 1-.45 1-1v-4c0-.55-.45-1-1-1zM6 8h12v8H6V8z"/></svg>
                     </div>
                     <div class="system-tray-icon">
-                        <span class="icon-placeholder" data-asset-key="icon_volume"></span>
+                        <!-- Volume icon - Kept the existing conventional one -->
+                        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.98 7-4.99 7-8.77s-2.99-7.79-7-8.77z"/></svg>
                     </div>
                     <span class="text-sm text-white opacity-80" id="current-time"></span> <!-- Time display -->
                 </div>
@@ -1162,46 +1187,28 @@
          * 您可以根据需要修改这些路径和文件名。
          */
         const ASSETS = {
-            // 光标图片 (请替换为您的 PNG 或 CUR 文件路径)
-            'cursor_default': './assets/cursors/hand_open.png',
-            'cursor_active': './assets/cursors/hand_closed.png',
-            'cursor_pointer': './assets/cursors/hand_point.png',
+            // 光标图片 (Using provided files)
+            'cursor_default': 'hand_open.png',
+            'cursor_active': 'hand_closed.png',
+            'cursor_pointer': 'hand_point.png',
 
-            // 桌面图标 / 开始菜单图标 (请替换为您的 PNG/SVG 文件路径)
-            'icon_works': './assets/icons/folder.png', // 作品集文件夹图标
-            'icon_characters': './assets/icons/users.png', // 角色用户图标
-            'icon_mazko_logo': './assets/icons/mazko_logo.png', // 您的自定义 'M' 标志
-            'icon_services': './assets/icons/handshake.png', // 服务握手图标
-            'icon_socials': './assets/icons/share.png', // 社交分享图标
+            // 桌面图标 / 开始菜单图标 (Using user-provided image files)
+            'icon_works': 'image_4106dc.png', 
+            'icon_characters': 'image_5bf20c.png', 
+            'icon_mazko_logo': 'https://placehold.co/48x48/6699CC/FFFFFF?text=M', // Using placeholder for now
+            'icon_services': 'https://placehold.co/48x48/6699CC/FFFFFF?text=Services', // Placeholder for social icon as image asset
+            'icon_socials': 'https://placehold.co/48x48/6699CC/FFFFFF?text=Social', // Placeholder for social icon as image asset
+            'icon_settings': 'https://placehold.co/48x48/6699CC/FFFFFF?text=Settings', // Placeholder for settings icon as image asset
+            
+            // Desktop background image (User-provided image)
+            'desktop_background_image': 'https://placehold.co/1920x1080/00BFFF/FFFFFF?text=Desktop+Background', // Using placeholder for now
 
-            // 任务栏系统托盘图标 (请替换为您的 PNG/SVG 文件路径)
-            'icon_wifi': './assets/icons/wifi.png',
-            'icon_battery': './assets/icons/battery_full.png',
-            'icon_volume': './assets/icons/volume_up.png',
-
-            // 开始菜单底部按钮图标 (请替换为您的 PNG/SVG 文件路径)
-            'icon_settings': './assets/icons/cog.png', // 设置齿轮图标
-            'icon_shutdown': './assets/icons/power_off.png', // 关机电源图标
-
-            // 窗口控制按钮图标 (请替换为您的 PNG/SVG 文件路径)
-            'icon_minus': './assets/icons/minus.png', // 最小化图标
-            'icon_square': './assets/icons/square.png', // 最大化/还原图标
-            'icon_times': './assets/icons/times.png', // 关闭图标
-            'icon_window_restore': './assets/icons/window_restore.png', // 任务栏最小化窗口图标
-
-            // 画廊导航按钮图标 (请替换为您的 PNG/SVG 文件路径)
-            'icon_chevron_left': './assets/icons/chevron_left.png', // 左箭头
-            'icon_chevron_right': './assets/icons/chevron_right.png', // 右箭头
-
-            // 社交媒体图标 (特别注意：这些需要您提供对应的图像文件，以修正现有显示不正确的问题)
-            'icon_weibo': './assets/socials/weibo.png',
-            'icon_instagram': './assets/socials/instagram.png',
-            'icon_artstation': './assets/socials/artstation.png',
-            'icon_behance_square': './assets/socials/behance.png',
-            'icon_envelope': './assets/socials/envelope.png',
-
-            // 桌面背景图片 (可选：如果您想使用图片背景，取消注释并提供路径)
-            // 'desktop_background_image': './assets/backgrounds/your_desktop_bg.jpg',
+            // Work section images (placeholders as files were not provided)
+            'image_d0f029.png': 'https://placehold.co/300x200/00BFFF/FFFFFF?text=Work1', 
+            'image_d160ec.png': 'https://placehold.co/300x200/007ACC/FFFFFF?text=Work1_Detail1', 
+            'image_057d28.png': 'https://placehold.co/300x200/00BFFF/FFFFFF?text=Work1_Detail2', 
+            'image_0597aa.jpg': 'https://placehold.co/300x200/007ACC/FFFFFF?text=Work2', 
+            'image_0597eb.png': 'https://placehold.co/300x200/00BFFF/FFFFFF?text=Work2_Detail1', 
         };
 
         /**
@@ -1243,7 +1250,13 @@
                 worksClickPrompt: '点击作品卡片查看详情...',
                 worksDetailsSuffix: ' - 详情', // New suffix for work details
                 charactersTitle: '角色设计',
-                charactersDescription: '探索我独特的PSX游戏风格卡通角色。',
+                charactersDescription: `
+探索我独特的PSX游戏风格卡通角色。
+
+我痴迷于将游戏角色的像素美学融入我的设计中，创造出既复古又充满未来感的卡通人物。这些角色拥有简洁的几何形态和明亮的色彩，每一个都旨在讲述一个独特的故事。
+
+我的角色设计灵感来源于90年代的经典游戏，力求通过低多边形建模和独特纹理来唤起怀旧情怀，同时注入现代的艺术感。它们不仅是视觉表达，更是对数字时代早期美学的致敬。
+                `, // Now Markdown
                 aboutTitle: '关于 MAZKO', // Title for About Me window
                 aboutContent: `
 我是一名来自中国的 3D 艺术家与平面设计师，专注于 PSX 游戏风格卡通建模与 lowpoly 复古像素质感，同时沉浸于地下 club 文化与先锋视觉的多元融合创作。
@@ -1291,7 +1304,7 @@
 
 建议：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。
 
-### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】版权申明
+### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧】版权申明
 所有成果（模型 / 动画 / 源文件等）版权归服务方（🅜）所有。
 
 客户仅获非商业使用权，禁止商用、二次创作、转售或授权第三方。
@@ -1322,7 +1335,7 @@
 提供指定格式和尺寸的图片
 
 ### [3D动态海报 1000¥+/ 张]
-**价格：** 1000¥+ / 张
+**价格：** 1000¥+/ 张
 可提供指定格式和尺寸的视频
 
 ### 📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】服务流程与交付说明
@@ -1346,9 +1359,9 @@
 
 责任界定：因甲方需求表述不清、资料不全或反复修改导致的工期延误及额外调整，相关后果由甲方承担
 
-效率建议：提供清晰参考图或灵感方向，可大幅提升还原精度与服务效率
+效率建议：提供尽可能清晰的参考图或灵感方向，有助于更高效还原你的视觉需求。
 
-### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】版权申明
+### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧】版权申明
 所有成果知识产权归服务方（🅜）所有。
 
 甲方获仅限该 club 自身宣传的商用使用权（含线下张贴、官方社交平台推广等），禁止转售或授权第三方。
@@ -1365,1589 +1378,1325 @@
                 socialsTitle: '社交媒体与社群',
                 socialsDescription: '欢迎通过以下平台找到我，加入我的虚拟宇宙：', // Now Markdown
                 socialsLinks: [
-                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo', nameEn: 'Weibo' }, // Changed to iconAssetKey
-                    { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', iconAssetKey: 'icon_instagram', nameEn: 'Instagram' },
-                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', iconAssetKey: 'icon_artstation', nameEn: 'ArtStation' },
-                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', iconAssetKey: 'icon_behance_square', nameEn: 'Behance' },
-                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope', nameEn: 'Email' }
-                ],
-                settings: { // New settings content
-                    title: '系统设置',
-                    titleEn: 'System Settings', // Added English title
-                    description: '调整MAX OS以满足您的偏好：', // Now Markdown
-                    options: [
-                        { label: '启用深色模式 (待开发)', labelEn: 'Enable Dark Mode (Coming Soon)', type: 'toggle', id: 'dark-mode-toggle', disabled: true },
-                        { label: '显示桌面图标', labelEn: 'Show Desktop Icons', type: 'toggle', id: 'desktop-icons-toggle', checked: true },
-                        { label: '语言切换', labelEn: 'Language Switch', type: 'language-toggle', id: 'language-toggle' },
-                        { label: '重置布局 (待开发)', labelEn: 'Reset Layout (Coming Soon)', type: 'button', id: 'reset-layout-button', disabled: true }
-                    ]
-                }
-            },
-            'en': { // Added English content object for language switching
-                systemName: 'MAX OS',
-                systemVersion: 'Ver1.0',
-                welcomeMessage: 'Welcome to MAX OS Virtual Universe Terminal',
-                startButton: 'Start',
-                profileName: 'MAZKO',
-                worksIcon: 'Works',
-                charactersIcon: 'Characters',
-                mazkoExeIcon: 'MAZKO',
-                servicesIcon: 'Services',
-                socialsIcon: 'Socials',
-                settingsIcon: 'Settings',
-                worksMenuItem: 'Works',
-                charactersMenuItem: 'Characters',
-                servicesMenuItem: 'Services & Pricing',
-                socialsMenuItem: 'Social Media',
-                settingsMenuItem: 'Settings',
-                languageMenuItem: 'Language',
-                shutdownMenuItem: 'Shutdown',
-                shutdownMessage: 'Thank you for visiting, MAX OS Virtual Universe Terminal is safely exiting.',
-                loadingMessage: 'Loading...',
-                errorLoadingContent: 'Failed to load content:',
-                unknownModule: 'Error: Unknown module.',
-                worksTitle: 'My Works',
-                worksClickPrompt: 'Click on a work card to view details...',
-                worksDetailsSuffix: ' - Details',
-                charactersTitle: 'Character Design',
-                charactersDescription: 'Explore my unique PSX game style cartoon characters.',
-                aboutTitle: 'About MAZKO',
-                aboutContent: `
-I am a 3D artist and graphic designer from China, specializing in PSX game-style cartoon modeling and low-poly retro pixel textures. I also immerse myself in multidisciplinary creative work that fuses underground club culture with avant-garde visuals.
-
-Obsessed with all aesthetic languages that break conventions – from the visual intensity in ASAP Rocky's MV "Tailor Swift," to the absurd character designs in "Dorohedoro," to the dimensional chaos of "Rick and Morty," I inject cultural genes like anime narratives, street hip-hop, and retro sci-fi into my work, constructing a unique visual system with pixel particles and low-poly models.
-
-I am proficient in Blender, Substance Painter, Zbrush, Photoshop, and Illustrator, covering various fields such as character design, CG animation, posters, VJ, virtual fashion, and LOGO design.
-                `,
-                services: {
-                    title: 'Services & Pricing',
-                    description: 'Below are my main services and estimated pricing ranges:',
-                    categories: [
-                        {
-                            id: 'character-modeling-category',
-                            name: 'Character Modeling Service',
-                            nameEn: 'Character Modeling Service',
-                            shortDescription: 'Low-poly character modeling and retro animation services.',
-                            detailContent: `
-### 👤【𝐋𝐨𝐰-𝐏𝐨𝐥𝐲 𝐂𝐡𝐚𝐫𝐚𝐜𝐭𝐞𝐫 𝐌𝐨𝐝𝐞𝐥𝐢𝐧𝐠】Low-Poly Character Modeling
-**Price:** 500¥+ / person
-I will provide low-poly modeling and design for your characters!
-
-#### ▷ Basic Service Content:
-* Character modeling (low-poly)
-* Simple rigging
-* Render video export
-
-■ Deliverable Formats: FBX / Blender / mp4
-
-### 🕺【𝐑𝐞𝐭𝐫𝐨 𝐀𝐧𝐢m𝐚𝐭𝐢𝐨𝐧 𝐌𝐨𝐝𝐮𝐥𝐞】Low-Poly Character Retro Animation
-**Price:** 1000¥+ / item
-I will provide complete low-poly character animation services. This includes modeling, rigging, motion design, and render export, suitable for demo reels, social media character showcases, retro scene ambiance rendering, etc.
-
-#### ▷ Basic Service Content:
-* Character modeling + skeletal animation setup
-* Scene construction (customized according to requirements)
-* Demo rendering (default animation length within 20 seconds)
-
-■ Deliverable Formats: FBX / Blender / mp4
-
-### ⚠️ 【𝐒𝐩𝐞𝐜𝐢𝐚𝐥 𝐍𝐨𝐭𝐞𝐬】
-Authorization Scope: Limited to personal non-commercial use (e.g., WeChat / Weibo / Douyin social sharing, non-profit personal display); Commercial use (brand promotion, product placement, paid content, etc.) requires prior communication, and pricing will be adjusted according to usage scope / duration.
-
-Additional Costs: Animations exceeding 20 seconds or with increased complexity (e.g., special effects / multi-character interaction) will incur additional fees based on workload, subject to mutual confirmation.
-
-Suggestion: Providing clear reference images or inspirational directions will help to efficiently achieve your visual requirements.
-
-### 📜【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞𝐦𝐞𝐧𝐭】
-All deliverables (models / animations / source files, etc.) copyright belongs to the service provider (🅜).
-
-The client only obtains non-commercial usage rights, and is prohibited from commercial use, secondary creation, resale, or authorization to third parties.
-
-For copyright transfer, a separate agreement must be signed, and 3-5 times the original quoted fee must be paid.
-
-The client shall be responsible for disputes arising from unauthorized use beyond the scope.
-
-🅜 Agreement Version: *𝘝1.2* | Placing an order is deemed acceptance of all content.
-                            `,
-                        },
-                        {
-                            id: 'poster-design-category',
-                            name: 'Poster Design Service',
-                            nameEn: 'Poster Design Service',
-                            shortDescription: '2D, AI dynamic, 3D, and 3D dynamic poster design services.',
-                            detailContent: `
-### [2D Poster 500¥ / piece]
-**Price:** 500¥ / piece
-Provides source files and images in specified formats and sizes.
-
-### [AI Dynamic Poster 500¥ / piece]
-**Price:** 500¥ / piece
-Provides videos and images in specified formats and sizes.
-
-### [3D Poster 700¥+ / piece]
-**Price:** 700¥+ / piece
-Provides images in specified formats and sizes.
-
-### [3D Dynamic Poster 1000¥+ / piece]
-**Price:** 1000¥+ / piece
-Provides videos in specified formats and sizes.
-
-### 📦 【𝐒𝐄𝐑𝐕𝐈𝐂𝐄 𝐅𝐋𝐎𝐖 & 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘】Service Process & Delivery Instructions
-Project Start: Design begins upon receipt of a 50% deposit, with a turnaround time of approximately 1–2 days per piece.
-
-Final Payment: Upon design finalization and client confirmation, the remaining 50% payment is due.
-
-Deliverables: Final product files are delivered upon receipt of the final payment.
-
-### 🔁 【𝐑𝐄𝐕𝐈𝐒𝐈𝐎𝐍 𝐑𝐔𝐋𝐄𝐒 & 𝐄𝐗𝐓𝐑𝐀 𝐅𝐄𝐄𝐒】Revision Rules & Extra Fees
-Includes 3 free basic revisions + 1 free major revision.
-
-After exceeding the free basic revision limit, each additional basic revision will incur a 25% surcharge of the design fee.
-
-After exceeding the free major revision limit, each additional major revision will incur a 50% surcharge of the design fee.
-
-### 📌 【𝐒𝐏𝐄𝐂𝐈𝐀𝐋 𝐍𝐎𝐓𝐄𝐒】
-Basic Revisions: Limited to minor adjustments (e.g., text corrections, slight color adjustments, minor layout changes), not involving core creative or structural changes.
-
-Major Revisions: Limited to core direction adjustments (e.g., overall style adjustment, core element replacement), not involving complete redesign.
-
-Responsibility: Delays in project timeline and additional revisions caused by unclear client requirements, incomplete information, or repeated changes shall be borne by the client.
-
-Efficiency Tip: Providing clear reference images or inspirational directions can significantly improve accuracy and service efficiency.
-
-### 📜 【𝐂𝐨𝐩𝐲𝐫𝐢𝐠𝐡𝐭 𝐒𝐭𝐚𝐭𝐞m𝐞𝐧𝐭】
-All intellectual property rights of the deliverables belong to the service provider (🅜).
-
-The client is granted commercial use rights strictly for their own club's promotion (including offline display, official social media promotion, etc.), and is prohibited from resale or authorization to third parties.
-
-For copyright transfer, a separate agreement must be signed and paid for.
-
-The client shall be responsible for any disputes arising from unauthorized use beyond the scope.
-
-🅜 Agreement Version: *𝘝1.2* | Placing an order is deemed acceptance of all content.
-                            `,
-                        },
-                    ],
-                },
-                socialsTitle: 'Social Media & Community',
-                socialsDescription: 'Find me on the following platforms and join my virtual universe:',
-                socialsLinks: [
-                    { name: 'Weibo', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo', nameEn: 'Weibo' }, // Changed to iconAssetKey
-                    { name: 'Instagram', url: 'https://www.instagram.com/yourprofile', iconAssetKey: 'icon_instagram', nameEn: 'Instagram' },
-                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', iconAssetKey: 'icon_artstation', nameEn: 'ArtStation' },
-                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', iconAssetKey: 'icon_behance_square', nameEn: 'Behance' },
-                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope', nameEn: 'Email' }
-                ],
-                settings: {
-                    title: 'System Settings',
-                    titleEn: 'System Settings',
-                    description: 'Adjust MAX OS to your preferences:',
-                    options: [
-                        { label: 'Enable Dark Mode (Coming Soon)', labelEn: 'Enable Dark Mode (Coming Soon)', type: 'toggle', id: 'dark-mode-toggle', disabled: true },
-                        { label: 'Show Desktop Icons', labelEn: 'Show Desktop Icons', type: 'toggle', id: 'desktop-icons-toggle', checked: true },
-                        { label: 'Language Switch', labelEn: 'Language Switch', type: 'language-toggle', id: 'language-toggle' },
-                        { label: 'Reset Layout (Coming Soon)', labelEn: 'Reset Layout (Coming Soon)', type: 'button', id: 'reset-layout-button', disabled: true }
-                    ]
-                }
+                    { name: '微博', url: 'https://weibo.com/yourprofile', iconSvg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.331 8.875c.01.204.017.411.017.618 0 6.302-4.814 13.582-13.582 13.582-2.697 0-5.207-.79-7.348-2.155.371.044.749.066 1.134.066 2.232 0 4.29-2.022 4.29-4.29 0-.083-.004-.165-.012-.247-.417-.298-.784-.664-1.071-1.077-.923-.274-2.03-.437-3.093-.437-1.12 0-2.164.218-3.136.602-.519-.39-.993-.822-1.428-1.285.497.058 1.002.086 1.512.086.993 0 1.95-.27 2.802-.821-.29-.007-.577-.02-.862-.038-.577-.038-1.139-.074-1.683-.118-.895-.084-1.683-.162-2.36-.263-1.087-.16-2.126-.403-3.09-.728-.426-.145-.838-.306-1.235-.49-.78-.363-1.503-.787-2.167-1.267.31-.03.62-.047.93-.047 1.055 0 2.062.193 3.012.573.535.216 1.037.46 1.518.72 1.393.74 2.658 1.63 3.79 2.652 1.134 1.026 2.115 2.14 2.946 3.328-.158.214-.306.435-.44.664-.475.807-.866 1.636-1.17 2.474-.298.81-.462 1.65-.487 2.508-.024.858.058 1.708.243 2.52.185.812.45 1.57.785 2.26.335.69.75 1.32 1.235 1.88.485.56.983 1.066 1.488 1.493.505.426.985.768 1.442 1.025.456.258.88.428 1.263.51.382.083.738.07 1.066-.038.328-.108.62-.31.865-.606.245-.296.42-.647.525-1.037.105-.39.125-.798.057-1.21-.068-.41-.23-.8-.485-1.157-.255-.357-.59-.68-.992-.95-.403-.272-.89-.523-1.458-.75-.568-.228-1.21-.433-1.92-.612-1.42-.36-2.82-.678-4.185-.945-1.36-.268-2.67-.487-3.89-.64-.52-.066-1.01-.116-1.46-.15-.45-.034-.85-.05-1.2-.05-.88 0-1.74.12-2.58.35-.84.23-1.64.55-2.39.95-.75.4-1.45.89-2.09 1.47-.64.58-1.2 1.25-1.68 1.99-.48.74-.83 1.55-1.05 2.43-.22.88-.27 1.78-.15 2.69.12.91.43 1.78.93 2.59.5.81 1.1 1.57 1.8 2.26.7.69 1.45 1.32 2.26 1.88.81.56 1.66 1.07 2.54 1.49.88.42 1.78.77 2.7 1.05.92.28 1.86.49 2.82.63.96.14 1.92.14 2.88.003.96-.137 1.86-.39 2.7-.75.84-.36 1.6-.83 2.29-1.42.69-.59 1.3-1.27 1.83-2.05.53-.78.97-1.6 1.3-2.5.33-.9.47-1.83.42-2.77-.05-.94-.3-1.85-.75-2.69-.45-.84-1.05-1.6-1.8-2.26-.75-.66-1.58-1.24-2.48-1.74-.9-.5-1.86-.89-2.88-1.17-1.02-.28-2.06-.41-3.12-.4-.73.0-1.45.04-2.17.11z"/></svg>` },
+                    { name: 'Instagram', url: 'https://instagram.com/yourprofile', iconSvg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.8 2h8.4C18.14 2 20 3.86 20 6.2v8.4c0 2.34-1.86 4.2-4.2 4.2H7.8C5.46 19 3.6 17.14 3.6 14.8V6.2C3.6 3.86 5.46 2 7.8 2zm-.2 4A2 2 0 0 0 5.6 6.2v8.4A2 2 0 0 0 7.8 17h8.4a2 2 0 0 0 2.2-2.2V6.2A2 2 0 0 0 16.2 4H7.6zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10zm0 2a3 3 0 1 1 0 6 3 3 0 0 1 0-6zm6.5-3a1.2 1.2 0 1 0 0 2.4 1.2 1.2 0 0 0 0-2.4z"/></svg>` },
+                    { name: 'ArtStation', url: 'https://www.artstation.com/yourprofile', iconSvg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 17.3c-.2-.7-.4-1.3-.7-2-.3-.6-.6-1.2-1-1.7-.4-.5-.9-1-1.5-1.4-.6-.4-1.2-.7-1.9-.8-.7-.1-1.4-.1-2.1-.1s-1.4.1-2.1.3c-.7.2-1.3.5-1.9.8-.6.3-1.1.7-1.6 1.2-.5.5-.9 1-1.3 1.6-.4.6-.7 1.2-.9 1.8-.2.7-.3 1.4-.3 2.1s.1 1.4.3 2.1c.2.7.4 1.3.7 2 .3.6.6 1.2 1 1.7.4.5.9 1 1.5 1.4.6.4 1.2.7 1.9.8.7.1 1.4.1 2.1.1s1.4-.1 2.1-.3c.7-.2 1.3-.5 1.9-.8.6-.3 1.1-.7 1.6-1.2.5-.5.9-1 1.3-1.6.4-.6.7-1.2.9-1.8.2-.7.3-1.4.3-2.1s-.1-1.4-.3-2.1zM12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8zm0-14c-.66 0-1.2.54-1.2 1.2s.54 1.2 1.2 1.2 1.2-.54 1.2-1.2-.54-1.2-1.2-1.2zm-2.8 10h5.6c.66 0 1.2-.54 1.2-1.2s-.54-1.2-1.2-1.2h-5.6c-.66 0-1.2.54-1.2 1.2s.54 1.2 1.2 1.2z"/></svg>` },
+                    { name: 'Behance', url: 'https://www.behance.net/yourprofile', iconSvg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12s4.48 10 10 10 10-4.48 10-10zm-6.2 3.8h-7.6V8.2h7.6v7.6zM12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm-1 9h-2V9h2v6z"/></svg>` },
+                    { name: 'Email', url: 'mailto:your_email@example.com', iconSvg: `<svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>` },
+                ]
             }
         };
 
-        let currentLanguage = 'zh'; // Moved declaration outside DOMContentLoaded
+        let currentLanguage = 'zh'; // Default language
+        let windows = []; // Array to keep track of open windows
+        let zIndexCounter = 10; // For managing window z-index
+        let isDragging = false;
+        let activeDraggableElement = null; // Can be a window or a desktop icon
 
-        document.addEventListener('DOMContentLoaded', () => {
-            console.log('Script started parsing.'); // Added for debugging
-            
-            // JavaScript for dynamic elements (e.g., time display)
-            function updateTime() {
+        // Mock data for works section
+        const WORKS_DATA = [
+            {
+                id: 'work1',
+                title: '低多边形角色设计：宇航员',
+                titleEn: 'Low-Poly Character Design: Astronaut', // Added English title
+                category: '3D 建模 / 角色设计',
+                thumbnail: 'image_d0f029.png', // Placeholder image from assets
+                images: [
+                    'image_d0f029.png',
+                    'image_d160ec.png', // Additional images for gallery
+                    'image_057d28.png'
+                ],
+                description: `
+这个项目探索了低多边形（low-poly）艺术风格在角色设计中的应用，创造了一个未来主义的宇航员角色。设计理念侧重于通过简洁的几何形状和有限的颜色调色板来传达复杂性和深度。宇航员的服装融合了经典科幻元素与现代美学，旨在 evoking 一种怀旧而又前卫的感觉。纹理和光影处理旨在模拟早期3D游戏的视觉效果，同时保持高水平的细节和表现力。
+
+**技术栈：**
+* **建模:** Blender
+* **纹理:** Substance Painter (用于烘焙 AO 和颜色，然后手绘像素细节)
+* **渲染:** Blender Eevee (实时渲染器，强调卡通渲染)
+
+通过这个项目，我旨在展示如何利用低多边形技术在保持视觉吸引力的同时优化资源，使其适用于游戏开发或概念艺术。每个角度都经过精心设计，以确保角色的可识别性和视觉冲击力。
+                `
+            },
+            {
+                id: 'work2',
+                title: 'MAZKO 品牌视觉概念',
+                titleEn: 'MAZKO Brand Visual Concept', // Added English title
+                category: '平面设计 / 品牌设计',
+                thumbnail: 'image_0597aa.jpg', // Placeholder image
+                images: [
+                    'image_0597aa.jpg',
+                    'image_0597eb.png'
+                ],
+                description: `
+MAZKO 品牌视觉概念项目旨在创建一个结合复古美学与未来主义元素的独特品牌形象。这个项目涵盖了标志设计、排版选择、色彩方案以及在各种媒介上的应用，包括数字界面和印刷品。
+
+**核心理念：**
+品牌的核心是“虚拟宇宙终端”的概念，它通过像素化、故障艺术（glitch art）和霓虹灯光效来体现，旨在传达一种沉浸式、探索性的体验。主标志设计简洁而富有冲击力，易于识别，并能适应不同尺寸和背景。
+
+**设计元素：**
+* **标志:** 抽象的几何形状结合了赛博朋克和早期数字艺术的灵感。
+* **配色:** 主要使用深蓝色、青色和紫色，辅以高对比度的亮色作为点缀，营造出迷幻而科技感十足的氛围。
+* **排版:** 选用具有未来感的无衬线字体，并结合像素字体，以增强复古感。
+
+这个概念通过视觉叙事，将观众带入一个充满活力和神秘感的数字世界，强调 MAZKO 作为一个创意和艺术平台的独特身份。
+                `
+            }
+            // Add more work items here
+        ];
+
+        // Functions for OS features
+
+        /**
+         * @function updateTime
+         * @description Updates the current time displayed in the system tray.
+         */
+        function updateTime() {
+            const currentTimeElement = document.getElementById('current-time');
+            if (currentTimeElement) { // Add null check
                 const now = new Date();
                 const hours = String(now.getHours()).padStart(2, '0');
                 const minutes = String(now.getMinutes()).padStart(2, '0');
-                const timeElement = document.getElementById('current-time');
-                if (timeElement) {
-                    timeElement.textContent = `${hours}:${minutes}`;
-                } else {
-                    console.warn('Time element not found.');
-                }
+                currentTimeElement.textContent = `${hours}:${minutes}`;
             }
+        }
 
-            // Update time every minute
-            setInterval(updateTime, 60000); // Update every minute for HH:MM
-            // Initial call to display time immediately
-            updateTime();
-
-            // Get elements for the desktop environment
-            const startButton = document.getElementById('start-button-taskbar');
-            const startMenu = document.getElementById('start-menu');
-            const startMenuHeader = document.querySelector('.start-menu-header'); // Get the header
-            const mainDesktopArea = document.getElementById('main-desktop-area');
-            const welcomeMessage = document.getElementById('welcome-message');
-            let welcomeMessageText = document.getElementById('welcome-message-text'); 
-            const taskbarIconsContainer = document.getElementById('taskbar-icons');
-            const desktopIconsContainer = document.getElementById('desktop-icons-container');
-            const desktopBackground = document.getElementById('desktop-background'); // Get desktop background element
-            let highestZIndex = 5; // To manage window stacking order
-
-            // Store references to open windows to re-render them on language change
-            const openWindowsMap = new Map(); // Map<windowId, {section, chineseTitle, englishTitle, windowElement}>
-
-            console.log('Core DOM elements and variables initialized.');
-
-            /**
-             * @function updateCursors
-             * @description 根据 ASSETS 中定义的光标路径动态更新 CSS 自定义属性，从而改变光标样式。
-             */
-            function updateCursors() {
-                const root = document.documentElement;
-                root.style.setProperty('--cursor-default', `url('${getAssetUrl('cursor_default')}'), auto`);
-                root.style.setProperty('--cursor-active', `url('${getAssetUrl('cursor_active')}'), auto`);
-                root.style.setProperty('--cursor-pointer', `url('${getAssetUrl('cursor_pointer')}'), auto`);
-                console.log('Custom cursors updated.');
-            }
-
-            /**
-             * @function renderDynamicAssets
-             * @description 遍历所有带有 data-asset-key 属性的占位符元素，并用 <img> 标签替换它们，加载对应的图片。
-             */
-            function renderDynamicAssets() {
-                document.querySelectorAll('.icon-placeholder[data-asset-key]').forEach(placeholder => {
-                    const assetKey = placeholder.dataset.assetKey;
-                    const iconUrl = getAssetUrl(assetKey);
-                    if (iconUrl) {
-                        // 如果 placeholder 已经有图片，避免重复添加
-                        if (placeholder.querySelector('img')) {
-                            placeholder.querySelector('img').src = iconUrl;
-                        } else {
-                            const img = document.createElement('img');
-                            img.src = iconUrl;
-                            img.alt = assetKey.replace('icon_', '').replace(/_/g, ' '); // 简单的 alt 文本
-                            img.classList.add('icon-image'); // 应用 CSS 中定义的通用图标样式
-                            placeholder.innerHTML = ''; // 清除任何现有内容
-                            placeholder.appendChild(img);
+        /**
+         * @function renderDynamicAssets
+         * @description Replaces placeholder spans with actual image elements based on ASSETS object.
+         * This ensures dynamic asset loading for desktop icons and start menu items.
+         */
+        function renderDynamicAssets() {
+            document.querySelectorAll('.icon-placeholder').forEach(placeholder => {
+                const assetKey = placeholder.getAttribute('data-asset-key');
+                if (assetKey) {
+                    const img = document.createElement('img');
+                    img.src = getAssetUrl(assetKey);
+                    img.alt = assetKey;
+                    img.classList.add('icon-image'); // Add a class for styling
+                    // Check if placeholder still exists before replacing
+                    if (placeholder.parentNode) {
+                        // Prevent re-rendering if image is already there and src is the same
+                        const existingImg = placeholder.querySelector('img.icon-image');
+                        if (existingImg && existingImg.src === img.src) {
+                            return; 
                         }
-                    } else {
-                        console.warn(`Asset not found for key: ${assetKey}`);
-                        // 如果找不到资产，可以显示一个默认的破碎图标，或保持为空
-                        placeholder.innerHTML = '⚠️';
+                        placeholder.innerHTML = ''; // Clear existing content before appending
+                        placeholder.appendChild(img);
                     }
-                });
-
-                // 检查并设置桌面背景图片（如果 ASSETS 中有定义）
-                const desktopBgImage = getAssetUrl('desktop_background_image');
-                if (desktopBgImage && desktopBackground) {
-                    desktopBackground.style.backgroundImage = `url('${desktopBgImage}')`;
-                    desktopBackground.style.opacity = '1'; // 可能需要调整不透明度，如果图片本身已经有光感
-                    desktopBackground.style.filter = 'none'; // 如果背景图片自带效果，可以移除滤镜
-                    console.log('Desktop background image applied.');
                 }
-            }
-
-
-            // Function to update all UI text based on currentLanguage
-            function updateUIForLanguage() {
-                const langData = LANG_CONTENT[currentLanguage];
-
-                // Update welcome message
-                if (welcomeMessageText) {
-                    welcomeMessageText.textContent = langData.welcomeMessage;
-                }
-
-                // Update Start Menu header profile name
-                const profileNameElement = startMenu.querySelector('[data-lang-key="profileName"]');
-                if (profileNameElement) {
-                    profileNameElement.textContent = langData.profileName;
-                }
-
-                // Update Desktop Icons
-                document.querySelectorAll('.desktop-icon').forEach(icon => {
-                    const langKey = icon.querySelector('.desktop-icon-label').dataset.langKey;
-                    if (langKey && langData[langKey]) {
-                        icon.querySelector('.desktop-icon-label').textContent = langData[langKey];
-                    }
-                    // Update data-title for window opening (using current language for display, but keep zh/en for internal)
-                    icon.dataset.title = icon.dataset[`title-${currentLanguage}`];
-                });
-
-                // Update Start Menu Items (links and buttons)
-                document.querySelectorAll('.start-menu-item').forEach(item => {
-                    const langKey = item.dataset.langKey;
-                    const chineseLabel = LANG_CONTENT['zh'][langKey]; 
-                    const englishLabel = LANG_CONTENT['en'][langKey]; 
-
-                    const labelSpan = item.querySelector('.menu-item-label');
-                    if (labelSpan) {
-                        labelSpan.textContent = `${chineseLabel} [${englishLabel}]`; 
-                    }
-                });
-
-                // Update Start Menu Footer Buttons (now icon-only)
-                document.querySelectorAll('.start-menu-footer-button').forEach(button => {
-                    const langKey = button.dataset.langKey;
-                    if (langKey && langData[langKey]) {
-                        button.title = langData[langKey];
-                    }
-                });
-                
-                // Re-open/re-render all active windows
-                reopenAllWindows();
-                // Re-render all dynamic assets (icons) for current language
-                renderDynamicAssets();
-            }
-
-            // Function to get window titles (Chinese and English) based on section and currentWork/currentCategory
-            function getWindowTitles(section, currentWork = null, currentCategory = null) {
-                let chineseTitle = LANG_CONTENT[currentLanguage]?.unknownModule || 'Untitled Window';
-                let englishTitle = LANG_CONTENT['en']?.unknownModule || 'Untitled Window';
-
-                if (section.startsWith('work-detail-') && currentWork) {
-                    chineseTitle = currentWork.title + (LANG_CONTENT[currentLanguage]?.worksDetailsSuffix || '');
-                    englishTitle = currentWork.title + (LANG_CONTENT['en']?.worksDetailsSuffix || ''); 
-                } else if (section.startsWith('service-category-') && currentCategory) {
-                    chineseTitle = currentCategory.name;
-                    englishTitle = currentCategory.nameEn || currentCategory.name; // Use nameEn if available, otherwise fallback
+            });
+            // Set desktop background image if defined
+            const desktopBackground = document.getElementById('desktop-background');
+            if (desktopBackground) { // Add null check
+                const bgImageUrl = getAssetUrl('desktop_background_image');
+                if (bgImageUrl && bgImageUrl !== 'https://placehold.co/1920x1080/00BFFF/FFFFFF?text=Desktop+Background') { // Check if it's not the placeholder
+                    desktopBackground.style.backgroundImage = `url(${bgImageUrl})`;
+                    desktopBackground.style.opacity = '1'; // Make it fully opaque if using an image
+                    desktopBackground.style.filter = 'none'; // Remove filters if using an image
                 } else {
-                    // For main sections, use data-title-zh and data-title-en from desktop icons or menu items
-                    const desktopIcon = document.querySelector(`.desktop-icon[data-section="${section}"]`);
-                    const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
-                    const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
-                    const startMenuHeader = document.querySelector('.start-menu-header[data-section="about"]'); // For about section
-
-                    if (desktopIcon) {
-                        chineseTitle = desktopIcon.dataset.titleZh;
-                        englishTitle = desktopIcon.dataset.titleEn;
-                    } else if (startMenuItem) {
-                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; 
-                        englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
-                    } else if (startMenuFooterButton) {
-                        chineseTitle = LANG_CONTENT['zh'][`${section}MenuItem`]; 
-                        englishTitle = LANG_CONTENT['en'][`${section}MenuItem`]; 
-                    } else if (section === 'about' && startMenuHeader) {
-                        chineseTitle = startMenuHeader.dataset.titleZh;
-                        englishTitle = startMenuHeader.dataset.titleEn;
-                    } else if (section === 'settings') {
-                        chineseTitle = LANG_CONTENT['zh']?.settings?.title; 
-                        englishTitle = LANG_CONTENT['en']?.settings?.title; 
-                    } else if (section === 'shutdown') {
-                        chineseTitle = LANG_CONTENT['zh']?.shutdownMenuItem; 
-                        englishTitle = LANG_CONTENT['en']?.shutdownMenuItem; 
-                    }
+                    // Fallback to CSS gradients if no image or if it's the placeholder
+                    desktopBackground.style.backgroundImage = `
+                        radial-gradient(circle at 20% 80%, rgba(0,191,255,0.2) 0%, transparent 40%),
+                        radial-gradient(circle at 80% 20%, rgba(0,191,255,0.2) 0%, transparent 40%),
+                        linear-gradient(to bottom right, #6699CC, #CCEEFF)
+                    `;
+                    desktopBackground.style.opacity = '0.8';
+                    desktopBackground.style.filter = 'brightness(0.8) contrast(1.2)';
                 }
-                return { chineseTitle, englishTitle };
             }
 
+            // Update custom cursor styles (assuming these are image assets for custom cursors)
+            document.documentElement.style.setProperty('--cursor-default', `url(${getAssetUrl('cursor_default')}), auto`);
+            document.documentElement.style.setProperty('--cursor-active', `url(${getAssetUrl('cursor_active')}), grabbing`);
+            document.documentElement.style.setProperty('--cursor-pointer', `url(${getAssetUrl('cursor_pointer')}), pointer`);
+        }
 
-            // Function to re-open all currently open windows to update their content
-            async function reopenAllWindows() {
-                // Get a snapshot of currently open windows and their original positions/sizes
-                const activeWindowsData = [];
-                document.querySelectorAll('.os-window').forEach(win => {
-                    // Only re-open if not minimized, as minimized state will be re-applied
-                    if (!win.classList.contains('minimized')) {
-                        activeWindowsData.push({
-                            section: win.dataset.section,
-                            windowId: win.dataset.windowId,
-                            originalLeft: win.dataset.originalLeft,
-                            originalTop: win.dataset.originalTop,
-                            originalWidth: win.dataset.originalWidth,
-                            originalHeight: win.dataset.originalHeight,
-                            isMaximized: win.classList.contains('maximized')
-                        });
-                        win.remove(); // Remove old window
+        /**
+         * @function positionDesktopIcons
+         * @description Arranges desktop icons in a grid-like fashion (vertical first) and makes them draggable.
+         */
+        function positionDesktopIcons() {
+            const desktopIconsContainer = document.getElementById('desktop-icons-container');
+            if (!desktopIconsContainer) return;
+
+            const icons = desktopIconsContainer.querySelectorAll('.desktop-icon');
+            const iconWidth = 90; // Approximate width including padding/margin
+            const iconHeight = 100; // Approximate height including padding/margin
+            const padding = 20; // Padding from desktop edges
+
+            let col = 0;
+            let row = 0;
+            const maxRows = Math.floor((desktopIconsContainer.offsetHeight - 2 * padding) / iconHeight);
+
+            icons.forEach(icon => {
+                icon.style.left = `${padding + col * iconWidth}px`;
+                icon.style.top = `${padding + row * iconHeight}px`;
+                icon.style.zIndex = 3; // Ensure icons are above background but below windows
+
+                // Make icons draggable
+                makeDraggable(icon, icon); // Icon itself is the drag handle
+
+                row++;
+                // Move to next column if maxRows reached
+                if (row >= maxRows) {
+                    row = 0;
+                    col++;
+                }
+            });
+        }
+
+        /**
+         * @function applyLanguage
+         * @param {string} langCode - The language code (e.g., 'zh', 'en').
+         * @description Applies the selected language to all relevant UI elements.
+         */
+        function applyLanguage(langCode) {
+            currentLanguage = langCode;
+            document.querySelectorAll('[data-lang-key]').forEach(element => {
+                if (element) { // Add null check for element
+                    const key = element.getAttribute('data-lang-key');
+                    if (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage][key]) {
+                        if (element.tagName === 'SPAN' || element.tagName === 'P') {
+                            element.textContent = LANG_CONTENT[currentLanguage][key];
+                        } else if (element.tagName === 'BUTTON') {
+                            // For buttons, update title attribute for hover text
+                            element.title = LANG_CONTENT[currentLanguage][key];
+                        }
+                        // For menu items, update the text within the .menu-item-label span
+                        if (element.classList.contains('start-menu-item')) {
+                            const labelSpan = element.querySelector('.menu-item-label');
+                            if (labelSpan) { // Add null check for labelSpan
+                                labelSpan.textContent = LANG_CONTENT[currentLanguage][key];
+                            }
+                        }
                     }
-                });
-                // Clear taskbar icons for removed windows
-                taskbarIconsContainer.innerHTML = '';
+                }
+            });
 
-                // Re-open windows one by one
-                for (const winData of activeWindowsData) {
-                    const data = await fetchContent(winData.section); // Re-fetch content in new language
-                    let contentHTML = '';
-                    let isMarkdown = false;
-                    let currentWork = null;
-                    let currentCategory = null;
+            // Update window titles of open windows
+            windows.forEach(win => {
+                const section = win.getAttribute('data-section');
+                const titleElement = win.querySelector('.os-window-title');
+                const statusBar = win.querySelector('.os-window-status-bar'); 
 
-                    if (winData.section.startsWith('work-detail-')) {
-                        const workId = winData.windowId.replace('work-detail-', '');
-                        const worksData = await fetchContent('works'); // Re-fetch works data to find the work
-                        currentWork = worksData.find(w => w.id === workId);
-                    } else if (winData.section.startsWith('service-category-')) {
-                        const categoryId = winData.windowId.replace('service-category-', '');
-                        // Get category directly from LANG_CONTENT as it's static
-                        currentCategory = LANG_CONTENT[currentLanguage]?.services?.categories.find(cat => cat.id === categoryId);
+                if (titleElement) { 
+                    const newTitleZh = win.getAttribute('data-title-zh') || '';
+                    const newTitleEn = win.getAttribute('data-title-en') || '';
+                    titleElement.textContent = `${newTitleZh} / ${newTitleEn}`;
+                }
+
+                // Update status bar with version
+                if (statusBar) {
+                    let statusPrefix = 'Ready'; // Default
+                    if (section === 'works' && win.getAttribute('data-work-id')) {
+                        const work = WORKS_DATA.find(w => w.id === win.getAttribute('data-work-id'));
+                        if (work) statusPrefix = `图片: ${win.dataset.currentImageIndex || 1}/${work.images.length}`;
+                    } else if (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage][section] && LANG_CONTENT[currentLanguage][section].statusText) {
+                        statusPrefix = LANG_CONTENT[currentLanguage][section].statusText;
+                    } else if (section === 'service-detail') {
+                        const category = (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].services && LANG_CONTENT[currentLanguage].services.categories) ? LANG_CONTENT[currentLanguage].services.categories.find(c => c.id === win.getAttribute('data-work-id')) : null;
+                        statusPrefix = category ? `Viewing: ${category.name}` : 'Ready';
+                    } else if (section === 'settings') {
+                        statusPrefix = (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].settingsIcon) ? LANG_CONTENT[currentLanguage].settingsIcon : 'Setting preferences'; // Changed to use settingsIcon for status
+                    } else if (section === 'shutdown') {
+                         statusPrefix = (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].shutdownMenuItem) ? LANG_CONTENT[currentLanguage].shutdownMenuItem : 'Shutting down...';
                     }
+                    
+                    const systemName = (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].systemName) ? LANG_CONTENT[currentLanguage].systemName : 'MAX OS';
+                    const systemVersion = (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].systemVersion) ? LANG_CONTENT[currentLanguage].systemVersion : 'Ver1.0';
+                    statusBar.textContent = `${statusPrefix} - ${systemName} ${systemVersion}`;
+                }
+            });
 
-                    const { chineseTitle, englishTitle } = getWindowTitles(winData.section, currentWork, currentCategory);
+            // IMPORTANT: Update taskbar icons when language changes
+            document.querySelectorAll('.taskbar-minimized-icon').forEach(taskbarIcon => {
+                const windowId = taskbarIcon.getAttribute('data-window-id');
+                const windowElement = document.getElementById(windowId);
+                if (windowElement) {
+                    const titleSpan = taskbarIcon.querySelector('span:last-child'); // Assuming the last span is the title text
+                    if (titleSpan) {
+                         // Get title directly from data attributes on the window element
+                        const newTitleText = currentLanguage === 'zh' ? 
+                                            windowElement.getAttribute('data-title-zh') : 
+                                            windowElement.getAttribute('data-title-en');
+                        titleSpan.textContent = newTitleText || '未知窗口'; // Fallback
+                    }
+                }
+            });
 
-                    // Re-generate content based on section and new language
-                    switch (winData.section) {
-                        case 'works':
-                            contentHTML = `
-                                <h2 class="text-xl font-bold mb-4">${chineseTitle}</h2>
-                                <div class="works-grid">
-                                    ${data?.map(work => `
-                                        <div class="work-card" data-work-id="${work.id}">
-                                            <img src="${work.thumbnail}" alt="${work.title}">
-                                            <div class="work-card-title">${work.title}</div>
-                                            <div class="work-card-category">${work.category}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage]?.worksClickPrompt}</p>
-                            `;
-                            break;
-                        case 'characters':
-                            contentHTML = `
-                                <h2 class="text-xl font-bold mb-4">${chineseTitle}</h2>
-                                <p>${LANG_CONTENT[currentLanguage]?.charactersDescription}</p>
-                                <div class="grid grid-cols-2 gap-4 mt-4">
-                                    ${data?.map(char => `
-                                        <div class="flex flex-col items-center">
-                                            <img src="${char.image}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
-                                            <p class="font-bold">${char.name}</p>
-                                            <p class="text-sm opacity-80 text-center">${char.description}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            `;
-                            break;
-                        case 'about':
-                            contentHTML = LANG_CONTENT[currentLanguage]?.aboutContent;
-                            isMarkdown = true;
-                            break;
-                        case 'services':
-                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.services?.description || '') + `
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                    ${data?.categories.map(category => `
-                                        <div class="service-category-card p-4 rounded-lg border border-primary-blue hover:bg-glass-bg cursor-pointer transition-all duration-200" data-category-id="${category.id}">
-                                            <h3 class="font-bold text-lg text-light-blue">${category.name}</h3>
-                                            <p class="text-sm opacity-80 mt-1">${category.shortDescription}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            `;
-                            break;
-                        case 'socials':
-                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.socialsDescription || '') + `
-                                <div class="flex flex-wrap gap-4 mt-4">
-                                    ${data?.links.map(link => `
-                                        <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
-                                            <span class="icon-placeholder w-6 h-6" data-asset-key="${link.iconAssetKey}"></span>
-                                            <span>${link.name}</span>
-                                        </a>
-                                    `).join('')}
-                                </div>
-                            `;
-                            break;
-                        case 'settings': // New case for settings window
-                            contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.settings?.description || '') + `
-                                <div class="flex flex-col gap-4 mt-4">
-                                    ${data?.options.map(option => {
-                                        const labelText = LANG_CONTENT[currentLanguage]?.settings?.options.find(opt => opt.id === option.id)?.label || option.label; 
-                                        if (option.type === 'toggle') {
-                                            return `
-                                                <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
-                                                    <label for="${option.id}" class="text-lg">${labelText}</label>
-                                                    <label class="toggle-switch">
-                                                        <input type="checkbox" id="${option.id}" ${option.checked ? 'checked' : ''} ${option.disabled ? 'disabled' : ''}>
-                                                        <span class="toggle-slider round"></span>
-                                                    </label>
-                                                </div>
-                                            `;
-                                        } else if (option.type === 'language-toggle') {
-                                            return `
-                                                <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
-                                                    <span class="text-lg">${labelText}</span>
-                                                    <label class="toggle-switch">
-                                                        <input type="checkbox" id="${option.id}" ${currentLanguage === 'en' ? 'checked' : ''}>
-                                                        <span class="toggle-slider round"></span>
-                                                    </label>
-                                                </div>
-                                            `;
-                                        } else if (option.type === 'button') {
-                                            return `
-                                                <button id="${option.id}" class="py-2 px-4 rounded-lg bg-primary-blue hover:bg-dark-blue transition-colors text-white font-bold ${option.disabled ? 'opacity-50 cursor-not-allowed' : ''}" ${option.disabled ? 'disabled' : ''}>
-                                                    ${labelText}
-                                                </button>
-                                            `;
-                                        }
-                                        return '';
-                                    }).join('')}
-                                </div>
-                            `;
-                            break;
-                        case 'service-category-character-modeling-category': 
-                        case 'service-category-poster-design-category':
-                            contentHTML = currentCategory ? currentCategory.detailContent : `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
-                            isMarkdown = true;
-                            break;
-                        case 'work-detail-' + winData.windowId.replace('work-detail-', ''):
-                            if (currentWork) {
-                                let currentImageIndex = 0; // This state is lost on re-render, will default to 0
+            // Update welcome message
+            const welcomeMessageText = document.getElementById('welcome-message-text');
+            if (welcomeMessageText) { // Add null check
+                const welcomeMsgKey = LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].welcomeMessage ? LANG_CONTENT[currentLanguage].welcomeMessage : 'Welcome to MAX OS Virtual Universe Terminal';
+                welcomeMessageText.textContent = welcomeMsgKey;
+            }
+        }
+
+        /**
+         * @function openWindow
+         * @param {string} section - The section identifier (e.g., 'works', 'about').
+         * @param {string} [dataId] - Optional ID for specific content within a section (e.g., work ID or service category ID).
+         * @description Opens a new OS window or brings an existing one to the front.
+         */
+        async function openWindow(section, dataId = null) {
+            let windowId = section + (dataId ? `-${dataId}` : '');
+            let existingWindow = document.getElementById(windowId);
+
+            if (existingWindow) {
+                // If window exists, bring to front and restore if minimized
+                bringWindowToFront(existingWindow);
+                if (existingWindow.classList.contains('minimized')) {
+                    existingWindow.classList.remove('minimized');
+                    // Ensure active state on taskbar icon is set when restored
+                    const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
+                    if (taskbarIcon) { 
+                        taskbarIcon.classList.add('active'); 
+                    }
+                }
+                loadWindowContent(existingWindow, section, dataId); // Always reload content to ensure language is correct
+                return;
+            }
+
+            // Create new window
+            const newWindow = document.createElement('div');
+            newWindow.id = windowId;
+            newWindow.classList.add('os-window', 'shadow-lg', 'rounded-xl');
+            newWindow.setAttribute('data-section', section);
+            if (dataId) {
+                newWindow.setAttribute('data-work-id', dataId); // Using data-work-id generically for any dataId
+            }
+
+            // Set initial position and size
+            const mainDesktopArea = document.getElementById('main-desktop-area');
+            if (!mainDesktopArea) {
+                console.error("Error: main-desktop-area not found, cannot open window.");
+                return;
+            }
+            
+            const desktopWidth = mainDesktopArea.offsetWidth;
+            const desktopHeight = mainDesktopArea.offsetHeight;
+            const taskbarHeight = document.getElementById('taskbar').offsetHeight;
+            const effectiveDesktopHeight = desktopHeight - taskbarHeight; // Area above taskbar
+
+            // Define fixed default initial dimensions, not based on ratios
+            const DEFAULT_OPEN_WIDTH = 900;
+            const DEFAULT_OPEN_HEIGHT = 600;
+
+            const minWindowWidth = 300; 
+            const minWindowHeight = 200;
+            const PADDING_MARGIN = 20; // Small margin to prevent window flush against edges
+
+            // Calculate initial width and height, clamped by defaults, mins, and desktop bounds
+            let initialWidth = Math.max(minWindowWidth, Math.min(DEFAULT_OPEN_WIDTH, desktopWidth - PADDING_MARGIN)); 
+            let initialHeight = Math.max(minWindowHeight, Math.min(DEFAULT_OPEN_HEIGHT, effectiveDesktopHeight - PADDING_MARGIN)); 
+
+            // Center the window based on these initial clamped dimensions
+            const posX = Math.max(0, (desktopWidth - initialWidth) / 2); 
+            const posY = Math.max(0, (effectiveDesktopHeight - initialHeight) / 2);
+            
+            console.log('openWindow: Desktop Area Dimensions:', { desktopWidth, effectiveDesktopHeight });
+            console.log('openWindow: Fixed Default Dimensions:', { DEFAULT_OPEN_WIDTH, DEFAULT_OPEN_HEIGHT });
+            console.log('openWindow: Clamped Initial Dimensions:', { initialWidth, initialHeight });
+            console.log('openWindow: Calculated Position (Centered):', { posX, posY });
+
+
+            newWindow.style.width = `${initialWidth}px`;
+            newWindow.style.height = `${initialHeight}px`;
+            newWindow.style.left = `${posX}px`;
+            newWindow.style.top = `${posY}px`; 
+
+            // Window title bar
+            const titleBar = document.createElement('div');
+            titleBar.classList.add('os-window-title-bar', 'flex', 'justify-between', 'items-center', 'px-4', 'py-2', 'rounded-t-lg', 'cursor-grab', 'select-none');
+            
+            const titleContent = document.createElement('div');
+            titleContent.classList.add('os-window-title-content');
+            
+            const windowIcon = document.createElement('img'); // Use img for the M-logo
+            windowIcon.classList.add('icon-image');
+            windowIcon.src = getAssetUrl('icon_mazko_logo'); // Always use MAZKO logo for window icon
+            windowIcon.alt = 'Window Icon';
+            titleContent.appendChild(windowIcon);
+
+            const titleText = document.createElement('span');
+            titleText.classList.add('os-window-title', 'text-white', 'font-bold');
+            titleContent.appendChild(titleText);
+            titleBar.appendChild(titleContent);
+
+            // Window controls
+            const controls = document.createElement('div');
+            controls.classList.add('os-window-controls', 'flex', 'space-x-2');
+
+            // Minimize button
+            const minimizeBtn = document.createElement('button');
+            minimizeBtn.classList.add('control-button', 'minimize');
+            minimizeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 13H5v-2h14v2z"/></svg>';
+            minimizeBtn.onclick = (e) => {
+                e.stopPropagation(); // Prevent drag event
+                minimizeWindow(newWindow.id);
+            };
+            controls.appendChild(minimizeBtn);
+
+            // Maximize/Restore button
+            const maximizeBtn = document.createElement('button');
+            maximizeBtn.classList.add('control-button', 'maximize');
+            maximizeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v10H7z" fill="none"/><path d="M3 5v14h18V5H3zm16 12H5V7h14v10z"/></svg>'; // Restore icon
+            maximizeBtn.onclick = (e) => {
+                e.stopPropagation(); // Prevent drag event
+                toggleMaximizeWindow(newWindow.id);
+            };
+            controls.appendChild(maximizeBtn);
+
+            // Close button
+            const closeBtn = document.createElement('button');
+            closeBtn.classList.add('control-button', 'close');
+            closeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>';
+            closeBtn.onclick = (e) => {
+                e.stopPropagation(); // Prevent drag event
+                closeWindow(newWindow.id);
+            };
+            controls.appendChild(closeBtn);
+
+            titleBar.appendChild(controls);
+            newWindow.appendChild(titleBar);
+
+            // Window content
+            const content = document.createElement('div');
+            content.classList.add('os-window-content', 'flex-grow', 'p-4', 'overflow-auto');
+            newWindow.appendChild(content);
+
+            // Status bar
+            const statusBar = document.createElement('div');
+            statusBar.classList.add('os-window-status-bar', 'p-2', 'text-right', 'text-xs', 'text-gray-400');
+            newWindow.appendChild(statusBar);
+
+            // Append to desktop area
+            mainDesktopArea.appendChild(newWindow); // Use mainDesktopArea
+            windows.push(newWindow); // Add to tracking array
+
+            // Apply the new smooth opening animation AFTER appending to DOM
+            newWindow.style.animation = 'windowOpenAnimation 0.3s ease-out forwards';
+
+            // Load content into the new window (this will set data-title-zh/en attributes)
+            // It's crucial this happens BEFORE createTaskbarIcon
+            await loadWindowContent(newWindow, section, dataId); // Await content loading
+
+            // Add to taskbar (now called AFTER content is loaded so titles are set)
+            createTaskbarIcon(newWindow);
+
+            // Make window draggable
+            makeDraggable(newWindow, titleBar);
+
+            // Make window resizable
+            makeWindowResizable(newWindow);
+
+            // Bring to front on click
+            newWindow.addEventListener('mousedown', () => bringWindowToFront(newWindow));
+            newWindow.addEventListener('touchstart', () => bringWindowToFront(newWindow)); // Touch support
+            
+            bringWindowToFront(newWindow); // Bring new window to front
+            hideWelcomeMessage(); // Hide welcome message when a window is open
+        }
+
+        /**
+         * @function loadWindowContent
+         * @param {HTMLElement} windowElement - The window element to load content into.
+         * @param {string} section - The section identifier.
+         * @param {string} [dataId] - Optional ID for specific content within a section.
+         * @description Loads content into the window based on the section.
+         */
+        async function loadWindowContent(windowElement, section, dataId = null) {
+            console.log('loadWindowContent called for section:', section, 'dataId:', dataId);
+            console.log('Current language:', currentLanguage);
+            console.log('LANG_CONTENT[currentLanguage]:', LANG_CONTENT[currentLanguage]);
+
+            const contentArea = windowElement.querySelector('.os-window-content');
+            const titleElement = windowElement.querySelector('.os-window-title');
+            const statusBar = windowElement.querySelector('.os-window-status-bar');
+
+            // Add null checks for contentArea, titleElement, statusBar
+            if (!contentArea || !titleElement || !statusBar) {
+                console.error("Error: Missing window content elements.", { contentArea, titleElement, statusBar });
+                return;
+            }
+
+            // Ensure language content exists for the current language
+            const currentLangContent = LANG_CONTENT[currentLanguage] || LANG_CONTENT['zh']; // Fallback to Chinese if current language content is missing
+
+            contentArea.innerHTML = `<div class="loading-spinner"></div><p class="text-center text-white mt-4">${currentLangContent.loadingMessage}</p>`;
+            
+            let contentHTML = '';
+            let windowTitleZh = '';
+            let windowTitleEn = '';
+            let statusText = '';
+
+            try {
+                switch (section) {
+                    case 'works':
+                        if (dataId) {
+                            const work = WORKS_DATA.find(w => w.id === dataId);
+                            if (work) {
+                                windowTitleZh = `${work.title} ${(LANG_CONTENT['zh'] && LANG_CONTENT['zh'].worksDetailsSuffix) ? LANG_CONTENT['zh'].worksDetailsSuffix : ' - 详情'}`;
+                                windowTitleEn = `${work.titleEn || work.title} ${(LANG_CONTENT['en'] && LANG_CONTENT['en'].worksDetailsSuffix) ? LANG_CONTENT['en'].worksDetailsSuffix : ' - Details'}`; 
                                 contentHTML = `
-                                    <div class="work-detail-content">
+                                    <div class="work-detail-content text-center">
                                         <div class="gallery-main-image-container">
-                                            <img src="${currentWork.images[currentImageIndex]}" alt="${currentWork.title}" class="gallery-main-image">
-                                            ${currentWork.images.length > 1 ? `
-                                                <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
-                                                <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
-                                            ` : ''}
+                                            <img src="${getAssetUrl(work.images[0])}" class="gallery-main-image" alt="${work.title} Main Image">
+                                            <button class="gallery-nav-button prev"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg></button>
+                                            <button class="gallery-nav-button next"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12z"/></svg></button>
                                         </div>
-                                        ${currentWork.images.length > 1 ? `
-                                            <div class="gallery-thumbnails">
-                                                ${currentWork.images.map((imgSrc, index) => `
-                                                    <img src="${imgSrc}" alt="${currentWork.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
-                                                `).join('')}
-                                            </div>
-                                        ` : ''}
-                                        <h3>${currentWork.title}</h3>
-                                        <p class="text-sm opacity-90 mb-2">${currentWork.category}</p>
-                                        <p>${currentWork.description}</p>
-                                        <div class="flex flex-wrap gap-2 mt-4">
-                                            ${currentWork.tags.map(tag => `<span class="category-tag">${tag}</span>`).join('')}
+                                        <div class="gallery-thumbnails">
+                                            ${work.images.map((imgSrc, index) => `<img src="${getAssetUrl(imgSrc)}" class="gallery-thumbnail ${index === 0 ? 'active' : ''}" data-image-index="${index}" alt="Thumbnail ${index + 1}">`).join('')}
+                                        </div>
+                                        <h3 class="text-xl font-bold mb-2">${currentLanguage === 'zh' ? work.title : (work.titleEn || work.title)}</h3>
+                                        <p class="category-tag">${work.category}</p>
+                                        <div class="markdown-content mt-4 text-left w-full max-w-prose">
+                                            ${marked.parse(work.description)}
                                         </div>
                                     </div>
                                 `;
+                                statusText = `图片: 1/${work.images.length}`; // Dynamic status
+                                windowElement.dataset.currentImageIndex = 1; // Store current image index
                             } else {
-                                contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
+                                contentHTML = `<p class="text-center text-red-500">${currentLangContent.errorLoadingContent} 作品未找到。</p>`;
+                                windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].worksTitle) ? LANG_CONTENT['zh'].worksTitle : '我的作品集';
+                                windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].worksTitle) ? LANG_CONTENT['en'].worksTitle : 'My Works';
                             }
-                            break;
-                        default:
-                            contentHTML = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.unknownModule || 'Unknown Module'}</p>`;
-                    }
-
-                    // Re-open the window with its original properties
-                    const newWindowElement = await openWindow(winData.section, chineseTitle, englishTitle, contentHTML, winData.windowId, {
-                        left: winData.originalLeft,
-                        top: winData.originalTop,
-                        width: winData.originalWidth,
-                        height: winData.originalHeight
-                    }, isMarkdown);
-
-                    if (winData.isMaximized) {
-                        newWindowElement.classList.add('maximized');
-                        // Re-apply maximized styles if necessary, or let CSS handle it
-                        newWindowElement.style.borderRadius = '0';
-                        newWindowElement.style.boxShadow = 'none';
-                    }
-                }
-            }
-
-
-            // --- Desktop Icon Positioning Logic ---
-            // Function to position desktop icons in a regular grid
-            function positionDesktopIcons() {
-                const iconWidth = 80; // Defined in CSS .desktop-icon width
-                const iconHeight = 100; // Approximate height including label and padding
-                const paddingX = 20; // Horizontal padding from desktop edge
-                const paddingY = 20; // Vertical padding from desktop edge
-                const gapX = 20; // Gap between icons horizontally
-                const gapY = 20; // Gap between icons vertically
-
-                const icons = Array.from(desktopIconsContainer.children);
-                let currentX = paddingX;
-                let currentY = paddingY;
-                let column = 0;
-
-                icons.forEach((icon, index) => {
-                    // Check if icon fits in current column, otherwise move to next column
-                    if (currentY + iconHeight > mainDesktopArea.clientHeight - (paddingY + 10)) { // Add small buffer for taskbar
-                        column++;
-                        currentX = paddingX + (column * (iconWidth + gapX));
-                        currentY = paddingY;
-                    }
-
-                    icon.style.left = `${currentX}px`;
-                    icon.style.top = `${currentY}px`;
-                    currentY += (iconHeight + gapY);
-                });
-            }
-
-            // Call positioning function initially and on window resize
-            positionDesktopIcons();
-            window.addEventListener('resize', positionDesktopIcons);
-
-            console.log('Desktop icon positioning logic initialized.');
-
-            // --- Mock Data Fetching (Simulating Headless CMS API Calls) ---
-            // In a real application, these would be actual fetch() calls to your CMS API endpoints.
-
-            // Function to simulate fetching data
-            async function fetchContent(section) {
-                console.log(`Fetching content for: ${section} in language: ${currentLanguage}...`);
-                // Simulate network delay
-                await new Promise(resolve => setTimeout(resolve, 300)); 
-
-                const langData = LANG_CONTENT[currentLanguage];
-                let data = null;
-
-                switch (section) {
-                    case 'works':
-                        data = [
-                            {
-                                id: 'work-001',
-                                title: '地下俱乐部场景',
-                                category: '场景设计 / PSX风格',
-                                thumbnail: 'https://placehold.co/400x300/00BFFF/FFFFFF?text=Scene+1', // Updated to use placeholder
-                                images: [
-                                    'https://placehold.co/800x600/00BFFF/FFFFFF?text=Scene+Full+1',
-                                    'https://placehold.co/800x600/007ACC/FFFFFF?text=Scene+Full+2',
-                                    'https://placehold.co/800x600/CCEEFF/000000?text=Scene+Full+3'
-                                ],
-                                description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
-                                tags: ['场景', 'PSX', 'Y2K', 'Blender']
-                            },
-                            {
-                                id: 'work-002',
-                                title: '赛博朋克角色 - KAI',
-                                category: '角色设计 / Lowpoly',
-                                thumbnail: 'https://placehold.co/400x300/00BFFF/FFFFFF?text=Character+1', // Updated to use placeholder
-                                images: [
-                                    'https://placehold.co/800x600/00BFFF/FFFFFF?text=Character+Full+1',
-                                    'https://placehold.co/800x600/007ACC/FFFFFF?text=Character+Full+2',
-                                    'https://placehold.co/800x600/CCEEFF/000000?text=Character+Full+3'
-                                ],
-                                description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
-                                tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
-                            }
-                        ];
+                        } else {
+                            // Works grid overview
+                            windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].worksTitle) ? LANG_CONTENT['zh'].worksTitle : '我的作品集';
+                            windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].worksTitle) ? LANG_CONTENT['en'].worksTitle : 'My Works';
+                            contentHTML = `
+                                <p class="text-center mb-4 text-gray-300">${currentLangContent.worksClickPrompt}</p>
+                                <div class="works-grid">
+                                    ${WORKS_DATA.map(work => `
+                                        <div class="work-card" data-work-id="${work.id}">
+                                            <img src="${getAssetUrl(work.thumbnail)}" alt="${work.title}" class="w-full h-32 object-cover rounded-t-lg">
+                                            <div class="p-2">
+                                                <h4 class="work-card-title">${currentLanguage === 'zh' ? work.title : (work.titleEn || work.title)}</h4>
+                                                <p class="work-card-category">${work.category}</p>
+                                            </div>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            `;
+                            statusText = `${WORKS_DATA.length} ${currentLangContent.worksIcon}`;
+                        }
                         break;
                     case 'characters':
-                        data = [
-                            {
-                                id: 'char-001',
-                                name: '星际漫游者',
-                                description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
-                                image: 'https://placehold.co/200x200/00BFFF/FFFFFF?text=Character+A' // Updated to use placeholder
-                            },
-                            {
-                                id: 'char-002',
-                                name: '都市忍者',
-                                description: '穿梭于霓虹都市阴影中的神秘忍者。',
-                                image: 'https://placehold.co/200x200/007ACC/FFFFFF?text=Character+B' // Updated to use placeholder
-                            }
-                        ];
+                        windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].charactersTitle) ? LANG_CONTENT['zh'].charactersTitle : '角色设计';
+                        windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].charactersTitle) ? LANG_CONTENT['en'].charactersTitle : 'Character Design';
+                        contentHTML = `
+                            <div class="markdown-content">
+                                <h1 class="text-center">${currentLanguage === 'zh' ? windowTitleZh : windowTitleEn}</h1>
+                                ${marked.parse(currentLangContent.charactersDescription)}
+                                <!-- Placeholder for character images/models -->
+                                <div class="flex flex-wrap justify-center gap-4 mt-8">
+                                    <img src="https://placehold.co/200x200/00BFFF/FFFFFF?text=Character+1" alt="Character 1" class="rounded-lg shadow-md">
+                                    <img src="https://placehold.co/200x200/00BFFF/FFFFFF?text=Character+2" alt="Character 2" class="rounded-lg shadow-md">
+                                    <img src="https://placehold.co/200x200/00BFFF/FFFFFF?text=Character+3" alt="Character 3" class="rounded-lg shadow-md">
+                                </div>
+                                <p class="mt-8 text-center">更多角色即将推出。</p>
+                            </div>
+                        `;
+                        statusText = 'Ready'; 
                         break;
                     case 'about':
-                        data = {
-                            title: langData.aboutTitle,
-                            content: langData.aboutContent
-                        };
+                        windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].aboutTitle) ? LANG_CONTENT['zh'].aboutTitle : '关于 MAZKO'; 
+                        windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].aboutTitle) ? LANG_CONTENT['en'].aboutTitle : 'About MAZKO'; 
+                        contentHTML = `
+                            <div class="markdown-content">
+                                <h1 class="text-center">${currentLanguage === 'zh' ? windowTitleZh : windowTitleEn}</h1>
+                                ${marked.parse(currentLangContent.aboutContent)}
+                                <div class="flex justify-center mt-6">
+                                    <img src="${getAssetUrl('icon_mazko_logo')}" alt="MAZKO Logo" class="w-24 h-24 filter drop-shadow-lg">
+                                </div>
+                            </div>
+                        `;
+                        statusText = 'Ready'; 
                         break;
                     case 'services':
-                        data = {
-                            title: langData.services.title,
-                            description: langData.services.description,
-                            categories: langData.services.categories
-                        };
+                        windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].services && LANG_CONTENT['zh'].services.title) ? LANG_CONTENT['zh'].services.title : '服务与报价'; 
+                        windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].services && LANG_CONTENT['en'].services.title) ? LANG_CONTENT['en'].services.title : 'Services & Pricing';
+                        contentHTML = `
+                            <div class="markdown-content">
+                                <h1 class="text-center">${currentLanguage === 'zh' ? windowTitleZh : windowTitleEn}</h1>
+                                ${marked.parse(currentLangContent.services.description)}
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
+                                    ${currentLangContent.services.categories.map(cat => `
+                                        <div class="service-category-card bg-white bg-opacity-10 p-4 rounded-lg shadow-md border border-white border-opacity-20 transition-all hover:bg-opacity-20 cursor-pointer" data-category-id="${cat.id}">
+                                            <h3 class="text-lg font-semibold text-primary-blue mb-2">${cat.name}</h3>
+                                            <p class="text-sm text-gray-300">${cat.shortDescription}</p>
+                                        </div>
+                                    `).join('')}
+                                </div>
+                            </div>
+                        `;
+                        statusText = `${currentLangContent.services.categories.length} Services`; 
+                        break;
+                    case 'service-detail': // New case for service detail window
+                        console.log('loadWindowContent: Attempting to load service detail for dataId:', dataId);
+                        const allServiceCategories = (currentLangContent.services && currentLangContent.services.categories) ? currentLangContent.services.categories : [];
+                        console.log('loadWindowContent: All service categories:', allServiceCategories);
+
+                        // Ensure dataId is treated as a string for comparison
+                        const categoryFound = allServiceCategories.find(c => String(c.id) === String(dataId));
+                        console.log('loadWindowContent: Category found:', categoryFound);
+
+                        if (categoryFound) {
+                            windowTitleZh = categoryFound.name; // Use service name as title
+                            const categoryEnContent = (LANG_CONTENT['en'] && LANG_CONTENT['en'].services && LANG_CONTENT['en'].services.categories) ? LANG_CONTENT['en'].services.categories.find(c => String(c.id) === String(dataId)) : null;
+                            windowTitleEn = categoryEnContent ? categoryEnContent.nameEn : (categoryFound.nameEn || categoryFound.name);
+
+
+                            contentHTML = `
+                                <div class="markdown-content">
+                                    ${marked.parse(categoryFound.detailContent)}
+                                </div>
+                            `;
+                            statusText = `Viewing: ${categoryFound.name}`; 
+                        } else {
+                            console.error('loadWindowContent: Service category not found for dataId:', dataId);
+                            contentHTML = `<p class="text-center text-red-500">${currentLangContent.errorLoadingContent} 服务类别未找到。</p>`;
+                            windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].services && LANG_CONTENT['zh'].services.title) ? LANG_CONTENT['zh'].services.title : '服务与报价';
+                            windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].services && LANG_CONTENT['en'].services.title) ? LANG_CONTENT['en'].services.title : 'Services & Pricing';
+                        }
                         break;
                     case 'socials':
-                        data = {
-                            title: langData.socialsTitle,
-                            description: langData.socialsDescription,
-                            links: langData.socialsLinks
-                        };
-                        break;
-                    case 'settings': // New case for settings
-                        data = langData.settings;
-                        break;
-                    case 'shutdown':
-                        data = null; // No specific data needed for shutdown
-                        break;
-                    default:
-                        data = null;
-                }
-                console.log(`Content fetched for ${section}:`, data);
-                return data;
-            }
-
-            // Function to manage active taskbar icons
-            function setActiveTaskbarIcon(windowId) {
-                document.querySelectorAll('.taskbar-minimized-icon').forEach(icon => {
-                    if (icon.dataset.windowId === windowId) {
-                        icon.classList.add('active');
-                    } else {
-                        icon.classList.remove('active');
-                    }
-                });
-            }
-
-            // Function to bring a window to the front
-            function bringToFront(windowElement) {
-                highestZIndex++;
-                windowElement.style.zIndex = highestZIndex;
-                console.log(`Window "${windowElement.dataset.windowId}" brought to front. New z-index: ${highestZIndex}`);
-                setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
-                // Also set window title bar to active style
-                document.querySelectorAll('.os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
-                const titleBar = windowElement.querySelector('.os-window-title-bar');
-                if (titleBar) {
-                    titleBar.classList.remove('inactive');
-                }
-            }
-
-            // Function to create and open a new window
-            async function openWindow(section, chineseTitle, englishTitle, contentHTML, windowId = section, initialProps = {}, isMarkdown = false) {
-                console.log(`Attempting to open window: ${chineseTitle} [${englishTitle}] (Section: ${section}, ID: ${windowId}, Markdown: ${isMarkdown}`);
-
-                // Hide welcome message if it's visible
-                if (welcomeMessage) {
-                    welcomeMessage.style.display = 'none';
-                    console.log('Welcome message hidden.');
-                }
-
-                // Check if a window for this section already exists
-                let existingWindow = document.querySelector(`.os-window[data-window-id="${windowId}"]`);
-                if (existingWindow) {
-                    bringToFront(existingWindow);
-                    // If it exists and is minimized, restore it
-                    if (existingWindow.classList.contains('minimized')) {
-                        restoreWindow(existingWindow);
-                    }
-                    return existingWindow; // Return existing window
-                }
-
-                const windowElement = document.createElement('div');
-                windowElement.classList.add('os-window');
-                windowElement.dataset.section = section; // Store section for identification
-                windowElement.dataset.windowId = windowId; // Unique ID for this specific window instance
-                
-                // Store initial position and size for restore functionality
-                const desktopWidth = mainDesktopArea.offsetWidth;
-                const desktopHeight = mainDesktopArea.offsetHeight;
-                const defaultWidth = Math.min(desktopWidth * 0.7, 800); // Max 800px or 70%
-                const defaultHeight = Math.min(desktopHeight * 0.7, 600); // Max 600px or 70%
-
-                // Position new windows slightly offset from each other
-                const openWindows = document.querySelectorAll('.os-window:not(.minimized)');
-                let offsetX = 50 * (openWindows.length % 5); // Max 5 offsets before repeating
-                let offsetY = 50 * (openWindows.length % 5);
-
-                windowElement.style.width = initialProps.width || `${defaultWidth}px`;
-                windowElement.style.height = initialProps.height || `${defaultHeight}px`;
-                windowElement.style.left = initialProps.left || `${(desktopWidth / 2 - defaultWidth / 2) + offsetX}px`;
-                windowElement.style.top = initialProps.top || `${(desktopHeight / 2 - defaultHeight / 2) + offsetY}px`;
-
-                // Ensure window is within bounds after offset
-                if (parseFloat(windowElement.style.left) + parseFloat(windowElement.style.width) > desktopWidth) {
-                    windowElement.style.left = `${desktopWidth - parseFloat(windowElement.style.width) - 20}px`;
-                }
-                if (parseFloat(windowElement.style.top) + parseFloat(windowElement.style.height) > desktopHeight) {
-                    windowElement.style.top = `${desktopHeight - parseFloat(windowElement.style.height) - 20}px`;
-                }
-
-                // Store current position and size for restoration
-                windowElement.dataset.originalLeft = windowElement.style.left;
-                windowElement.dataset.originalTop = windowElement.style.top;
-                windowElement.dataset.originalWidth = windowElement.style.width;
-                windowElement.dataset.originalHeight = windowElement.style.height;
-
-
-                bringToFront(windowElement); // Bring new window to front
-                console.log(`New window "${windowId}" created at left: ${windowElement.style.left}, top: ${windowElement.style.top}`);
-
-                // Parse Markdown if required
-                const finalContent = isMarkdown ? marked.parse(contentHTML) : contentHTML;
-                const contentClass = isMarkdown ? 'markdown-content' : '';
-
-                // Construct the full title bar text
-                const fullTitle = `${chineseTitle} [${englishTitle}]`;
-                windowElement.dataset.windowTitle = fullTitle; // Store the full title in dataset
-
-                // Construct window HTML dynamically, using data-asset-key for icons
-                windowElement.innerHTML = `
-                    <div class="os-window-title-bar">
-                        <div class="os-window-title-content">
-                            <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
-                            <span class="os-window-title">${fullTitle}</span>
-                        </div>
-                        <div class="os-window-controls">
-                            <div class="control-button minimize" title="最小化">
-                                <span class="icon-placeholder" data-asset-key="icon_minus"></span>
-                            </div>
-                            <div class="control-button maximize" title="最大化">
-                                <span class="icon-placeholder" data-asset-key="icon_square"></span>
-                            </div>
-                            <div class="control-button close" title="关闭">
-                                <span class="icon-placeholder" data-asset-key="icon_times"></span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="os-window-content ${contentClass}">
-                        ${finalContent}
-                    </div>
-                    <div class="os-window-status-bar">
-                        ${LANG_CONTENT[currentLanguage].systemName} ${LANG_CONTENT[currentLanguage].systemVersion}
-                    </div>
-                `;
-
-                mainDesktopArea.appendChild(windowElement); // Append to main desktop area
-                console.log(`Window "${windowId}" appended to main desktop area.`);
-                renderDynamicAssets(); // Render icons for the newly created window
-
-                // Add to map for language switching
-                openWindowsMap.set(windowId, {
-                    section: section,
-                    chineseTitle: chineseTitle, // Store both for re-rendering
-                    englishTitle: englishTitle,
-                    windowElement: windowElement
-                });
-
-                // Immediately create and add taskbar icon for the new window
-                createTaskbarIcon(windowElement, chineseTitle, windowId);
-
-
-                // Make window draggable
-                const titleBar = windowElement.querySelector('.os-window-title-bar');
-                let isDraggingWindow = false; // Renamed to avoid conflict with desktop icon dragging
-                let offsetXWindow, offsetYWindow;
-
-                if (titleBar) { // Ensure titleBar exists
-                    titleBar.addEventListener('mousedown', (e) => {
-                        isDraggingWindow = true;
-                        offsetXWindow = e.clientX - windowElement.getBoundingClientRect().left;
-                        offsetYWindow = e.clientY - windowElement.getBoundingClientRect().top;
-                        titleBar.style.cursor = 'grabbing'; // Changed to grab cursor
-                        bringToFront(windowElement); // Bring to front when dragging starts
-                        console.log(`Started dragging window "${windowId}".`);
-                    });
-                } else {
-                    console.error(`Title bar not found for window "${windowId}". Dragging disabled.`);
-                }
-
-                document.addEventListener('mousemove', (e) => {
-                    if (!isDraggingWindow) return;
-                    let newX = e.clientX - offsetXWindow;
-                    let newY = e.clientY - offsetYWindow;
-
-                    // Boundary checks for dragging within mainDesktopArea
-                    const parentRect = mainDesktopArea.getBoundingClientRect();
-                    const windowRect = windowElement.getBoundingClientRect();
-
-                    if (newX < 0) newX = 0;
-                    if (newY < 0) newY = 0;
-                    if (newX + windowRect.width > parentRect.width) newX = parentRect.width - windowRect.width;
-                    if (newY + windowRect.height > parentRect.height) newY = parentRect.height - windowRect.height;
-
-                    windowElement.style.left = `${newX}px`;
-                    windowElement.style.top = `${newY}px`;
-                });
-
-                document.addEventListener('mouseup', () => {
-                    if (isDraggingWindow) {
-                        isDraggingWindow = false;
-                        if (titleBar) titleBar.style.cursor = 'grab'; // Changed to grab cursor
-                        console.log(`Stopped dragging window "${windowId}".`);
-                    }
-                });
-
-                // Handle window control buttons
-                const closeButton = windowElement.querySelector('.control-button.close');
-                const minimizeButton = windowElement.querySelector('.control-button.minimize');
-                const maximizeButton = windowElement.querySelector('.control-button.maximize');
-
-                if (closeButton) {
-                    closeButton.addEventListener('click', () => {
-                        windowElement.remove();
-                        openWindowsMap.delete(windowId); // Remove from map
-                        // Remove taskbar icon if it exists
-                        const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
-                        if (taskbarIcon) {
-                            taskbarIcon.remove();
-                        }
-                        console.log(`Window "${windowId}" closed.`);
-                        // If no windows are open, show welcome message again
-                        if (mainDesktopArea.querySelectorAll('.os-window').length === 0 && taskbarIconsContainer.children.length === 0) {
-                            if (welcomeMessage) {
-                                welcomeMessage.style.display = 'flex';
-                                console.log('All windows closed, welcome message shown.');
-                            }
-                        }
-                    });
-                } else {
-                    console.error(`Close button not found for window "${windowId}".`);
-                }
-
-                if (minimizeButton) {
-                    minimizeButton.addEventListener('click', () => {
-                        minimizeWindow(windowElement, chineseTitle, windowId);
-                    });
-                }
-                if (maximizeButton) {
-                    maximizeButton.addEventListener('click', () => {
-                        toggleMaximizeWindow(windowElement);
-                    });
-                }
-
-                // Bring to front on click anywhere on the window
-                windowElement.addEventListener('mousedown', () => {
-                    bringToFront(windowElement);
-                });
-
-                return windowElement; // Return the newly created window element
-            }
-
-            // Function to create a taskbar icon for a window
-            function createTaskbarIcon(windowElement, title, windowId) {
-                console.log('createTaskbarIcon received title:', title, 'type:', typeof title, 'windowId:', windowId); // Debug log
-                let taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
-                if (!taskbarIcon) {
-                    taskbarIcon = document.createElement('div');
-                    taskbarIcon.classList.add('taskbar-minimized-icon');
-                    taskbarIcon.dataset.windowId = windowId;
-
-                    // Initialize displayTitle with a safe fallback
-                    let displayTitle = String(title || 'Untitled Window'); // Ensure it's a string, even if title is null/undefined
-
-                    // Attempt to get a more specific display title from language content if available
-                    const langData = LANG_CONTENT[currentLanguage];
-                    const section = windowElement.dataset.section;
-
-                    if (langData && section) { // Ensure both langData and section are defined
-                        if (langData[`${section}MenuItem`]) {
-                            displayTitle = String(langData[`${section}MenuItem`]); // Use the simplified menu item label
-                        } else if (section === 'about' && langData.mazkoExeIcon) {
-                            displayTitle = String(langData.mazkoExeIcon);
-                        } else if (section.startsWith('service-category-')) {
-                            const categoryId = section.replace('service-category-', '');
-                            if (langData.services && langData.services.categories) {
-                                const category = langData.services.categories.find(cat => cat.id === categoryId);
-                                if (category && category.name) {
-                                    displayTitle = String(category.name);
-                                }
-                            }
-                        } else if (section.startsWith('work-detail-')) {
-                            // For work-detail windows, the 'title' parameter already contains the full title
-                            // so no further modification needed here.
-                            displayTitle = String(title); // Ensure it's explicitly a string
-                        }
-                    }
-                    // Final fallback to ensure displayTitle is always a non-empty string
-                    displayTitle = displayTitle.trim() || 'Untitled'; // Trim and ensure it's not empty
-
-                    taskbarIcon.innerHTML = `<span class="icon-placeholder" data-asset-key="icon_window_restore"></span> <span>${displayTitle}</span>`;
-                    taskbarIconsContainer.appendChild(taskbarIcon);
-                    renderDynamicAssets(); // Render icons for the newly created taskbar icon
-
-                    taskbarIcon.addEventListener('click', () => {
-                        restoreWindow(windowElement);
-                    });
-                }
-                setActiveTaskbarIcon(windowId); // Set its taskbar icon as active
-            }
-
-            // Function to minimize a window
-            function minimizeWindow(windowElement, title, windowId) {
-                windowElement.classList.add('minimized');
-                console.log(`Window "${windowId}" minimized.`);
-                // Ensure taskbar icon is active even when minimized
-                setActiveTaskbarIcon(windowId); 
-            }
-
-            // Function to restore a minimized window
-            function restoreWindow(windowElement) {
-                windowElement.classList.remove('minimized');
-                windowElement.classList.remove('maximized'); // Ensure it's not maximized either
-                windowElement.style.width = windowElement.dataset.originalWidth;
-                windowElement.style.height = windowElement.dataset.originalHeight;
-                windowElement.style.left = windowElement.dataset.originalLeft;
-                windowElement.style.top = windowElement.dataset.originalTop;
-                windowElement.style.borderRadius = '12px'; // Restore border-radius for Aero
-                // Fix: Changed box-shadow to boxShadow for correct CSS property access
-                windowElement.style.boxShadow = '0 10px 40px rgba(0, 191, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3)'; // Restore shadow
-                bringToFront(windowElement);
-                console.log(`Window "${windowElement.dataset.windowId}" restored.`);
-                setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
-            }
-
-            // Function to toggle maximize/restore a window
-            function toggleMaximizeWindow(windowElement) {
-                if (windowElement.classList.contains('maximized')) {
-                    // Restore
-                    windowElement.classList.remove('maximized');
-                    windowElement.style.width = windowElement.dataset.originalWidth;
-                    windowElement.style.height = windowElement.dataset.originalHeight;
-                    windowElement.style.left = windowElement.dataset.originalLeft;
-                    windowElement.style.top = windowElement.dataset.originalTop;
-                    windowElement.style.borderRadius = '12px'; // Restore border-radius for Aero
-                    // Fix: Changed box-shadow to boxShadow for correct CSS property access
-                    windowElement.style.boxShadow = '0 10px 40px rgba(0, 191, 255, 0.5), inset 0 0 20px rgba(255, 255, 255, 0.3)'; // Restore shadow
-                    console.log(`Window "${windowElement.dataset.windowId}" restored from maximized.`);
-                } else {
-                    // Maximize
-                    // Save current position and size before maximizing (if not already saved)
-                    if (!windowElement.dataset.originalLeft) {
-                        windowElement.dataset.originalLeft = windowElement.style.left;
-                        windowElement.dataset.originalTop = windowElement.style.top;
-                        windowElement.dataset.originalWidth = windowElement.style.width;
-                        windowElement.dataset.originalHeight = windowElement.style.height;
-                    }
-                    windowElement.classList.add('maximized');
-                    // CSS handles the full-screen positioning via the .maximized class
-                    console.log(`Window "${windowElement.dataset.windowId}" maximized.`);
-                }
-                bringToFront(windowElement); // Bring to front after state change
-                setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
-            }
-
-            // Function to open work detail window with gallery
-            function openWorkDetail(work) {
-                // Initialize current image index for this work
-                let currentImageIndex = 0;
-
-                const { chineseTitle, englishTitle } = getWindowTitles('work-detail-' + work.id, work);
-
-                const detailContent = `
-                    <div class="work-detail-content">
-                        <div class="gallery-main-image-container">
-                            <img src="${work.images[currentImageIndex]}" alt="${work.title}" class="gallery-main-image">
-                            ${work.images.length > 1 ? `
-                                <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
-                                <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
-                            ` : ''}
-                        </div>
-                        ${work.images.length > 1 ? `
-                            <div class="gallery-thumbnails">
-                                ${work.images.map((imgSrc, index) => `
-                                    <img src="${imgSrc}" alt="${work.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
-                                `).join('')}
-                            </div>
-                        ` : ''}
-                        <h3>${work.title}</h3>
-                        <p class="text-sm opacity-90 mb-2">${work.category}</p>
-                        <p>${work.description}</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
-                            ${work.tags.map(tag => `<span class="category-tag">${tag}</span>`).join('')}
-                        </div>
-                    </div>
-                `;
-                
-                openWindow('work-detail-' + work.id, chineseTitle, englishTitle, detailContent, 'work-detail-' + work.id);
-
-                // Add event listeners for gallery navigation after the window is opened and content is rendered
-                setTimeout(() => {
-                    const detailWindow = document.querySelector(`.os-window[data-window-id="work-detail-${work.id}"]`);
-                    if (!detailWindow) return;
-
-                    const mainImage = detailWindow.querySelector('.gallery-main-image');
-                    const thumbnailsContainer = detailWindow.querySelector('.gallery-thumbnails');
-                    const prevButton = detailWindow.querySelector('.gallery-nav-button.prev');
-                    const nextButton = detailWindow.querySelector('.gallery-nav-button.next');
-
-                    function updateGallery() {
-                        if (mainImage) {
-                            mainImage.src = work.images[currentImageIndex];
-                        }
-                        if (thumbnailsContainer) {
-                            thumbnailsContainer.querySelectorAll('.gallery-thumbnail').forEach((thumb, idx) => {
-                                if (idx === currentImageIndex) {
-                                    thumb.classList.add('active');
-                                } else {
-                                    thumb.classList.remove('active');
-                                }
-                            });
-                        }
-                        renderDynamicAssets(); // Render newly inserted icons (chevrons)
-                    }
-
-                    if (prevButton) {
-                        prevButton.addEventListener('click', () => {
-                            currentImageIndex = (currentImageIndex - 1 + work.images.length) % work.images.length;
-                            updateGallery();
-                        });
-                    }
-                    if (nextButton) {
-                        nextButton.addEventListener('click', () => { 
-                            currentImageIndex = (currentImageIndex + 1) % work.images.length;
-                            updateGallery();
-                        });
-                    }
-                    if (thumbnailsContainer) {
-                        thumbnailsContainer.addEventListener('click', (e) => {
-                            if (e.target.classList.contains('gallery-thumbnail')) {
-                                const index = parseInt(e.target.dataset.index);
-                                if (!isNaN(index)) {
-                                    currentImageIndex = index;
-                                    updateGallery();
-                                }
-                            }
-                        });
-                    }
-                    updateGallery(); // Initial update to set the first image and active thumbnail
-                }, 100); // Small delay to ensure DOM is ready
-            }
-
-            // Function to open a specific service category detail window
-            function openServiceCategoryDetail(category) {
-                const { chineseTitle, englishTitle } = getWindowTitles('service-category-' + category.id, null, category);
-                const contentHTML = category.detailContent;
-                openWindow('service-category-' + category.id, chineseTitle, englishTitle, contentHTML, 'service-category-' + category.id, {}, true); // Pass true for Markdown
-            }
-
-
-            // Toggle Start Menu visibility
-            if (startButton && startMenu) { // Ensure elements exist before adding listeners
-                console.log('START button and Start Menu elements found. Attaching event listeners.');
-                startButton.addEventListener('click', (event) => {
-                    event.stopPropagation(); // Prevent click from propagating to document
-                    console.log('START button clicked!'); // Debug: Confirm button click
-                    startMenu.classList.toggle('hidden');
-                    startMenu.classList.toggle('visible');
-                    console.log(`Start Menu visibility toggled. Current classes: ${startMenu.classList}`);
-                });
-
-                // Hide Start Menu when clicking outside of it
-                document.addEventListener('click', (event) => {
-                    if (!startMenu.contains(event.target) && !startButton.contains(event.target)) {
-                        if (startMenu.classList.contains('visible')) {
-                            startMenu.classList.add('hidden');
-                            startMenu.classList.remove('visible');
-                            console.log('Clicked outside menu, Start Menu hidden.');
-                        }
-                    }
-                });
-            } else {
-                console.error('Error: START button or Start Menu element not found in the DOM. Check IDs and HTML structure.');
-            }
-
-            // Handle Start Menu item clicks (for links)
-            document.querySelectorAll('.start-menu-item, .start-menu-footer-button').forEach(item => {
-                item.addEventListener('click', async (event) => { // Made async to await fetchContent
-                    event.preventDefault(); // Prevent default link behavior
-
-                    const section = item.dataset.section;
-                    const { chineseTitle, englishTitle } = getWindowTitles(section);
-                    
-                    startMenu.classList.add('hidden'); // Hide menu after clicking an item
-                    startMenu.classList.remove('visible'); // Ensure it's explicitly removed
-                    console.log(`Start Menu item "${section}" clicked. Menu hidden.`);
-
-                    let content = '';
-                    let data = null;
-                    let isMarkdown = false;
-
-                    // Show loading spinner while fetching data
-                    content = `
-                        <div class="flex flex-col items-center justify-center h-full">
-                            <div class="loading-spinner"></div>
-                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage]?.loadingMessage}</p>
-                        </div>
-                    `;
-                    // Pass windowId to openWindow for correct targeting
-                    const openedWindow = await openWindow(section, chineseTitle, englishTitle, content, section); 
-
-                    try {
-                        data = await fetchContent(section); // Fetch data
-                    } catch (error) {
-                        console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${section}:`, error);
-                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
-                        // Update existing window with error message
-                        if (openedWindow) {
-                            openedWindow.querySelector('.os-window-content').innerHTML = content;
-                            renderDynamicAssets(); // Re-render icons after content update
-                        }
-                        return;
-                    }
-
-                    // Re-render content based on fetched data
-                    switch (section) {
-                        case 'works':
-                            content = `
-                                <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage]?.worksTitle}</h2>
-                                <div class="works-grid">
-                                    ${data?.map(work => `
-                                        <div class="work-card" data-work-id="${work.id}">
-                                            <img src="${work.thumbnail}" alt="${work.title}">
-                                            <div class="work-card-title">${work.title}</div>
-                                            <div class="work-card-category">${work.category}</div>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                                <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage]?.worksClickPrompt}</p>
-                            `;
-                            // Update content of existing window
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                // Attach event listeners to newly created work cards
-                                setTimeout(() => { // Use setTimeout to ensure elements are rendered
-                                    openedWindow.querySelectorAll('.work-card').forEach(card => {
-                                        card.addEventListener('click', () => {
-                                            const workId = card.dataset.workId;
-                                            const selectedWork = data?.find(w => w.id === workId); // Use fetched data
-                                            if (selectedWork) {
-                                                console.log(`Work card "${workId}" clicked. Opening detail window.`);
-                                                openWorkDetail(selectedWork);
-                                            } else {
-                                                console.warn(`Work with ID "${workId}" not found.`);
-                                            }
-                                        });
-                                    });
-                                }, 100); // Small delay
-                                renderDynamicAssets(); // Re-render icons after content update
-                            }
-                            break;
-                        case 'characters':
-                            content = `
-                                <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage]?.charactersTitle}</h2>
-                                <p>${LANG_CONTENT[currentLanguage]?.charactersDescription}</p>
-                                <div class="grid grid-cols-2 gap-4 mt-4">
-                                    ${data?.map(char => `
-                                        <div class="flex flex-col items-center">
-                                            <img src="${char.image}" alt="${char.name}" class="rounded-lg shadow-md mb-2">
-                                            <p class="font-bold">${char.name}</p>
-                                            <p class="text-sm opacity-80 text-center">${char.description}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                renderDynamicAssets(); // Re-render icons after content update
-                            }
-                            break;
-                        case 'about':
-                            content = data?.content;
-                            isMarkdown = true;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
-                                renderDynamicAssets(); // Re-render icons after content update
-                            }
-                            break;
-                        case 'services':
-                            content = marked.parse(data?.description || '') + `
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                                    ${data?.categories.map(category => `
-                                        <div class="service-category-card p-4 rounded-lg border border-primary-blue hover:bg-glass-bg cursor-pointer transition-all duration-200" data-category-id="${category.id}">
-                                            <h3 class="font-bold text-lg text-light-blue">${category.name}</h3>
-                                            <p class="text-sm opacity-80 mt-1">${category.shortDescription}</p>
-                                        </div>
-                                    `).join('')}
-                                </div>
-                            `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                // Attach event listeners to newly created service category cards
-                                setTimeout(() => {
-                                    openedWindow.querySelectorAll('.service-category-card').forEach(card => {
-                                        card.addEventListener('click', () => {
-                                            const categoryId = card.dataset.categoryId;
-                                            const selectedCategory = data?.categories.find(cat => cat.id === categoryId);
-                                            if (selectedCategory) {
-                                                console.log(`Service category "${categoryId}" clicked. Opening detail window.`);
-                                                openServiceCategoryDetail(selectedCategory);
-                                            } else {
-                                                console.warn(`Service category with ID "${categoryId}" not found.`);
-                                            }
-                                        });
-                                    });
-                                }, 100);
-                                renderDynamicAssets(); // Re-render icons after content update
-                            }
-                            break;
-                        case 'socials':
-                            content = marked.parse(data?.description || '') + `
-                                <div class="flex flex-wrap gap-4 mt-4">
-                                    ${data?.links.map(link => `
-                                        <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
-                                            <span class="icon-placeholder w-6 h-6" data-asset-key="${link.iconAssetKey}"></span> <!-- Using iconAssetKey -->
-                                            <span>${link.name}</span>
+                        windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].socialsTitle) ? LANG_CONTENT['zh'].socialsTitle : '社交媒体与社群'; 
+                        windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].socialsTitle) ? LANG_CONTENT['en'].socialsTitle : 'Social Media & Community'; 
+                        contentHTML = `
+                            <div class="markdown-content">
+                                <h1 class="text-center">${currentLanguage === 'zh' ? windowTitleZh : windowTitleEn}</h1>
+                                ${marked.parse(currentLangContent.socialsDescription)}
+                                <div class="flex flex-col items-center gap-4 mt-6">
+                                    ${currentLangContent.socialsLinks.map(link => `
+                                        <a href="${link.url}" target="_blank" class="flex items-center bg-white bg-opacity-10 p-3 rounded-lg w-64 justify-center hover:bg-opacity-20 transition-colors shadow-md">
+                                            <span class="text-2xl mr-3">${link.iconSvg}</span>
+                                            <span class="text-lg font-medium">${link.name}</span>
                                         </a>
                                     `).join('')}
                                 </div>
-                            `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                renderDynamicAssets(); // Re-render icons after content update
-                            }
-                            break;
-                        case 'settings':
-                            content = marked.parse(data?.description || '') + `
-                                <div class="flex flex-col gap-4 mt-4">
-                                    ${data?.options.map(option => {
-                                        const labelText = LANG_CONTENT[currentLanguage]?.settings?.options.find(opt => opt.id === option.id)?.label || option.label;
-                                        if (option.type === 'toggle') {
-                                            return `
-                                                <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
-                                                    <label for="${option.id}" class="text-lg">${labelText}</label>
-                                                    <label class="toggle-switch">
-                                                        <input type="checkbox" id="${option.id}" ${option.checked ? 'checked' : ''} ${option.disabled ? 'disabled' : ''}>
-                                                        <span class="toggle-slider round"></span>
-                                                    </label>
-                                                </div>
-                                            `;
-                                        } else if (option.type === 'language-toggle') {
-                                            return `
-                                                <div class="flex items-center justify-between p-3 rounded-lg bg-white bg-opacity-5 border border-white border-opacity-20">
-                                                    <span class="text-lg">${labelText}</span>
-                                                    <label class="toggle-switch">
-                                                        <input type="checkbox" id="${option.id}" ${currentLanguage === 'en' ? 'checked' : ''}>
-                                                        <span class="toggle-slider round"></span>
-                                                    </label>
-                                                </div>
-                                            `;
-                                        } else if (option.type === 'button') {
-                                            return `
-                                                <button id="${option.id}" class="py-2 px-4 rounded-lg bg-primary-blue hover:bg-dark-blue transition-colors text-white font-bold ${option.disabled ? 'opacity-50 cursor-not-allowed' : ''}" ${option.disabled ? 'disabled' : ''}>
-                                                    ${labelText}
-                                                </button>
-                                            `;
-                                        }
-                                        return '';
-                                    }).join('')}
                             </div>
                         `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                setTimeout(() => {
-                                    const languageToggle = openedWindow.querySelector('#language-toggle');
-                                    if (languageToggle) {
-                                        languageToggle.addEventListener('change', (e) => {
-                                            const newLang = e.target.checked ? 'en' : 'zh';
-                                            if (newLang !== currentLanguage) {
-                                                currentLanguage = newLang;
-                                                console.log(`Language switched via settings toggle to: ${currentLanguage}`);
-                                                updateUIForLanguage();
-                                                // Re-render the settings window to reflect the new language
-                                                const { chineseTitle: settingsZh, englishTitle: settingsEn } = getWindowTitles('settings');
-                                                openWindow('settings', settingsZh, settingsEn, content, 'settings');
-                                            }
-                                        });
-                                    }
-
-                                    const desktopIconsToggle = openedWindow.querySelector('#desktop-icons-toggle');
-                                    if (desktopIconsToggle) {
-                                        desktopIconsToggle.addEventListener('change', (e) => {
-                                            if (e.target.checked) {
-                                                desktopIconsContainer.style.display = 'block';
-                                                console.log('Desktop icons enabled.');
-                                            } else {
-                                                desktopIconsContainer.style.display = 'none';
-                                                console.log('Desktop icons disabled.');
-                                            }
-                                        });
-                                    }
-                                }, 100);
-                                renderDynamicAssets(); // Re-render icons after content update
+                        statusText = 'Stay connected!'; 
+                        break;
+                    case 'settings':
+                        windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].settingsMenuItem) ? LANG_CONTENT['zh'].settingsMenuItem : '系统设置'; 
+                        windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].settingsMenuItem) ? LANG_CONTENT['en'].settingsMenuItem : 'Settings'; 
+                        contentHTML = `
+                            <div class="settings-content markdown-content">
+                                <h1 class="text-center">${currentLanguage === 'zh' ? windowTitleZh : windowTitleEn}</h1>
+                                <h2 class="mt-6 mb-3">语言设置</h2>
+                                <div class="flex items-center justify-between bg-white bg-opacity-10 p-3 rounded-lg shadow-md border border-white border-opacity-20">
+                                    <label for="language-select" class="text-lg font-medium text-white mr-4">选择语言:</label>
+                                    <select id="language-select" class="bg-transparent border border-gray-400 rounded-md p-2 text-white focus:outline-none focus:border-primary-blue">
+                                        <option value="zh" ${currentLanguage === 'zh' ? 'selected' : ''}>中文 (简体)</option>
+                                        <option value="en" ${currentLanguage === 'en' ? 'selected' : ''}>English</option>
+                                    </select>
+                                </div>
+                                <h2 class="mt-6 mb-3">系统信息</h2>
+                                <p><strong>系统名称:</strong> ${currentLangContent.systemName}</p>
+                                <p><strong>版本:</strong> ${currentLangContent.systemVersion}</p>
+                                <p class="mt-4 text-gray-400">更多设置项即将推出。</p>
+                            </div>
+                        `;
+                        statusText = 'Setting preferences'; 
+                        break;
+                    case 'shutdown':
+                        windowTitleZh = (LANG_CONTENT['zh'] && LANG_CONTENT['zh'].shutdownMenuItem) ? LANG_CONTENT['zh'].shutdownMenuItem : '关闭系统'; 
+                        windowTitleEn = (LANG_CONTENT['en'] && LANG_CONTENT['en'].shutdownMenuItem) ? LANG_CONTENT['en'].shutdownMenuItem : 'Shutdown'; 
+                        contentHTML = `
+                            <div class="text-center p-8">
+                                <h1 class="text-2xl font-bold mb-4">${currentLanguage === 'zh' ? windowTitleZh : windowTitleEn}</h1>
+                                <p class="text-lg mb-8">${currentLangContent.shutdownMessage}</p>
+                                <div class="loading-spinner"></div>
+                            </div>
+                        `;
+                        statusText = 'Shutting down...'; 
+                        setTimeout(() => {
+                            closeAllWindows();
+                            // Possibly hide desktop elements or show a "Powered Off" screen
+                            const desktopContainer = document.getElementById('desktop-container');
+                            if (desktopContainer) { // Add null check
+                                desktopContainer.style.display = 'none';
                             }
-                            break;
-                        case 'shutdown':
-                            content = `
-                                <h2 class="text-xl font-bold mb-4 text-red-400">${LANG_CONTENT[currentLanguage]?.shutdownMenuItem}...</h2>
-                                <p>${LANG_CONTENT[currentLanguage]?.shutdownMessage}</p>
-                                <p class="mt-4 opacity-70">${(LANG_CONTENT[currentLanguage]?.loadingMessage || '加载中...').replace('加载中...', '请稍候...')}</p>
-                            `;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                                renderDynamicAssets(); // Re-render icons after content update
-                            }
-                            // For a real shutdown, you might redirect or show a final message
-                            setTimeout(() => {
-                                console.log(LANG_CONTENT[currentLanguage]?.shutdownMessage);
-                                mainDesktopArea.innerHTML = `<div id="welcome-message" class="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                    <p class="text-3xl text-white opacity-70" id="welcome-message-text">${LANG_CONTENT[currentLanguage]?.shutdownMessage}</p>
-                                </div>`;
-                                // Clear all open windows from map and taskbar
-                                openWindowsMap.clear();
-                                taskbarIconsContainer.innerHTML = '';
-                                // Re-initialize welcome message text element
-                                welcomeMessageText = document.getElementById('welcome-message-text'); // Re-assign the element
-                                renderDynamicAssets(); // Ensure icons in shutdown message are rendered if any
-                            }, 2000);
-                            break;
-                    }
-                });
-            });
-
-
-            // Handle Start Menu header click to open About Me
-            if (startMenuHeader) {
-                startMenuHeader.addEventListener('click', async (event) => {
-                    event.preventDefault();
-                    event.stopPropagation(); // Prevent start menu from closing immediately
-                    startMenu.classList.add('hidden');
-                    startMenu.classList.remove('visible');
-
-                    const section = 'about';
-                    // Directly get titles from LANG_CONTENT, as getWindowTitles is for generic sections
-                    const chineseTitle = LANG_CONTENT[currentLanguage]?.aboutTitle;
-                    const englishTitle = LANG_CONTENT['en']?.aboutTitle;
-                    
-                    let content = '';
-                    let data = null;
-                    let isMarkdown = true;
-
-                    content = `
-                        <div class="flex flex-col items-center justify-center h-full">
-                            <div class="loading-spinner"></div>
-                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage]?.loadingMessage}</p>
-                        </div>
-                    `;
-                    const openedWindow = await openWindow(section, chineseTitle, englishTitle, content, 'about', {}, true); // Pass 'about' as windowId
-
-                    try {
-                        data = await fetchContent(section);
-                        if (data && typeof data.content !== 'undefined') { // Added check
-                            content = data.content;
-                            if (openedWindow) openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
-                        } else {
-                            console.error(`Fetched data for section "${section}" is invalid or missing 'content':`, data);
-                            content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                            }
-                        }
-                    } catch (error) {
-                        console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${section}:`, error);
-                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
-                        if (openedWindow) {
-                            openedWindow.querySelector('.os-window-content').innerHTML = content;
-                        }
-                    } finally {
-                        renderDynamicAssets(); // Ensure icons within the content are rendered
-                    }
-                });
-            }
-
-
-            // --- Desktop Icon Dragging Logic ---
-            let isDraggingIcon = false;
-            let currentDraggedIcon = null;
-            let initialMouseX, initialMouseY;
-            let initialIconX, initialIconY;
-
-            if (desktopIconsContainer) {
-                desktopIconsContainer.querySelectorAll('.desktop-icon').forEach(icon => {
-                    // Set initial positions (from inline style)
-                    icon.style.position = 'absolute'; // Ensure position is absolute for dragging
-
-                    icon.addEventListener('mousedown', (e) => {
-                        if (e.button !== 0) return; // Only allow left-click drag
-                        isDraggingIcon = true;
-                        currentDraggedIcon = icon;
-                        initialMouseX = e.clientX;
-                        initialMouseY = e.clientY;
-                        initialIconX = icon.offsetLeft;
-                        initialIconY = icon.offsetTop;
-
-                        // Bring the icon to front while dragging (optional, but good UX)
-                        currentDraggedIcon.style.zIndex = highestZIndex + 1; 
-
-                        e.preventDefault(); // Prevent default browser drag behavior (e.g., ghost image)
-                        console.log(`Started dragging icon: ${icon.dataset.title}`);
-                    });
-
-                    // Handle icon click (separate from drag)
-                    icon.addEventListener('click', (event) => {
-                        // If it was a drag, don't open the window
-                        if (currentDraggedIcon === icon && (Math.abs(event.clientX - initialMouseX) > 5 || Math.abs(event.clientY - initialMouseY) > 5)) {
-                            console.log("Icon was dragged, preventing click action.");
-                            return; 
-                        }
-
-                        const section = icon.dataset.section;
-                        const { chineseTitle, englishTitle } = getWindowTitles(section);
-                        
-                        let existingWindow = document.querySelector(`.os-window[data-window-id="${section}"]`);
-                        if (existingWindow) {
-                            if (existingWindow.classList.contains('minimized')) {
-                                restoreWindow(existingWindow);
-                            } else {
-                                bringToFront(existingWindow);
-                            }
-                            return;
-                        }
-
-                        // Simulate click on the corresponding start menu item or button to trigger window opening logic
-                        // For mazko.exe, directly open the about window
-                        if (section === 'about') {
-                            console.log('Desktop MAZKO icon clicked. currentLanguage:', currentLanguage);
-                            // Directly access aboutTitle and aboutContent from LANG_CONTENT
-                            const aboutTitleForWindow = LANG_CONTENT[currentLanguage]?.aboutTitle;
-                            const aboutContentForWindow = LANG_CONTENT[currentLanguage]?.aboutContent;
-
-                            if (aboutContentForWindow) { // Check if content exists
-                                openWindow('about', aboutTitleForWindow, LANG_CONTENT['en']?.aboutTitle, aboutContentForWindow, 'about', {}, true);
-                            } else {
-                                console.error(`Error: 'about' content not found for language ${currentLanguage} or is undefined.`);
-                                openWindow('about', 'Error', 'Error', `<p class="text-xl text-red-400">Failed to load About MAZKO content.</p>`, 'about', {}, false);
-                            }
-                        } else {
-                            // Find the corresponding start menu item or button and click it
-                            const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
-                            const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
-                            if (startMenuItem) {
-                                startMenuItem.click();
-                            } else if (startMenuFooterButton) {
-                                startMenuFooterButton.click();
-                            } else {
-                                console.warn(`No start menu item or footer button found for section: ${section}`);
-                            }
-                        }
-                    });
-                });
-            }
-
-            document.addEventListener('mousemove', (e) => {
-                if (!isDraggingIcon || !currentDraggedIcon) return;
-
-                const dx = e.clientX - initialMouseX;
-                const dy = e.clientY - initialMouseY;
-
-                let newX = initialIconX + dx;
-                let newY = initialIconY + dy;
-
-                // Boundary checks for dragging within mainDesktopArea
-                const desktopRect = mainDesktopArea.getBoundingClientRect();
-                const iconRect = currentDraggedIcon.getBoundingClientRect();
-
-                // Adjust for desktop area's position relative to viewport
-                const desktopLeft = desktopRect.left;
-                const desktopTop = desktopRect.top;
-
-                // Calculate bounds relative to the desktop area's top-left corner
-                const minX = 0;
-                const minY = 0;
-                const maxX = desktopRect.width - iconRect.width;
-                const maxY = desktopRect.height - iconRect.height;
-
-                newX = Math.max(minX, Math.min(newX, maxX));
-                newY = Math.max(minY, Math.min(newY, maxY));
-
-                currentDraggedIcon.style.left = `${newX}px`;
-                currentDraggedIcon.style.top = `${newY}px`;
-            });
-
-            document.addEventListener('mouseup', () => {
-                if (isDraggingIcon) {
-                    isDraggingIcon = false;
-                    if (currentDraggedIcon) {
-                        // Reset z-index if desired, or keep it high if windows can overlap icons
-                        currentDraggedIcon.style.zIndex = 2; 
-                        console.log(`Stopped dragging icon: ${currentDraggedIcon.dataset.title}`);
-                    }
-                    currentDraggedIcon = null;
+                            // You might want to fade out the body or show a black screen here
+                            document.body.innerHTML = '<div class="flex items-center justify-center w-screen h-screen bg-black text-white text-3xl">系统已关闭</div>';
+                        }, 3000); // Simulate shutdown time
+                        break;
+                    default:
+                        contentHTML = `<p class="text-center text-red-500">${currentLangContent.unknownModule}</p>`;
+                        windowTitleZh = '错误';
+                        windowTitleEn = 'Error';
+                        statusText = 'Failed to load'; 
+                        break;
                 }
-            });
 
-            // Handle window focus/blur to update title bar active state
-            document.addEventListener('mousedown', (e) => {
-                const clickedWindow = e.target.closest('.os-window');
-                document.querySelectorAll('.os-window').forEach(win => {
+                contentArea.innerHTML = contentHTML;
+                titleElement.textContent = `${windowTitleZh} / ${windowTitleEn}`; // Display both languages
+                
+                // Store the individual titles as data attributes on the window itself
+                windowElement.setAttribute('data-title-zh', windowTitleZh);
+                windowElement.setAttribute('data-title-en', windowTitleEn);
+
+                statusBar.textContent = `${statusText} - ${currentLangContent.systemName} ${currentLangContent.systemVersion}`; 
+
+                // Add event listeners for work detail gallery if applicable
+                if (section === 'works' && dataId) {
+                    const mainImage = contentArea.querySelector('.gallery-main-image');
+                    const thumbnails = contentArea.querySelectorAll('.gallery-thumbnail');
+                    const prevBtn = contentArea.querySelector('.gallery-nav-button.prev');
+                    // FIX: Changed selector for nextBtn
+                    const nextBtn = contentArea.querySelector('.gallery-nav-button.next'); 
+                    const work = WORKS_DATA.find(w => w.id === dataId);
+                    let currentImageIndex = windowElement.dataset.currentImageIndex ? parseInt(windowElement.dataset.currentImageIndex) - 1 : 0; // Get from dataset, default to 0
+
+                    function updateGallery() {
+                        if (mainImage && work && work.images[currentImageIndex]) { // Add null checks
+                            mainImage.src = getAssetUrl(work.images[currentImageIndex]);
+                        }
+                        thumbnails.forEach((thumb, idx) => {
+                            thumb.classList.toggle('active', idx === currentImageIndex);
+                        });
+                        if (statusBar && work) { // Add null checks
+                            statusBar.textContent = `图片: ${currentImageIndex + 1}/${work.images.length} - ${currentLangContent.systemName} ${currentLangContent.systemVersion}`;
+                        }
+                        windowElement.dataset.currentImageIndex = currentImageIndex + 1; // Update stored index
+                    }
+                    updateGallery(); // Initial call to set gallery and status bar
+
+                    if (prevBtn) { // Add null check
+                        prevBtn.onclick = () => {
+                            currentImageIndex = (currentImageIndex - 1 + work.images.length) % work.images.length;
+                            updateGallery();
+                        };
+                    }
+
+                    if (nextBtn) { // Add null check
+                        nextBtn.onclick = () => {
+                            currentImageIndex = (currentImageIndex + 1) % work.images.length;
+                            updateGallery();
+                        };
+                    }
+
+                    thumbnails.forEach(thumbnail => {
+                        if (thumbnail) { // Add null check
+                            // FIX: Changed data-image-index to dataImageIndex
+                            thumbnail.onclick = (e) => {
+                                currentImageIndex = parseInt(e.target.dataset.imageIndex); 
+                                updateGallery();
+                            };
+                        }
+                    });
+                }
+                
+                // Add event listeners for service category cards
+                if (section === 'services') {
+                    contentArea.querySelectorAll('.service-category-card').forEach(card => {
+                        if (card) { // Add null check
+                            card.onclick = () => {
+                                const categoryId = card.getAttribute('data-category-id');
+                                console.log('Clicked service card with ID:', categoryId); // Log for debugging
+                                openWindow('service-detail', categoryId);
+                            };
+                        }
+                    });
+                }
+
+                // Add event listener for language select in settings
+                if (section === 'settings') {
+                    const languageSelect = contentArea.querySelector('#language-select');
+                    if (languageSelect) { // Add null check
+                        languageSelect.onchange = (e) => {
+                            applyLanguage(e.target.value);
+                            // Re-render settings window to update content based on new language
+                            loadWindowContent(windowElement, 'settings');
+                        };
+                    }
+                }
+
+            } catch (error) {
+                console.error(`Error loading content for section ${section}:`, error);
+                if (contentArea) { // Add null check
+                    contentArea.innerHTML = `<p class="text-center text-red-500">${currentLangContent.errorLoadingContent} ${error.message}</p>`;
+                }
+                if (titleElement) { // Add null check
+                    titleElement.textContent = `错误 / Error`;
+                }
+                if (statusBar) { // Add null check
+                    statusBar.textContent = `加载失败 / Failed to load - ${currentLangContent.systemName} ${currentLangContent.systemVersion}`;
+                }
+            }
+        }
+
+
+        /**
+         * @function bringWindowToFront
+         * @param {HTMLElement} element - The window or draggable element to bring to front.
+         * @description Updates the z-index of the given element to bring it to the front.
+         */
+        function bringWindowToFront(element) {
+            if (!element) return;
+            zIndexCounter++;
+            element.style.zIndex = zIndexCounter;
+
+            // Only apply active/inactive to actual windows
+            if (element.classList.contains('os-window')) {
+                windows.forEach(win => {
                     const titleBar = win.querySelector('.os-window-title-bar');
-                    if (titleBar) {
-                        if (win === clickedWindow) {
+                    if (titleBar) { 
+                        if (win === element) {
                             titleBar.classList.remove('inactive');
                         } else {
                             titleBar.classList.add('inactive');
                         }
                     }
                 });
+
+                // Update active taskbar icon
+                document.querySelectorAll('.taskbar-minimized-icon').forEach(icon => {
+                    if (icon) { 
+                        icon.classList.remove('active');
+                    }
+                });
+                const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${element.id}"]`);
+                if (taskbarIcon) { 
+                    taskbarIcon.classList.add('active');
+                }
+            }
+            // For desktop icons, they also need to come to front on drag/click
+            if (element.classList.contains('desktop-icon')) {
+                element.style.zIndex = zIndexCounter; // Bring icon to front when clicked/dragged
+            }
+        }
+
+        /**
+         * @function minimizeWindow
+         * @param {string} windowId - The ID of the window to minimize.
+         * @description Minimizes a window and updates its taskbar icon state.
+         */
+        function minimizeWindow(windowId) {
+            const windowElement = document.getElementById(windowId);
+            if (windowElement) {
+                windowElement.classList.add('minimized');
+                // Remove active state from taskbar icon
+                const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
+                if (taskbarIcon) {
+                    taskbarIcon.classList.remove('active');
+                }
+                // If the minimized window was active, activate the next available window
+                if (activeDraggableElement && activeDraggableElement.id === windowId) { // Changed activeWindow to activeDraggableElement
+                    activeDraggableElement = null;
+                    const otherOpenWindows = windows.filter(win => win.id !== windowId && !win.classList.contains('minimized'));
+                    if (otherOpenWindows.length > 0) {
+                        bringWindowToFront(otherOpenWindows[otherOpenWindows.length - 1]); // Bring the most recent non-minimized window to front
+                    }
+                }
+            }
+        }
+
+        /**
+         * @function toggleMaximizeWindow
+         * @param {string} windowId - The ID of the window to toggle maximize state.
+         * @description Toggles the maximized state of a window.
+         */
+        function toggleMaximizeWindow(windowId) {
+            const windowElement = document.getElementById(windowId);
+            if (windowElement) {
+                const maximizeBtn = windowElement.querySelector('.control-button.maximize');
+                if (windowElement.classList.contains('maximized')) {
+                    // Restore
+                    windowElement.classList.remove('maximized');
+                    // Restore original size and position (store these as data attributes)
+                    windowElement.style.width = windowElement.dataset.originalWidth;
+                    windowElement.style.height = windowElement.dataset.originalHeight;
+                    windowElement.style.left = windowElement.dataset.originalLeft;
+                    windowElement.style.top = windowElement.dataset.originalTop;
+                    if (maximizeBtn) { 
+                        maximizeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 7h10v10H7z" fill="none"/><path d="M3 5v14h18V5H3zm16 12H5V7h14v10z"/></svg>'; // Restore icon
+                    }
+                } else {
+                    // Maximize
+                    // Store original size and position
+                    windowElement.dataset.originalWidth = windowElement.style.width;
+                    windowElement.dataset.originalHeight = windowElement.style.height;
+                    windowElement.dataset.originalLeft = windowElement.style.left;
+                    windowElement.dataset.originalTop = windowElement.style.top;
+
+                    windowElement.classList.add('maximized');
+                    if (maximizeBtn) { 
+                        maximizeBtn.innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19 7h-2v2h2v10H5V9h2V7H3v14h18V7zM17 2h-12c-1.1 0-2 .9-2 2v12h2V4h12V2z"/></svg>'; // Maximize icon
+                    }
+                }
+            }
+        }
+
+
+        /**
+         * @function closeWindow
+         * @param {string} windowId - The ID of the window to close.
+         * @description Closes a window and removes its taskbar icon.
+         */
+        function closeWindow(windowId) {
+            const windowElement = document.getElementById(windowId);
+            if (windowElement) {
+                // Disconnect ResizeObserver before removing the element
+                if (windowElement._resizeObserver) {
+                    windowElement._resizeObserver.disconnect();
+                    windowElement._resizeObserver = null;
+                }
+
+                windowElement.remove(); // Remove from DOM
+                windows = windows.filter(win => win.id !== windowId); // Remove from tracking array
+
+                // Remove from taskbar
+                const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
+                if (taskbarIcon) {
+                    taskbarIcon.remove();
+                }
+
+                // If no windows are open, show welcome message
+                if (windows.length === 0) {
+                    showWelcomeMessage();
+                } else if (activeDraggableElement && activeDraggableElement.id === windowId) { // Changed activeWindow to activeDraggableElement
+                    activeDraggableElement = null;
+                    const openWindows = windows.filter(win => !win.classList.contains('minimized'));
+                    if (openWindows.length > 0) {
+                        bringWindowToFront(openWindows[openWindows.length - 1]); // Bring the most recent non-minimized window to front
+                    }
+                }
+            }
+        }
+
+        /**
+         * @function closeAllWindows
+         * @description Closes all open windows.
+         */
+        function closeAllWindows() {
+            // Iterate over a copy of the array because we're modifying it
+            [...windows].forEach(win => {
+                closeWindow(win.id);
+            });
+            windows = []; // Clear the array
+        }
+
+        /**
+         * @function createTaskbarIcon
+         * @param {HTMLElement} windowElement - The window element for which to create a taskbar icon.
+         * @description Creates a taskbar icon for the given window.
+         */
+        function createTaskbarIcon(windowElement) {
+            const taskbarIconsContainer = document.getElementById('taskbar-icons');
+            if (!taskbarIconsContainer) { 
+                console.error("Error: taskbar-icons container not found.");
+                return;
+            }
+            const taskbarIcon = document.createElement('div');
+            taskbarIcon.classList.add('taskbar-minimized-icon');
+            taskbarIcon.setAttribute('data-window-id', windowElement.id);
+
+            // Get the title directly from the window's data attributes
+            const windowTitleText = currentLanguage === 'zh' ? 
+                                    windowElement.getAttribute('data-title-zh') : 
+                                    windowElement.getAttribute('data-title-en');
+            
+            console.log(`Creating taskbar icon for window ID: ${windowElement.id} with title: "${windowTitleText}"`);
+
+            // Determine the icon for the taskbar based on section
+            let iconHtml = '';
+            const section = windowElement.getAttribute('data-section');
+
+            if (section === 'socials') {
+                 // For socials, use the specific social icon from LANG_CONTENT if available, otherwise a default SVG
+                 const socialLink = (LANG_CONTENT[currentLanguage] && LANG_CONTENT[currentLanguage].socialsLinks) ? LANG_CONTENT[currentLanguage].socialsLinks.find(link => windowTitleText.includes(link.name)) : null;
+                 iconHtml = socialLink ? socialLink.iconSvg : '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg>';
+            } else if (section === 'settings') {
+                iconHtml = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M19.43 12.98c.04-.32.07-.64.07-.98s-.03-.66-.07-.98l2.11-1.65c.19-.15.24-.42.12-.64l-2-3.46c-.12-.22-.39-.31-.61-.22l-2.49 1c-.52-.4-1.07-.75-1.67-1.03l-.38-2.65C14.46 2.18 14.25 2 14 2h-4c-.25 0-.46.18-.5.44l-.38 2.65c-.6.28-1.15.63-1.67 1.03l-2.49-1c-.22-.09-.49 0-.61.22l-2 3.46c-.12.22-.07.49.12.64l2.11 1.65c-.04.32-.07.64-.07.98s.03.66.07.98l-2.11 1.65c-.19.15-.24.42-.12.64l2 3.46c.12.22.39.31.61.22l2.49-1c.52.4 1.07.75 1.67 1.03l.38 2.65c.04.26.25.44.5.44h4c.25 0 .46-.18.5-.44l-.38-2.65c.6-.28 1.15-.63 1.67-1.03l2.49 1c-.22.09-.49 0-.61-.22l2-3.46c.12-.22.07-.49-.12-.64l-2.11-1.65zM12 15.5c-1.93 0-3.5-1.57-3.5-3.5s1.57-3.5 3.5-3.5 3.5 1.57 3.5 3.5-1.57 3.5-3.5 3.5z"/></svg>';
+            } else if (section === 'shutdown') {
+                iconHtml = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 3c-4.97 0-9 4.03-9 9H1l3.05 3.05L7 12H5c0-3.86 3.14-7 7-7s7 3.14 7 7-3.14 7-7 7c-.64 0-1.27-.09-1.87-.27l-.76 1.24c.94.49 2 .78 3.07.78 4.97 0 9-4.03 9-9s-4.03-9-9-9z"/></svg>';
+            } else if (section === 'service-detail') {
+                 // For service details, use the service icon from ASSETS
+                 iconHtml = `<img src="${getAssetUrl('icon_services')}" alt="Service Icon" class="w-4 h-4">`;
+            } else {
+                // For other sections, use the image asset
+                iconHtml = `<img src="${getAssetUrl(`icon_${section}`)}" alt="${windowTitleText}" class="w-4 h-4">`;
+            }
+            
+            // Append icon (either img or SVG)
+            if (iconHtml.startsWith('<img')) {
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = iconHtml;
+                taskbarIcon.appendChild(tempDiv.firstChild);
+            } else {
+                taskbarIcon.innerHTML += `<span class="w-4 h-4 flex items-center justify-center">${iconHtml}</span>`; // Wrap SVG in a span for consistent sizing
+            }
+
+            const titleSpan = document.createElement('span');
+            titleSpan.textContent = windowTitleText; // Set the determined title text
+            taskbarIcon.appendChild(titleSpan);
+
+            taskbarIcon.onclick = () => {
+                if (windowElement.classList.contains('minimized')) {
+                    windowElement.classList.remove('minimized');
+                    bringWindowToFront(windowElement);
+                } else if (windowElement === activeDraggableElement) { // Use activeDraggableElement
+                    // If already active, minimize it
+                    minimizeWindow(windowElement.id);
+                } else {
+                    bringWindowToFront(windowElement);
+                }
+            };
+
+            taskbarIconsContainer.appendChild(taskbarIcon);
+            bringWindowToFront(windowElement); // Bring the newly opened window to front
+        }
+
+        /**
+         * @function makeDraggable
+         * @param {HTMLElement} element - The element to make draggable (e.g., window, desktop icon).
+         * @param {HTMLElement} dragHandle - The element that initiates the drag (e.g., title bar, the icon itself).
+         * @description Adds drag functionality to any element.
+         */
+        function makeDraggable(element, dragHandle) {
+            let dragOffsetX, dragOffsetY; // Declare drag offset variables here
+
+            dragHandle.addEventListener('mousedown', (e) => {
+                if (element.classList.contains('os-window') && element.classList.contains('maximized')) return; // Prevent dragging maximized windows
+                isDragging = true;
+                activeDraggableElement = element; // Set the active draggable element
+                bringWindowToFront(element); // Bring the element to front on drag start
+                dragOffsetX = e.clientX - element.getBoundingClientRect().left;
+                dragOffsetY = e.clientY - element.getBoundingClientRect().top;
+                dragHandle.style.cursor = 'grabbing';
+                e.preventDefault(); // Prevent default browser drag behavior
             });
 
-            // Initial UI update based on default language
-            updateCursors(); // Set cursors initially
-            updateUIForLanguage(); // Render text and initial assets
-            renderDynamicAssets(); // Render all initial icons
-            console.log('All event listeners attached and script initialization complete.');
+            // Touch events for dragging
+            dragHandle.addEventListener('touchstart', (e) => {
+                if (element.classList.contains('os-window') && element.classList.contains('maximized')) return;
+                isDragging = true;
+                activeDraggableElement = element;
+                bringWindowToFront(element);
+                const touch = e.touches[0];
+                dragOffsetX = touch.clientX - element.getBoundingClientRect().left;
+                dragOffsetY = touch.clientY - element.getBoundingClientRect().top;
+                dragHandle.style.cursor = 'grabbing';
+                e.preventDefault(); // Prevent scrolling while dragging on touch devices
+            }, { passive: false }); // Use passive: false to allow preventDefault
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging || !activeDraggableElement) return;
+                let newX = e.clientX - dragOffsetX;
+                let newY = e.clientY - dragOffsetY;
+
+                // Boundary checks
+                const desktopArea = document.getElementById('main-desktop-area');
+                if (!desktopArea) { 
+                    console.warn("Desktop area not found during drag.");
+                    return;
+                }
+                const desktopRect = desktopArea.getBoundingClientRect();
+                const elementRect = activeDraggableElement.getBoundingClientRect();
+
+                // Constrain within desktop area
+                if (newY < 0) newY = 0;
+                if (newX < 0) newX = 0;
+                if (newX + elementRect.width > desktopRect.width) newX = desktopRect.width - elementRect.width;
+                if (newY + elementRect.height > desktopRect.height - (element.classList.contains('os-window') ? 0 : document.getElementById('taskbar').offsetHeight)) {
+                    newY = desktopRect.height - elementRect.height - (element.classList.contains('os-window') ? 0 : document.getElementById('taskbar').offsetHeight);
+                }
+
+
+                activeDraggableElement.style.left = `${newX}px`;
+                activeDraggableElement.style.top = `${newY}px`;
+            });
+
+            document.addEventListener('touchmove', (e) => {
+                if (!isDragging || !activeDraggableElement || e.touches.length === 0) return;
+                const touch = e.touches[0];
+                let newX = touch.clientX - dragOffsetX;
+                let newY = touch.clientY - dragOffsetY;
+
+                // Boundary checks (same as mousemove)
+                const desktopArea = document.getElementById('main-desktop-area');
+                if (!desktopArea) { 
+                    console.warn("Desktop area not found during touch drag.");
+                    return;
+                }
+                const desktopRect = desktopArea.getBoundingClientRect();
+                const elementRect = activeDraggableElement.getBoundingClientRect();
+
+                if (newY < 0) newY = 0;
+                if (newX < 0) newX = 0;
+                if (newX + elementRect.width > desktopRect.width) newX = desktopRect.width - elementRect.width;
+                if (newY + elementRect.height > desktopRect.height - (element.classList.contains('os-window') ? 0 : document.getElementById('taskbar').offsetHeight)) {
+                    newY = desktopRect.height - elementRect.height - (element.classList.contains('os-window') ? 0 : document.getElementById('taskbar').offsetHeight);
+                }
+
+                activeDraggableElement.style.left = `${newX}px`;
+                activeDraggableElement.style.top = `${newY}px`;
+                e.preventDefault(); 
+            }, { passive: false });
+
+            document.addEventListener('mouseup', () => {
+                isDragging = false;
+                if (activeDraggableElement && dragHandle) { 
+                    dragHandle.style.cursor = 'grab';
+                }
+                activeDraggableElement = null;
+            });
+
+            document.addEventListener('touchend', () => {
+                isDragging = false;
+                if (activeDraggableElement && dragHandle) { 
+                    dragHandle.style.cursor = 'grab';
+                }
+                activeDraggableElement = null;
+            });
+        } // This '}' closes makeDraggable
+
+        // Global debounce timer for ResizeObserver
+        let resizeObserverTimeout;
+        const RESIZE_DEBOUNCE_DELAY = 50; // Milliseconds
+
+        /**
+         * @function makeWindowResizable
+         * @param {HTMLElement} windowElement - The window element to make resizable.
+         * @description Adds basic resize functionality to a window.
+         */
+        function makeWindowResizable(windowElement) {
+            if (!windowElement) return;
+            
+            const minWidth = 300;
+            const minHeight = 200;
+            const desktopArea = document.getElementById('main-desktop-area');
+            if (!desktopArea) {
+                console.warn("Desktop area not found, resize observer might not work correctly.");
+                return;
+            }
+            const taskbarHeight = document.getElementById('taskbar').offsetHeight;
+            const RESIZE_BOUND_MARGIN = 10;
+
+            // Disconnect previous observer if re-applying to the same element
+            if (windowElement._resizeObserver) {
+                windowElement._resizeObserver.disconnect();
+            }
+
+            const observerCallback = (entries) => {
+                clearTimeout(resizeObserverTimeout);
+                resizeObserverTimeout = setTimeout(() => {
+                    for (let entry of entries) {
+                        // Skip if the window is maximized, CSS handles sizing in this case
+                        if (windowElement.classList.contains('maximized')) {
+                            continue; 
+                        }
+
+                        // Use getBoundingClientRect for current live dimensions and position
+                        const windowRect = windowElement.getBoundingClientRect();
+                        const desktopRect = desktopArea.getBoundingClientRect();
+
+                        let currentWidth = windowRect.width;
+                        let currentHeight = windowRect.height;
+                        let currentLeft = windowRect.left;
+                        let currentTop = windowRect.top;
+
+                        // Calculate potential new dimensions and positions
+                        let newWidth = currentWidth;
+                        let newHeight = currentHeight;
+                        let newLeft = currentLeft;
+                        let newTop = currentTop;
+
+                        // 1. Clamp Width and Height (respecting min and max based on desktop bounds)
+                        newWidth = Math.max(minWidth, Math.min(currentWidth, desktopRect.width - currentLeft - RESIZE_BOUND_MARGIN));
+                        newHeight = Math.max(minHeight, Math.min(currentHeight, (desktopRect.height - taskbarHeight) - currentTop - RESIZE_BOUND_MARGIN));
+                        
+                        // 2. Clamp Position (after adjusting size, ensure it still fits)
+                        newLeft = Math.max(RESIZE_BOUND_MARGIN, Math.min(currentLeft, desktopRect.width - newWidth - RESIZE_BOUND_MARGIN));
+                        newTop = Math.max(RESIZE_BOUND_MARGIN, Math.min(currentTop, (desktopRect.height - taskbarHeight) - newHeight - RESIZE_BOUND_MARGIN));
+
+                        // Round values to integers to prevent floating-point discrepancies causing re-renders
+                        newWidth = Math.round(newWidth);
+                        newHeight = Math.round(newHeight);
+                        newLeft = Math.round(newLeft);
+                        newTop = Math.round(newTop);
+
+                        // Get the currently applied computed styles for comparison
+                        const computedStyle = window.getComputedStyle(windowElement);
+                        const appliedWidth = Math.round(parseFloat(computedStyle.width));
+                        const appliedHeight = Math.round(parseFloat(computedStyle.height));
+                        const appliedLeft = Math.round(parseFloat(computedStyle.left));
+                        const appliedTop = Math.round(parseFloat(computedStyle.top));
+
+                        let changed = false;
+
+                        // Only update style if there's a significant change from currently applied style
+                        if (Math.abs(newWidth - appliedWidth) > 1) { // Allow for 1px tolerance
+                            windowElement.style.width = `${newWidth}px`;
+                            changed = true;
+                        }
+                        if (Math.abs(newHeight - appliedHeight) > 1) { // Allow for 1px tolerance
+                            windowElement.style.height = `${newHeight}px`;
+                            changed = true;
+                        }
+                        // Only update position if it's outside bounds OR significantly different
+                        if (Math.abs(newLeft - appliedLeft) > 1 || newLeft < RESIZE_BOUND_MARGIN || (newLeft + newWidth) > (desktopRect.width - RESIZE_BOUND_MARGIN)) {
+                            windowElement.style.left = `${newLeft}px`;
+                            changed = true;
+                        }
+                        if (Math.abs(newTop - appliedTop) > 1 || newTop < RESIZE_BOUND_MARGIN || (newTop + newHeight) > (desktopRect.height - taskbarHeight - RESIZE_BOUND_MARGIN)) {
+                             windowElement.style.top = `${newTop}px`;
+                             changed = true;
+                        }
+
+                        if (changed) {
+                            console.log(`Window ${windowElement.id} adjusted: W:${newWidth}, H:${newHeight}, X:${newLeft}, Y:${newTop}`);
+                        }
+                    }
+                }, RESIZE_DEBOUNCE_DELAY); 
+            };
+
+            const observer = new ResizeObserver(observerCallback);
+            observer.observe(windowElement);
+            windowElement._resizeObserver = observer; // Store observer instance for later disconnection
+        }
+
+
+        /**
+         * @function hideWelcomeMessage
+         * @description Hides the initial welcome message.
+         */
+        function hideWelcomeMessage() {
+            const welcomeMessage = document.getElementById('welcome-message');
+            if (welcomeMessage) { // Add null check
+                welcomeMessage.style.display = 'none';
+            }
+        }
+
+        /**
+         * @function showWelcomeMessage
+         * @description Shows the initial welcome message.
+         */
+        function showWelcomeMessage() {
+            const welcomeMessage = document.getElementById('welcome-message');
+            if (welcomeMessage) { // Add null check
+                welcomeMessage.style.display = 'flex';
+            }
+        }
+
+        // Event Listeners
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('DOM Content Loaded. Initializing...');
+            updateTime();
+            setInterval(updateTime, 1000); // Update time every second
+
+            renderDynamicAssets(); // Render initial assets
+            applyLanguage(currentLanguage); // Apply default language content
+            positionDesktopIcons(); // Position desktop icons after assets are rendered
+
+            // Start button toggle Start Menu
+            const startButtonTaskbar = document.getElementById('start-button-taskbar');
+            const startMenu = document.getElementById('start-menu');
+
+            if (startButtonTaskbar && startMenu) { // Add null checks
+                startButtonTaskbar.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent document click from closing immediately
+                    startMenu.classList.toggle('hidden');
+                    startMenu.classList.toggle('visible');
+                });
+            }
+
+
+            // Close Start Menu when clicking outside
+            document.addEventListener('click', (e) => {
+                const startMenu = document.getElementById('start-menu');
+                const startButton = document.getElementById('start-button-taskbar');
+                if (startMenu && startButton) { // Add null checks
+                    if (startMenu.classList.contains('visible') && !startMenu.contains(e.target) && !startButton.contains(e.target)) {
+                        startMenu.classList.remove('visible');
+                        startMenu.classList.add('hidden');
+                    }
+                }
+            });
+
+            // Desktop icons double-click handler (to open window)
+            document.querySelectorAll('.desktop-icon').forEach(icon => {
+                if (icon) { // Add null check
+                    icon.addEventListener('dblclick', async (e) => { // Made async here
+                        e.stopPropagation(); // Prevent this click from interfering with drag
+                        const section = icon.getAttribute('data-section');
+                        await openWindow(section); // Await openWindow
+                        const startMenuAfterClick = document.getElementById('start-menu'); // Re-get reference as it might have changed state
+                        if (startMenuAfterClick) { // Add null check
+                            startMenuAfterClick.classList.remove('visible'); // Close start menu on app launch
+                            startMenuAfterClick.classList.add('hidden');
+                        }
+                    });
+                     // Single click to bring to front for desktop icons (consistent with windows)
+                    icon.addEventListener('mousedown', () => bringWindowToFront(icon));
+                    icon.addEventListener('touchstart', () => bringWindowToFront(icon));
+                }
+            });
+
+            // Start menu item click handler
+            document.querySelectorAll('.start-menu-item').forEach(item => {
+                if (item) { // Add null check
+                    item.addEventListener('click', async (e) => { 
+                        e.preventDefault(); // Prevent default link behavior
+                        const section = item.getAttribute('data-section');
+                        await openWindow(section); // Await openWindow
+                        const startMenuAfterClick = document.getElementById('start-menu'); // Re-get reference
+                        if (startMenuAfterClick) { // Add null check
+                            startMenuAfterClick.classList.remove('visible'); // Close start menu on app launch
+                            startMenuAfterClick.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+
+            // Start menu footer button click handler
+            document.querySelectorAll('.start-menu-footer-button').forEach(button => {
+                if (button) { // Add null check
+                    button.addEventListener('click', async (e) => { 
+                        e.preventDefault();
+                        const section = button.getAttribute('data-section');
+                        await openWindow(section); // Await openWindow
+                        const startMenuAfterClick = document.getElementById('start-menu'); // Re-get reference
+                        if (startMenuAfterClick) { // Add null check
+                            startMenuAfterClick.classList.remove('visible');
+                            startMenuAfterClick.classList.add('hidden');
+                        }
+                    });
+                }
+            });
+
+            // Event delegation for dynamically added work cards (in Works window)
+            document.getElementById('main-desktop-area').addEventListener('click', async (e) => { 
+                // Ensure main-desktop-area exists before adding listener
+                const mainDesktopArea = document.getElementById('main-desktop-area');
+                if (!mainDesktopArea) return; // Double check as this is a top-level listener
+
+                if (e.target.closest('.work-card')) {
+                    const workCard = e.target.closest('.work-card');
+                    if (workCard) { // Add null check
+                        const workId = workCard.getAttribute('data-work-id');
+                        await openWindow('works', workId); // Await openWindow
+                    }
+                }
+            });
+
+            // Handle window resizing (on window load and resize events)
+            window.addEventListener('resize', positionDesktopIcons); // Re-position icons on window resize
         });
+
+        // Ensure functions are globally accessible if needed for HTML attributes or for clarity
+        window.getAssetUrl = getAssetUrl;
+        window.openWindow = openWindow;
+        window.minimizeWindow = minimizeWindow;
+        window.toggleMaximizeWindow = toggleMaximizeWindow;
+        window.closeWindow = closeWindow;
+        window.bringWindowToFront = bringWindowToFront;
+        window.applyLanguage = applyLanguage; // Make it accessible for console/debugging
     </script>
 </body>
 </html>
