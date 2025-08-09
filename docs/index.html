@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAX OS - 虚拟宇宙终端 (Frutiger Aero Style)</title>
     <!-- Favicon - Using a simple SVG as an example -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>\" type="image/svg+xml">
     <!-- Include Tailwind CSS CDN for rapid building and responsive layouts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Include Google Fonts - Inter font as general font, if 'Chocolate Classical Sans' is needed, include its CDN or local path here -->
@@ -60,6 +60,8 @@
             --cursor-default: auto;
             --cursor-active: auto;
             --cursor-pointer: pointer;
+
+            --desktop-image-url: none; /* New CSS variable for desktop background image URL */
         }
 
         body {
@@ -87,11 +89,11 @@
 
         /* Frutiger Aero style desktop background - Complex gradients and effects (default fallback) */
         .desktop-background {
-            position: absolute;
+            position: fixed; /* Changed to fixed for full viewport coverage */
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
+            width: 100vw; /* Ensure full viewport width */
+            height: 100vh; /* Ensure full viewport height */
             /* Default background with multiple gradients for depth and gloss */
             background-image: 
                 radial-gradient(circle at 10% 90%, rgba(0,191,255,0.3) 0%, transparent 45%), /* Stronger corner glow */
@@ -105,9 +107,15 @@
             z-index: 0;
         }
         /* When a background image is active, hide pseudo-elements */
+        .desktop-background-image-active {
+            background-image: var(--desktop-image-url) !important; /* Set image and ensure it overrides */
+            background-color: transparent !important; /* Crucial: make sure no solid color underneath */
+            opacity: 1 !important; /* Ensure full opacity */
+            filter: none !important; /* No filters */
+        }
         .desktop-background-image-active::before,
         .desktop-background-image-active::after {
-            display: none;
+            display: none !important; /* Ensure pseudo-elements are truly hidden */
         }
 
         /* Simulate subtle noise/grain texture - critical for Aero feel */
@@ -1405,7 +1413,7 @@
             'icon_envelope': './assets/socials/envelope.png',
 
             // Desktop Background Image (Optional: Uncomment and provide path if you want to use an image background)
-            'desktop_background_image': './assets/backgrounds/rnostalgia - Y2K Futuristic Aesthetics (c.1995–2004).jpg',
+            'desktop_background_image': './assets/backgrounds/nostalgia - Y2K Futuristic Aesthetics (c.1995-2004).jpg', // Corrected filename
         };
 
         /**
@@ -1776,19 +1784,20 @@ Services include:
 
                 // Check and set desktop background image (if defined in ASSETS)
                 const desktopBgImage = getAssetUrl('desktop_background_image');
+                console.log('Attempting to set desktop background. Path:', desktopBgImage); // Debug: Check path
                 if (desktopBgImage && desktopBackground) {
-                    desktopBackground.style.backgroundImage = `url('${desktopBgImage}')`;
-                    desktopBackground.style.backgroundSize = 'cover';
-                    desktopBackground.style.backgroundPosition = 'center';
-                    desktopBackground.style.opacity = '1';
-                    desktopBackground.style.filter = 'none';
-                    desktopBackground.classList.add('desktop-background-image-active'); // Add a class to disable pseudo-elements
-                    desktopBackground.classList.remove('desktop-background'); // Remove default background class if it exists
-                    console.log('Desktop background image applied.');
+                    // Set CSS variable for the image URL
+                    desktopBackground.style.setProperty('--desktop-image-url', `url('${desktopBgImage}')`);
+                    
+                    desktopBackground.classList.add('desktop-background-image-active');
+                    desktopBackground.classList.remove('desktop-background'); // This removes the class that sets default gradients.
+                                                                           // The --desktop-image-url + .desktop-background-image-active will then take over.
+                    console.log('Desktop background image applied CSS properties. ClassList:', desktopBackground.classList.value);
                 } else if (desktopBackground) {
                     // Ensure default background and effects are active if no image is used
                     desktopBackground.classList.remove('desktop-background-image-active');
                     desktopBackground.classList.add('desktop-background');
+                    desktopBackground.style.removeProperty('--desktop-image-url'); // Remove the CSS variable
                     // Re-apply default background gradients if no image is set
                     desktopBackground.style.backgroundImage = `
                         radial-gradient(circle at 10% 90%, rgba(0,191,255,0.3) 0%, transparent 45%),
@@ -1798,6 +1807,7 @@ Services include:
                     `;
                     desktopBackground.style.opacity = '0.95';
                     desktopBackground.style.filter = 'brightness(0.9) contrast(1.1)';
+                    console.log('No desktop background image specified, falling back to gradients.');
                 }
             }
 
