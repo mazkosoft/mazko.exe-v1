@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MAX OS - 虚拟宇宙终端 (Frutiger Aero Style)</title>
     <!-- Favicon - Using a simple SVG as an example -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>\" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>" type="image/svg+xml">
     <!-- Include Tailwind CSS CDN for rapid building and responsive layouts -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Include Google Fonts - Inter font as general font, if 'Chocolate Classical Sans' is needed, include its CDN or local path here -->
@@ -90,10 +90,11 @@
         /* Frutiger Aero style desktop background - Complex gradients and effects (default fallback) */
         .desktop-background {
             position: fixed; /* Changed to fixed for full viewport coverage */
-            top: 0;
-            left: 0;
+            top: 0; /* Explicitly set top to 0 */
+            left: 0; /* Explicitly set left to 0 */
             width: 100vw; /* Ensure full viewport width */
             height: 100vh; /* Ensure full viewport height */
+            min-height: 100vh; /* Added for robustness */
             /* Default background with multiple gradients for depth and gloss */
             background-image: 
                 radial-gradient(circle at 10% 90%, rgba(0,191,255,0.3) 0%, transparent 45%), /* Stronger corner glow */
@@ -104,7 +105,7 @@
             background-position: center;
             opacity: 0.95; /* Slightly more opaque for richer colors */
             filter: brightness(0.9) contrast(1.1); /* Subtle adjustments */
-            z-index: 0;
+            z-index: -1; /* Changed to -1 to ensure it's always behind other elements */
         }
         /* When a background image is active, hide pseudo-elements */
         .desktop-background-image-active {
@@ -1413,14 +1414,14 @@
             'icon_envelope': './assets/socials/envelope.png',
 
             // Desktop Background Image (Optional: Uncomment and provide path if you want to use an image background)
-            'desktop_background_image': './assets/backgrounds/test_bg.jpg', // Corrected filename
+            'desktop_background_image': './assets/backgrounds/test_bg.jpg', // Updated to use test_bg.jpg as per user's screenshot
         };
 
         /**
          * @function getAssetUrl
+         * @description Retrieves the URL of the specified asset from the ASSETS object.
          * @param {string} assetKey - Key name in the ASSETS object.
          * @returns {string} URL path of the corresponding asset.
-         * @description Retrieves the URL of the specified asset from the ASSETS object.
          */
         function getAssetUrl(assetKey) {
             return ASSETS[assetKey] || ''; 
@@ -1452,6 +1453,7 @@
                 socialsMenuItem: '社交媒体',
                 settingsMenuItem: '系统设置',
                 shutdownMenuItem: '关机',
+                shutdownMessage: '系统正在关机，再见！', // Added missing translation
 
                 // Works Section
                 worksTitle: '我的作品集',
@@ -1558,19 +1560,20 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     title: '系统设置',
                     description: '调整您的系统偏好设置。',
                     options: [
-                        { id: 'language-toggle', type: 'language-toggle' }, // Custom type for language
+                        { id: 'language-toggle', type: 'language-toggle', label: '切换语言' }, // Added missing label
                         { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: '显示桌面图标' },
                         { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: '启用系统动画 (暂不可用)' },
                         { id: 'reset-settings', type: 'button', label: '重置所有设置' }
                     ]
                 },
             },
+            // Add English content for multi-language support
             en: {
                 systemName: 'MAX OS',
                 systemVersion: 'v1.0.0',
                 welcomeMessage: 'Welcome to MAZKO\'s Virtual Terminal',
                 loadingMessage: 'Loading...',
-                errorLoadingContent: 'Failed to load content:',
+                errorLoadingContent: 'Failed to load content: ',
                 unknownModule: 'Unknown Module',
                 profileName: 'MAZKO',
                 startButton: 'Start',
@@ -1584,8 +1587,9 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                 servicesMenuItem: 'Services & Pricing',
                 socialsIcon: 'Socials',
                 socialsMenuItem: 'Social Media',
-                settingsMenuItem: 'System Settings',
+                settingsMenuItem: 'Settings',
                 shutdownMenuItem: 'Shutdown',
+                shutdownMessage: 'System is shutting down. Goodbye!', // Added missing translation
 
                 // Works Section
                 worksTitle: 'My Works',
@@ -1594,7 +1598,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
 
                 // Characters Section
                 charactersTitle: 'Characters Library',
-                charactersDescription: 'Here are some characters I\'ve designed, hailing from different worlds and stories.',
+                charactersDescription: 'Here are some characters I designed, from different worlds and stories.',
 
                 // About Section
                 aboutTitle: 'About MAZKO',
@@ -1603,25 +1607,25 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
 
 MAZKO is a digital artist specializing in **Cyberpunk, Y2K, PSX, and Glitch Art styles**.
 
-My creative areas include:
+My creative fields include:
 
-* **3D Modeling & Rendering**: High-fidelity and low-poly models, focusing on retro-futuristic aesthetics.
-* **Concept Art & Illustration**: Transforming abstract ideas into concrete visuals with a unique cyberpunk atmosphere.
+* **3D Modeling & Rendering**: High-fidelity and low-poly models, focused on retro-futuristic aesthetics.
+* **Concept Art & Illustration**: Transforming abstract ideas into concrete visuals, with a unique cyberpunk vibe.
 * **Visual Effects & Animation**: Adding dynamic and immersive elements to your projects.
-* **User Interface Design**: Adhering to styles like Frutiger Aero, Y2K, to create intuitive and aesthetically pleasing interfaces.
+* **User Interface Design**: Adhering to Frutiger Aero, Y2K, and other styles to create intuitive and aesthetically pleasing interfaces.
 
 I am dedicated to expressing thoughts on technology, the future, and nostalgia through art.
 
-**Contact Me:**
+**Contact me:**
 
-Feel free to contact me through the following channels to explore the endless possibilities of digital art together.
+Feel free to contact me through the following methods to explore the endless possibilities of digital art.
 
 `,
 
                 // Services Section
                 services: {
                     title: 'Services & Pricing',
-                    description: 'I offer the following digital art services. Each service is tailored to meet your specific creative needs.',
+                    description: 'I offer the following digital art services. Each service is designed to meet your specific creative needs.',
                     categories: [
                         {
                             id: 'character-modeling-category',
@@ -1631,13 +1635,13 @@ Feel free to contact me through the following channels to explore the endless po
                             detailContent: `
 # Character Modeling & Design
 
-I specialize in character design from concept to final render, with a particular focus on **PSX style and low-poly aesthetics**.
+I specialize in all types of character design from concept to final render, with a deep focus on **PSX style and low-poly**.
 
 Services include:
 
-* **Concept Sketching**: Providing multi-angle character concept drawings based on your ideas.
-* **3D Modeling**: Using Blender/ZBrush etc. tools for character high and low poly modeling.
-* **紋理繪製**: Using Substance Painter to give characters retro-pixel or sci-fi textures.
+* **Concept Sketches**: Providing multi-angle character concepts based on your ideas.
+* **3D Modeling**: Creating high and low-poly characters using tools like Blender/ZBrush.
+* **Texture Painting**: Using Substance Painter to give characters retro-pixel or sci-fi textures.
 * **Rigging & Basic Animation**: Providing basic character rigging and pose setup.
 
 **Pricing Examples:**
@@ -1645,32 +1649,32 @@ Services include:
 * **PSX Style Low-Poly Character**: ¥1500 - ¥5000 (depending on detail complexity)
 * **Detailed Concept Character Illustration**: ¥800 - ¥3000 (depending on detail and background)
 
-**Project Timeline**: Typically 1-3 weeks.
+**Project Cycle**: Typically 1-3 weeks.
 `
                         },
                         {
                             id: 'poster-design-category',
-                            name: '海报与视觉设计',
+                            name: 'Poster & Visual Design',
                             nameEn: 'Poster & Visual Design',
-                            shortDescription: '制作具有赛博朋克和故障艺术感的宣传海报。',
+                            shortDescription: 'Creating promotional posters with cyberpunk and glitch art aesthetics.',
                             detailContent: `
-# 海报与视觉设计
+# Poster & Visual Design
 
-我能为您创作出引人注目的 **赛博朋克、Y2K 或故障艺术风格** 的海报和各类视觉宣传品。
+I can create striking **Cyberpunk, Y2K, or Glitch Art style** posters and various visual promotional materials for you.
 
-服务包括：
+Services include：
 
-* **活动海报**：音乐节、游戏发布、艺术展览等主题海报。
-* **品牌视觉**：符合您品牌调性的独特图形元素和宣传图。
-* **数字插画**：用于网站、社交媒体或印刷品的定制插画。
-* **动态图形（基础）**：为海报添加简单的动画效果。
+* **Event Posters**: Posters for music festivals, game releases, art exhibitions, etc.
+* **Brand Visuals**: Unique graphic elements and promotional images that match your brand's tone.
+* **Digital Illustration**: Custom illustrations for websites, social media, or print.
+* **Basic Motion Graphics**: Adding simple animation effects to posters.
 
-**报价示例：**
+**Pricing Examples:**
 
-* **单页概念海报**：¥1200 - ¥4000 (根据复杂度和修订次数)
-* **系列视觉宣传图（3张）**：¥3000 - ¥8000
+* **Single Page Concept Poster**: ¥1200 - ¥4000 (depending on complexity and revisions)
+* **Series of Visual Promotional Images (3 images)**: ¥3000 - ¥8000
 
-**项目周期**：通常为 0.5-2 周。
+**Project Cycle**: Typically 0.5-2 weeks.
 `
                         }
                     ]
@@ -1678,9 +1682,9 @@ Services include:
 
                 // Socials Section
                 socialsTitle: 'Social Media',
-                socialsDescription: 'Feel free to follow me on the platforms below and interact with me.',
+                socialsDescription: 'Feel free to follow me and interact on the platforms below.',
                 socialsLinks: [
-                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
+                    { name: 'Weibo', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
                     { name: 'Instagram', url: 'https://instagram.com/yourprofile', iconAssetKey: 'icon_instagram' },
                     { name: 'ArtStation', url: 'https://artstation.com/yourprofile', iconAssetKey: 'icon_artstation' },
                     { name: 'Behance', url: 'https://behance.net/yourprofile', iconAssetKey: 'icon_behance_square' },
@@ -1689,13 +1693,13 @@ Services include:
 
                 // Settings Section
                 settings: {
-                    title: '系统设置',
-                    description: '调整您的系统偏好设置。',
+                    title: 'System Settings',
+                    description: 'Adjust your system preferences.',
                     options: [
-                        { id: 'language-toggle', type: 'language-toggle' }, // Custom type for language
-                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: '显示桌面图标' },
-                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: '启用系统动画 (暂不可用)' },
-                        { id: 'reset-settings', type: 'button', label: '重置所有设置' }
+                        { id: 'language-toggle', type: 'language-toggle', label: 'Toggle Language' }, // Added missing label
+                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: 'Show Desktop Icons' },
+                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: 'Enable System Animations (Unavailable)' },
+                        { id: 'reset-settings', type: 'button', label: 'Reset All Settings' }
                     ]
                 },
             }
@@ -1746,6 +1750,7 @@ Services include:
             /**
              * @function updateCursors
              * @description Dynamically updates CSS custom properties for cursors based on paths defined in ASSETS.
+             * @returns {void}
              */
             function updateCursors() {
                 const root = document.documentElement;
@@ -1758,6 +1763,7 @@ Services include:
             /**
              * @function renderDynamicAssets
              * @description Iterates through all placeholder elements with `data-asset-key` attribute and replaces them with `<img>` tags, loading the corresponding images.
+             * @returns {void}
              */
             function renderDynamicAssets() {
                 document.querySelectorAll('.icon-placeholder[data-asset-key]').forEach(placeholder => {
@@ -1812,14 +1818,13 @@ Services include:
             }
 
 
-            // Function to update all UI text based on currentLanguage
+            /**
+             * @function updateUIForLanguage
+             * @description Updates all UI text based on the current language setting.
+             * @returns {void}
+             */
             function updateUIForLanguage() {
                 const langData = LANG_CONTENT[currentLanguage];
-
-                // Update welcome message (this section is now removed from HTML, but keeping logic for robustness)
-                // if (welcomeMessageText) {
-                //     welcomeMessageText.textContent = langData.welcomeMessage;
-                // }
 
                 // Update Start Menu header profile name
                 const profileNameElement = startMenu.querySelector('[data-lang-key="profileName"]');
@@ -1840,8 +1845,9 @@ Services include:
                 // Update Start Menu Items (links and buttons)
                 document.querySelectorAll('.start-menu-item').forEach(item => {
                     const langKey = item.dataset.langKey;
-                    const chineseLabel = LANG_CONTENT['zh'][langKey]; 
-                    const englishLabel = LANG_CONTENT['en'][langKey]; 
+                    // Ensure both language versions exist before attempting to access
+                    const chineseLabel = LANG_CONTENT.zh[langKey] || '';
+                    const englishLabel = LANG_CONTENT.en[langKey] || '';
 
                     const labelSpan = item.querySelector('.menu-item-label');
                     if (labelSpan) {
@@ -1863,7 +1869,14 @@ Services include:
                 renderDynamicAssets();
             }
 
-            // Function to get window titles (Chinese and English) based on section and currentWork/currentCategory
+            /**
+             * @function getWindowTitles
+             * @description Generates window titles in both Chinese and English based on the section and optional content.
+             * @param {string} section - The section identifier (e.g., 'works', 'about', 'work-detail-123').
+             * @param {Object} [currentWork=null] - The work object if the section is a work detail.
+             * @param {Object} [currentCategory=null] - The service category object if the section is a service category detail.
+             * @returns {{chineseTitle: string, englishTitle: string}} An object containing the Chinese and English titles.
+             */
             function getWindowTitles(section, currentWork = null, currentCategory = null) {
                 let chineseTitle = LANG_CONTENT[currentLanguage]?.unknownModule || 'Untitled Window';
                 let englishTitle = LANG_CONTENT['en']?.unknownModule || 'Untitled Window';
@@ -1905,7 +1918,11 @@ Services include:
             }
 
 
-            // Function to re-open all currently open windows to update their content
+            /**
+             * @function reopenAllWindows
+             * @description Re-opens all currently active windows to update their content based on the current language.
+             * @returns {Promise<void>}
+             */
             async function reopenAllWindows() {
                 // Get a snapshot of currently open windows and their original positions/sizes
                 const activeWindowsData = [];
@@ -2103,7 +2120,11 @@ Services include:
 
 
             // --- Desktop Icon Positioning Logic ---
-            // Function to position desktop icons in a regular grid
+            /**
+             * @function positionDesktopIcons
+             * @description Positions desktop icons in a grid layout within the main desktop area.
+             * @returns {void}
+             */
             function positionDesktopIcons() {
                 const iconWidth = 80; // Defined in CSS .desktop-icon width
                 const iconHeight = 100; // Approximate height including label and padding
@@ -2140,7 +2161,12 @@ Services include:
             // --- Mock Data Fetching (Simulating Headless CMS API Calls) ---
             // In a real application, these would be actual fetch() calls to your CMS API endpoints.
 
-            // Function to simulate fetching data
+            /**
+             * @function fetchContent
+             * @description Simulates fetching content for a given section. In a real app, this would be an API call.
+             * @param {string} section - The section identifier (e.g., 'works', 'about').
+             * @returns {Promise<Object|null>} A promise that resolves with the content data or null if not found.
+             */
             async function fetchContent(section) {
                 console.log(`Fetching content for: ${section} in language: ${currentLanguage}...`);
                 // Simulate network delay
@@ -2229,7 +2255,12 @@ Services include:
                 return data;
             }
 
-            // Function to manage active taskbar icons
+            /**
+             * @function setActiveTaskbarIcon
+             * @description Sets the active state for a taskbar icon.
+             * @param {string} windowId - The ID of the window whose taskbar icon should be set active.
+             * @returns {void}
+             */
             function setActiveTaskbarIcon(windowId) {
                 document.querySelectorAll('.taskbar-minimized-icon').forEach(icon => {
                     if (icon.dataset.windowId === windowId) {
@@ -2240,7 +2271,12 @@ Services include:
                 });
             }
 
-            // Function to bring a window to the front
+            /**
+             * @function bringToFront
+             * @description Brings a specified window element to the front of the stacking order.
+             * @param {HTMLElement} windowElement - The window HTML element to bring to front.
+             * @returns {void}
+             */
             function bringToFront(windowElement) {
                 highestZIndex++;
                 windowElement.style.zIndex = highestZIndex;
@@ -2254,15 +2290,20 @@ Services include:
                 }
             }
 
-            // Function to create and open a new window
+            /**
+             * @function openWindow
+             * @description Creates and opens a new window or brings an existing one to the front.
+             * @param {string} section - The section identifier this window belongs to.
+             * @param {string} chineseTitle - The Chinese title for the window.
+             * @param {string} englishTitle - The English title for the window.
+             * @param {string} contentHTML - The HTML content to display inside the window.
+             * @param {string} [windowId=section] - A unique ID for this specific window instance.
+             * @param {Object} [initialProps={}] - Initial position and size properties (left, top, width, height).
+             * @param {boolean} [isMarkdown=false] - Whether the contentHTML should be parsed as Markdown.
+             * @returns {Promise<HTMLElement>} A promise that resolves with the created or existing window element.
+             */
             async function openWindow(section, chineseTitle, englishTitle, contentHTML, windowId = section, initialProps = {}, isMarkdown = false) {
                 console.log(`Attempting to open window: ${chineseTitle} [${englishTitle}] (Section: ${section}, ID: ${windowId}, Markdown: ${isMarkdown}`);
-
-                // Welcome message is removed, so no need to hide it.
-                // if (welcomeMessage) {
-                //     welcomeMessage.style.display = 'none';
-                //     console.log('Welcome message hidden.');
-                // }
 
                 // Check if a window for this section already exists
                 let existingWindow = document.querySelector(`.os-window[data-window-id="${windowId}"]`);
@@ -2424,13 +2465,6 @@ Services include:
                             taskbarIcon.remove();
                         }
                         console.log(`Window "${windowId}" closed.`);
-                        // If no windows are open, there's no welcome message to show now.
-                        // if (mainDesktopArea.querySelectorAll('.os-window').length === 0 && taskbarIconsContainer.children.length === 0) {
-                        //     if (welcomeMessage) {
-                        //         welcomeMessage.style.display = 'flex';
-                        //         console.log('All windows closed, welcome message shown.');
-                        //     }
-                        // }
                     });
                 } else {
                     console.error(`Close button not found for window "${windowId}".`);
@@ -2455,7 +2489,14 @@ Services include:
                 return windowElement; // Return the newly created window element
             }
 
-            // Function to create a taskbar icon for a window
+            /**
+             * @function createTaskbarIcon
+             * @description Creates and appends a taskbar icon for a given window.
+             * @param {HTMLElement} windowElement - The window HTML element for which to create an icon.
+             * @param {string} title - The title of the window (used for display in taskbar).
+             * @param {string} windowId - The unique ID of the window.
+             * @returns {void}
+             */
             function createTaskbarIcon(windowElement, title, windowId) {
                 console.log('createTaskbarIcon received title:', title, 'type:', typeof title, 'windowId:', windowId); // Debug log
                 let taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
@@ -2507,7 +2548,14 @@ Services include:
                 setActiveTaskbarIcon(windowId); // Set its taskbar icon as active
             }
 
-            // Function to minimize a window
+            /**
+             * @function minimizeWindow
+             * @description Minimizes a given window.
+             * @param {HTMLElement} windowElement - The window HTML element to minimize.
+             * @param {string} title - The title of the window.
+             * @param {string} windowId - The ID of the window.
+             * @returns {void}
+             */
             function minimizeWindow(windowElement, title, windowId) {
                 windowElement.classList.add('minimized');
                 console.log(`Window "${windowId}" minimized.`);
@@ -2515,7 +2563,12 @@ Services include:
                 setActiveTaskbarIcon(windowId); 
             }
 
-            // Function to restore a minimized window
+            /**
+             * @function restoreWindow
+             * @description Restores a minimized or maximized window to its original size and position.
+             * @param {HTMLElement} windowElement - The window HTML element to restore.
+             * @returns {void}
+             */
             function restoreWindow(windowElement) {
                 windowElement.classList.remove('minimized');
                 windowElement.classList.remove('maximized'); // Ensure it's not maximized either
@@ -2530,7 +2583,12 @@ Services include:
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
             }
 
-            // Function to toggle maximize/restore a window
+            /**
+             * @function toggleMaximizeWindow
+             * @description Toggles the maximized state of a window.
+             * @param {HTMLElement} windowElement - The window HTML element to toggle.
+             * @returns {void}
+             */
             function toggleMaximizeWindow(windowElement) {
                 if (windowElement.classList.contains('maximized')) {
                     // Restore
@@ -2559,7 +2617,12 @@ Services include:
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
             }
 
-            // Function to open work detail window with gallery
+            /**
+             * @function openWorkDetail
+             * @description Opens a detailed work view window with a gallery.
+             * @param {Object} work - The work object containing details like title, images, description, etc.
+             * @returns {void}
+             */
             function openWorkDetail(work) {
                 // Initialize current image index for this work
                 let currentImageIndex = 0;
@@ -2646,7 +2709,12 @@ Services include:
                 }, 100); // Small delay to ensure DOM is ready
             }
 
-            // Function to open a specific service category detail window
+            /**
+             * @function openServiceCategoryDetail
+             * @description Opens a detailed view window for a specific service category.
+             * @param {Object} category - The service category object containing details.
+             * @returns {void}
+             */
             function openServiceCategoryDetail(category) {
                 const { chineseTitle, englishTitle } = getWindowTitles('service-category-' + category.id, null, category);
                 const contentHTML = category.detailContent;
@@ -2918,8 +2986,6 @@ Services include:
                                 // Clear all open windows from map and taskbar
                                 openWindowsMap.clear();
                                 taskbarIconsContainer.innerHTML = '';
-                                // Re-initialize welcome message text element (though it's now just a shutdown message)
-                                // welcomeMessageText = document.getElementById('welcome-message-text'); // Re-assign the element
                                 renderDynamicAssets(); // Ensure icons in shutdown message are rendered if any
                             }, 2000);
                             break;
@@ -3068,10 +3134,6 @@ Services include:
                 // Boundary checks for dragging within mainDesktopArea
                 const desktopRect = mainDesktopArea.getBoundingClientRect();
                 const iconRect = currentDraggedIcon.getBoundingClientRect();
-
-                // Adjust for desktop area's position relative to viewport
-                // const desktopLeft = desktopRect.left; // These are not needed for calculating relative 'left'/'top'
-                // const desktopTop = desktopRect.top;
 
                 // Calculate bounds relative to the desktop area's top-left corner
                 const minX = 0;
