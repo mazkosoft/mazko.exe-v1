@@ -1796,8 +1796,6 @@ Services include：
                     desktopBackground.style.setProperty('--desktop-image-url', `url('${desktopBgImage}')`);
                     
                     desktopBackground.classList.add('desktop-background-image-active');
-                    desktopBackground.classList.remove('desktop-background'); // This removes the class that sets default gradients.
-                                                                           // The --desktop-image-url + .desktop-background-image-active will then take over.
                     console.log('Desktop background image applied CSS properties. ClassList:', desktopBackground.classList.value);
                 } else if (desktopBackground) {
                     // Ensure default background and effects are active if no image is used
