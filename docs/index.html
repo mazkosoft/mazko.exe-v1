@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [v¹․⁰․⁰]</title>
     <!-- Favicon - 使用一个简单的SVG作为示例 -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>Ⓜ️</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>" type="image/svg+xml">
     <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google Fonts - Inter 字体作为通用字体，如果需要 'Chocolate Classical Sans'，请在此处引入其 CDN 或本地路径 -->
@@ -62,7 +62,7 @@
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url:  url('/mazko/docs/assets/backgrounds/test_bg.jpg'); /* 桌面背景图片的CSS变量 */
+            --desktop-image-url:  url('docs/assets/backgrounds/test_bg.jpg'); /* 桌面背景图片的CSS变量 */
         }
 
         body {
@@ -1416,7 +1416,7 @@
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
             // 桌面背景图像 (使用相对路径)
-            'desktop_background_image': 'docs/assets/backgrounds/test_bg.jpeg'
+            'desktop_background_image': 'docs/assets/backgrounds/test_bg.jpg'
         };
 
         /**
@@ -3055,7 +3055,7 @@ Services include：
                                 `;
                             } else {
                                 content = `
-                                    <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage]?.datacoreTitle}</h2>
+                                    <h2 class="text-xl font-bold mb-4">${chineseTitle}</h2>
                                     <p>${LANG_CONTENT[currentLanguage]?.datacoreEmpty}</p>
                                 `;
                             }
