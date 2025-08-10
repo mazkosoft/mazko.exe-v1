@@ -23,22 +23,26 @@
             --accent-glow-blue: #87CEEB; /* A more subtle, airy blue for glows */
 
             /* Glassmorphism & Translucency - Enhanced for realistic Aero feel */
+            /* Adjusted glass border colors to match status bar blue tones, more opaque */
+            --glass-border-light: rgba(0, 191, 255, 0.8); /* Changed from white to primary blue with high opacity */
+            --glass-border-dark: rgba(0, 122, 204, 0.8); /* Changed from white to dark blue with high opacity */
             --glass-bg: rgba(255, 255, 255, 0.08); /* Even more subtle white tint for background of glass */
-            --glass-border-light: rgba(255, 255, 255, 0.6); /* Clearer white border for glass edges */
-            --glass-border-dark: rgba(255, 255, 255, 0.3); /* Darker part of border for depth */
             --glass-overlay-light: rgba(255, 255, 255, 0.2); /* Lighter overlay for internal elements, slightly stronger */
             --glass-overlay-dark: rgba(0, 0, 0, 0.1); /* Subtle dark overlay for depth */
 
             /* Backgrounds - Reflecting the image's vibrant and slightly dark context */
             --background-dark: #10152B; /* Darker, slightly blue-tinted background */
-            --text-color: #E0FFFF; /* Standard text color, very light blue/cyan */
+            /* Adjusted text color to a deeper blue for most elements, white for prominent ones */
+            --text-color: #004D80; /* Deeper blue for general text (e.g., body, paragraphs) */
 
             /* Fonts - Keeping Inter as a fallback, prioritize a classic Aero-like font if possible */
             --font-main: 'Inter', sans-serif; /* Default to Inter */
 
             /* Frutiger Aero Specific Gradients - More complex and subtle */
-            --fa-title-active-gradient: linear-gradient(to bottom, rgba(114, 177, 255, 0.4) 0%, rgba(48, 116, 212, 0.4) 100%); /* Brighter active title bar with transparency */
-            --fa-title-inactive-gradient: linear-gradient(to bottom, rgba(167, 187, 212, 0.3) 0%, rgba(102, 153, 204, 0.3) 100%); /* Muted blue for inactive with transparency */
+            /* Updated title bar gradients to use status bar blue hues and transparencies */
+            --fa-title-active-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.5) 100%); /* Brighter active title bar with transparency */
+            --fa-title-inactive-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.25) 0%, rgba(0, 122, 204, 0.25) 100%); /* Muted blue for inactive with transparency */
+            
             --fa-button-bg: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* More pronounced button base */
             --fa-button-hover-bg: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%); /* Lighter on hover */
             --fa-button-active-bg: linear-gradient(to top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* Depressed look */
@@ -50,7 +54,7 @@
             /* Shadows & Glows - Increased intensity and spread for Aero feel */
             --fa-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3); /* Slightly softer shadow */
             --fa-shadow-deep: 0 8px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow, but less spread */
-            --fa-glow-blue: 0 0 12px rgba(0, 191, 255, 0.6); /* Smaller, softer blue glow */
+            --fa-glow-blue: 0 0 12px rgba(0, 191, 255, 0.8); /* Stronger blue glow matching status bar */
             --fa-inner-highlight: inset 0 1px 6px rgba(255, 255, 255, 0.3); /* Subtle inner highlight for gloss */
             --fa-inner-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.15); /* Inner shadow for depth */
 
@@ -67,7 +71,7 @@
         body {
             font-family: var(--font-main); /* Apply the new main font globally */
             background-color: var(--background-dark); /* Dark background */
-            color: var(--text-color); /* Text color */
+            color: var(--text-color); /* Text color set to deeper blue */
             margin: 0;
             padding: 0;
             overflow: hidden; /* Prevent scrollbars, as we simulate a desktop environment */
@@ -190,12 +194,13 @@
             left: 0;
             width: 100%; /* Full width */
             height: var(--taskbar-height); /* Fixed height */
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05)); /* More subtle gradient glass base */
+            /* Background and borders adjusted to match status bar */
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.4)); /* Match status bar gradient */
             backdrop-filter: blur(20px); /* Stronger blur for glass effect */
             -webkit-backdrop-filter: blur(20px); /* For Safari */
-            border-top: 1px solid var(--glass-border-light); /* Stronger top border */
-            border-bottom: 1px solid var(--glass-border-dark); /* Subtle bottom border for depth */
-            box-shadow: 0 -6px 25px rgba(0, 191, 255, 0.5), inset 0 2px 15px rgba(255, 255, 255, 0.4); /* More prominent shadow and inner highlight */
+            border-top: 1px solid var(--glass-border-light); /* Changed to new blue border */
+            border-bottom: 1px solid var(--glass-border-dark); /* Changed to new blue border */
+            box-shadow: 0 -6px 25px var(--fa-glow-blue), inset 0 2px 15px rgba(255, 255, 255, 0.4); /* More prominent shadow and inner highlight */
             display: flex;
             align-items: center;
             justify-content: space-between; /* Space between start button, icons, and tray */
@@ -214,7 +219,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
+            color: white; /* Text color explicitly white */
             font-size: 0.9rem;
             font-weight: bold;
             text-shadow: 0 0 10px rgba(0, 191, 255, 0.8); /* Stronger blue glow */
@@ -222,8 +227,8 @@
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             white-space: nowrap;
-            position: relative; /* For pseudo-elements */
-            overflow: hidden; /* Hide overflow for shine */
+            position: relative;
+            overflow: hidden;
         }
 
         /* Inner shine for the start button */
@@ -296,7 +301,7 @@
 
         .system-tray-icon {
             font-size: 1.2rem; /* Slightly larger icon size */
-            color: var(--light-blue);
+            color: var(--text-color); /* Adjusted to deeper blue */
             transition: all 0.2s ease;
             cursor: default;
             padding: 8px; /* Slightly more padding */
@@ -304,7 +309,7 @@
             box-shadow: 0 1px 5px rgba(0,0,0,0.3); /* Subtle shadow */
         }
         .system-tray-icon:hover {
-            color: white;
+            color: white; /* White on hover */
             background-color: rgba(255,255,255,0.25); /* More visible hover */
             transform: translateY(-3px);
             box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4); /* Stronger blue glow */
@@ -334,49 +339,47 @@
             text-align: center;
             width: 100px; /* Slightly wider for better spacing */
             cursor: pointer;
-            transition: transform 0.15s ease, filter 0.15s ease; /* Removed background-color and box-shadow from transition */
-            padding: 10px; /* More padding */
-            border-radius: 15px; /* More rounded */
+            transition: transform 0.15s ease, filter 0.15s ease;
+            padding: 10px;
+            border-radius: 15px;
             user-select: none;
             position: absolute;
         }
 
         .desktop-icon:hover {
-            filter: brightness(1.1); /* Subtle brightness increase */
-            /* Removed background-color to remove the square */
-            background-color: transparent; /* Explicitly ensure no background on hover */
+            filter: brightness(1.1);
+            background-color: transparent;
         }
 
         .desktop-icon:active {
-            transform: scale(0.95); /* Slightly less pronounced scale */
+            transform: scale(0.95);
             filter: brightness(0.9);
-            /* Removed background-color to remove the square */
-            background-color: transparent; /* Explicitly ensure no background on active */
+            background-color: transparent;
         }
 
         .desktop-icon .icon-image { /* Sizing for dynamically loaded image */
-            width: 60px; /* Larger icon size */
+            width: 60px;
             height: 60px;
-            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8)); /* Base shadow for icon */
-            transition: filter 0.15s ease; /* Add transition for filter for smooth glow */
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
+            transition: filter 0.15s ease;
         }
 
         .desktop-icon:hover .icon-image {
             /* Apply glow around the icon itself using drop-shadow */
-            filter: drop-shadow(0 0 8px var(--primary-blue)) /* Stronger blue glow */
-                    drop-shadow(0 0 15px var(--accent-glow-blue)) /* Softer, wider glow */
-                    drop-shadow(0 0 25px rgba(0, 191, 255, 0.3)); /* Even wider, subtle glow */
+            filter: drop-shadow(0 0 8px var(--primary-blue))
+                    drop-shadow(0 0 15px var(--accent-glow-blue))
+                    drop-shadow(0 0 25px rgba(0, 191, 255, 0.3));
         }
 
         .desktop-icon:active .icon-image {
-            filter: drop-shadow(0 0 3px rgba(0,0,0,0.6)); /* Very subtle shadow on active */
+            filter: drop-shadow(0 0 3px rgba(0,0,0,0.6));
         }
 
         .desktop-icon-label {
-            font-size: 0.9rem; /* Slightly larger font */
+            font-size: 0.9rem;
             color: white;
-            text-shadow: 1px 1px 4px rgba(0,0,0,0.9); /* Stronger text shadow */
-            margin-top: 10px; /* More space */
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.9);
+            margin-top: 10px;
             word-wrap: break-word;
             max-width: 100%;
         }
@@ -384,24 +387,24 @@
         /* Start Menu styles - Highly glass-like */
         .start-menu {
             position: absolute;
-            bottom: var(--taskbar-height); /* Position above the taskbar */
-            left: 10px; /* Align with the start button's left edge */
-            width: 380px; /* Wider for more content and padding */
+            bottom: var(--taskbar-height);
+            left: 10px;
+            width: 380px;
             height: auto;
-            max-height: calc(100% - var(--taskbar-height) - 40px); /* Max height to fit screen, with more margin */
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* More prominent glass background for start menu */
-            backdrop-filter: blur(28px); /* Stronger blur for glass effect */
-            -webkit-backdrop-filter: blur(28px); /* For Safari */
-            border: 2px solid var(--glass-border-light); /* Clearer, more defined border */
-            border-radius: 25px; /* More rounded corners */
-            box-shadow: 0 20px 60px rgba(0, 191, 255, 0.7), inset 0 0 30px rgba(255, 255, 255, 0.5); /* More prominent shadow and inner glow */
-            padding: 20px; /* More internal padding */
+            max-height: calc(100% - var(--taskbar-height) - 40px);
+            background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.3), rgba(0, 122, 204, 0.2));
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 2px solid var(--glass-border-light);
+            border-radius: 25px;
+            box-shadow: 0 20px 60px var(--fa-glow-blue), inset 0 0 30px rgba(255, 255, 255, 0.5);
+            padding: 20px;
             display: none;
             flex-direction: column;
             z-index: 100;
             transform-origin: bottom left;
             animation: fadeInScaleUpFromBottomLeft 0.3s ease-out forwards;
-            overflow-y: auto; /* Allow scrolling if menu content is too long */
+            overflow-y: auto;
         }
 
         .start-menu.hidden {
@@ -415,12 +418,12 @@
         .start-menu-header {
             display: flex;
             align-items: center;
-            padding: 15px; /* More padding */
+            padding: 15px;
             margin-bottom: 15px;
-            background: linear-gradient(to right, rgba(0,191,255,0.4) 0%, rgba(0,122,204,0.4) 100%); /* Stronger blue gradient */
-            border-radius: 18px; /* More rounded */
-            border: 1px solid var(--glass-border-light); /* Clearer border */
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), inset 0 -1px 5px rgba(255,255,255,0.4); /* More prominent inner shadow */
+            background: linear-gradient(to right, rgba(0,191,255,0.6) 0%, rgba(0,122,204,0.6) 100%);
+            border-radius: 18px;
+            border: 1px solid var(--glass-border-light);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), inset 0 -1px 5px rgba(255,255,255,0.4);
             cursor: pointer;
             transition: all 0.2s ease;
             position: relative;
@@ -433,49 +436,40 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.2) 0%, transparent 50%); /* Subtle shine */
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.2) 0%, transparent 50%);
             border-radius: inherit;
             pointer-events: none;
         }
         .start-menu-header:hover {
             transform: translateX(8px);
-            box-shadow: 0 8px 20px rgba(0,191,255,0.7), inset 0 2px 10px rgba(255,255,255,0.6);
+            box-shadow: 0 8px 20px var(--fa-glow-blue), inset 0 2px 10px rgba(255,255,255,0.6);
             filter: brightness(1.2);
-        }
-
-        .start-menu-header .icon-image { /* Sizing for dynamically loaded image */
-            width: 45px; /* Larger */
-            height: 45px;
-            border-radius: 50%;
-            border: 3px solid white; /* Thicker border */
-            margin-right: 15px;
-            box-shadow: 0 0 10px rgba(255,255,255,0.5); /* Subtle glow */
         }
 
         .start-menu-header span {
             color: white;
-            font-size: 1.3rem; /* Larger font */
+            font-size: 1.3rem;
             font-weight: bold;
             text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
         }
 
         /* Start Menu item styles - More interactive and glossy */
         .start-menu-item {
-            padding: 15px 20px; /* More padding */
+            padding: 15px 20px;
             display: flex;
             align-items: center;
-            color: white;
+            color: var(--text-color);
             text-decoration: none;
             transition: background-color 0.2s ease, transform 0.15s ease, filter 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
-            font-size: 1.05rem; /* Standard font size */
+            font-size: 1.05rem;
             font-weight: normal;
-            border-radius: 12px; /* More rounded */
-            margin: 6px 0; /* Vertical margin for items */
+            border-radius: 12px;
+            margin: 6px 0;
             position: relative;
             overflow: hidden;
-            box-shadow: var(--fa-inner-highlight), var(--fa-dark-gloss-effect); /* Subtle inner highlight */
-            border: 1px solid rgba(255,255,255,0.2);
+            box-shadow: var(--fa-inner-highlight), var(--fa-dark-gloss-effect);
+            border: 1px solid var(--glass-border-dark);
         }
 
         .start-menu-item::before {
@@ -485,7 +479,7 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); /* Stronger shine effect */
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
             transition: left 0.5s ease;
         }
 
@@ -494,31 +488,31 @@
         }
 
         .start-menu-item:hover {
-            background: linear-gradient(to right, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.5) 100%); /* Stronger blue gradient hover */
-            transform: translateX(10px); /* More pronounced slide effect */
+            background: linear-gradient(to right, rgba(0, 191, 255, 0.7) 0%, rgba(0, 122, 204, 0.7) 100%);
+            transform: translateX(10px);
             color: white;
             text-shadow: 0 0 12px rgba(255,255,255,1);
             filter: brightness(1.4);
-            box-shadow: var(--fa-glow-blue), inset 0 0 10px rgba(0,0,0,0.5); /* Inner shadow + outer glow */
+            box-shadow: var(--fa-glow-blue), inset 0 0 10px rgba(0,0,0,0.5);
         }
 
-        .start-menu-item .icon-image { /* Style for dynamically loaded images within menu items */
-            margin-right: 18px; /* More space */
-            width: 1.5em; /* Larger icons */
+        .start-menu-item .icon-image {
+            margin-right: 18px;
+            width: 1.5em;
             height: 1.5em;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7)); /* More prominent glow */
+            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
             transition: filter 0.2s ease;
         }
         .start-menu-item:hover .icon-image {
-            filter: brightness(2) drop-shadow(0 0 15px rgba(255,255,255,1)); /* Brighten and stronger glow on hover */
+            filter: brightness(2) drop-shadow(0 0 15px rgba(255,255,255,1));
         }
         
         .start-menu-item .menu-item-label {
             flex-grow: 1;
             text-align: left;
-            white-space: nowrap; /* Prevent text wrapping */
-            overflow: hidden; /* Hide overflow */
-            text-overflow: ellipsis; /* Add ellipsis */
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* Start Menu Buttons Container (for Settings and Shutdown) */
@@ -526,24 +520,24 @@
             display: flex;
             flex-direction: row;
             justify-content: flex-end;
-            gap: 15px; /* More space */
-            padding-top: 18px; /* More padding */
+            gap: 15px;
+            padding-top: 18px;
             margin-top: 18px;
-            padding-right: 10px; /* Small padding to the right */
-            border-top: 1px solid rgba(255,255,255,0.3); /* Added back a subtle separator */
+            padding-right: 10px;
+            border-top: 1px solid var(--glass-border-dark);
         }
 
         /* New style for icon-only buttons in the start menu footer - more jelly-like */
         .start-menu-footer-button {
-            width: 58px; /* Fixed width for square button */
-            height: 58px; /* Fixed height for square button */
+            width: 58px;
+            height: 58px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
+            background: linear-gradient(to bottom, rgba(0,191,255,0.5) 0%, rgba(0,122,204,0.2) 100%);
             border: 2px solid var(--glass-border-light);
-            border-radius: 15px; /* More rounded */
+            border-radius: 15px;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
             color: white;
@@ -564,20 +558,20 @@
         }
 
         .start-menu-footer-button:hover {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0.3) 100%);
-            transform: translateY(-4px); /* More pronounced lift */
-            box-shadow: 0 6px 20px rgba(0, 191, 255, 0.8), inset 0 2px 10px rgba(255,255,255,0.7);
+            background: linear-gradient(to bottom, rgba(0,191,255,0.6) 0%, rgba(0,122,204,0.3) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 6px 20px var(--fa-glow-blue), inset 0 2px 10px rgba(255,255,255,0.7);
         }
 
         .start-menu-footer-button:active {
             transform: translateY(0);
-            background: linear-gradient(to top, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
+            background: linear-gradient(to top, rgba(0,191,255,0.5) 0%, rgba(0,122,204,0.2) 100%);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), inset 0 -2px 6px rgba(255,255,255,0.5);
             filter: brightness(0.9);
         }
 
-        .start-menu-footer-button .icon-image { /* Sizing for dynamically loaded image */
-            width: 32px; /* Larger icon size */
+        .start-menu-footer-button .icon-image {
+            width: 32px;
             height: 32px;
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
         }
@@ -586,7 +580,7 @@
         @keyframes fadeInScaleUpFromBottomLeft {
             from {
                 opacity: 0;
-                transform: scale(0.6); /* More pronounced scaling */
+                transform: scale(0.6);
             }
             to {
                 opacity: 1;
@@ -597,22 +591,22 @@
         /* Window styles (retaining glassmorphism) - Main focus of Aero */
         .os-window {
             position: absolute;
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); /* Stronger glass background */
-            backdrop-filter: blur(35px); /* Very strong blur for deep glass effect */
-            -webkit-backdrop-filter: blur(35px); /* For Safari */
-            border: 2px solid var(--glass-border-light); /* Thicker, very clear white border */
-            border-bottom: 2px solid var(--glass-border-dark); /* Add bottom border for depth */
-            border-right: 2px solid var(--glass-border-dark); /* Add right border for depth */
-            border-radius: 20px; /* More rounded for Aero style */
-            box-shadow: 0 10px 40px rgba(0, 191, 255, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.4); /* Reduced glow spread */
+            background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.2), rgba(0, 122, 204, 0.1));
+            backdrop-filter: blur(35px);
+            -webkit-backdrop-filter: blur(35px);
+            border: 2px solid var(--glass-border-light);
+            border-bottom: 2px solid var(--glass-border-dark);
+            border-right: 2px solid var(--glass-border-dark);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4);
             display: flex;
             flex-direction: column;
             overflow: hidden;
-            min-width: 400px; /* Slightly larger min-width */
-            min-height: 300px; /* Slightly larger min-height */
+            min-width: 400px;
+            min-height: 300px;
             z-index: 5;
             animation: windowPopIn 0.3s ease-out forwards;
-            resize: both; /* Allow resizing */
+            resize: both;
         }
 
         .os-window.minimized {
@@ -625,29 +619,29 @@
             width: 100% !important;
             height: calc(100% - var(--taskbar-height)) !important;
             border-radius: 0;
-            box-shadow: none; /* No shadow when maximized for seamless edge */
+            box-shadow: none;
             transition: all 0.3s ease-in-out;
-            border: none; /* No border when maximized */
+            border: none;
         }
 
         /* Window title bar - Enhanced Frutiger Aero style */
         .os-window-title-bar {
-            background: linear-gradient(to bottom, rgba(114, 177, 255, 0.2), rgba(48, 116, 212, 0.2)); /* Lighter transparent gradient */
-            backdrop-filter: blur(10px); /* Add a subtle blur to the title bar itself */
+            background: var(--fa-title-active-gradient);
+            backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
-            padding: 10px 18px; /* Slightly reduced padding */
+            padding: 10px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.3); /* Softer bottom border */
+            border-bottom: 1px solid var(--glass-border-dark);
             cursor: grab;
-            border-radius: 18px 18px 0 0; /* Match window border-radius, adjusted for 2px window border */
+            border-radius: 18px 18px 0 0;
             position: relative;
-            font-size: 1.1rem; /* Slightly larger title font size */
+            font-size: 1.1rem;
             font-weight: bold;
             color: white;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.7); /* Slightly softer text shadow */
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.2); /* Softer inner highlight */
+            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.2);
         }
         /* Glassy internal highlight for title bar */
         .os-window-title-bar::after {
@@ -657,29 +651,29 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 60%); /* Even lighter top-to-bottom highlight */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 60%);
             pointer-events: none;
             border-radius: inherit;
         }
 
         .os-window-title-bar.inactive {
-            background: linear-gradient(to bottom, rgba(167, 187, 212, 0.15), rgba(102, 153, 204, 0.15)); /* Even more subtle inactive gradient */
-            border-bottom: 1px solid rgba(255, 255, 255, 0.2); /* Softer border */
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.1); /* Softer inactive shadow */
+            background: var(--fa-title-inactive-gradient);
+            border-bottom: 1px solid rgba(0, 122, 204, 0.5);
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.1);
         }
         .os-window-title-bar.inactive::after {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 60%); /* Very subtle highlight for inactive */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 60%);
         }
 
         /* Window title and logo container */
         .os-window-title-content {
             display: flex;
             align-items: center;
-            gap: 12px; /* More space */
+            gap: 12px;
         }
 
-        .os-window-title-content .icon-image { /* Sizing for dynamically loaded image */
-            width: 32px; /* Larger size for the M-logo */
+        .os-window-title-content .icon-image {
+            width: 32px;
             height: 32px;
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
         }
@@ -692,27 +686,27 @@
         /* Window control buttons (minimize, maximize, close) - Smaller and more prominent */
         .os-window-controls {
             display: flex;
-            gap: 6px; /* Reduced gap */
+            gap: 6px;
         }
 
         .os-window-controls .control-button {
-            width: 24px; /* Smaller circular buttons */
+            width: 24px;
             height: 24px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 0.7em; /* Adjusted for SVG size to match smaller button */
+            font-size: 0.7em;
             color: white;
             cursor: pointer;
             transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 4px rgba(0,0,0,0.4); /* Softer shadows */
-            border: 1px solid rgba(255, 255, 255, 0.6); /* Slightly thinner border */
-            background: rgba(255,255,255,0.1); /* More visible base white background with transparency */
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 4px rgba(0,0,0,0.4);
+            border: 1px solid rgba(0, 191, 255, 0.6);
+            background: rgba(0,191,255,0.15);
             position: relative;
-            overflow: hidden; /* For inner highlight */
+            overflow: hidden;
         }
-        .os-window-controls .control-button::before { /* Inner highlight for buttons */
+        .os-window-controls .control-button::before {
             content: '';
             position: absolute;
             top: 0;
@@ -726,68 +720,67 @@
         }
 
         /* Specific button colors for hover/active states */
-        .os-window-controls .control-button.close { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
-        .os-window-controls .control-button.minimize { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
-        .os-window-controls .control-button.maximize { background: rgba(255,255,255,0.1); border-color: rgba(255,255,255,0.6); }
+        .os-window-controls .control-button.close { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
+        .os-window-controls .control-button.minimize { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
+        .os-window-controls .control-button.maximize { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
 
         .os-window-controls .control-button:hover {
-            transform: scale(1.1); /* Slightly less pronounced hover effect */
+            transform: scale(1.1);
             filter: brightness(1.2);
             box-shadow: inset 0 1px 6px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.5);
-            background: rgba(255,255,255,0.2); /* Lighter white on hover with transparency */
+            background: rgba(0,191,255,0.3);
         }
-        .os-window-controls .control-button.close:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.7); }
-        .os-window-controls .control-button.minimize:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.7); }
-        .os-window-controls .control-button.maximize:hover { background: rgba(255,255,255,0.2); border-color: rgba(255,255,255,0.7); }
+        .os-window-controls .control-button.close:hover { background: rgba(0,191,255,0.3); border-color: rgba(0,191,255,0.8); }
+        .os-window-controls .control-button.minimize:hover { background: rgba(0,191,255,0.3); border-color: rgba(0,191,255,0.8); }
+        .os-window-controls .control-button.maximize:hover { background: rgba(0,191,255,0.3); border-color: rgba(0,191,255,0.8); }
 
         .os-window-controls .control-button:active {
             transform: scale(0.95);
             opacity: 1;
             box-shadow: inset 0 0 6px rgba(0,0,0,0.7), inset 0 -1px 4px rgba(255,255,255,0.5);
             filter: brightness(0.9);
-            background: rgba(255,255,255,0.05); /* Darker white on active with transparency */
+            background: rgba(0,191,255,0.08);
         }
-        .os-window-controls .control-button .icon-image { /* Sizing for dynamically loaded image */
-            width: 0.9em; /* Adjusted icon size for smaller button */
-            height: 0.9em; /* Adjusted icon size for smaller button */
+        .os-window-controls .control-button .icon-image {
+            width: 0.9em;
+            height: 0.9em;
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
         }
 
         /* Window content area */
         .os-window-content {
             flex-grow: 1;
-            padding: 25px; /* More padding */
+            padding: 25px;
             color: var(--text-color);
-            font-size: 1rem; /* Slightly larger font */
-            line-height: 1.7; /* Better readability */
+            font-size: 1rem;
+            line-height: 1.7;
             overflow: auto;
         }
 
         /* Status bar at the bottom of each window */
         .os-window-status-bar {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.4) 0%, rgba(0, 122, 204, 0.4) 100%); /* Stronger blue gradient */
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.4) 0%, rgba(0, 122, 204, 0.4) 100%);
             border-top: 2px solid rgba(255, 255, 255, 0.5);
-            padding: 10px 20px; /* More padding */
-            font-size: 0.85rem; /* Slightly larger font */
-            color: rgba(255, 255, 255, 0.9);
+            padding: 10px 20px;
+            color: white;
             text-align: right;
-            border-radius: 0 0 18px 18px; /* Match window border-radius, adjusted for 2px window border */
+            border-radius: 0 0 18px 18px;
             box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5);
         }
 
         /* Markdown specific styles within window content - tuned for Aero readability */
-        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: var(--primary-blue); border-bottom: 3px solid rgba(0,191,255,0.5); padding-bottom: 0.5em; text-shadow: 0 0 10px rgba(0,191,255,0.6); }
-        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: var(--light-blue); text-shadow: 0 0 8px rgba(255,255,255,0.4); }
-        .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: white; text-shadow: 0 0 5px rgba(0,0,0,0.6); }
-        .os-window-content .markdown-content p { margin-bottom: 1.4em; opacity: 0.98; }
-        .os-window-content .markdown-content ul, .os-window-content .markdown-content ol { margin-left: 2.5em; margin-bottom: 1.4em; list-style-type: disc; opacity: 0.95; }
+        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: white; border-bottom: 3px solid var(--primary-blue); padding-bottom: 0.5em; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
+        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: white; text-shadow: 0 0 8px rgba(255,255,255,0.4); }
+        .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.6); }
+        .os-window-content .markdown-content p { margin-bottom: 1.4em; opacity: 0.98; color: var(--text-color); }
+        .os-window-content .markdown-content ul, .os-window-content .markdown-content ol { margin-left: 2.5em; margin-bottom: 1.4em; list-style-type: disc; opacity: 0.95; color: var(--text-color); }
         .os-window-content .markdown-content li { margin-bottom: 0.8em; }
         .os-window-content .markdown-content strong { font-weight: bold; color: white; text-shadow: 0 0 4px rgba(255,255,255,0.6); }
-        .os-window-content .markdown-content em { font-style: italic; opacity: 0.95; }
+        .os-window-content .markdown-content em { font-style: italic; opacity: 0.95; color: var(--text-color); }
         .os-window-content .markdown-content a { color: var(--primary-blue); text-decoration: underline; text-shadow: 0 0 8px rgba(0,191,255,0.4); }
-        .os-window-content .markdown-content code { background-color: rgba(0,0,0,0.5); padding: 0.3em 0.6em; border-radius: 8px; font-family: monospace; font-size: 0.95em; border: 1px solid rgba(255,255,255,0.3); }
-        .os-window-content .markdown-content pre { background-color: rgba(0,0,0,0.6); padding: 1.5em; border-radius: 12px; overflow-x: auto; margin-bottom: 1.8em; border: 2px solid rgba(255,255,255,0.4); box-shadow: inset 0 0 8px rgba(0,0,0,0.6); }
-        .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 0.85; background-color: rgba(0,191,255,0.15); border-radius: 10px; padding-top: 1em; padding-bottom: 1em; }
+        .os-window-content .markdown-content code { background-color: rgba(0,0,0,0.5); padding: 0.3em 0.6em; border-radius: 8px; font-family: monospace; font-size: 0.95em; border: 1px solid rgba(255,255,255,0.3); color: white; }
+        .os-window-content .markdown-content pre { background-color: rgba(0,0,0,0.6); padding: 1.5em; border-radius: 12px; overflow-x: auto; margin-bottom: 1.8em; border: 2px solid rgba(255,255,255,0.4); box-shadow: inset 0 0 8px rgba(0,0,0,0.6); color: white; }
+        .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 0.85; background-color: rgba(0,191,255,0.25); border-radius: 10px; padding-top: 1em; padding-bottom: 1em; color: var(--text-color); }
 
 
         /* Window pop-in animation - more subtle */
@@ -805,27 +798,27 @@
         /* Works grid specific styles */
         .works-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Larger grid items */
-            gap: 25px; /* More gap */
-            padding: 20px; /* More padding */
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 25px;
+            padding: 20px;
         }
 
         .work-card {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05)); /* More prominent glass */
-            border: 2px solid var(--glass-border-light); /* Stronger border */
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            border: 2px solid var(--glass-border-light);
             border-bottom: 2px solid var(--glass-border-dark);
             border-right: 2px solid var(--glass-border-dark);
-            border-radius: 20px; /* More rounded */
+            border-radius: 20px;
             overflow: hidden;
             cursor: pointer;
             transition: all 0.25s ease-in-out, filter 0.25s ease, box-shadow 0.25s ease;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(255,255,255,0.2); /* Stronger shadow and inner glow */
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), inset 0 0 12px rgba(255,255,255,0.2);
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
             padding-bottom: 15px;
-            position: relative; /* For inner highlight */
+            position: relative;
             overflow: hidden;
         }
         .work-card::before {
@@ -835,15 +828,15 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.15) 0%, transparent 55%); /* Subtle inner highlight */
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.15) 0%, transparent 55%);
             border-radius: inherit;
             pointer-events: none;
         }
 
 
         .work-card:hover {
-            transform: translateY(-10px) scale(1.05); /* More pronounced lift and scale */
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.7), inset 0 0 15px rgba(255,255,255,0.3); /* Reduced glow spread */
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: 0 8px 25px var(--fa-glow-blue), inset 0 0 15px rgba(255,255,255,0.3);
             border-color: var(--primary-blue);
             filter: brightness(1.2);
             background: linear-gradient(to bottom, rgba(0, 191, 255, 0.2), rgba(0, 122, 204, 0.1));
@@ -851,9 +844,9 @@
 
         .work-card img {
             width: 100%;
-            height: 180px; /* Slightly taller */
+            height: 180px;
             object-fit: cover;
-            border-radius: 18px 18px 0 0; /* Match card border-radius */
+            border-radius: 18px 18px 0 0;
             filter: brightness(0.95);
             transition: filter 0.2s ease;
         }
@@ -863,7 +856,7 @@
         }
 
         .work-card-title {
-            font-size: 1.1rem; /* Slightly larger */
+            font-size: 1.1rem;
             font-weight: bold;
             margin-top: 15px;
             color: white;
@@ -871,8 +864,8 @@
         }
 
         .work-card-category {
-            font-size: 0.9rem; /* Slightly larger */
-            color: var(--light-blue);
+            font-size: 0.9rem;
+            color: var(--text-color);
             opacity: 0.95;
             margin-top: 6px;
         }
@@ -887,12 +880,12 @@
         .work-detail-content .gallery-main-image-container {
             position: relative;
             width: 100%;
-            max-width: 700px; /* Larger main image width */
+            max-width: 700px;
             margin-bottom: 25px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            border-radius: 15px; /* More rounded */
+            border-radius: 15px;
             overflow: hidden;
-            border: 3px solid rgba(255,255,255,0.4); /* Subtle border */
+            border: 3px solid var(--glass-border-light);
         }
 
         .work-detail-content .gallery-main-image {
@@ -906,16 +899,16 @@
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(0, 0, 0, 0.8); /* Darker for better contrast */
+            background: rgba(0, 0, 0, 0.8);
             color: white;
-            border: 2px solid rgba(255,255,255,0.6); /* White border */
-            padding: 15px; /* Larger padding */
+            border: 2px solid rgba(255,255,255,0.6);
+            padding: 15px;
             cursor: pointer;
-            font-size: 2rem; /* Larger font size */
+            font-size: 2rem;
             border-radius: 50%;
             transition: background-color 0.25s ease, filter 0.25s ease, box-shadow 0.25s ease;
             z-index: 2;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.6); /* Stronger shadow */
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6);
         }
 
         .work-detail-content .gallery-nav-button:hover {
@@ -923,7 +916,7 @@
             filter: brightness(1.4);
             box-shadow: 0 8px 20px rgba(0,0,0,0.8);
         }
-        .work-detail-content .gallery-nav-button .icon-image { /* Sizing for dynamically loaded image */
+        .work-detail-content .gallery-nav-button .icon-image {
             width: 2em;
             height: 2em;
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
@@ -941,36 +934,36 @@
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
-            gap: 15px; /* More gap */
+            gap: 15px;
             margin-top: 20px;
             margin-bottom: 25px;
         }
 
         .work-detail-content .gallery-thumbnail {
-            width: 100px; /* Slightly larger */
-            height: 80px; /* Slightly taller */
+            width: 100px;
+            height: 80px;
             object-fit: cover;
-            border-radius: 10px; /* More rounded */
+            border-radius: 10px;
             border: 3px solid transparent;
             cursor: pointer;
             transition: border-color 0.25s ease, transform 0.15s ease, filter 0.25s ease, box-shadow 0.25s ease;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4); /* Subtle shadow */
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         .work-detail-content .gallery-thumbnail.active {
             border-color: var(--primary-blue);
-            transform: scale(1.15); /* More pronounced scale */
-            box-shadow: 0 0 20px rgba(0, 191, 255, 1); /* Stronger glow for active thumbnail */
+            transform: scale(1.15);
+            box-shadow: 0 0 20px var(--fa-glow-blue);
         }
         .work-detail-content .gallery-thumbnail:hover {
             filter: brightness(1.2);
-            box-shadow: 0 0 12px rgba(0, 191, 255, 0.8);
+            box-shadow: 0 0 12px var(--fa-glow-blue);
         }
 
         .work-detail-content h3 {
-            font-size: 2rem; /* Larger font */
+            font-size: 2rem;
             font-weight: bold;
-            color: var(--primary-blue);
+            color: white;
             margin-bottom: 15px;
             text-align: center;
             text-shadow: 0 0 10px rgba(0,191,255,0.6);
@@ -978,16 +971,17 @@
         .work-detail-content p {
             margin-bottom: 15px;
             text-align: justify;
-            font-size: 1rem; /* Consistent font size */
+            font-size: 1rem;
+            color: var(--text-color);
         }
         .work-detail-content .category-tag {
             display: inline-block;
-            background-color: rgba(0, 191, 255, 0.5); /* More vibrant tag background */
+            background-color: rgba(0, 191, 255, 0.5);
             border: 1px solid var(--primary-blue);
-            border-radius: 10px; /* More rounded */
-            padding: 6px 12px; /* More padding */
-            font-size: 0.9rem; /* Slightly larger */
-            color: var(--light-blue);
+            border-radius: 10px;
+            padding: 6px 12px;
+            font-size: 0.9rem;
+            color: white;
             margin-top: 15px;
             text-shadow: 0 0 5px rgba(0,0,0,0.6);
             box-shadow: inset 0 0 8px rgba(255,255,255,0.2);
@@ -1002,11 +996,11 @@
             cursor: pointer;
             transition: all 0.25s ease-in-out, filter 0.25s ease, box-shadow 0.25s ease;
             box-shadow: 0 8px 25px rgba(0, 0, 0, 0.5), inset 0 0 10px rgba(255,255,255,0.2);
-            padding: 20px; /* Added padding */
-            display: flex; /* Make it a flex container */
-            flex-direction: column; /* Stack children vertically */
-            justify-content: space-between; /* Space out title and description */
-            min-height: 120px; /* Ensure a minimum height for consistent appearance */
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            min-height: 120px;
             position: relative;
             overflow: hidden;
         }
@@ -1017,13 +1011,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.2) 0%, transparent 60%); /* Subtle shine */
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.2) 0%, transparent 60%);
             border-radius: inherit;
             pointer-events: none;
         }
         .service-category-card:hover {
             transform: translateY(-8px) scale(1.03);
-            box-shadow: 0 10px 25px rgba(0, 191, 255, 0.6), inset 0 0 12px rgba(255,255,255,0.3); /* Reduced glow spread */
+            box-shadow: 0 10px 25px var(--fa-glow-blue), inset 0 0 12px rgba(255,255,255,0.3);
             border-color: var(--primary-blue);
             filter: brightness(1.2);
             background: linear-gradient(to right, rgba(0, 191, 255, 0.3), rgba(0, 122, 204, 0.2));
@@ -1031,27 +1025,27 @@
 
         /* Taskbar icon for minimized windows - more glassy */
         .taskbar-minimized-icon {
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.2), rgba(255, 255, 255, 0.1)); /* More transparent background */
-            border: 1px solid var(--glass-border-light); /* Stronger border */
-            border-radius: 12px; /* More rounded square */
-            padding: 8px 12px; /* More padding */
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.3));
+            border: 1px solid var(--glass-border-light);
+            border-radius: 12px;
+            padding: 8px 12px;
             margin: 0 5px;
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px; /* More gap */
+            gap: 8px;
             color: white;
-            font-size: 0.9rem; /* Slightly larger font */
-            box-shadow: inset 0 1px 6px rgba(255,255,255,0.7), 0 2px 8px rgba(0,0,0,0.6); /* Stronger shadows */
+            font-size: 0.9rem;
+            box-shadow: inset 0 1px 6px rgba(255,255,255,0.7), 0 2px 8px rgba(0,0,0,0.6);
             transition: all 0.25s ease;
             white-space: nowrap;
-            max-width: 160px; /* Increased max-width */
+            max-width: 160px;
             overflow: hidden;
             text-overflow: ellipsis;
             position: relative;
             overflow: hidden;
         }
-        .taskbar-minimized-icon::before { /* Inner highlight */
+        .taskbar-minimized-icon::before {
             content: '';
             position: absolute;
             top: 0;
@@ -1065,16 +1059,16 @@
 
 
         .taskbar-minimized-icon:hover {
-            background: linear-gradient(to top, rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.15));
-            transform: translateY(-4px); /* More pronounced lift effect on hover */
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.5), rgba(0, 122, 204, 0.4));
+            transform: translateY(-4px);
             box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 15px rgba(0,0,0,0.7);
         }
 
         /* Active taskbar icon style */
         .taskbar-minimized-icon.active {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.7) 0%, rgba(0, 122, 204, 0.7) 100%); /* Stronger blue gradient active */
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.8) 0%, rgba(0, 122, 204, 0.8) 100%);
             border-color: var(--primary-blue);
-            box-shadow: inset 0 1px 8px rgba(0,0,0,0.8), 0 0 12px var(--primary-blue); /* Reduced glow spread */
+            box-shadow: inset 0 1px 8px rgba(0,0,0,0.8), 0 0 12px var(--primary-blue);
             transform: translateY(0);
         }
         .taskbar-minimized-icon.active::before {
@@ -1082,7 +1076,7 @@
         }
 
 
-        .taskbar-minimized-icon .icon-image { /* Sizing for dynamically loaded image */
+        .taskbar-minimized-icon .icon-image {
             width: 1.2em;
             height: 1.2em;
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
@@ -1111,15 +1105,15 @@
         /* Sub-menu for language selection */
         .start-menu-submenu {
             position: absolute;
-            left: 100%; /* Position to the right of the parent menu item */
+            left: 100%;
             top: 0;
-            width: 250px; /* Slightly wider submenu */
-            background: linear-gradient(to bottom right, rgba(255, 255, 255, 0.25), rgba(255, 255, 255, 0.15)); /* Stronger glass background */
+            width: 250px;
+            background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.35), rgba(0, 122, 204, 0.25));
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 2px solid var(--glass-border-light);
-            border-radius: 20px; /* More rounded */
-            box-shadow: 0 10px 40px rgba(0, 191, 255, 0.6), inset 0 0 20px rgba(255, 255, 255, 0.4);
+            border-radius: 20px;
+            box-shadow: 0 10px 40px var(--fa-glow-blue), inset 0 0 20px rgba(255, 255, 255, 0.4);
             padding: 15px;
             display: none;
             flex-direction: column;
@@ -1133,8 +1127,8 @@
         .toggle-switch {
             position: relative;
             display: inline-block;
-            width: 70px; /* Slightly wider */
-            height: 40px; /* Slightly taller */
+            width: 70px;
+            height: 40px;
         }
 
         .toggle-switch input {
@@ -1150,10 +1144,10 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background-color: #909090; /* Muted gray for off state */
+            background-color: #909090;
             -webkit-transition: .4s;
             transition: .4s;
-            border-radius: 40px; /* Match height */
+            border-radius: 40px;
             box-shadow: inset 0 0 6px rgba(0,0,0,0.5);
             border: 2px solid rgba(255,255,255,0.4);
         }
@@ -1161,11 +1155,11 @@
         .toggle-slider:before {
             position: absolute;
             content: "";
-            height: 32px; /* Larger handle */
+            height: 32px;
             width: 32px;
             left: 4px;
             bottom: 4px;
-            background: linear-gradient(to bottom, #FFFFFF 0%, #F0F0F0 100%); /* Glossy white handle */
+            background: linear-gradient(to bottom, #FFFFFF 0%, #F0F0F0 100%);
             -webkit-transition: .4s;
             transition: .4s;
             border-radius: 50%;
@@ -1173,7 +1167,7 @@
         }
 
         input:checked + .toggle-slider {
-            background: linear-gradient(to right, var(--primary-blue) 0%, var(--mid-blue) 100%); /* Blue gradient for on state */
+            background: linear-gradient(to right, var(--primary-blue) 0%, var(--mid-blue) 100%);
             border-color: var(--dark-blue);
         }
 
@@ -1182,7 +1176,7 @@
         }
 
         input:checked + .toggle-slider:before {
-            -webkit-transform: translateX(30px); /* Adjusted for larger handle */
+            -webkit-transform: translateX(30px);
             -ms-transform: translateX(30px);
             transform: translateX(30px);
         }
@@ -1199,36 +1193,36 @@
         /* Custom Scrollbar Styles (for Webkit browsers like Chrome/Safari) */
         /* Track */
         ::-webkit-scrollbar {
-            width: 20px; /* Thicker scrollbar width */
+            width: 20px;
         }
 
         /* Handle */
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.9), rgba(0, 122, 204, 0.9)); /* Stronger blue gradient */
-            border-radius: 15px; /* More rounded corners for the thumb */
-            border: 4px solid rgba(255, 255, 255, 0.5); /* Thicker transparent border around thumb */
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.9), rgba(0, 122, 204, 0.9));
+            border-radius: 15px;
+            border: 4px solid rgba(255, 255, 255, 0.5);
             transition: background 0.2s ease, box-shadow 0.2s ease;
-            box-shadow: inset 0 0 10px rgba(255,255,255,0.3); /* Inner highlight */
+            box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
         }
 
         /* Handle on hover */
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 1), rgba(0, 122, 204, 1)); /* Darker blue on hover */
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 1), rgba(0, 122, 204, 1));
             box-shadow: inset 0 0 12px rgba(255,255,255,0.4), 0 0 20px rgba(0,191,255,0.8);
         }
 
         /* Track background */
         ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.15); /* More subtle transparent track */
+            background: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
         }
 
         /* Buttons (arrows) - more prominent and glossy */
         ::-webkit-scrollbar-button {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%); /* Glossy button */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%);
             border-radius: 50%;
-            height: 28px; /* Adjust height to make it circular */
-            width: 28px; /* Adjust width to make it circular */
+            height: 28px;
+            width: 28px;
             display: block;
             border: 2px solid rgba(255, 255, 255, 0.8);
             box-shadow: inset 0 2px 8px rgba(255,255,255,0.9), 0 2px 10px rgba(0,0,0,0.7);
@@ -1358,7 +1352,7 @@
                     <div class="system-tray-icon">
                         <span class="icon-placeholder" data-asset-key="icon_volume"></span>
                     </div>
-                    <span class="text-sm text-white opacity-80" id="current-time"></span> <!-- Time display -->
+                    <span class="text-sm text-white opacity-80" id="current-time"></span> <!-- Time display, kept white for contrast -->
                 </div>
             </div>
         </div>
@@ -1370,51 +1364,49 @@
         /**
          * @object ASSETS
          * @description Centralized management of all image and icon paths.
-         * Please place your image files in the corresponding `assets/` folder.
-         * For example, `./assets/cursors/hand_open.png` means the file is located in the `assets/cursors/` folder at the project root.
-         * You can modify these paths and filenames as needed.
+         * All assets are now Base64 encoded for self-containment.
          */
         const ASSETS = {
-            // Cursor images (please replace with your PNG or CUR file paths)
-            'cursor_default': './assets/cursors/hand_open.png',
-            'cursor_active': './assets/cursors/hand_closed.png',
-            'cursor_pointer': './assets/cursors/hand_point.png',
+            // Cursor images (simple black dot for default, cross for active, arrow for pointer)
+            'cursor_default': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'2\' fill=\'%23000000\'/%3E%3C/svg%3E',
+            'cursor_active': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M8 0V16M0 8H16\' stroke=\'%23000000\' stroke-width=\'2\'/%3E%3C/svg%3E',
+            'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1L1 1Z\' fill=\'%23000000\' stroke=\'%23000000\' stroke-width=\'1\'/%3E%3C/svg%3E',
 
-            // Desktop Icons / Start Menu Icons (please replace with your PNG/SVG file paths)
-            'icon_works': './assets/icons/folder.png', // Works folder icon
-            'icon_characters': './assets/icons/users.png', // Characters user icon
-            'icon_mazko_logo': './assets/icons/mazko_logo.png', // Your custom 'M' logo
-            'icon_services': './assets/icons/handshake.png', // Services handshake icon
-            'icon_socials': './assets/icons/share.png', // Social share icon
+            // Desktop Icons / Start Menu Icons (simple SVG icons)
+            'icon_works': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M2 12V4C2 3.44772 2.44772 3 3 3H9L11 7H21C21.5523 7 22 7.44772 22 8V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_characters': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M17 21H23V19C23 17.9391 22.5786 16.9217 21.8284 16.1716C21.0783 15.4214 20.0609 15 19 15H17M9 3C11.2091 3 13 4.79086 13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_mazko_logo': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M7.5 12C7.5 10.16 8.96 8.75 10.75 8.75C12.54 8.75 14 10.16 14 12C14 13.84 12.54 15.25 10.75 15.25C8.96 15.25 7.5 13.84 7.5 12ZM10.75 7.5C13.29 7.5 15.33 9.38 15.33 12C15.33 14.62 13.29 16.5 10.75 16.5C8.21 16.5 6.17 14.62 6.17 12C6.17 9.38 8.21 7.5 10.75 7.5ZM2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12ZM3.33 12C3.33 7.21 7.21 3.33 12 3.33C16.79 3.33 20.67 7.21 20.67 12C20.67 16.79 16.79 20.67 12 20.67C7.21 20.67 3.33 16.79 3.33 12Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E', // A generic 'M' shape in a circle, like a logo
+            'icon_services': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 13.5V18C18 19.1046 17.1046 20 16 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4H10.5M18 13.5L22 9.5M22 9.5L18 5.5M22 9.5H16M13 10L10.5 12.5L13 15\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_socials': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8.59 13.51L15.42 17.49\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.41 6.51L8.59 10.49\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Taskbar System Tray Icons (please replace with your PNG/SVG file paths)
-            'icon_wifi': './assets/icons/wifi.png',
-            'icon_battery': './assets/icons/battery_full.png',
-            'icon_volume': './assets/icons/volume_up.png',
+            // Taskbar System Tray Icons (simple SVG icons)
+            'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 12L12.01 12\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_battery': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M15 6H19C19.5523 6 20 6.44772 20 7V17C20 17.5523 19.5523 18 19 18H5C4.44772 18 4 17.5523 4 17V7C4 6.44772 4.44772 6 5 6H9M15 6V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V6M15 6H9M22 10V14\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_volume': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 5L6 9H2V15H6L11 19V5Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M19.07 4.93C20.6695 6.52936 21.5583 8.70776 21.5583 11C21.5583 13.2922 20.6695 15.4706 19.07 17.07\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.54 8.46C16.3262 9.24614 16.7644 10.2986 16.7644 11.39C16.7644 12.4814 16.3262 13.5339 15.54 14.32\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Start Menu Footer Button Icons (please replace with your PNG/SVG file paths)
-            'icon_settings': './assets/icons/cog.png', // Settings gear icon
-            'icon_shutdown': './assets/icons/power_off.png', // Shutdown power icon
+            // Start Menu Footer Button Icons (simple SVG icons)
+            'icon_settings': 'data:image/svg+xml,%3Csvg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C12.5523 2 13 2.44772 13 3V5.07409C14.7351 5.25367 16.3475 5.92383 17.7088 6.98066L19.2912 5.3983C19.6817 5.00782 20.3183 5.00782 20.7088 5.3983L21.5983 6.28779C21.9888 6.67828 21.9888 7.31482 21.5983 7.70531L19.9575 9.34612C21.0143 10.7074 21.6845 12.3198 21.864 14H24V14C24 14.5523 23.5523 15 23 15H20.9259C20.7463 16.7351 20.0762 18.3475 19.0193 19.7088L20.6017 21.2912C20.9922 21.6817 20.9922 22.3183 20.6017 22.7088L19.7122 23.5983C19.3217 23.9888 18.6852 23.9888 18.2947 23.5983L16.6539 21.9575C15.2926 23.0143 13.6802 23.6845 12 23.864V24C11.4477 24 11 23.5523 11 23V21.864C9.26493 21.6845 7.65251 21.0143 6.29119 19.9575L4.70883 21.54C4.31834 21.9305 3.68179 21.9305 3.29131 21.54L2.40181 20.6505C2.01132 20.26 2.01132 19.6235 2.40181 19.233L4.04262 17.5922C2.98576 16.2309 2.31557 14.6185 2.13603 12.8833H0V12C0 11.4477 0.447715 11 1 11H3.07409C3.25367 9.26493 3.92383 7.65251 4.98066 6.29119L3.3983 4.70883C3.00782 4.31834 3.00782 3.68179 3.3983 3.29131L4.28779 2.40181C4.67828 2.01132 5.31482 2.01132 5.70531 2.40181L7.34612 4.04262C8.70744 2.98576 10.3198 2.31557 12 2.13603V2Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Ccircle cx=\'12\' cy=\'12\' r=\'3\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_shutdown': 'data:image/svg+xml,%3Csvg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2V12\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18.364 5.63604C20.4184 7.69036 21.5817 10.3913 21.5817 13.2091C21.5817 16.0269 20.4184 18.7277 18.364 20.7821C16.3096 22.8364 13.6087 24 10.7909 24C7.97314 24 5.27228 22.8364 3.21796 20.7821C1.16364 18.7277 0 16.0269 0 13.2091C0 10.3913 1.16364 7.69036 3.21796 5.63604\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Window Control Button Icons (please replace with your PNG/SVG file paths)
-            'icon_minus': './assets/icons/minus.png', // Minimize icon
-            'icon_square': './assets/icons/square.png', // Maximize/Restore icon
-            'icon_times': './assets/icons/times.png', // Close icon
-            'icon_window_restore': './assets/icons/window_restore.png', // Taskbar minimized window icon
+            // Window Control Button Icons (simple SVG icons)
+            'icon_minus': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M5 12H19\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_times': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M6 18L18 6M6 6L18 18\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_window_restore': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 14C4 12.8954 4.89543 12 6 12H18C19.1046 12 20 12.8954 20 14V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8 4C8 2.89543 8.89543 2 10 2H18C19.1046 2 20 2.89543 20 4V8\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Gallery Navigation Button Icons (please replace with your PNG/SVG file paths)
-            'icon_chevron_left': './assets/icons/chevron_left.png', // Left arrow
-            'icon_chevron_right': './assets/icons/chevron_right.png', // Right arrow
+            // Gallery Navigation Button Icons (simple SVG icons)
+            'icon_chevron_left': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M15 18L9 12L15 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_chevron_right': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M9 18L15 12L9 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Social Media Icons (Note: You need to provide corresponding image files for these to correct existing display issues)
-            'icon_weibo': './assets/socials/weibo.png',
-            'icon_instagram': './assets/socials/instagram.png',
-            'icon_artstation': './assets/socials/artstation.png',
-            'icon_behance_square': './assets/socials/behance.png',
-            'icon_envelope': './assets/socials/envelope.png',
+            // Social Media Icons (simple SVG icons)
+            'icon_weibo': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%23EA4C89\'/%3E%3Cpath d=\'M15.5 8C15.5 7.44772 15.0523 7 14.5 7H9.5C8.94772 7 8.5 7.44772 8.5 8V16C8.5 16.5523 8.94772 17 9.5 17H14.5C15.0523 17 15.5 16.5523 15.5 16V8Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 10.5C12.8284 10.5 13.5 9.82843 13.5 9C13.5 8.17157 12.8284 7.5 12 7.5C11.1716 7.5 10.5 8.17157 10.5 9C10.5 9.82843 11.1716 10.5 12 10.5Z\' fill=\'%23FFFFFF\'/%3E%3Cpath d=\'M12 13C12.8284 13 13.5 12.3284 13.5 11.5C13.5 10.6716 12.8284 10 12 10C11.1716 10 10.5 10.6716 10.5 11.5C10.5 12.3284 11.1716 13 12 13Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E',
+            'icon_instagram': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'5\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 3H16.01\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_artstation': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%2313AFF0\'/%3E%3Cpath d=\'M12 6L18 18H6L12 6Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E',
+            'icon_behance_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 10C16 8.89543 15.1046 8 14 8H10C8.89543 8 8 8.89543 8 10V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V10Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M10 8L14 16\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Desktop Background Image (Optional: Uncomment and provide path if you want to use an image background)
-            'desktop_background_image': './assets/backgrounds/test_bg.jpg', // Updated to use test_bg.jpg as per user's screenshot
+            // Desktop Background Image (a simple blue gradient base64 image)
+            'desktop_background_image': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAEgAE/2vG/FwAAAABJRU5ErkJggg==' // A very small solid blue image for placeholder
         };
 
         /**
@@ -1536,7 +1528,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
 **报价示例：**
 
 * **单页概念海报**：¥1200 - ¥4000 (根据复杂度和修订次数)
-* **系列视觉宣传图（3张）**：¥3000 - ¥8000
+* **系列视觉宣传图（3张）：**：¥3000 - ¥8000
 
 **项目周期**：通常为 0.5-2 周。
 `
@@ -1587,7 +1579,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                 servicesMenuItem: 'Services & Pricing',
                 socialsIcon: 'Socials',
                 socialsMenuItem: 'Social Media',
-                settingsMenuItem: 'Settings',
+                settingsMenuItem: 'System Settings',
                 shutdownMenuItem: 'Shutdown',
                 shutdownMessage: 'System is shutting down. Goodbye!', // Added missing translation
 
@@ -1637,7 +1629,7 @@ Feel free to contact me through the following methods to explore the endless pos
 
 I specialize in all types of character design from concept to final render, with a deep focus on **PSX style and low-poly**.
 
-Services include:
+Services include：
 
 * **Concept Sketches**: Providing multi-angle character concepts based on your ideas.
 * **3D Modeling**: Creating high and low-poly characters using tools like Blender/ZBrush.
@@ -1656,7 +1648,7 @@ Services include:
                             id: 'poster-design-category',
                             name: 'Poster & Visual Design',
                             nameEn: 'Poster & Visual Design',
-                            shortDescription: 'Creating promotional posters with cyberpunk and glitch art aesthetics.',
+                            shortDescription: '制作具有赛博朋克和故障艺术感的宣传海报。',
                             detailContent: `
 # Poster & Visual Design
 
@@ -1664,42 +1656,42 @@ I can create striking **Cyberpunk, Y2K, or Glitch Art style** posters and variou
 
 Services include：
 
-* **Event Posters**: Posters for music festivals, game releases, art exhibitions, etc.
-* **Brand Visuals**: Unique graphic elements and promotional images that match your brand's tone.
-* **Digital Illustration**: Custom illustrations for websites, social media, or print.
-* **Basic Motion Graphics**: Adding simple animation effects to posters.
+* **活动海报**：音乐节、游戏发布、艺术展览等主题海报。
+* **品牌视觉**：符合您品牌调性的独特图形元素和宣传图。
+* **数字插画**：用于网站、社交媒体或印刷品的定制插画。
+* **动态图形（基础）**：为海报添加简单的动画效果。
 
-**Pricing Examples:**
+**报价示例：**
 
-* **Single Page Concept Poster**: ¥1200 - ¥4000 (depending on complexity and revisions)
-* **Series of Visual Promotional Images (3 images)**: ¥3000 - ¥8000
+* **单页概念海报**：¥1200 - ¥4000 (根据复杂度和修订次数)
+* **系列视觉宣传图（3张）：**：¥3000 - ¥8000
 
-**Project Cycle**: Typically 0.5-2 weeks.
+**项目周期**：通常为 0.5-2 周。
 `
                         }
                     ]
                 },
 
                 // Socials Section
-                socialsTitle: 'Social Media',
-                socialsDescription: 'Feel free to follow me and interact on the platforms below.',
+                socialsTitle: '社交媒体',
+                socialsDescription: '欢迎在以下平台关注我，与我互动。',
                 socialsLinks: [
-                    { name: 'Weibo', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
+                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
                     { name: 'Instagram', url: 'https://instagram.com/yourprofile', iconAssetKey: 'icon_instagram' },
                     { name: 'ArtStation', url: 'https://artstation.com/yourprofile', iconAssetKey: 'icon_artstation' },
                     { name: 'Behance', url: 'https://behance.net/yourprofile', iconAssetKey: 'icon_behance_square' },
-                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
+                    { name: '邮箱', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
                 ],
 
                 // Settings Section
                 settings: {
-                    title: 'System Settings',
-                    description: 'Adjust your system preferences.',
+                    title: '系统设置',
+                    description: '调整您的系统偏好设置。',
                     options: [
-                        { id: 'language-toggle', type: 'language-toggle', label: 'Toggle Language' }, // Added missing label
-                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: 'Show Desktop Icons' },
-                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: 'Enable System Animations (Unavailable)' },
-                        { id: 'reset-settings', type: 'button', label: 'Reset All Settings' }
+                        { id: 'language-toggle', type: 'language-toggle', label: '切换语言' }, // Added missing label
+                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: '显示桌面图标' },
+                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: '启用系统动画 (暂不可用)' },
+                        { id: 'reset-settings', type: 'button', label: '重置所有设置' }
                     ]
                 },
             }
@@ -2180,11 +2172,11 @@ Services include：
                                 id: 'work-001',
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
-                                thumbnail: 'https://placehold.co/400x300/00BFFF/FFFFFF?text=Scene+1', // Updated to use placeholder
+                                thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAACu/rWvAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 400x300 blue image
                                 images: [
-                                    'https://placehold.co/800x600/00BFFF/FFFFFF?text=Scene+Full+1',
-                                    'https://placehold.co/800x600/007ACC/FFFFFF?text=Scene+Full+2',
-                                    'https://placehold.co/800x600/CCEEFF/000000?text=Scene+Full+3'
+                                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 blue image
+                                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 dark blue image
+                                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC'  // Base64 placeholder for 800x600 light blue image
                                 ],
                                 description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
                                 tags: ['场景', 'PSX', 'Y2K', 'Blender']
@@ -2193,11 +2185,11 @@ Services include：
                                 id: 'work-002',
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
-                                thumbnail: 'https://placehold.co/400x300/00BFFF/FFFFFF?text=Character+1', // Updated to use placeholder
+                                thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAACu/rWvAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 400x300 blue image
                                 images: [
-                                    'https://placehold.co/800x600/00BFFF/FFFFFF?text=Character+Full+1',
-                                    'https://placehold.co/800x600/007ACC/FFFFFF?text=Character+Full+2',
-                                    'https://placehold.co/800x600/CCEEFF/000000?text=Character+Full+3'
+                                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 blue image
+                                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 dark blue image
+                                    'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC'  // Base64 placeholder for 800x600 light blue image
                                 ],
                                 description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
@@ -2210,13 +2202,13 @@ Services include：
                                 id: 'char-001',
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
-                                image: 'https://placehold.co/200x200/00BFFF/FFFFFF?text=Character+A' // Updated to use placeholder
+                                image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC' // Base64 placeholder for 200x200 blue image
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
-                                image: 'https://placehold.co/200x200/007ACC/FFFFFF?text=Character+B' // Updated to use placeholder
+                                image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC' // Base64 placeholder for 200x200 dark blue image
                             }
                         ];
                         break;
@@ -2287,7 +2279,6 @@ Services include：
                     titleBar.classList.remove('inactive');
                 }
             }
-
             /**
              * @function openWindow
              * @description Creates and opens a new window or brings an existing one to the front.
@@ -2575,7 +2566,7 @@ Services include：
                 windowElement.style.left = windowElement.dataset.originalLeft;
                 windowElement.style.top = windowElement.dataset.originalTop;
                 windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
-                windowElement.style.boxShadow = '0 10px 40px rgba(0, 191, 255, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow
+                windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
                 bringToFront(windowElement);
                 console.log(`Window "${windowElement.dataset.windowId}" restored.`);
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
@@ -2596,7 +2587,7 @@ Services include：
                     windowElement.style.left = windowElement.dataset.originalLeft;
                     windowElement.style.top = windowElement.dataset.originalTop;
                     windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
-                    windowElement.style.boxShadow = '0 10px 40px rgba(0, 191, 255, 0.6), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow
+                    windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
                     console.log(`Window "${windowElement.dataset.windowId}" restored from maximized.`);
                 } else {
                     // Maximize
@@ -2688,7 +2679,7 @@ Services include：
                     }
                     if (nextButton) {
                         nextButton.addEventListener('click', () => { 
-                            currentImageIndex = (currentImageIndex + 1) % work.images.length;
+                            currentImageIndex = (currentImageIndex + 1) % work.images.length; 
                             updateGallery();
                         });
                     }
@@ -2884,7 +2875,7 @@ Services include：
                                 <div class="flex flex-wrap gap-4 mt-4">
                                     ${data?.links.map(link => `
                                         <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
-                                            <span class="icon-placeholder" data-asset-key="${link.iconAssetKey}"></span> <!-- Using iconAssetKey -->
+                                            <span class="icon-placeholder" data-asset-key="${link.iconAssetKey}"></span>
                                             <span>${link.name}</span>
                                         </a>
                                     `).join('')}
@@ -3002,41 +2993,14 @@ Services include：
 
                     const section = 'about';
                     // Directly get titles from LANG_CONTENT, as getWindowTitles is for generic sections
-                    const chineseTitle = LANG_CONTENT[currentLanguage]?.aboutTitle;
-                    const englishTitle = LANG_CONTENT['en']?.aboutTitle;
-                    
-                    let content = '';
-                    let data = null;
-                    let isMarkdown = true;
+                    const aboutTitleForWindow = LANG_CONTENT[currentLanguage]?.aboutTitle;
+                    const aboutContentForWindow = LANG_CONTENT[currentLanguage]?.aboutContent;
 
-                    content = `
-                        <div class="flex flex-col items-center justify-center h-full">
-                            <div class="loading-spinner"></div>
-                            <p class="mt-4 text-lg">${LANG_CONTENT[currentLanguage]?.loadingMessage}</p>
-                        </div>
-                    `;
-                    const openedWindow = await openWindow(section, chineseTitle, englishTitle, content, 'about', {}, true); // Pass 'about' as windowId
-
-                    try {
-                        data = await fetchContent(section);
-                        if (data && typeof data.content !== 'undefined') { // Added check
-                            content = data.content;
-                            if (openedWindow) openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
-                        } else {
-                            console.error(`Fetched data for section "${section}" is invalid or missing 'content':`, data);
-                            content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
-                            if (openedWindow) {
-                                openedWindow.querySelector('.os-window-content').innerHTML = content;
-                            }
-                        }
-                    } catch (error) {
-                        console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${section}:`, error);
-                        content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
-                        if (openedWindow) {
-                            openedWindow.querySelector('.os-window-content').innerHTML = content;
-                        }
-                    } finally {
-                        renderDynamicAssets(); // Ensure icons within the content are rendered
+                    if (aboutContentForWindow) { // Check if content exists
+                        openWindow('about', aboutTitleForWindow, LANG_CONTENT['en']?.aboutTitle, aboutContentForWindow, 'about', {}, true);
+                    } else {
+                        console.error(`Error: 'about' content not found for language ${currentLanguage} or is undefined.`);
+                        openWindow('about', 'Error', 'Error', `<p class="text-xl text-red-400">Failed to load About MAZKO content.</p>`, 'about', {}, false);
                     }
                 });
             }
