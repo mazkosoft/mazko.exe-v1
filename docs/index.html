@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [v¹․⁰․⁰]</title>
     <!-- Favicon - 使用一个简单的SVG作为示例 -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>Ⓜ️</text></svg>" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>\" type="image/svg+xml">
     <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google Fonts - Inter 字体作为通用字体，如果需要 'Chocolate Classical Sans'，请在此处引入其 CDN 或本地路径 -->
@@ -62,7 +62,7 @@
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url:  url('docs/assets/backgrounds/test_bg.jpg'); /* 桌面背景图片的CSS变量 */
+            --desktop-image-url:  url('./assets/backgrounds/test_bg.jpg'); /* 桌面背景图片的CSS变量 */
         }
 
         body {
@@ -1416,7 +1416,7 @@
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
             // 桌面背景图像 (使用相对路径)
-            'desktop_background_image': 'docs/assets/backgrounds/test_bg.jpg'
+            'desktop_background_image': './assets/backgrounds/test_bg.jpg'
         };
 
         /**
@@ -1725,7 +1725,7 @@ Services include：
         let currentLanguage = 'zh'; // 将声明移到 DOMContentLoaded 外部
 
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('脚本开始解析。'); // 用于调试
+            console.log('脚本开始解析。'); // Added for debugging
             
             // JavaScript for dynamic elements (e.g., time display)
             // 用于动态元素（例如，时间显示）的 JavaScript
@@ -2325,11 +2325,11 @@ Services include：
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
                                 // 使用相对路径
-                                thumbnail: 'docs/assets/works/work_001_thumbnail.png', 
+                                thumbnail: './assets/works/work_001_thumbnail.png', 
                                 images: [
-                                    'docs/assets/works/work_001_full_1.png', // 使用相对路径
-                                    'docs/assets/works/work_001_full_2.png', // 使用相对路径
-                                    'docs/assets/works/work_001_full_3.png'  // 使用相对路径
+                                    './assets/works/work_001_full_1.png', // 使用相对路径
+                                    './assets/works/work_001_full_2.png', // 使用相对路径
+                                    './assets/works/work_001_full_3.png'  // 使用相对路径
                                 ],
                                 description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
                                 tags: ['场景', 'PSX', 'Y2K', 'Blender']
@@ -2339,11 +2339,11 @@ Services include：
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
                                 // 使用相对路径
-                                thumbnail: 'docs/assets/works/work_002_thumbnail.png', 
+                                thumbnail: './assets/works/work_002_thumbnail.png', 
                                 images: [
-                                    'docs/assets/works/work_002_full_1.png', // 使用相对路径
-                                    'docs/assets/works/work_002_full_2.png', // 使用相对路径
-                                    'docs/assets/works/work_002_full_3.png'  // 使用相对路径
+                                    './assets/works/work_002_full_1.png', // 使用相对路径
+                                    './assets/works/work_002_full_2.png', // 使用相对路径
+                                    './assets/works/work_002_full_3.png'  // 使用相对路径
                                 ],
                                 description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
@@ -2357,14 +2357,14 @@ Services include：
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
                                 // 使用相对路径
-                                image: 'docs/assets/characters/char_001_image.png' 
+                                image: './assets/characters/char_001_image.png' 
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
                                 // 使用相对路径
-                                image: 'docs/assets/characters/char_002_image.png' 
+                                image: './assets/characters/char_002_image.png' 
                             }
                         ];
                         break;
@@ -2391,14 +2391,14 @@ Services include：
                     case 'data-core': // Fetch content for the new Data Core app
                         data = [
                             // 示例灵感图片，请替换为您的实际图片 URL 或 Base64
-                            { url: 'docs/assets/data-core/inspiration_1_thumb.jpg', alt: '赛博朋克城市景观', fullSizeUrl: 'docs/assets/data-core/inspiration_1_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_2_thumb.jpg', alt: '故障艺术肖像', fullSizeUrl: 'docs/assets/data-core/inspiration_2_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_3_thumb.jpg', alt: 'Y2K美学设计', fullSizeUrl: 'docs/assets/data-core/inspiration_3_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_4_thumb.jpg', alt: 'PSX风格场景', fullSizeUrl: 'docs/assets/data-core/inspiration_4_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_5_thumb.jpg', alt: '霓虹灯管艺术', fullSizeUrl: 'docs/assets/data-core/inspiration_5_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_6_thumb.jpg', alt: '科技感UI界面', fullSizeUrl: 'docs/assets/data-core/inspiration_6_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_7_thumb.jpg', alt: '复古未来主义', fullSizeUrl: 'docs/assets/data-core/inspiration_7_full.jpg' },
-                            { url: 'docs/assets/data-core/inspiration_8_thumb.jpg', alt: '数字故障纹理', fullSizeUrl: 'docs/assets/data-core/inspiration_8_full.jpg' }
+                            { url: './assets/data-core/inspiration_1_thumb.jpg', alt: '赛博朋克城市景观', fullSizeUrl: './assets/data-core/inspiration_1_full.jpg' },
+                            { url: './assets/data-core/inspiration_2_thumb.jpg', alt: '故障艺术肖像', fullSizeUrl: './assets/data-core/inspiration_2_full.jpg' },
+                            { url: './assets/data-core/inspiration_3_thumb.jpg', alt: 'Y2K美学设计', fullSizeUrl: './assets/data-core/inspiration_3_full.jpg' },
+                            { url: './assets/data-core/inspiration_4_thumb.jpg', alt: 'PSX风格场景', fullSizeUrl: './assets/data-core/inspiration_4_full.jpg' },
+                            { url: './assets/data-core/inspiration_5_thumb.jpg', alt: '霓虹灯管艺术', fullSizeUrl: './assets/data-core/inspiration_5_full.jpg' },
+                            { url: './assets/data-core/inspiration_6_thumb.jpg', alt: '科技感UI界面', fullSizeUrl: './assets/data-core/inspiration_6_full.jpg' },
+                            { url: './assets/data-core/inspiration_7_thumb.jpg', alt: '复古未来主义', fullSizeUrl: './assets/data-core/inspiration_7_full.jpg' },
+                            { url: './assets/data-core/inspiration_8_thumb.jpg', alt: '数字故障纹理', fullSizeUrl: './assets/data-core/inspiration_8_full.jpg' }
                         ];
                         break;
                     case 'settings': // New case for settings
@@ -3070,7 +3070,7 @@ Services include：
 
                                     openedWindow.querySelectorAll('.os-window-content img[data-full-image]').forEach(img => {
                                         img.addEventListener('click', (e) => {
-                                            modalImage.src = e.target.dataset.full-image;
+                                            modalImage.src = e.target.dataset.fullImage;
                                             imageModal.classList.remove('hidden');
                                         });
                                     });
