@@ -65,7 +65,7 @@
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url: none; /* New CSS variable for desktop background image URL */
+            --desktop-image-url:  url('./assets/backgrounds/test_bg.jpg'); /* New CSS variable for desktop background image URL */
         }
 
         body {
@@ -92,24 +92,24 @@
         }
 
         /* Frutiger Aero style desktop background - Complex gradients and effects (default fallback) */
-        .desktop-background {
-            position: fixed; /* Changed to fixed for full viewport coverage */
-            top: 0; /* Explicitly set top to 0 */
-            left: 0; /* Explicitly set left to 0 */
-            width: 100vw; /* Ensure full viewport width */
-            height: 100vh; /* Ensure full viewport height */
-            min-height: 100vh; /* Added for robustness */
-            /* Default background with multiple gradients for depth and gloss */
-            background-image: 
-                radial-gradient(circle at 10% 90%, rgba(0,191,255,0.3) 0%, transparent 45%), /* Stronger corner glow */
-                radial-gradient(circle at 90% 10%, rgba(0,191,255,0.3) 0%, transparent 45%),
-                radial-gradient(ellipse at center, rgba(0,122,204,0.15) 0%, transparent 55%),
-                linear-gradient(to bottom right, #3A92CE, #CCEEFF);
+          .desktop-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            min-height: 100vh;
+            /* 使用图片作为背景，优先于渐变 */
+            background-image: var(--desktop-image-url);
             background-size: cover;
             background-position: center;
-            opacity: 0.95; /* Slightly more opaque for richer colors */
-            filter: brightness(0.9) contrast(1.1); /* Subtle adjustments */
-            z-index: -1; /* Changed to -1 to ensure it's always behind other elements */
+            opacity: 1; /* 使用图片时建议全不透明 */
+            filter: none;
+            z-index: -1;
+        }
+        .desktop-background::before,
+        .desktop-background::after {
+            display: none !important;
         }
         /* When a background image is active, hide pseudo-elements */
         .desktop-background-image-active {
