@@ -3,83 +3,83 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MAX OS - 虚拟宇宙终端 (Frutiger Aero Style)</title>
-    <!-- Favicon - Using a simple SVG as an example -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>" type="image/svg+xml">
-    <!-- Include Tailwind CSS CDN for rapid building and responsive layouts -->
+    <title>☍ MᴬX.OS ᴠᵉʳ¹․⁰․⁰</title>
+    <!-- Favicon - 使用一个简单的SVG作为示例 -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🅜</text></svg>" type="image/svg+xml">
+    <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Include Google Fonts - Inter font as general font, if 'Chocolate Classical Sans' is needed, include its CDN or local path here -->
+    <!-- 引入 Google Fonts - Inter 字体作为通用字体，如果需要 'Chocolate Classical Sans'，请在此处引入其 CDN 或本地路径 -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <!-- Marked.js for Markdown parsing -->
+    <!-- Marked.js 用于 Markdown 解析 -->
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <style>
-        /* Global styles and variables, optimized for Frutiger Aero (Enhanced) */
+        /* 全局样式和变量，针对 Frutiger Aero（增强版）优化 */
         :root {
-            /* Core Blue Palette - Tuned to match the reference image's vibrant blues */
-            --primary-blue: #00BFFF; /* Bright Sky Blue for highlights and active states */
-            --dark-blue: #007ACC; /* Deeper blue for gradients and shadows */
-            --light-blue: #CCEEFF; /* Very light blue for subtle highlights and text */
-            --mid-blue: #3A92CE; /* New intermediate blue for smoother gradients */
-            --accent-glow-blue: #87CEEB; /* A more subtle, airy blue for glows */
+            /* 核心蓝色调色板 - 调整以匹配参考图片的高饱和蓝色 */
+            --primary-blue: #00BFFF; /* 明亮的天空蓝，用于高光和激活状态 */
+            --dark-blue: #007ACC; /* 深蓝色，用于渐变和阴影 */
+            --light-blue: #CCEEFF; /* 非常浅的蓝色，用于细微高光和文本 */
+            --mid-blue: #3A92CE; /* 新增的中间蓝色，用于更平滑的渐变 */
+            --accent-glow-blue: #87CEEB; /* 更细腻、通透的蓝色光晕 */
 
-            /* Glassmorphism & Translucency - Enhanced for realistic Aero feel */
-            /* Adjusted glass border colors to match status bar blue tones, more opaque */
-            --glass-border-light: rgba(0, 191, 255, 0.8); /* Changed from white to primary blue with high opacity */
-            --glass-border-dark: rgba(0, 122, 204, 0.8); /* Changed from white to dark blue with high opacity */
-            --glass-bg: rgba(255, 255, 255, 0.08); /* Even more subtle white tint for background of glass */
-            --glass-overlay-light: rgba(255, 255, 255, 0.2); /* Lighter overlay for internal elements, slightly stronger */
-            --glass-overlay-dark: rgba(0, 0, 0, 0.1); /* Subtle dark overlay for depth */
+            /* Glassmorphism & 玻璃质感与半透明 - 增强真实 Aero 效果 */
+            --glass-border-light: rgba(0, 191, 255, 0.8); /* 更改为主蓝色，增加不透明度 */
+            --glass-border-dark: rgba(0, 122, 204, 0.8); /* 更改为深蓝色，增加不透明度 */
+            --glass-bg: rgba(255, 255, 255, 0.08); /* 更加细腻的白色背景 */
+            --glass-overlay-light: rgba(255, 255, 255, 0.2); /* 内部元素的更亮覆盖层 */
+            --glass-overlay-dark: rgba(0, 0, 0, 0.1); /* 微妙的黑色覆盖层，用于深度效果 */
 
-            /* Backgrounds - Reflecting the image's vibrant and slightly dark context */
-            --background-dark: #10152B; /* Darker, slightly blue-tinted background */
-            /* Adjusted text color to a deeper blue for most elements, white for prominent ones */
-            --text-color: #004D80; /* Deeper blue for general text (e.g., body, paragraphs) */
+            /* 背景 - 反映图片的鲜明且略暗的氛围 */
+            --background-dark: #10152B; /* 更深的、略带蓝色的背景 */
+            --text-color: #004D80; /* 更深的蓝色，用于一般文本（如主体、段落） */
 
-            /* Fonts - Keeping Inter as a fallback, prioritize a classic Aero-like font if possible */
-            --font-main: 'Inter', sans-serif; /* Default to Inter */
+            /* 字体 - 保持 Inter 作为备选，优先使用经典 Aero 风格字体（如有） */
+            --font-main: 'Inter', sans-serif; /* 默认使用 Inter 字体 */
 
-            /* Frutiger Aero Specific Gradients - More complex and subtle */
-            /* Updated title bar gradients to use status bar blue hues and transparencies */
-            --fa-title-active-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.5) 100%); /* Brighter active title bar with transparency */
-            --fa-title-inactive-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.25) 0%, rgba(0, 122, 204, 0.25) 100%); /* Muted blue for inactive with transparency */
+            /* Frutiger Aero 专属渐变 - 更复杂和细腻 */
+            --fa-title-active-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.5) 100%); /* 更亮的激活标题栏渐变 */
+            --fa-title-inactive-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.25) 0%, rgba(0, 122, 204, 0.25) 100%); /* 更柔和的非激活标题栏渐变 */
             
-            --fa-button-bg: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* More pronounced button base */
-            --fa-button-hover-bg: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%); /* Lighter on hover */
-            --fa-button-active-bg: linear-gradient(to top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* Depressed look */
+            --fa-button-bg: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* 更明显的按钮基础渐变 */
+            --fa-button-hover-bg: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%); /* 悬停时更亮 */
+            --fa-button-active-bg: linear-gradient(to top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* 按下时的渐变效果 */
             
-            /* Enhanced gloss effect for buttons and elements */
-            --fa-gloss-effect: inset 0 1px 12px rgba(255, 255, 255, 0.7); /* Stronger inner highlight */
-            --fa-dark-gloss-effect: inset 0 -1px 8px rgba(0, 0, 0, 0.3); /* Subtle inner shadow for depth */
+            /* 按钮和元素的增强光泽效果 */
+            --fa-gloss-effect: inset 0 1px 12px rgba(255, 255, 255, 0.7); /* 更强的内高光 */
+            --fa-dark-gloss-effect: inset 0 -1px 8px rgba(0, 0, 0, 0.3); /* 微妙的内阴影，用于深度效果 */
 
-            /* Shadows & Glows - Increased intensity and spread for Aero feel */
-            --fa-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3); /* Slightly softer shadow */
-            --fa-shadow-deep: 0 8px 20px rgba(0, 0, 0, 0.5); /* Deeper shadow, but less spread */
-            --fa-glow-blue: 0 0 12px rgba(0, 191, 255, 0.8); /* Stronger blue glow matching status bar */
-            --fa-inner-highlight: inset 0 1px 6px rgba(255, 255, 255, 0.3); /* Subtle inner highlight for gloss */
-            --fa-inner-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.15); /* Inner shadow for depth */
+            /* 阴影与光晕 - 增强 Aero 质感的强度和扩散 */
+            --fa-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3); /* 略微柔和的阴影 */
+            --fa-shadow-deep: 0 8px 20px rgba(0, 0, 0, 0.5); /* 更深的阴影，但扩散较少 */
+            --fa-glow-blue: 0 0 12px rgba(0, 191, 255, 0.8); /* 更强的蓝色光晕，匹配状态栏 */
+            --fa-inner-highlight: inset 0 1px 6px rgba(255, 255, 255, 0.3); /* 微妙的内高光，用于光泽效果 */
+            --fa-inner-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.15); /* 内阴影，用于深度效果 */
 
-            --taskbar-height: 48px; /* Define taskbar height */
+            --taskbar-height: 48px; /* 定义任务栏高度 */
 
-            /* Cursors - These will be set dynamically by JavaScript */
+            /* 鼠标指针 - 由 JavaScript 动态设置 */
             --cursor-default: auto;
             --cursor-active: auto;
             --cursor-pointer: pointer;
 
-            --desktop-image-url:  url('./assets/backgrounds/test_bg.jpg'); /* New CSS variable for desktop background image URL */
+            --desktop-image-url:  url('./assets/backgrounds/test_bg.jpg'); /* 桌面背景图片的CSS变量 */
         }
 
         body {
-            font-family: var(--font-main); /* Apply the new main font globally */
-            background-color: var(--background-dark); /* Dark background */
-            color: var(--text-color); /* Text color set to deeper blue */
+            /* 全局字体应用新主字体 */
+            font-family: var(--font-main); 
+            /* 深色背景 */
+            background-color: var(--background-dark); 
+            /* 文本颜色设置为更深的蓝色 */
+            color: var(--text-color); 
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevent scrollbars, as we simulate a desktop environment */
-            position: relative; /* For background animation positioning */
-            width: 100vw; /* Ensure body takes full viewport width */
-            height: 100vh; /* Ensure body takes full viewport height */
+            overflow: hidden; /* 防止滚动条出现，模拟桌面环境 */
+            position: relative; /* 用于背景动画定位 */
+            width: 100vw; /* 确保主体占满整个视口宽度 */
+            height: 100vh; /* 确保主体占满整个视口高度 */
             cursor: var(--cursor-default);
-            display: flex; /* Use flexbox for desktop container */
+            display: flex; /* 使用弹性盒子布局桌面容器 */
             flex-direction: column;
         }
 
@@ -91,7 +91,7 @@
             cursor: var(--cursor-pointer);
         }
 
-        /* Frutiger Aero style desktop background - Complex gradients and effects (default fallback) */
+        /* Frutiger Aero 风格桌面背景 - 复杂渐变和特效（默认回退） */
           .desktop-background {
             position: fixed;
             top: 0;
@@ -111,19 +111,19 @@
         .desktop-background::after {
             display: none !important;
         }
-        /* When a background image is active, hide pseudo-elements */
+        /* 当背景图片激活时，隐藏伪元素 */
         .desktop-background-image-active {
-            background-image: var(--desktop-image-url) !important; /* Set image and ensure it overrides */
-            background-color: transparent !important; /* Crucial: make sure no solid color underneath */
-            opacity: 1 !important; /* Ensure full opacity */
-            filter: none !important; /* No filters */
+            background-image: var(--desktop-image-url) !important; /* 设置图片并确保其覆盖 */
+            background-color: transparent !important; /* 关键：确保底下没有实色 */
+            opacity: 1 !important; /* 确保完全不透明 */
+            filter: none !important; /* 无滤镜 */
         }
         .desktop-background-image-active::before,
         .desktop-background-image-active::after {
-            display: none !important; /* Ensure pseudo-elements are truly hidden */
+            display: none !important; /* 确保伪元素被隐藏 */
         }
 
-        /* Simulate subtle noise/grain texture - critical for Aero feel */
+        /* 模拟细微噪点/颗粒纹理 - Aero 必备 */
         .desktop-background::before {
             content: '';
             position: absolute;
@@ -131,13 +131,13 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzJ6OAAAAAXNSR0IArs4c6QAAABJJREFUGFdjYGBgYGJgaAgGAIAADoA7X0jYAAAAAElFTkSuQmCC"); /* Tiny noise texture */
+            background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAGCAYAAADgzJ6OAAAAAXNSR0IArs4c6QAAABJJREFUGFdjYGBgYGJgaAgGAIAADoA7X0jYAAAAAElFTkSuQmCC"); /* 微小噪点纹理 */
             background-repeat: repeat;
-            opacity: 0.08; /* Slightly more visible */
+            opacity: 0.08; /* 稍微明显一些 */
             z-index: 1;
         }
 
-        /* Simulate glow effect - enhanced */
+        /* 模拟光晕效果 - 增强版 */
         .desktop-background::after {
             content: '';
             position: absolute;
@@ -145,32 +145,32 @@
             left: 50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,191,255,0.5) 0%, transparent 65%); /* Stronger center glow */
+            background: radial-gradient(circle at center, rgba(0,191,255,0.5) 0%, transparent 65%); /* 更强的中心光晕 */
             transform: translate(-50%, -50%);
-            animation: pulse-glow 12s infinite alternate; /* Faster glow pulse animation */
-            z-index: 2; /* Above noise, below content */
+            animation: pulse-glow 12s infinite alternate; /* 更快的光晕脉冲动画 */
+            z-index: 2; /* 在噪点上方，在内容下方 */
         }
 
-        /* Glow pulse animation - adjusted */
+        /* 光晕脉冲动画 - 调整 */
         @keyframes pulse-glow {
             0% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.4; }
             50% { transform: translate(-50%, -50%) scale(1.02); opacity: 0.6; }
             100% { transform: translate(-50%, -50%) scale(0.98); opacity: 0.4; }
         }
 
-        /* Desktop container, now acting as the main content wrapper */
+        /* 桌面容器，作为主要内容包装器 */
         .desktop-container {
-            position: relative; /* Position relative to body */
-            flex-grow: 1; /* Take up all available space */
+            position: relative; /* 相对于主体定位 */
+            flex-grow: 1; /* 占满所有可用空间 */
             width: 100%;
             height: 100%;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            z-index: 3; /* Ensure it's above the background effects */
+            z-index: 3; /* 确保在背景特效之上 */
         }
 
-        /* Desktop Layout - holds the main desktop area and the taskbar */
+        /* 桌面布局 - 包含主桌面区和任务栏 */
         .desktop-layout {
             display: flex;
             flex-direction: column;
@@ -178,52 +178,52 @@
             height: 100%;
         }
 
-        /* Main Desktop Area - where icons and windows reside */
+        /* 主桌面区 - 图标和窗口所在区域 */
         .main-desktop-area {
             flex-grow: 1;
             position: relative;
-            overflow: hidden; /* For windows */
-            padding: 10px; /* Padding for desktop icons */
-            padding-bottom: calc(10px + var(--taskbar-height)); /* Account for taskbar height only */
+            overflow: hidden; /* 用于窗口 */
+            padding: 10px; /* 桌面图标的内边距 */
+            padding-bottom: calc(10px + var(--taskbar-height)); /* 仅考虑任务栏高度 */
         }
 
-        /* Taskbar (formerly dock) */
+        /* 任务栏（原Dock） */
         .taskbar {
             position: absolute;
-            bottom: 0; /* Position at the very bottom */
+            bottom: 0; /* 固定在底部 */
             left: 0;
-            width: 100%; /* Full width */
-            height: var(--taskbar-height); /* Fixed height */
-            /* Background and borders adjusted to match status bar */
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.4)); /* Match status bar gradient */
-            backdrop-filter: blur(20px); /* Stronger blur for glass effect */
-            -webkit-backdrop-filter: blur(20px); /* For Safari */
-            border-top: 1px solid var(--glass-border-light); /* Changed to new blue border */
-            border-bottom: 1px solid var(--glass-border-dark); /* Changed to new blue border */
-            box-shadow: 0 -6px 25px var(--fa-glow-blue), inset 0 2px 15px rgba(255, 255, 255, 0.4); /* More prominent shadow and inner highlight */
+            width: 100%; /* 全宽 */
+            height: var(--taskbar-height); /* 固定高度 */
+            /* 背景和边框调整以匹配状态栏 */
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.4)); /* 匹配状态栏渐变 */
+            backdrop-filter: blur(20px); /* 更强的模糊效果 */
+            -webkit-backdrop-filter: blur(20px); /* Safari 支持 */
+            border-top: 1px solid var(--glass-border-light); /* 新蓝色边框 */
+            border-bottom: 1px solid var(--glass-border-dark); /* 新蓝色边框 */
+            box-shadow: 0 -6px 25px var(--fa-glow-blue), inset 0 2px 15px rgba(255, 255, 255, 0.4); /* 更明显的阴影和内高光 */
             display: flex;
             align-items: center;
-            justify-content: space-between; /* Space between start button, icons, and tray */
-            padding: 0 10px; /* Padding on sides */
-            z-index: 100; /* Ensure taskbar is always on top */
-            position: fixed; /* Keep taskbar fixed */
+            justify-content: space-between; /* 在开始按钮、图标和托盘之间留出空间 */
+            padding: 0 10px; /* 两侧内边距 */
+            z-index: 100; /* 确保任务栏始终在最上层 */
+            position: fixed; /* 固定任务栏 */
         }
 
-        /* Start Button - Highly detailed Aero look */
+        /* 开始按钮 - 高度细致的 Aero 风格 */
         .start-button {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%); /* Stronger white highlight */
-            border: 2px solid rgba(255, 255, 255, 0.8); /* Thicker, more prominent border */
-            border-radius: 50%; /* Circular */
-            width: 48px; /* Slightly larger */
-            height: 48px; /* Slightly larger */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%); /* 更强的白色高光 */
+            border: 2px solid rgba(255, 255, 255, 0.8); /* 更厚、更明显的边框 */
+            border-radius: 50%; /* 圆形 */
+            width: 48px; /* 稍大一些 */
+            height: 48px; /* 稍大一些 */
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white; /* Text color explicitly white */
+            color: white; /* 文本颜色显式为白色 */
             font-size: 0.9rem;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8); /* Stronger blue glow */
-            box-shadow: 0 6px 20px rgba(0,0,0,0.7), inset 0 2px 10px rgba(255,255,255,0.8); /* More prominent shadow and inner highlight */
+            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8); /* 更强的蓝色光晕 */
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7), inset 0 2px 10px rgba(255,255,255,0.8); /* 更明显的阴影和内高光 */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             white-space: nowrap;
@@ -231,7 +231,7 @@
             overflow: hidden;
         }
 
-        /* Inner shine for the start button */
+        /* 开始按钮内部高光 */
         .start-button::before {
             content: '';
             position: absolute;
@@ -239,7 +239,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.6) 0%, transparent 60%); /* Top-left highlight */
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.6) 0%, transparent 60%); /* 左上角高光 */
             border-radius: 50%;
             opacity: 0.9;
             pointer-events: none;
@@ -251,7 +251,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(0,191,255,0.4) 0%, transparent 70%); /* Subtle blue glow */
+            background: radial-gradient(circle at center, rgba(0,191,255,0.4) 0%, transparent 70%); /* 微妙的蓝色光晕 */
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -260,11 +260,11 @@
 
         .start-button:hover {
             background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%);
-            transform: translateY(-4px); /* More pronounced lift effect */
+            transform: translateY(-4px); /* 更明显的抬起效果 */
             box-shadow: 0 8px 25px rgba(0, 191, 255, 0.9), inset 0 2px 12px rgba(255,255,255,0.9);
         }
         .start-button:hover::after {
-            opacity: 1; /* Show glow on hover */
+            opacity: 1; /* 悬停时显示光晕 */
         }
 
         .start-button:active {
@@ -274,13 +274,13 @@
             filter: brightness(0.9);
         }
 
-        .start-button .icon-image { /* Sizing for dynamically loaded image */
-            width: 2em; /* Larger icon size */
+        .start-button .icon-image { /* 动态加载图片的尺寸 */
+            width: 2em; /* 更大的图标尺寸 */
             height: 2em;
-            filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.8)); /* Stronger text-shadow equivalent for image */
+            filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.8)); /* 更强的文本阴影等效于图像 */
         }
 
-        /* Taskbar Icons (for open/minimized windows) */
+        /* 任务栏图标（打开/最小化窗口） */
         .taskbar-icons-container {
             display: flex;
             flex-grow: 1;
@@ -289,39 +289,39 @@
             height: 100%;
             overflow-x: auto;
             padding: 0 10px;
-            gap: 10px; /* Larger gap between taskbar items */
+            gap: 10px; /* 任务栏项目之间的间距更大 */
         }
 
-        /* System Tray */
+        /* 系统托盘 */
         .system-tray {
             display: flex;
             align-items: center;
-            gap: 12px; /* Larger gap between system icons */
+            gap: 12px; /* 系统图标之间的间距更大 */
         }
 
         .system-tray-icon {
-            font-size: 1.2rem; /* Slightly larger icon size */
-            color: var(--text-color); /* Adjusted to deeper blue */
+            font-size: 1.2rem; /* 图标尺寸稍大 */
+            color: var(--text-color); /* 调整为更深的蓝色 */
             transition: all 0.2s ease;
             cursor: default;
-            padding: 8px; /* Slightly more padding */
+            padding: 8px; /* 稍微多一点内边距 */
             border-radius: 50%;
-            box-shadow: 0 1px 5px rgba(0,0,0,0.3); /* Subtle shadow */
+            box-shadow: 0 1px 5px rgba(0,0,0,0.3); /* 微妙的阴影 */
         }
         .system-tray-icon:hover {
-            color: white; /* White on hover */
-            background-color: rgba(255,255,255,0.25); /* More visible hover */
+            color: white; /* 悬停时变为白色 */
+            background-color: rgba(255,255,255,0.25); /* 更明显的悬停效果 */
             transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4); /* Stronger blue glow */
+            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4); /* 更强的蓝色光晕 */
         }
-        .system-tray-icon .icon-image { /* Sizing for dynamically loaded image */
+        .system-tray-icon .icon-image { /* 动态加载图片的尺寸 */
             width: 1.2em;
             height: 1.2em;
             vertical-align: middle;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6)); /* More prominent glow */
+            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6)); /* 更明显的光晕 */
         }
 
-        /* Desktop Icons (Shortcuts) */
+        /* 桌面图标（快捷方式） */
         .desktop-icons-container {
             position: absolute;
             top: 0;
@@ -337,7 +337,7 @@
             flex-direction: column;
             align-items: center;
             text-align: center;
-            width: 100px; /* Slightly wider for better spacing */
+            width: 100px; /* 稍微宽一些，以便更好的间距 */
             cursor: pointer;
             transition: transform 0.15s ease, filter 0.15s ease;
             padding: 10px;
@@ -357,7 +357,7 @@
             background-color: transparent;
         }
 
-        .desktop-icon .icon-image { /* Sizing for dynamically loaded image */
+        .desktop-icon .icon-image { /* 动态加载图片的尺寸 */
             width: 60px;
             height: 60px;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.8));
@@ -365,7 +365,7 @@
         }
 
         .desktop-icon:hover .icon-image {
-            /* Apply glow around the icon itself using drop-shadow */
+            /* 悬停时为图标本身添加光晕 */
             filter: drop-shadow(0 0 8px var(--primary-blue))
                     drop-shadow(0 0 15px var(--accent-glow-blue))
                     drop-shadow(0 0 25px rgba(0, 191, 255, 0.3));
@@ -384,7 +384,7 @@
             max-width: 100%;
         }
 
-        /* Start Menu styles - Highly glass-like */
+        /* 开始菜单样式 - 高度玻璃质感 */
         .start-menu {
             position: absolute;
             bottom: var(--taskbar-height);
@@ -414,7 +414,7 @@
             display: flex;
         }
 
-        /* Start Menu header (with profile info) - More defined */
+        /* 开始菜单头部（带个人信息） - 更突出 */
         .start-menu-header {
             display: flex;
             align-items: center;
@@ -453,7 +453,7 @@
             text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
         }
 
-        /* Start Menu item styles - More interactive and glossy */
+        /* 开始菜单条目样式 - 更具交互性和光泽感 */
         .start-menu-item {
             padding: 15px 20px;
             display: flex;
@@ -515,7 +515,7 @@
             text-overflow: ellipsis;
         }
 
-        /* Start Menu Buttons Container (for Settings and Shutdown) */
+        /* 开始菜单底部按钮容器（设置和关机） */
         .start-menu-buttons-container { 
             display: flex;
             flex-direction: row;
@@ -527,7 +527,7 @@
             border-top: 1px solid var(--glass-border-dark);
         }
 
-        /* New style for icon-only buttons in the start menu footer - more jelly-like */
+        /* 开始菜单底部图标按钮的新样式 - 更果冻感 */
         .start-menu-footer-button {
             width: 58px;
             height: 58px;
@@ -576,7 +576,7 @@
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
         }
 
-        /* Animation for menu appearance - Adjusted for bottom-left origin */
+        /* 动画：菜单出现 - 从左下角放大淡入 */
         @keyframes fadeInScaleUpFromBottomLeft {
             from {
                 opacity: 0;
@@ -588,7 +588,7 @@
             }
         }
 
-        /* Window styles (retaining glassmorphism) - Main focus of Aero */
+        /* 窗口样式（保留玻璃质感） - Aero 重点 */
         .os-window {
             position: absolute;
             background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.2), rgba(0, 122, 204, 0.1));
@@ -624,7 +624,7 @@
             border: none;
         }
 
-        /* Window title bar - Enhanced Frutiger Aero style */
+        /* 窗口标题栏 - 增强 Frutiger Aero 风格 */
         .os-window-title-bar {
             background: var(--fa-title-active-gradient);
             backdrop-filter: blur(10px);
@@ -643,7 +643,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
             box-shadow: inset 0 1px 4px rgba(255,255,255,0.2);
         }
-        /* Glassy internal highlight for title bar */
+        /* 标题栏内部玻璃高光 */
         .os-window-title-bar::after {
             content: '';
             position: absolute;
@@ -665,7 +665,7 @@
             background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 60%);
         }
 
-        /* Window title and logo container */
+        /* 窗口标题和Logo容器 */
         .os-window-title-content {
             display: flex;
             align-items: center;
@@ -683,7 +683,7 @@
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
         }
 
-        /* Window control buttons (minimize, maximize, close) - Smaller and more prominent */
+        /* 窗口控制按钮（最小化、最大化、关闭） - 更小更突出 */
         .os-window-controls {
             display: flex;
             gap: 6px;
@@ -719,7 +719,7 @@
             pointer-events: none;
         }
 
-        /* Specific button colors for hover/active states */
+        /* 悬停/激活状态下的按钮颜色 */
         .os-window-controls .control-button.close { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
         .os-window-controls .control-button.minimize { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
         .os-window-controls .control-button.maximize { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
@@ -747,7 +747,7 @@
             filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
         }
 
-        /* Window content area */
+        /* 窗口内容区 */
         .os-window-content {
             flex-grow: 1;
             padding: 25px;
@@ -757,7 +757,7 @@
             overflow: auto;
         }
 
-        /* Status bar at the bottom of each window */
+        /* 每个窗口底部的状态栏 */
         .os-window-status-bar {
             background: linear-gradient(to top, rgba(0, 191, 255, 0.4) 0%, rgba(0, 122, 204, 0.4) 100%);
             border-top: 2px solid rgba(255, 255, 255, 0.5);
@@ -768,7 +768,7 @@
             box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5);
         }
 
-        /* Markdown specific styles within window content - tuned for Aero readability */
+        /* Markdown内容区专属样式 - 针对 Aero 可读性优化 */
         .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: white; border-bottom: 3px solid var(--primary-blue); padding-bottom: 0.5em; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
         .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: white; text-shadow: 0 0 8px rgba(255,255,255,0.4); }
         .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.6); }
@@ -783,7 +783,7 @@
         .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 0.85; background-color: rgba(0,191,255,0.25); border-radius: 10px; padding-top: 1em; padding-bottom: 1em; color: var(--text-color); }
 
 
-        /* Window pop-in animation - more subtle */
+        /* 窗口弹出动画 - 更细腻 */
         @keyframes windowPopIn {
             from {
                 opacity: 0;
@@ -795,7 +795,7 @@
             }
         }
 
-        /* Works grid specific styles */
+        /* 作品集网格专属样式 */
         .works-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
@@ -870,7 +870,7 @@
             margin-top: 6px;
         }
 
-        /* Work Detail Window Specific Styles */
+        /* 作品详情窗口专属样式 */
         .work-detail-content {
             display: flex;
             flex-direction: column;
@@ -1023,7 +1023,7 @@
             background: linear-gradient(to right, rgba(0, 191, 255, 0.3), rgba(0, 122, 204, 0.2));
         }
 
-        /* Taskbar icon for minimized windows - more glassy */
+        /* 任务栏最小化窗口图标 - 更玻璃质感 */
         .taskbar-minimized-icon {
             background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.3));
             border: 1px solid var(--glass-border-light);
@@ -1064,7 +1064,7 @@
             box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 15px rgba(0,0,0,0.7);
         }
 
-        /* Active taskbar icon style */
+        /* 激活状态下的任务栏图标样式 */
         .taskbar-minimized-icon.active {
             background: linear-gradient(to bottom, rgba(0, 191, 255, 0.8) 0%, rgba(0, 122, 204, 0.8) 100%);
             border-color: var(--primary-blue);
@@ -1086,7 +1086,7 @@
             filter: brightness(2) drop-shadow(0 0 12px rgba(255,255,255,1));
         }
 
-        /* Loading spinner styles */
+        /* 加载动画样式 */
         .loading-spinner {
             border: 5px solid rgba(255, 255, 255, 0.4);
             border-top: 5px solid var(--primary-blue);
@@ -1102,7 +1102,7 @@
             100% { transform: rotate(360deg); }
         }
 
-        /* Sub-menu for language selection */
+        /* 语言选择子菜单 */
         .start-menu-submenu {
             position: absolute;
             left: 100%;
@@ -1123,7 +1123,7 @@
             display: flex;
         }
 
-        /* Toggle switch styles - more Aero-like */
+        /* 开关样式 - 更 Aero 风格 */
         .toggle-switch {
             position: relative;
             display: inline-block;
@@ -1181,7 +1181,7 @@
             transform: translateX(30px);
         }
 
-        /* Round sliders */
+        /* 圆形滑块 */
         .toggle-slider.round {
             border-radius: 40px;
         }
@@ -1190,13 +1190,13 @@
             border-radius: 50%;
         }
 
-        /* Custom Scrollbar Styles (for Webkit browsers like Chrome/Safari) */
-        /* Track */
+        /* 自定义滚动条样式（Webkit浏览器如Chrome/Safari） */
+        /* 滚动条轨道 */
         ::-webkit-scrollbar {
             width: 20px;
         }
 
-        /* Handle */
+        /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
             background: linear-gradient(to bottom, rgba(0, 191, 255, 0.9), rgba(0, 122, 204, 0.9));
             border-radius: 15px;
@@ -1205,19 +1205,19 @@
             box-shadow: inset 0 0 10px rgba(255,255,255,0.3);
         }
 
-        /* Handle on hover */
+        /* 滑块悬停时 */
         ::-webkit-scrollbar-thumb:hover {
             background: linear-gradient(to bottom, rgba(0, 191, 255, 1), rgba(0, 122, 204, 1));
             box-shadow: inset 0 0 12px rgba(255,255,255,0.4), 0 0 20px rgba(0,191,255,0.8);
         }
 
-        /* Track background */
+        /* 轨道背景 */
         ::-webkit-scrollbar-track {
             background: rgba(255, 255, 255, 0.15);
             border-radius: 15px;
         }
 
-        /* Buttons (arrows) - more prominent and glossy */
+        /* 滚动条按钮（箭头） - 更突出更光泽 */
         ::-webkit-scrollbar-button {
             background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%);
             border-radius: 50%;
@@ -1244,7 +1244,7 @@
             filter: brightness(0.8);
         }
 
-        /* For Firefox scrollbars */
+        /* Firefox滚动条样式 */
         html {
             scrollbar-width: thin;
             scrollbar-color: rgba(0, 191, 255, 0.9) rgba(255, 255, 255, 0.15);
@@ -1252,19 +1252,19 @@
     </style>
 </head>
 <body>
-    <!-- Desktop background layer for dynamic Frutiger Aero style background -->
+    <!-- 桌面背景层，用于动态 Frutiger Aero 风格背景 -->
     <div class="desktop-background" id="desktop-background"></div>
 
-    <!-- Desktop container, simulating a screen -->
+    <!-- 桌面容器，模拟屏幕 -->
     <div class="desktop-container" id="desktop-container">
-        <!-- Desktop Layout - holds the main desktop area and the taskbar -->
+        <!-- 桌面布局 - 包含主桌面区和任务栏 -->
         <div class="desktop-layout">
-            <!-- Main Desktop Area - where icons and windows reside -->
+            <!-- 主桌面区 - 图标和窗口所在区域 -->
             <div class="main-desktop-area" id="main-desktop-area">
-                <!-- Initial welcome message, will be hidden when windows open -->
-                <!-- Removed the welcome message entirely as requested -->
+                <!-- 初始欢迎信息，窗口打开时隐藏 -->
+                <!-- 移除欢迎信息 -->
                 
-                <!-- Desktop Icons (Shortcuts) -->
+                <!-- 桌面图标（快捷方式） -->
                 <div class="desktop-icons-container" id="desktop-icons-container">
                     <div class="desktop-icon" data-section="works" data-title-zh="我的作品集" data-title-en="My Works">
                         <span class="icon-placeholder" data-asset-key="icon_works"></span>
@@ -1274,7 +1274,7 @@
                         <span class="icon-placeholder" data-asset-key="icon_characters"></span>
                         <span class="desktop-icon-label" data-lang-key="charactersIcon">角色</span>
                     </div>
-                    <!-- About Me icon changed to mazko.exe with M icon -->
+                    <!-- 关于我图标更改为 mazko.exe 和 M 图标 -->
                     <div class="desktop-icon" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO">
                         <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                         <span class="desktop-icon-label" data-lang-key="mazkoExeIcon">MAZKO</span>
@@ -1288,12 +1288,12 @@
                         <span class="desktop-icon-label" data-lang-key="socialsIcon">社交</span>
                     </div>
                 </div>
-                <!-- Windows will be appended here by JavaScript -->
+                <!-- 窗口将通过 JavaScript 附加在这里 -->
             </div>
 
-            <!-- Start Menu -->
+            <!-- 开始菜单 -->
             <div id="start-menu" class="start-menu hidden">
-                <div class="start-menu-header" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO"> <!-- Make header clickable to open About Me -->
+                <div class="start-menu-header" data-section="about" data-title-zh="关于 MAZKO" data-title-en="About MAZKO"> <!-- 点击头部打开关于我 -->
                     <span class="icon-placeholder" data-asset-key="icon_mazko_logo"></span>
                     <span data-lang-key="profileName">MAZKO</span>
                 </div>
@@ -1313,35 +1313,35 @@
                     <span class="icon-placeholder" data-asset-key="icon_socials"></span>
                     <span class="menu-item-label"></span>
                 </a>
-                <!-- Removed the horizontal line as requested -->
+                <!-- 移除水平分隔线 -->
                 <!-- <div class="border-t border-gray-600 my-2 mx-4"></div> -->
-                <!-- Settings and Shutdown Buttons in a container, now using start-menu-footer-button class -->
+                <!-- 设置和关机按钮在一个容器中，现在使用 start-menu-footer-button 类 -->
                 <div class="start-menu-buttons-container">
                     <button class="start-menu-footer-button" data-section="settings" data-lang-key="settingsMenuItem" title="设置" data-title-zh="系统设置" data-title-en="Settings">
                         <span class="icon-placeholder" data-asset-key="icon_settings"></span>
-                        <!-- Removed text span as requested -->
+                        <!-- 移除文本span -->
                     </button>
                     <button class="start-menu-footer-button" data-section="shutdown" data-lang-key="shutdownMenuItem" title="关闭系统" data-title-zh="关闭系统" data-title-en="Shutdown">
                         <span class="icon-placeholder" data-asset-key="icon_shutdown"></span>
-                        <!-- Removed text span as requested -->
+                        <!-- 移除文本span -->
                     </button>
                 </div>
             </div>
 
-            <!-- Taskbar at the bottom -->
+            <!-- 任务栏底部 -->
             <div class="taskbar" id="taskbar">
-                <!-- Start Button changed to M icon -->
+                <!-- 开始按钮更改为 M 图标 -->
                 <button class="start-button" id="start-button-taskbar">
                     <span class="icon-placeholder" data-asset-key="icon_mazko_logo" id="start-button-icon-placeholder"></span>
-                    <!-- <span data-lang-key="startButton">开始</span> Removed text -->
+                    <!-- <span data-lang-key="startButton">开始</span> 移除文本 -->
                 </button>
 
-                <!-- Taskbar icons for open/minimized windows -->
+                <!-- 任务栏图标（打开/最小化窗口） -->
                 <div id="taskbar-icons" class="taskbar-icons-container">
-                    <!-- Minimized window icons will be appended here -->
+                    <!-- 最小化窗口图标将附加在这里 -->
                 </div>
 
-                <!-- Right side system tray -->
+                <!-- 右侧系统托盘 -->
                 <div class="system-tray">
                     <div class="system-tray-icon">
                         <span class="icon-placeholder" data-asset-key="icon_wifi"></span>
@@ -1352,68 +1352,68 @@
                     <div class="system-tray-icon">
                         <span class="icon-placeholder" data-asset-key="icon_volume"></span>
                     </div>
-                    <span class="text-sm text-white opacity-80" id="current-time"></span> <!-- Time display, kept white for contrast -->
+                    <span class="text-sm text-white opacity-80" id="current-time"></span> <!-- 时间显示，保持白色以增强对比 -->
                 </div>
             </div>
         </div>
     </div>
 
     <script>
-        console.log('Script started parsing.'); // Added for debugging
+        console.log('脚本开始解析。'); // Added for debugging
         
         /**
          * @object ASSETS
-         * @description Centralized management of all image and icon paths.
-         * All assets are now Base64 encoded for self-containment.
+         * @description 所有图片和图标路径的集中管理。
+         * 所有资产现在都经过Base64编码以实现自包含。
          */
         const ASSETS = {
-            // Cursor images (simple black dot for default, cross for active, arrow for pointer)
+            // 光标图像（默认黑色点，活动时十字，指针时箭头）
             'cursor_default': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Ccircle cx=\'8\' cy=\'8\' r=\'2\' fill=\'%23000000\'/%3E%3C/svg%3E',
             'cursor_active': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M8 0V16M0 8H16\' stroke=\'%23000000\' stroke-width=\'2\'/%3E%3C/svg%3E',
             'cursor_pointer': 'data:image/svg+xml,%3Csvg width=\'16\' height=\'16\' viewBox=\'0 0 16 16\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M1 1L15 8L1 15V1L1 1Z\' fill=\'%23000000\' stroke=\'%23000000\' stroke-width=\'1\'/%3E%3C/svg%3E',
 
-            // Desktop Icons / Start Menu Icons (simple SVG icons)
+            // 桌面图标 / 开始菜单图标 (简单的SVG图标)
             'icon_works': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M2 12V4C2 3.44772 2.44772 3 3 3H9L11 7H21C21.5523 7 22 7.44772 22 8V20C22 20.5523 21.5523 21 21 21H3C2.44772 21 2 20.5523 2 20V12Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_characters': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M17 21V19C17 17.9391 16.5786 16.9217 15.8284 16.1716C15.0783 15.4214 14.0609 15 13 15H5C3.93913 15 2.92172 15.4214 2.17157 16.1716C1.42143 16.9217 1 17.9391 1 19V21M17 21H23V19C23 17.9391 22.5786 16.9217 21.8284 16.1716C21.0783 15.4214 20.0609 15 19 15H17M9 3C11.2091 3 13 4.79086 13 7C13 9.20914 11.2091 11 9 11C6.79086 11 5 9.20914 5 7C5 4.79086 6.79086 3 9 3Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
-            'icon_mazko_logo': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M7.5 12C7.5 10.16 8.96 8.75 10.75 8.75C12.54 8.75 14 10.16 14 12C14 13.84 12.54 15.25 10.75 15.25C8.96 15.25 7.5 13.84 7.5 12ZM10.75 7.5C13.29 7.5 15.33 9.38 15.33 12C15.33 14.62 13.29 16.5 10.75 16.5C8.21 16.5 6.17 14.62 6.17 12C6.17 9.38 8.21 7.5 10.75 7.5ZM2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12ZM3.33 12C3.33 7.21 7.21 3.33 12 3.33C16.79 3.33 20.67 7.21 20.67 12C20.67 16.79 16.79 20.67 12 20.67C7.21 20.67 3.33 16.79 3.33 12Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E', // A generic 'M' shape in a circle, like a logo
+            'icon_mazko_logo': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M7.5 12C7.5 10.16 8.96 8.75 10.75 8.75C12.54 8.75 14 10.16 14 12C14 13.84 12.54 15.25 10.75 15.25C8.96 15.25 7.5 13.84 7.5 12ZM10.75 7.5C13.29 7.5 15.33 9.38 15.33 12C15.33 14.62 13.29 16.5 10.75 16.5C8.21 16.5 6.17 14.62 6.17 12C6.17 9.38 8.21 7.5 10.75 7.5ZM2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2C6.48 2 2 6.48 2 12ZM3.33 12C3.33 7.21 7.21 3.33 12 3.33C16.79 3.33 20.67 7.21 20.67 12C20.67 16.79 16.79 20.67 12 20.67C7.21 20.67 3.33 16.79 3.33 12Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E', // 一个圆圈中的通用“M”形，像一个标志
             'icon_services': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 13.5V18C18 19.1046 17.1046 20 16 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4H10.5M18 13.5L22 9.5M22 9.5L18 5.5M22 9.5H16M13 10L10.5 12.5L13 15\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_socials': 'data:image/svg+xml,%3Csvg width=\'64\' height=\'64\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M18 8C19.6569 8 21 6.65685 21 5C21 3.34315 19.6569 2 18 2C16.3431 2 15 3.34315 15 5C15 6.65685 16.3431 8 18 8Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M6 15C7.65685 15 9 13.6569 9 12C9 10.3431 7.65685 9 6 9C4.34315 9 3 10.3431 3 12C3 13.6569 4.34315 15 6 15Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18 22C19.6569 22 21 20.6569 21 19C21 17.3431 19.6569 16 18 16C16.3431 16 15 17.3431 15 19C15 20.6569 16.3431 22 18 22Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8.59 13.51L15.42 17.49\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.41 6.51L8.59 10.49\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Taskbar System Tray Icons (simple SVG icons)
+            // 任务栏系统托盘图标 (简单的SVG图标)
             'icon_wifi': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 18V22\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 12L12.01 12\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M2.99998 8.00002C5.99998 5.00002 9.00002 3.00002 12 3.00002C15 3.00002 18 5.00002 21 8.00002\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M5.99998 11C7.99998 9 10 7.99998 12 7.99998C14 7.99998 16 9 18 11\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_battery': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M15 6H19C19.5523 6 20 6.44772 20 7V17C20 17.5523 19.5523 18 19 18H5C4.44772 18 4 17.5523 4 17V7C4 6.44772 4.44772 6 5 6H9M15 6V4C15 3.44772 14.5523 3 14 3H10C9.44772 3 9 3.44772 9 4V6M15 6H9M22 10V14\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_volume': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M11 5L6 9H2V15H6L11 19V5Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M19.07 4.93C20.6695 6.52936 21.5583 8.70776 21.5583 11C21.5583 13.2922 20.6695 15.4706 19.07 17.07\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M15.54 8.46C16.3262 9.24614 16.7644 10.2986 16.7644 11.39C16.7644 12.4814 16.3262 13.5339 15.54 14.32\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Start Menu Footer Button Icons (simple SVG icons)
+            // 开始菜单底部按钮图标 (简单的SVG图标)
             'icon_settings': 'data:image/svg+xml,%3Csvg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C12.5523 2 13 2.44772 13 3V5.07409C14.7351 5.25367 16.3475 5.92383 17.7088 6.98066L19.2912 5.3983C19.6817 5.00782 20.3183 5.00782 20.7088 5.3983L21.5983 6.28779C21.9888 6.67828 21.9888 7.31482 21.5983 7.70531L19.9575 9.34612C21.0143 10.7074 21.6845 12.3198 21.864 14H24V14C24 14.5523 23.5523 15 23 15H20.9259C20.7463 16.7351 20.0762 18.3475 19.0193 19.7088L20.6017 21.2912C20.9922 21.6817 20.9922 22.3183 20.6017 22.7088L19.7122 23.5983C19.3217 23.9888 18.6852 23.9888 18.2947 23.5983L16.6539 21.9575C15.2926 23.0143 13.6802 23.6845 12 23.864V24C11.4477 24 11 23.5523 11 23V21.864C9.26493 21.6845 7.65251 21.0143 6.29119 19.9575L4.70883 21.54C4.31834 21.9305 3.68179 21.9305 3.29131 21.54L2.40181 20.6505C2.01132 20.26 2.01132 19.6235 2.40181 19.233L4.04262 17.5922C2.98576 16.2309 2.31557 14.6185 2.13603 12.8833H0V12C0 11.4477 0.447715 11 1 11H3.07409C3.25367 9.26493 3.92383 7.65251 4.98066 6.29119L3.3983 4.70883C3.00782 4.31834 3.00782 3.68179 3.3983 3.29131L4.28779 2.40181C4.67828 2.01132 5.31482 2.01132 5.70531 2.40181L7.34612 4.04262C8.70744 2.98576 10.3198 2.31557 12 2.13603V2Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Ccircle cx=\'12\' cy=\'12\' r=\'3\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
-            'icon_shutdown': 'data:image/svg+xml,%3Csvg width=\'32\' height=\'32\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2V12\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18.364 5.63604C20.4184 7.69036 21.5817 10.3913 21.5817 13.2091C21.5817 16.0269 20.4184 18.7277 18.364 20.7821C16.3096 22.8364 13.6087 24 10.7909 24C7.97314 24 5.27228 22.8364 3.21796 20.7821C1.16364 18.7277 0 16.0269 0 13.2091C0 10.3913 1.16364 7.69036 3.21796 5.63604\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
+            'icon_shutdown': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2V12\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M18.364 5.63604C20.4184 7.69036 21.5817 10.3913 21.5817 13.2091C21.5817 16.0269 20.4184 18.7277 18.364 20.7821C16.3096 22.8364 13.6087 24 10.7909 24C7.97314 24 5.27228 22.8364 3.21796 20.7821C1.16364 18.7277 0 16.0269 0 13.2091C0 10.3913 1.16364 7.69036 3.21796 5.63604\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Window Control Button Icons (simple SVG icons)
+            // 窗口控制按钮图标 (简单的SVG图标)
             'icon_minus': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M5 12H19\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'3\' y=\'3\' width=\'18\' height=\'18\' rx=\'2\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_times': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M6 18L18 6M6 6L18 18\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_window_restore': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 14C4 12.8954 4.89543 12 6 12H18C19.1046 12 20 12.8954 20 14V18C20 19.1046 19.1046 20 18 20H6C4.89543 20 4 19.1046 4 18V14Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M8 4C8 2.89543 8.89543 2 10 2H18C19.1046 2 20 2.89543 20 4V8\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Gallery Navigation Button Icons (simple SVG icons)
+            // 画廊导航按钮图标 (简单的SVG图标)
             'icon_chevron_left': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M15 18L9 12L15 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_chevron_right': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M9 18L15 12L9 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Social Media Icons (simple SVG icons)
+            // 社交媒体图标 (简单的SVG图标)
             'icon_weibo': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%23EA4C89\'/%3E%3Cpath d=\'M15.5 8C15.5 7.44772 15.0523 7 14.5 7H9.5C8.94772 7 8.5 7.44772 8.5 8V16C8.5 16.5523 8.94772 17 9.5 17H14.5C15.0523 17 15.5 16.5523 15.5 16V8Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 10.5C12.8284 10.5 13.5 9.82843 13.5 9C13.5 8.17157 12.8284 7.5 12 7.5C11.1716 7.5 10.5 8.17157 10.5 9C10.5 9.82843 11.1716 10.5 12 10.5Z\' fill=\'%23FFFFFF\'/%3E%3Cpath d=\'M12 13C12.8284 13 13.5 12.3284 13.5 11.5C13.5 10.6716 12.8284 10 12 10C11.1716 10 10.5 10.6716 10.5 11.5C10.5 12.3284 11.1716 13 12 13Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E',
             'icon_instagram': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'5\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 3H16.01\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M12 7C9.23858 7 7 9.23858 7 12C7 14.7614 9.23858 17 12 17C14.7614 17 17 14.7614 17 12C17 9.23858 14.7614 7 12 7Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_artstation': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2Z\' fill=\'%2313AFF0\'/%3E%3Cpath d=\'M12 6L18 18H6L12 6Z\' fill=\'%23FFFFFF\'/%3E%3C/svg%3E',
             'icon_behance_square': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Crect x=\'2\' y=\'2\' width=\'20\' height=\'20\' rx=\'2\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M16 10C16 8.89543 15.1046 8 14 8H10C8.89543 8 8 8.89543 8 10V14C8 15.1046 8.89543 16 10 16H14C15.1046 16 16 15.1046 16 14V10Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M10 8L14 16\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
             'icon_envelope': 'data:image/svg+xml,%3Csvg width=\'24\' height=\'24\' viewBox=\'0 0 24 24\' fill=\'none\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cpath d=\'M4 4H20C21.1046 4 22 4.89543 22 6V18C22 19.1046 21.1046 20 20 20H4C2.89543 20 2 19.1046 2 18V6C2 4.89543 2.89543 4 4 4Z\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3Cpath d=\'M22 6L12 13L2 6\' stroke=\'%23FFFFFF\' stroke-width=\'2\' stroke-linecap=\'round\' stroke-linejoin=\'round\'/%3E%3C/svg%3E',
 
-            // Desktop Background Image (a simple blue gradient base64 image)
-            'desktop_background_image': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAEgAE/2vG/FwAAAABJRU5ErkJggg==' // A very small solid blue image for placeholder
+            // 桌面背景图像 (一个简单的蓝色渐变base64图像)
+            'desktop_background_image': 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAEgAE/2vG/FwAAAABJRU5ErkJggg==' // 一个非常小的纯蓝色图像作为占位符
         };
 
         /**
          * @function getAssetUrl
-         * @description Retrieves the URL of the specified asset from the ASSETS object.
-         * @param {string} assetKey - Key name in the ASSETS object.
-         * @returns {string} URL path of the corresponding asset.
+         * @description 从 ASSETS 对象中检索指定资产的URL。
+         * @param {string} assetKey - ASSETS 对象中的键名。
+         * @returns {string} 相应资产的URL路径。
          */
         function getAssetUrl(assetKey) {
             return ASSETS[assetKey] || ''; 
@@ -1421,7 +1421,7 @@
 
         /**
          * @object LANG_CONTENT
-         * @description Centralized multi-language content for the UI.
+         * @description 用于UI的集中式多语言内容。
          */
         const LANG_CONTENT = {
             zh: {
@@ -1433,7 +1433,7 @@
                 unknownModule: '未知模块',
                 profileName: 'MAZKO',
                 startButton: '开始',
-                // Desktop Icons / Menu Items
+                // 桌面图标 / 菜单项
                 worksIcon: '作品集',
                 worksMenuItem: '我的作品集',
                 charactersIcon: '角色',
@@ -1447,16 +1447,16 @@
                 shutdownMenuItem: '关机',
                 shutdownMessage: '系统正在关机，再见！', // Added missing translation
 
-                // Works Section
+                // 作品集部分
                 worksTitle: '我的作品集',
                 worksClickPrompt: '点击作品查看详情',
                 worksDetailsSuffix: ' 作品详情',
 
-                // Characters Section
+                // 角色部分
                 charactersTitle: '角色库',
                 charactersDescription: '这里展示了我设计的一些角色，它们来自不同的世界和故事。',
 
-                // About Section
+                // 关于部分
                 aboutTitle: '关于 MAZKO',
                 aboutContent: `
 # 关于 MAZKO
@@ -1478,7 +1478,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
 
 `,
 
-                // Services Section
+                // 服务部分
                 services: {
                     title: '服务与报价',
                     description: '我提供以下数字艺术服务。每个服务都旨在满足您特定的创意需求。',
@@ -1536,7 +1536,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     ]
                 },
 
-                // Socials Section
+                // 社交部分
                 socialsTitle: '社交媒体',
                 socialsDescription: '欢迎在以下平台关注我，与我互动。',
                 socialsLinks: [
@@ -1547,7 +1547,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     { name: '邮箱', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
                 ],
 
-                // Settings Section
+                // 设置部分
                 settings: {
                     title: '系统设置',
                     description: '调整您的系统偏好设置。',
@@ -1559,7 +1559,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     ]
                 },
             },
-            // Add English content for multi-language support
+            // 添加英文内容以支持多语言
             en: {
                 systemName: 'MAX OS',
                 systemVersion: 'v1.0.0',
@@ -1683,7 +1683,7 @@ Services include：
                     { name: '邮箱', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
                 ],
 
-                // Settings Section
+                // 设置部分
                 settings: {
                     title: '系统设置',
                     description: '调整您的系统偏好设置。',
@@ -1698,12 +1698,13 @@ Services include：
         };
 
 
-        let currentLanguage = 'zh'; // Moved declaration outside DOMContentLoaded
+        let currentLanguage = 'zh'; // 将声明移到 DOMContentLoaded 外部
 
         document.addEventListener('DOMContentLoaded', () => {
-            console.log('Script started parsing.'); // Added for debugging
+            console.log('脚本开始解析。'); // 用于调试
             
             // JavaScript for dynamic elements (e.g., time display)
+            // 用于动态元素（例如，时间显示）的 JavaScript
             function updateTime() {
                 const now = new Date();
                 const hours = String(now.getHours()).padStart(2, '0');
@@ -1712,36 +1713,49 @@ Services include：
                 if (timeElement) {
                     timeElement.textContent = `${hours}:${minutes}`;
                 } else {
-                    console.warn('Time element not found.');
+                    console.warn('未找到时间元素。');
                 }
             }
 
             // Update time every minute
-            setInterval(updateTime, 60000); // Update every minute for HH:MM
+            // 每分钟更新时间
+            setInterval(updateTime, 60000); // 每分钟更新 HH:MM
             // Initial call to display time immediately
+            // 立即调用以显示时间
             updateTime();
 
             // Get elements for the desktop environment
+            // 获取桌面环境的元素
             const startButton = document.getElementById('start-button-taskbar');
             const startMenu = document.getElementById('start-menu');
             const startMenuHeader = document.querySelector('.start-menu-header'); // Get the header
+            // 获取头部
             const mainDesktopArea = document.getElementById('main-desktop-area');
             // Removed welcome message elements as requested
+            // 按要求移除欢迎消息元素
             // const welcomeMessage = document.getElementById('welcome-message');
             // let welcomeMessageText = document.getElementById('welcome-message-text'); 
             const taskbarIconsContainer = document.getElementById('taskbar-icons');
             const desktopIconsContainer = document.getElementById('desktop-icons-container');
             const desktopBackground = document.getElementById('desktop-background'); // Get desktop background element
+            // 获取桌面背景元素
             let highestZIndex = 5; // To manage window stacking order
+            // 用于管理窗口堆叠顺序
 
             // Store references to open windows to re-render them on language change
+            // 存储打开的窗口的引用，以便在语言更改时重新渲染它们
             const openWindowsMap = new Map(); // Map<windowId, {section, chineseTitle, englishTitle, windowElement}>
 
-            console.log('Core DOM elements and variables initialized.');
+            console.log('核心DOM元素和变量已初始化。');
 
             /**
              * @function updateCursors
              * @description Dynamically updates CSS custom properties for cursors based on paths defined in ASSETS.
+             * @returns {void}
+             */
+            /**
+             * @function updateCursors
+             * @description 根据 ASSETS 中定义的路径动态更新光标的 CSS 自定义属性。
              * @returns {void}
              */
             function updateCursors() {
@@ -1749,12 +1763,17 @@ Services include：
                 root.style.setProperty('--cursor-default', `url('${getAssetUrl('cursor_default')}'), auto`);
                 root.style.setProperty('--cursor-active', `url('${getAssetUrl('cursor_active')}'), auto`);
                 root.style.setProperty('--cursor-pointer', `url('${getAssetUrl('cursor_pointer')}'), auto`);
-                console.log('Custom cursors updated.');
+                console.log('自定义光标已更新。');
             }
 
             /**
              * @function renderDynamicAssets
              * @description Iterates through all placeholder elements with `data-asset-key` attribute and replaces them with `<img>` tags, loading the corresponding images.
+             * @returns {void}
+             */
+            /**
+             * @function renderDynamicAssets
+             * @description 遍历所有带有 `data-asset-key` 属性的占位符元素，并将其替换为 `<img>` 标签，加载相应的图像。
              * @returns {void}
              */
             function renderDynamicAssets() {
@@ -1763,38 +1782,49 @@ Services include：
                     const iconUrl = getAssetUrl(assetKey);
                     if (iconUrl) {
                         // If placeholder already has an image, avoid adding duplicates
+                        // 如果占位符已经有图像，则避免添加重复项
                         if (placeholder.querySelector('img')) {
                             placeholder.querySelector('img').src = iconUrl;
                         } else {
                             const img = document.createElement('img');
                             img.src = iconUrl;
                             img.alt = assetKey.replace('icon_', '').replace(/_/g, ' '); // Simple alt text
+                            // 简单的alt文本
                             img.classList.add('icon-image'); // Apply general icon styles defined in CSS
+                            // 应用CSS中定义的通用图标样式
                             placeholder.innerHTML = ''; // Clear any existing content
+                            // 清除任何现有内容
                             placeholder.appendChild(img);
                         }
                     } else {
-                        console.warn(`Asset not found for key: ${assetKey}`);
+                        console.warn(`未找到键名为 "${assetKey}" 的资产。`);
                         // If asset not found, display a default broken icon, or keep it empty
+                        // 如果未找到资产，则显示默认的损坏图标，或保持为空
                         placeholder.innerHTML = '⚠️';
                     }
                 });
 
                 // Check and set desktop background image (if defined in ASSETS)
+                // 检查并设置桌面背景图像（如果ASSETS中定义）
                 const desktopBgImage = getAssetUrl('desktop_background_image');
-                console.log('Attempting to set desktop background. Path:', desktopBgImage); // Debug: Check path
+                console.log('尝试设置桌面背景。路径：', desktopBgImage); // Debug: Check path
+                // 调试：检查路径
                 if (desktopBgImage && desktopBackground) {
                     // Set CSS variable for the image URL
+                    // 设置图像URL的CSS变量
                     desktopBackground.style.setProperty('--desktop-image-url', `url('${desktopBgImage}')`);
                     
                     desktopBackground.classList.add('desktop-background-image-active');
-                    console.log('Desktop background image applied CSS properties. ClassList:', desktopBackground.classList.value);
+                    console.log('桌面背景图像已应用CSS属性。类列表：', desktopBackground.classList.value);
                 } else if (desktopBackground) {
                     // Ensure default background and effects are active if no image is used
+                    // 如果没有使用图像，请确保默认背景和效果处于活动状态
                     desktopBackground.classList.remove('desktop-background-image-active');
                     desktopBackground.classList.add('desktop-background');
                     desktopBackground.style.removeProperty('--desktop-image-url'); // Remove the CSS variable
+                    // 移除CSS变量
                     // Re-apply default background gradients if no image is set
+                    // 如果没有设置图像，则重新应用默认背景渐变
                     desktopBackground.style.backgroundImage = `
                         radial-gradient(circle at 10% 90%, rgba(0,191,255,0.3) 0%, transparent 45%),
                         radial-gradient(circle at 90% 10%, rgba(0,191,255,0.3) 0%, transparent 45%),
@@ -1803,7 +1833,7 @@ Services include：
                     `;
                     desktopBackground.style.opacity = '0.95';
                     desktopBackground.style.filter = 'brightness(0.9) contrast(1.1)';
-                    console.log('No desktop background image specified, falling back to gradients.');
+                    console.log('未指定桌面背景图像，回退到渐变。');
                 }
             }
 
@@ -1813,29 +1843,39 @@ Services include：
              * @description Updates all UI text based on the current language setting.
              * @returns {void}
              */
+            /**
+             * @function updateUIForLanguage
+             * @description 根据当前语言设置更新所有UI文本。
+             * @returns {void}
+             */
             function updateUIForLanguage() {
                 const langData = LANG_CONTENT[currentLanguage];
 
                 // Update Start Menu header profile name
+                // 更新开始菜单标题栏个人资料名称
                 const profileNameElement = startMenu.querySelector('[data-lang-key="profileName"]');
                 if (profileNameElement) {
                     profileNameElement.textContent = langData.profileName;
                 }
 
                 // Update Desktop Icons
+                // 更新桌面图标
                 document.querySelectorAll('.desktop-icon').forEach(icon => {
                     const langKey = icon.querySelector('.desktop-icon-label').dataset.langKey;
                     if (langKey && langData[langKey]) {
                         icon.querySelector('.desktop-icon-label').textContent = langData[langKey];
                     }
                     // Update data-title for window opening (using current language for display, but keep zh/en for internal)
+                    // 更新窗口打开的data-title（使用当前语言显示，但保持zh/en内部使用）
                     icon.dataset.title = icon.dataset[`title-${currentLanguage}`];
                 });
 
                 // Update Start Menu Items (links and buttons)
+                // 更新开始菜单项（链接和按钮）
                 document.querySelectorAll('.start-menu-item').forEach(item => {
                     const langKey = item.dataset.langKey;
                     // Ensure both language versions exist before attempting to access
+                    // 在尝试访问之前，请确保两种语言版本都存在
                     const chineseLabel = LANG_CONTENT.zh[langKey] || '';
                     const englishLabel = LANG_CONTENT.en[langKey] || '';
 
@@ -1846,6 +1886,7 @@ Services include：
                 });
 
                 // Update Start Menu Footer Buttons (now icon-only)
+                // 更新开始菜单底部按钮（现在只有图标）
                 document.querySelectorAll('.start-menu-footer-button').forEach(button => {
                     const langKey = button.dataset.langKey;
                     if (langKey && langData[langKey]) {
@@ -1854,8 +1895,10 @@ Services include：
                 });
                 
                 // Re-open/re-render all active windows
+                // 重新打开/重新渲染所有活动窗口
                 reopenAllWindows();
                 // Re-render all dynamic assets (icons) for current language
+                // 为当前语言重新渲染所有动态资产（图标）
                 renderDynamicAssets();
             }
 
@@ -1867,6 +1910,14 @@ Services include：
              * @param {Object} [currentCategory=null] - The service category object if the section is a service category detail.
              * @returns {{chineseTitle: string, englishTitle: string}} An object containing the Chinese and English titles.
              */
+            /**
+             * @function getWindowTitles
+             * @description 根据部分和可选内容生成中文和英文窗口标题。
+             * @param {string} section - 部分标识符（例如，'works'，'about'，'work-detail-123'）。
+             * @param {Object} [currentWork=null] - 如果部分是作品详情，则为作品对象。
+             * @param {Object} [currentCategory=null] - 如果部分是服务类别详情，则为服务类别对象。
+             * @returns {{chineseTitle: string, englishTitle: string}} 包含中文和英文标题的对象。
+             */
             function getWindowTitles(section, currentWork = null, currentCategory = null) {
                 let chineseTitle = LANG_CONTENT[currentLanguage]?.unknownModule || 'Untitled Window';
                 let englishTitle = LANG_CONTENT['en']?.unknownModule || 'Untitled Window';
@@ -1877,12 +1928,15 @@ Services include：
                 } else if (section.startsWith('service-category-') && currentCategory) {
                     chineseTitle = currentCategory.name;
                     englishTitle = currentCategory.nameEn || currentCategory.name; // Use nameEn if available, otherwise fallback
+                    // 如果nameEn可用则使用，否则回退
                 } else {
                     // For main sections, use data-title-zh and data-title-en from desktop icons or menu items
+                    // 对于主要部分，使用桌面图标或菜单项中的data-title-zh和data-title-en
                     const desktopIcon = document.querySelector(`.desktop-icon[data-section="${section}"]`);
                     const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
                     const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
                     const startMenuHeader = document.querySelector('.start-menu-header[data-section="about"]'); // For about section
+                    // 用于关于部分
 
                     if (desktopIcon) {
                         chineseTitle = desktopIcon.dataset.titleZh;
@@ -1913,11 +1967,18 @@ Services include：
              * @description Re-opens all currently active windows to update their content based on the current language.
              * @returns {Promise<void>}
              */
+            /**
+             * @function reopenAllWindows
+             * @description 重新打开所有当前活动窗口，根据当前语言更新其内容。
+             * @returns {Promise<void>}
+             */
             async function reopenAllWindows() {
                 // Get a snapshot of currently open windows and their original positions/sizes
+                // 获取当前打开窗口及其原始位置/大小的快照
                 const activeWindowsData = [];
                 document.querySelectorAll('.os-window').forEach(win => {
                     // Only re-open if not minimized, as minimized state will be re-applied
+                    // 仅在未最小化时重新打开，因为最小化状态将被重新应用
                     if (!win.classList.contains('minimized')) {
                         activeWindowsData.push({
                             section: win.dataset.section,
@@ -1929,14 +1990,18 @@ Services include：
                             isMaximized: win.classList.contains('maximized')
                         });
                         win.remove(); // Remove old window
+                        // 移除旧窗口
                     }
                 });
                 // Clear taskbar icons for removed windows
+                // 清除已移除窗口的任务栏图标
                 taskbarIconsContainer.innerHTML = '';
 
                 // Re-open windows one by one
+                // 逐一重新打开窗口
                 for (const winData of activeWindowsData) {
                     const data = await fetchContent(winData.section); // Re-fetch content in new language
+                    // 重新获取新语言的内容
                     let contentHTML = '';
                     let isMarkdown = false;
                     let currentWork = null;
@@ -1945,16 +2010,19 @@ Services include：
                     if (winData.section.startsWith('work-detail-')) {
                         const workId = winData.windowId.replace('work-detail-', '');
                         const worksData = await fetchContent('works'); // Re-fetch works data to find the work
+                        // 重新获取作品数据以查找作品
                         currentWork = worksData.find(w => w.id === workId);
                     } else if (winData.section.startsWith('service-category-')) {
                         const categoryId = winData.windowId.replace('service-category-', '');
                         // Get category directly from LANG_CONTENT as it's static
+                        // 直接从LANG_CONTENT获取类别，因为它是静态的
                         currentCategory = LANG_CONTENT[currentLanguage]?.services?.categories.find(cat => cat.id === categoryId);
                     }
 
                     const { chineseTitle, englishTitle } = getWindowTitles(winData.section, currentWork, currentCategory);
 
                     // Re-generate content based on section and new language
+                    // 根据部分和新语言重新生成内容
                     switch (winData.section) {
                         case 'works':
                             contentHTML = `
@@ -2015,6 +2083,7 @@ Services include：
                             `;
                             break;
                         case 'settings': // New case for settings window
+                        // 设置窗口的新案例
                             contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.settings?.description || '') + `
                                 <div class="flex flex-col gap-4 mt-4">
                                     ${data?.options.map(option => {
@@ -2059,10 +2128,11 @@ Services include：
                         case 'work-detail-' + winData.windowId.replace('work-detail-', ''):
                             if (currentWork) {
                                 let currentImageIndex = 0; // This state is lost on re-render, will default to 0
+                                // 此状态在重新渲染时丢失，将默认为 0
                                 contentHTML = `
                                     <div class="work-detail-content">
                                         <div class="gallery-main-image-container">
-                                            <img src="${currentWork.images[currentImageIndex]}" alt="${currentWork.title}" class="gallery-main-image">
+                                            <img src="${work.images[currentImageIndex]}" alt="${work.title}" class="gallery-main-image">
                                             ${currentWork.images.length > 1 ? `
                                                 <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
                                                 <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
@@ -2092,6 +2162,7 @@ Services include：
                     }
 
                     // Re-open the window with its original properties
+                    // 以其原始属性重新打开窗口
                     const newWindowElement = await openWindow(winData.section, chineseTitle, englishTitle, contentHTML, winData.windowId, {
                         left: winData.originalLeft,
                         top: winData.originalTop,
@@ -2102,6 +2173,7 @@ Services include：
                     if (winData.isMaximized) {
                         newWindowElement.classList.add('maximized');
                         // Re-apply maximized styles if necessary, or let CSS handle it
+                        // 如果需要，重新应用最大化样式，或者让CSS处理
                         newWindowElement.style.borderRadius = '0';
                         newWindowElement.style.boxShadow = 'none';
                     }
@@ -2109,19 +2181,31 @@ Services include：
             }
 
 
+            // --- 桌面图标定位逻辑 ---
             // --- Desktop Icon Positioning Logic ---
             /**
              * @function positionDesktopIcons
              * @description Positions desktop icons in a grid layout within the main desktop area.
              * @returns {void}
              */
+            /**
+             * @function positionDesktopIcons
+             * @description 在主桌面区域内以网格布局定位桌面图标。
+             * @returns {void}
+             */
             function positionDesktopIcons() {
                 const iconWidth = 80; // Defined in CSS .desktop-icon width
+                // 在CSS .desktop-icon宽度中定义
                 const iconHeight = 100; // Approximate height including label and padding
+                // 包括标签和填充的近似高度
                 const paddingX = 20; // Horizontal padding from desktop edge
+                // 桌面边缘的水平填充
                 const paddingY = 20; // Vertical padding from desktop edge
+                // 桌面边缘的垂直填充
                 const gapX = 20; // Gap between icons horizontally
+                // 图标之间的水平间距
                 const gapY = 20; // Gap between icons vertically
+                // 图标之间的垂直间距
 
                 const icons = Array.from(desktopIconsContainer.children);
                 let currentX = paddingX;
@@ -2130,7 +2214,9 @@ Services include：
 
                 icons.forEach((icon, index) => {
                     // Check if icon fits in current column, otherwise move to next column
+                    // 检查图标是否适合当前列，否则移动到下一列
                     if (currentY + iconHeight > mainDesktopArea.clientHeight - (paddingY + 10)) { // Add small buffer for taskbar
+                        // 为任务栏添加小缓冲区
                         column++;
                         currentX = paddingX + (column * (iconWidth + gapX));
                         currentY = paddingY;
@@ -2143,13 +2229,16 @@ Services include：
             }
 
             // Call positioning function initially and on window resize
+            // 初始化和窗口大小调整时调用定位函数
             positionDesktopIcons();
             window.addEventListener('resize', positionDesktopIcons);
 
-            console.log('Desktop icon positioning logic initialized.');
+            console.log('桌面图标定位逻辑已初始化。');
 
             // --- Mock Data Fetching (Simulating Headless CMS API Calls) ---
+            // --- 模拟数据获取（模拟无头CMS API调用） ---
             // In a real application, these would be actual fetch() calls to your CMS API endpoints.
+            // 在实际应用程序中，这些将是对您的CMS API端点的实际fetch()调用。
 
             /**
              * @function fetchContent
@@ -2157,9 +2246,16 @@ Services include：
              * @param {string} section - The section identifier (e.g., 'works', 'about').
              * @returns {Promise<Object|null>} A promise that resolves with the content data or null if not found.
              */
+            /**
+             * @function fetchContent
+             * @description 模拟获取给定部分的内容。在实际应用程序中，这将是一个API调用。
+             * @param {string} section - 部分标识符（例如，'works'，'about'）。
+             * @returns {Promise<Object|null>} 解析为内容数据或如果未找到则为null的Promise。
+             */
             async function fetchContent(section) {
-                console.log(`Fetching content for: ${section} in language: ${currentLanguage}...`);
+                console.log(`正在获取 ${currentLanguage} 语言的 ${section} 内容...`);
                 // Simulate network delay
+                // 模拟网络延迟
                 await new Promise(resolve => setTimeout(resolve, 300)); 
 
                 const langData = LANG_CONTENT[currentLanguage];
@@ -2173,10 +2269,14 @@ Services include：
                                 title: '地下俱乐部场景',
                                 category: '场景设计 / PSX风格',
                                 thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAACu/rWvAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 400x300 blue image
+                                // 400x300蓝色图像的Base64占位符
                                 images: [
                                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 blue image
+                                    // 800x600蓝色图像的Base64占位符
                                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 dark blue image
+                                    // 800x600深蓝色图像的Base64占位符
                                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC'  // Base64 placeholder for 800x600 light blue image
+                                    // 800x600浅蓝色图像的Base64占位符
                                 ],
                                 description: '一个充满霓虹灯和低多边形元素的地下俱乐部场景，融合了Y2K和故障美学。',
                                 tags: ['场景', 'PSX', 'Y2K', 'Blender']
@@ -2186,10 +2286,14 @@ Services include：
                                 title: '赛博朋克角色 - KAI',
                                 category: '角色设计 / Lowpoly',
                                 thumbnail: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAASwAAACoCAMAAACu/rWvAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 400x300 blue image
+                                // 400x300蓝色图像的Base64占位符
                                 images: [
                                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 blue image
+                                    // 800x600蓝色图像的Base64占位符
                                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC', // Base64 placeholder for 800x600 dark blue image
+                                    // 800x600深蓝色图像的Base64占位符
                                     'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAyAAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC'  // Base64 placeholder for 800x600 light blue image
+                                    // 800x600浅蓝色图像的Base64占位符
                                 ],
                                 description: '一个具有复古科幻感的赛博朋克角色，采用低多边形建模和像素质感纹理。',
                                 tags: ['角色', 'Lowpoly', '赛博朋K', 'Substance Painter']
@@ -2203,12 +2307,14 @@ Services include：
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
                                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC' // Base64 placeholder for 200x200 blue image
+                                // 200x200蓝色图像的Base64占位符
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
                                 image: 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMgAAAHgCAMAAADr20JBAAAAA1BMVEW+v789k9bCAAAAR0lEQVR42u3BAQ0AAADCoNu/uFFdAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAD4G4QAAcmT+x+WAAAAAElFTkSuQmCC' // Base64 placeholder for 200x200 dark blue image
+                                // 200x200深蓝色图像的Base64占位符
                             }
                         ];
                         break;
@@ -2233,15 +2339,17 @@ Services include：
                         };
                         break;
                     case 'settings': // New case for settings
+                    // 设置的新案例
                         data = langData.settings;
                         break;
                     case 'shutdown':
                         data = null; // No specific data needed for shutdown
+                        // 关机不需要特定数据
                         break;
                     default:
                         data = null;
                 }
-                console.log(`Content fetched for ${section}:`, data);
+                console.log(`已获取 ${section} 的内容:`, data);
                 return data;
             }
 
@@ -2249,6 +2357,12 @@ Services include：
              * @function setActiveTaskbarIcon
              * @description Sets the active state for a taskbar icon.
              * @param {string} windowId - The ID of the window whose taskbar icon should be set active.
+             * @returns {void}
+             */
+            /**
+             * @function setActiveTaskbarIcon
+             * @description 设置任务栏图标的活动状态。
+             * @param {string} windowId - 应该设置为活动状态的窗口的任务栏图标的ID。
              * @returns {void}
              */
             function setActiveTaskbarIcon(windowId) {
@@ -2267,12 +2381,20 @@ Services include：
              * @param {HTMLElement} windowElement - The window HTML element to bring to front.
              * @returns {void}
              */
+            /**
+             * @function bringToFront
+             * @description 将指定的窗口元素带到堆叠顺序的最前面。
+             * @param {HTMLElement} windowElement - 要带到最前面的窗口HTML元素。
+             * @returns {void}
+             */
             function bringToFront(windowElement) {
                 highestZIndex++;
                 windowElement.style.zIndex = highestZIndex;
-                console.log(`Window "${windowElement.dataset.windowId}" brought to front. New z-index: ${highestZIndex}`);
+                console.log(`窗口 "${windowElement.dataset.windowId}" 已置于最前。新z-index: ${highestZIndex}`);
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
+                // 将其任务栏图标设置为活动状态
                 // Also set window title bar to active style
+                // 同时将窗口标题栏设置为活动样式
                 document.querySelectorAll('.os-window-title-bar').forEach(bar => bar.classList.add('inactive'));
                 const titleBar = windowElement.querySelector('.os-window-title-bar');
                 if (titleBar) {
@@ -2291,34 +2413,56 @@ Services include：
              * @param {boolean} [isMarkdown=false] - Whether the contentHTML should be parsed as Markdown.
              * @returns {Promise<HTMLElement>} A promise that resolves with the created or existing window element.
              */
+            /**
+             * @function openWindow
+             * @description 创建并打开一个新窗口，或将现有窗口带到最前面。
+             * @param {string} section - 此窗口所属的部分标识符。
+             * @param {string} chineseTitle - 窗口的中文标题。
+             * @param {string} englishTitle - 窗口的英文标题。
+             * @param {string} contentHTML - 在窗口内部显示的HTML内容。
+             * @param {string} [windowId=section] - 此特定窗口实例的唯一ID。
+             * @param {Object} [initialProps={}] - 初始位置和大小属性（left，top，width，height）。
+             * @param {boolean} [isMarkdown=false] - contentHTML是否应解析为Markdown。
+             * @returns {Promise<HTMLElement>} 解析为创建或现有窗口元素的Promise。
+             */
             async function openWindow(section, chineseTitle, englishTitle, contentHTML, windowId = section, initialProps = {}, isMarkdown = false) {
-                console.log(`Attempting to open window: ${chineseTitle} [${englishTitle}] (Section: ${section}, ID: ${windowId}, Markdown: ${isMarkdown}`);
+                console.log(`尝试打开窗口：${chineseTitle} [${englishTitle}] (部分：${section}，ID：${windowId}，Markdown：${isMarkdown}`);
 
                 // Check if a window for this section already exists
+                // 检查此部分是否已存在窗口
                 let existingWindow = document.querySelector(`.os-window[data-window-id="${windowId}"]`);
                 if (existingWindow) {
                     bringToFront(existingWindow);
                     // If it exists and is minimized, restore it
+                    // 如果它存在且已最小化，则恢复它
                     if (existingWindow.classList.contains('minimized')) {
                         restoreWindow(existingWindow);
                     }
                     return existingWindow; // Return existing window
+                    // 返回现有窗口
                 }
 
                 const windowElement = document.createElement('div');
                 windowElement.classList.add('os-window');
                 windowElement.dataset.section = section; // Store section for identification
+                // 存储部分以进行识别
                 windowElement.dataset.windowId = windowId; // Unique ID for this specific window instance
+                // 此特定窗口实例的唯一ID
                 
                 // Store initial position and size for restore functionality
+                // 存储初始位置和大小以用于恢复功能
                 const desktopWidth = mainDesktopArea.offsetWidth;
                 const desktopHeight = mainDesktopArea.offsetHeight;
                 const defaultWidth = Math.min(desktopWidth * 0.7, 800); // Max 800px or 70%
+                // 最大800像素或70%
                 const defaultHeight = Math.min(desktopHeight * 0.7, 600); // Max 600px or 70%
+                // 最大600像素或70%
 
                 // Position new windows slightly offset from each other
+                // 新窗口彼此略微偏移
                 const openWindows = document.querySelectorAll('.os-window:not(.minimized)');
                 let offsetX = 50 * (openWindows.length % 5); // Max 5 offsets before repeating
+                // 重复前最大5个偏移量
                 let offsetY = 50 * (openWindows.length % 5);
 
                 windowElement.style.width = initialProps.width || `${defaultWidth}px`;
@@ -2327,6 +2471,7 @@ Services include：
                 windowElement.style.top = initialProps.top || `${(desktopHeight / 2 - defaultHeight / 2) + offsetY}px`;
 
                 // Ensure window is within bounds after offset
+                // 确保窗口在偏移后位于边界内
                 if (parseFloat(windowElement.style.left) + parseFloat(windowElement.style.width) > desktopWidth) {
                     windowElement.style.left = `${desktopWidth - parseFloat(windowElement.style.width) - 20}px`;
                 }
@@ -2335,6 +2480,7 @@ Services include：
                 }
 
                 // Store current position and size for restoration
+                // 存储当前位置和大小以供恢复
                 windowElement.dataset.originalLeft = windowElement.style.left;
                 windowElement.dataset.originalTop = windowElement.style.top;
                 windowElement.dataset.originalWidth = windowElement.style.width;
@@ -2342,17 +2488,22 @@ Services include：
 
 
                 bringToFront(windowElement); // Bring new window to front
-                console.log(`New window "${windowId}" created at left: ${windowElement.style.left}, top: ${windowElement.style.top}`);
+                // 将新窗口置于最前
+                console.log(`新窗口 "${windowId}" 创建于 left: ${windowElement.style.left}, top: ${windowElement.style.top}`);
 
                 // Parse Markdown if required
+                // 如果需要，解析Markdown
                 const finalContent = isMarkdown ? marked.parse(contentHTML) : contentHTML;
                 const contentClass = isMarkdown ? 'markdown-content' : '';
 
                 // Construct the full title bar text
+                // 构造完整的标题栏文本
                 const fullTitle = `${chineseTitle} [${englishTitle}]`;
                 windowElement.dataset.windowTitle = fullTitle; // Store the full title in dataset
+                // 在数据集中存储完整标题
 
                 // Construct window HTML dynamically, using data-asset-key for icons
+                // 动态构建窗口HTML，使用data-asset-key作为图标
                 windowElement.innerHTML = `
                     <div class="os-window-title-bar">
                         <div class="os-window-title-content">
@@ -2380,37 +2531,47 @@ Services include：
                 `;
 
                 mainDesktopArea.appendChild(windowElement); // Append to main desktop area
-                console.log(`Window "${windowId}" appended to main desktop area.`);
+                // 附加到主桌面区域
+                console.log(`窗口 "${windowId}" 已附加到主桌面区域。`);
                 renderDynamicAssets(); // Render icons for the newly created window
+                // 为新创建的窗口渲染图标
 
                 // Add to map for language switching
+                // 添加到用于语言切换的映射
                 openWindowsMap.set(windowId, {
                     section: section,
                     chineseTitle: chineseTitle, // Store both for re-rendering
+                    // 存储两者以供重新渲染
                     englishTitle: englishTitle,
                     windowElement: windowElement
                 });
 
                 // Immediately create and add taskbar icon for the new window
+                // 立即为新窗口创建并添加任务栏图标
                 createTaskbarIcon(windowElement, chineseTitle, windowId);
 
 
-                // Make window draggable
+                // // Make window draggable
+                // // 使窗口可拖动
                 const titleBar = windowElement.querySelector('.os-window-title-bar');
                 let isDraggingWindow = false; // Renamed to avoid conflict with desktop icon dragging
+                // 重命名以避免与桌面图标拖动冲突
                 let offsetXWindow, offsetYWindow;
 
                 if (titleBar) { // Ensure titleBar exists
+                    // 确保titleBar存在
                     titleBar.addEventListener('mousedown', (e) => {
                         isDraggingWindow = true;
                         offsetXWindow = e.clientX - windowElement.getBoundingClientRect().left;
                         offsetYWindow = e.clientY - windowElement.getBoundingClientRect().top;
                         titleBar.style.cursor = 'grabbing'; // Changed to grab cursor
+                        // 更改为抓取光标
                         bringToFront(windowElement); // Bring to front when dragging starts
-                        console.log(`Started dragging window "${windowId}".`);
+                        // 拖动开始时置于最前
+                        console.log(`开始拖动窗口 "${windowId}"。`);
                     });
                 } else {
-                    console.error(`Title bar not found for window "${windowId}". Dragging disabled.`);
+                    console.error(`未找到窗口 "${windowId}" 的标题栏。拖动已禁用。`);
                 }
 
                 document.addEventListener('mousemove', (e) => {
@@ -2419,6 +2580,7 @@ Services include：
                     let newY = e.clientY - offsetYWindow;
 
                     // Boundary checks for dragging within mainDesktopArea
+                    // 主桌面区域内拖动的边界检查
                     const parentRect = mainDesktopArea.getBoundingClientRect();
                     const windowRect = windowElement.getBoundingClientRect();
 
@@ -2435,11 +2597,13 @@ Services include：
                     if (isDraggingWindow) {
                         isDraggingWindow = false;
                         if (titleBar) titleBar.style.cursor = 'grab'; // Changed to grab cursor
-                        console.log(`Stopped dragging window "${windowId}".`);
+                        // 更改为抓取光标
+                        console.log(`停止拖动窗口 "${windowId}"。`);
                     }
                 });
 
                 // Handle window control buttons
+                // 处理窗口控制按钮
                 const closeButton = windowElement.querySelector('.control-button.close');
                 const minimizeButton = windowElement.querySelector('.control-button.minimize');
                 const maximizeButton = windowElement.querySelector('.control-button.maximize');
@@ -2448,15 +2612,17 @@ Services include：
                     closeButton.addEventListener('click', () => {
                         windowElement.remove();
                         openWindowsMap.delete(windowId); // Remove from map
+                        // 从映射中移除
                         // Remove taskbar icon if it exists
+                        // 如果任务栏图标存在，则移除
                         const taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
                         if (taskbarIcon) {
                             taskbarIcon.remove();
                         }
-                        console.log(`Window "${windowId}" closed.`);
+                        console.log(`窗口 "${windowId}" 已关闭。`);
                     });
                 } else {
-                    console.error(`Close button not found for window "${windowId}".`);
+                    console.error(`未找到窗口 "${windowId}" 的关闭按钮。`);
                 }
 
                 if (minimizeButton) {
@@ -2471,11 +2637,13 @@ Services include：
                 }
 
                 // Bring to front on click anywhere on the window
+                // 在窗口的任意位置点击时置于最前
                 windowElement.addEventListener('mousedown', () => {
                     bringToFront(windowElement);
                 });
 
                 return windowElement; // Return the newly created window element
+                // 返回新创建的窗口元素
             }
 
             /**
@@ -2486,8 +2654,16 @@ Services include：
              * @param {string} windowId - The unique ID of the window.
              * @returns {void}
              */
+            /**
+             * @function createTaskbarIcon
+             * @description 为给定窗口创建并附加任务栏图标。
+             * @param {HTMLElement} windowElement - 要为其创建图标的窗口HTML元素。
+             * @param {string} title - 窗口的标题（用于在任务栏中显示）。
+             * @param {string} windowId - 窗口的唯一ID。
+             * @returns {void}
+             */
             function createTaskbarIcon(windowElement, title, windowId) {
-                console.log('createTaskbarIcon received title:', title, 'type:', typeof title, 'windowId:', windowId); // Debug log
+                console.log('createTaskbarIcon 收到标题:', title, '类型:', typeof title, '窗口ID:', windowId); // 调试日志
                 let taskbarIcon = document.querySelector(`.taskbar-minimized-icon[data-window-id="${windowId}"]`);
                 if (!taskbarIcon) {
                     taskbarIcon = document.createElement('div');
@@ -2495,15 +2671,20 @@ Services include：
                     taskbarIcon.dataset.windowId = windowId;
 
                     // Initialize displayTitle with a safe fallback
+                    // 使用安全回退初始化 displayTitle
                     let displayTitle = String(title || 'Untitled Window'); // Ensure it's a string, even if title is null/undefined
+                    // 即使标题为 null/undefined，也确保它是字符串
 
                     // Attempt to get a more specific display title from language content if available
+                    // 如果可用，尝试从语言内容中获取更具体的显示标题
                     const langData = LANG_CONTENT[currentLanguage];
                     const section = windowElement.dataset.section;
 
                     if (langData && section) { // Ensure both langData and section are defined
+                        // 确保 langData 和 section 都已定义
                         if (langData[`${section}MenuItem`]) {
                             displayTitle = String(langData[`${section}MenuItem`]); // Use the simplified menu item label
+                            // 使用简化的菜单项标签
                         } else if (section === 'about' && langData.mazkoExeIcon) {
                             displayTitle = String(langData.mazkoExeIcon);
                         } else if (section.startsWith('service-category-')) {
@@ -2513,28 +2694,36 @@ Services include：
                                 if (category && category.name) {
                                     displayTitle = String(category.name);
                                     if (windowElement.dataset.windowTitle) { // Try to use actual window title if available
+                                        // 如果可用，尝试使用实际的窗口标题
                                         displayTitle = windowElement.dataset.windowTitle.split(' [')[0].trim();
                                     }
                                 }
                             }
                         } else if (section.startsWith('work-detail-')) {
                             // For work-detail windows, the 'title' parameter already contains the full title
+                            // 对于作品详情窗口，'title' 参数已经包含完整的标题
                             // so no further modification needed here.
+                            // 因此此处不需要进一步修改。
                             displayTitle = String(title); // Ensure it's explicitly a string
+                            // 确保它是显式字符串
                         }
                     }
                     // Final fallback to ensure displayTitle is always a non-empty string
+                    // 最终回退以确保 displayTitle 始终为非空字符串
                     displayTitle = displayTitle.trim() || 'Untitled'; // Trim and ensure it's not empty
+                    // 裁剪并确保它不为空
 
                     taskbarIcon.innerHTML = `<span class="icon-placeholder" data-asset-key="icon_window_restore"></span> <span>${displayTitle}</span>`;
                     taskbarIconsContainer.appendChild(taskbarIcon);
                     renderDynamicAssets(); // Render icons for the newly created taskbar icon
+                    // 为新创建的任务栏图标渲染图标
 
                     taskbarIcon.addEventListener('click', () => {
                         restoreWindow(windowElement);
                     });
                 }
                 setActiveTaskbarIcon(windowId); // Set its taskbar icon as active
+                // 将其任务栏图标设置为活动状态
             }
 
             /**
@@ -2545,10 +2734,19 @@ Services include：
              * @param {string} windowId - The ID of the window.
              * @returns {void}
              */
+            /**
+             * @function minimizeWindow
+             * @description 最小化给定窗口。
+             * @param {HTMLElement} windowElement - 要最小化的窗口HTML元素。
+             * @param {string} title - 窗口的标题。
+             * @param {string} windowId - 窗口的ID。
+             * @returns {void}
+             */
             function minimizeWindow(windowElement, title, windowId) {
                 windowElement.classList.add('minimized');
-                console.log(`Window "${windowId}" minimized.`);
+                console.log(`窗口 "${windowId}" 已最小化。`);
                 // Ensure taskbar icon is active even when minimized
+                // 即使最小化，也要确保任务栏图标处于活动状态
                 setActiveTaskbarIcon(windowId); 
             }
 
@@ -2558,18 +2756,28 @@ Services include：
              * @param {HTMLElement} windowElement - The window HTML element to restore.
              * @returns {void}
              */
+            /**
+             * @function restoreWindow
+             * @description 将最小化或最大化的窗口恢复到其原始大小和位置。
+             * @param {HTMLElement} windowElement - 要恢复的窗口HTML元素。
+             * @returns {void}
+             */
             function restoreWindow(windowElement) {
                 windowElement.classList.remove('minimized');
                 windowElement.classList.remove('maximized'); // Ensure it's not maximized either
+                // 确保它也没有最大化
                 windowElement.style.width = windowElement.dataset.originalWidth;
                 windowElement.style.height = windowElement.dataset.originalHeight;
                 windowElement.style.left = windowElement.dataset.originalLeft;
                 windowElement.style.top = windowElement.dataset.originalTop;
                 windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
+                // 恢复Aero的边框半径
                 windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
+                // 使用更新后的发光变量恢复阴影
                 bringToFront(windowElement);
-                console.log(`Window "${windowElement.dataset.windowId}" restored.`);
+                console.log(`窗口 "${windowElement.dataset.windowId}" 已恢复。`);
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
+                // 将其任务栏图标设置为活动状态
             }
 
             /**
@@ -2578,20 +2786,31 @@ Services include：
              * @param {HTMLElement} windowElement - The window HTML element to toggle.
              * @returns {void}
              */
+            /**
+             * @function toggleMaximizeWindow
+             * @description 切换窗口的最大化状态。
+             * @param {HTMLElement} windowElement - 要切换的窗口HTML元素。
+             * @returns {void}
+             */
             function toggleMaximizeWindow(windowElement) {
                 if (windowElement.classList.contains('maximized')) {
                     // Restore
+                    // 恢复
                     windowElement.classList.remove('maximized');
                     windowElement.style.width = windowElement.dataset.originalWidth;
                     windowElement.style.height = windowElement.dataset.originalHeight;
                     windowElement.style.left = windowElement.dataset.originalLeft;
                     windowElement.style.top = windowElement.dataset.originalTop;
                     windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
+                    // 恢复Aero的边框半径
                     windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
-                    console.log(`Window "${windowElement.dataset.windowId}" restored from maximized.`);
+                    // 使用更新后的发光变量恢复阴影
+                    console.log(`窗口 "${windowElement.dataset.windowId}" 已从最大化恢复。`);
                 } else {
                     // Maximize
+                    // 最大化
                     // Save current position and size before maximizing (if not already saved)
+                    // 在最大化之前保存当前位置和大小（如果尚未保存）
                     if (!windowElement.dataset.originalLeft) {
                         windowElement.dataset.originalLeft = windowElement.style.left;
                         windowElement.dataset.originalTop = windowElement.style.top;
@@ -2600,10 +2819,13 @@ Services include：
                     }
                     windowElement.classList.add('maximized');
                     // CSS handles the full-screen positioning via the .maximized class
-                    console.log(`Window "${windowElement.dataset.windowId}" maximized.`);
+                    // CSS通过.maximized类处理全屏定位
+                    console.log(`窗口 "${windowElement.dataset.windowId}" 已最大化。`);
                 }
                 bringToFront(windowElement); // Bring to front after state change
+                // 状态改变后置于最前
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
+                // 将其任务栏图标设置为活动状态
             }
 
             /**
@@ -2612,8 +2834,15 @@ Services include：
              * @param {Object} work - The work object containing details like title, images, description, etc.
              * @returns {void}
              */
+            /**
+             * @function openWorkDetail
+             * @description 打开带有画廊的详细作品视图窗口。
+             * @param {Object} work - 包含标题、图像、描述等详细信息的作品对象。
+             * @returns {void}
+             */
             function openWorkDetail(work) {
                 // Initialize current image index for this work
+                // 初始化此作品的当前图像索引
                 let currentImageIndex = 0;
 
                 const { chineseTitle, englishTitle } = getWindowTitles('work-detail-' + work.id, work);
@@ -2623,136 +2852,94 @@ Services include：
                         <div class="gallery-main-image-container">
                             <img src="${work.images[currentImageIndex]}" alt="${work.title}" class="gallery-main-image">
                             ${work.images.length > 1 ? `
-                                <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
-                                <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
+                                <button class="gallery-nav-button prev" title="上一张图片">
+                                    <span class="icon-placeholder" data-asset-key="icon_chevron_left"></span>
+                                </button>
+                                <button class="gallery-nav-button next" title="下一张图片">
+                                    <span class="icon-placeholder" data-asset-key="icon_chevron_right"></span>
+                                </button>
                             ` : ''}
                         </div>
-                        ${work.images.length > 1 ? `
-                            <div class="gallery-thumbnails">
-                                ${work.images.map((imgSrc, index) => `
-                                    <img src="${imgSrc}" alt="${work.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
-                                `).join('')}
-                            </div>
-                        ` : ''}
+                        <div class="gallery-thumbnails">
+                            ${work.images.map((image, index) => `
+                                <img src="${image}" alt="${work.title} 缩略图" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
+                            `).join('')}
+                        </div>
                         <h3>${work.title}</h3>
-                        <p class="text-sm opacity-90 mb-2">${work.category}</p>
                         <p>${work.description}</p>
-                        <div class="flex flex-wrap gap-2 mt-4">
+                        <div class="flex flex-wrap gap-2">
                             ${work.tags.map(tag => `<span class="category-tag">${tag}</span>`).join('')}
                         </div>
                     </div>
                 `;
                 
                 openWindow('work-detail-' + work.id, chineseTitle, englishTitle, detailContent, 'work-detail-' + work.id);
-
-                // Add event listeners for gallery navigation after the window is opened and content is rendered
-                setTimeout(() => {
-                    const detailWindow = document.querySelector(`.os-window[data-window-id="work-detail-${work.id}"]`);
-                    if (!detailWindow) return;
-
-                    const mainImage = detailWindow.querySelector('.gallery-main-image');
-                    const thumbnailsContainer = detailWindow.querySelector('.gallery-thumbnails');
-                    const prevButton = detailWindow.querySelector('.gallery-nav-button.prev');
-                    const nextButton = detailWindow.querySelector('.gallery-nav-button.next');
-
-                    function updateGallery() {
-                        if (mainImage) {
-                            mainImage.src = work.images[currentImageIndex];
-                        }
-                        if (thumbnailsContainer) {
-                            thumbnailsContainer.querySelectorAll('.gallery-thumbnail').forEach((thumb, idx) => {
-                                if (idx === currentImageIndex) {
-                                    thumb.classList.add('active');
-                                } else {
-                                    thumb.classList.remove('active');
-                                }
-                            });
-                        }
-                        renderDynamicAssets(); // Render newly inserted icons (chevrons)
-                    }
-
-                    if (prevButton) {
-                        prevButton.addEventListener('click', () => {
-                            currentImageIndex = (currentImageIndex - 1 + work.images.length) % work.images.length;
-                            updateGallery();
-                        });
-                    }
-                    if (nextButton) {
-                        nextButton.addEventListener('click', () => { 
-                            currentImageIndex = (currentImageIndex + 1) % work.images.length; 
-                            updateGallery();
-                        });
-                    }
-                    if (thumbnailsContainer) {
-                        thumbnailsContainer.addEventListener('click', (e) => {
-                            if (e.target.classList.contains('gallery-thumbnail')) {
-                                const index = parseInt(e.target.dataset.index);
-                                if (!isNaN(index)) {
-                                    currentImageIndex = index;
-                                    updateGallery();
-                                }
-                            }
-                        });
-                    }
-                    updateGallery(); // Initial update to set the first image and active thumbnail
-                }, 100); // Small delay to ensure DOM is ready
             }
 
-            /**
-             * @function openServiceCategoryDetail
-             * @description Opens a detailed view window for a specific service category.
-             * @param {Object} category - The service category object containing details.
-             * @returns {void}
-             */
+            // 修复未正确结束的函数定义
+            // Fix improperly terminated function definition
             function openServiceCategoryDetail(category) {
                 const { chineseTitle, englishTitle } = getWindowTitles('service-category-' + category.id, null, category);
-                const contentHTML = category.detailContent;
-                openWindow('service-category-' + category.id, chineseTitle, englishTitle, contentHTML, 'service-category-' + category.id, {}, true); // Pass true for Markdown
+
+                const detailContent = marked.parse(category.detailContent || '');
+
+                openWindow('service-category-' + category.id, chineseTitle, englishTitle, detailContent, 'service-category-' + category.id, {}, true);
             }
 
 
             // Toggle Start Menu visibility
+            // 切换开始菜单可见性
             if (startButton && startMenu) { // Ensure elements exist before adding listeners
-                console.log('START button and Start Menu elements found. Attaching event listeners.');
+                // 在添加监听器之前确保元素存在
+                console.log('找到“开始”按钮和“开始菜单”元素。正在附加事件监听器。');
                 startButton.addEventListener('click', (event) => {
                     event.stopPropagation(); // Prevent click from propagating to document
-                    console.log('START button clicked!'); // Debug: Confirm button click
+                    // 阻止点击事件传播到文档
+                    console.log('“开始”按钮被点击了！'); // Debug: Confirm button click
+                    // 调试：确认按钮点击
                     startMenu.classList.toggle('hidden');
                     startMenu.classList.toggle('visible');
-                    console.log(`Start Menu visibility toggled. Current classes: ${startMenu.classList}`);
+                    console.log(`开始菜单可见性已切换。当前类：${startMenu.classList}`);
                 });
 
                 // Hide Start Menu when clicking outside of it
+                // 点击菜单外部时隐藏开始菜单
                 document.addEventListener('click', (event) => {
                     if (!startMenu.contains(event.target) && !startButton.contains(event.target)) {
                         if (startMenu.classList.contains('visible')) {
                             startMenu.classList.add('hidden');
                             startMenu.classList.remove('visible');
-                            console.log('Clicked outside menu, Start Menu hidden.');
+                            console.log('点击菜单外部，开始菜单已隐藏。');
                         }
                     }
                 });
             } else {
-                console.error('Error: START button or Start Menu element not found in the DOM. Check IDs and HTML structure.');
+                console.error('错误：在DOM中未找到“开始”按钮或“开始菜单”元素。请检查ID和HTML结构。');
             }
 
             // Handle Start Menu item clicks (for links)
+            // 处理开始菜单项点击（针对链接）
             document.querySelectorAll('.start-menu-item, .start-menu-footer-button').forEach(item => {
                 item.addEventListener('click', async (event) => { // Made async to await fetchContent
+                    // 设为异步以等待 fetchContent
                     event.preventDefault(); // Prevent default link behavior
+                    // 阻止默认链接行为
 
                     const section = item.dataset.section;
                     const { chineseTitle, englishTitle } = getWindowTitles(section);
                     
                     startMenu.classList.add('hidden'); // Hide menu after clicking an item
+                    // 点击项目后隐藏菜单
                     startMenu.classList.remove('visible'); // Ensure it's explicitly removed
-                    console.log(`Start Menu item "${section}" clicked. Menu hidden.`);
+                    // 确保它被明确移除
+                    console.log(`开始菜单项“${section}”被点击。菜单已隐藏。`);
 
                     let content = '';
                     let data = null;
                     let isMarkdown = false;
 
                     // Show loading spinner while fetching data
+                    // 在获取数据时显示加载旋转器
                     content = `
                         <div class="flex flex-col items-center justify-center h-full">
                             <div class="loading-spinner"></div>
@@ -2760,22 +2947,27 @@ Services include：
                         </div>
                     `;
                     // Pass windowId to openWindow for correct targeting
+                    // 将 windowId 传递给 openWindow 以进行正确的目标定位
                     const openedWindow = await openWindow(section, chineseTitle, englishTitle, content, section); 
 
                     try {
                         data = await fetchContent(section); // Fetch data
+                        // 获取数据
                     } catch (error) {
                         console.error(`${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${section}:`, error);
                         content = `<p class="text-xl text-red-400">${LANG_CONTENT[currentLanguage]?.errorLoadingContent} ${error.message || LANG_CONTENT[currentLanguage]?.unknownModule}</p>`;
                         // Update existing window with error message
+                        // 使用错误消息更新现有窗口
                         if (openedWindow) {
                             openedWindow.querySelector('.os-window-content').innerHTML = content;
                             renderDynamicAssets(); // Re-render icons after content update
+                            // 内容更新后重新渲染图标
                         }
                         return;
                     }
 
                     // Re-render content based on fetched data
+                    // 根据获取的数据重新渲染内容
                     switch (section) {
                         case 'works':
                             content = `
@@ -2792,24 +2984,30 @@ Services include：
                                 <p class="mt-4 opacity-70 text-center">${LANG_CONTENT[currentLanguage]?.worksClickPrompt}</p>
                             `;
                             // Update content of existing window
+                            // 更新现有窗口的内容
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 // Attach event listeners to newly created work cards
+                                // 将事件监听器附加到新创建的作品卡片
                                 setTimeout(() => { // Use setTimeout to ensure elements are rendered
+                                    // 使用 setTimeout 确保元素已渲染
                                     openedWindow.querySelectorAll('.work-card').forEach(card => {
                                         card.addEventListener('click', () => {
                                             const workId = card.dataset.workId;
                                             const selectedWork = data?.find(w => w.id === workId); // Use fetched data
+                                            // 使用获取的数据
                                             if (selectedWork) {
-                                                console.log(`Work card "${workId}" clicked. Opening detail window.`);
+                                                console.log(`作品卡片“${workId}”被点击。正在打开详细信息窗口。`);
                                                 openWorkDetail(selectedWork);
                                             } else {
-                                                console.warn(`Work with ID "${workId}" not found.`);
+                                                console.warn(`未找到ID为“${workId}”的作品。`);
                                             }
                                         });
                                     });
                                 }, 100); // Small delay
+                                // 小延迟
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             break;
                         case 'characters':
@@ -2829,6 +3027,7 @@ Services include：
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             break;
                         case 'about':
@@ -2837,6 +3036,7 @@ Services include：
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = marked.parse(content || '');
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             break;
                         case 'services':
@@ -2853,21 +3053,23 @@ Services include：
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 // Attach event listeners to newly created service category cards
+                                // 将事件监听器附加到新创建的服务类别卡片
                                 setTimeout(() => {
                                     openedWindow.querySelectorAll('.service-category-card').forEach(card => {
                                         card.addEventListener('click', () => {
                                             const categoryId = card.dataset.categoryId;
                                             const selectedCategory = data?.categories.find(cat => cat.id === categoryId);
                                             if (selectedCategory) {
-                                                console.log(`Service category "${categoryId}" clicked. Opening detail window.`);
+                                                console.log(`服务类别“${categoryId}”被点击。正在打开详细信息窗口。`);
                                                 openServiceCategoryDetail(selectedCategory);
                                             } else {
-                                                console.warn(`Service category with ID "${categoryId}" not found.`);
+                                                console.warn(`未找到ID为“${categoryId}”的服务类别。`);
                                             }
                                         });
                                     });
                                 }, 100);
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             break;
                         case 'socials':
@@ -2884,6 +3086,7 @@ Services include：
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             break;
                         case 'settings':
@@ -2931,9 +3134,10 @@ Services include：
                                             const newLang = e.target.checked ? 'en' : 'zh';
                                             if (newLang !== currentLanguage) {
                                                 currentLanguage = newLang;
-                                                console.log(`Language switched via settings toggle to: ${currentLanguage}`);
+                                                console.log(`通过设置切换语言到: ${currentLanguage}`);
                                                 updateUIForLanguage();
                                                 // Re-render the settings window to reflect the new language
+                                                // 重新渲染设置窗口以反映新语言
                                                 const { chineseTitle: settingsZh, englishTitle: settingsEn } = getWindowTitles('settings');
                                                 openWindow('settings', settingsZh, settingsEn, content, 'settings');
                                             }
@@ -2945,15 +3149,16 @@ Services include：
                                         desktopIconsToggle.addEventListener('change', (e) => {
                                             if (e.target.checked) {
                                                 desktopIconsContainer.style.display = 'block';
-                                                console.log('Desktop icons enabled.');
+                                                console.log('桌面图标已启用。');
                                             } else {
                                                 desktopIconsContainer.style.display = 'none';
-                                                console.log('Desktop icons disabled.');
+                                                console.log('桌面图标已禁用。');
                                             }
                                         });
                                     }
                                 }, 100);
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             break;
                         case 'shutdown':
@@ -2965,17 +3170,21 @@ Services include：
                             if (openedWindow) {
                                 openedWindow.querySelector('.os-window-content').innerHTML = content;
                                 renderDynamicAssets(); // Re-render icons after content update
+                                // 内容更新后重新渲染图标
                             }
                             // For a real shutdown, you might redirect or show a final message
+                            // 对于真正的关机，您可能需要重定向或显示最终消息
                             setTimeout(() => {
                                 console.log(LANG_CONTENT[currentLanguage]?.shutdownMessage);
                                 mainDesktopArea.innerHTML = `<div id="welcome-message" class="absolute inset-0 flex items-center justify-center pointer-events-none">
                                     <p class="text-3xl text-white opacity-70" id="welcome-message-text">${LANG_CONTENT[currentLanguage]?.shutdownMessage}</p>
                                 </div>`;
                                 // Clear all open windows from map and taskbar
+                                // 清除映射和任务栏中的所有打开窗口
                                 openWindowsMap.clear();
                                 taskbarIconsContainer.innerHTML = '';
                                 renderDynamicAssets(); // Ensure icons in shutdown message are rendered if any
+                                // 确保如果有关机消息中的图标，则渲染它们
                             }, 2000);
                             break;
                     }
@@ -2984,28 +3193,33 @@ Services include：
 
 
             // Handle Start Menu header click to open About Me
+            // 处理开始菜单标题栏点击以打开“关于我”
             if (startMenuHeader) {
                 startMenuHeader.addEventListener('click', async (event) => {
                     event.preventDefault();
                     event.stopPropagation(); // Prevent start menu from closing immediately
+                    // 阻止开始菜单立即关闭
                     startMenu.classList.add('hidden');
                     startMenu.classList.remove('visible');
 
                     const section = 'about';
                     // Directly get titles from LANG_CONTENT, as getWindowTitles is for generic sections
+                    // 直接从 LANG_CONTENT 获取标题，因为 getWindowTitles 用于通用部分
                     const aboutTitleForWindow = LANG_CONTENT[currentLanguage]?.aboutTitle;
                     const aboutContentForWindow = LANG_CONTENT[currentLanguage]?.aboutContent;
 
                     if (aboutContentForWindow) { // Check if content exists
+                        // 检查内容是否存在
                         openWindow('about', aboutTitleForWindow, LANG_CONTENT['en']?.aboutTitle, aboutContentForWindow, 'about', {}, true);
                     } else {
-                        console.error(`Error: 'about' content not found for language ${currentLanguage} or is undefined.`);
-                        openWindow('about', 'Error', 'Error', `<p class="text-xl text-red-400">Failed to load About MAZKO content.</p>`, 'about', {}, false);
+                        console.error(`错误：未找到关于 MAZKO 的内容，语言 ${currentLanguage} 或未定义。`);
+                        openWindow('about', '错误', '错误', `<p class="text-xl text-red-400">无法加载关于 MAZKO 的内容。</p>`, 'about', {}, false);
                     }
                 });
             }
 
 
+            // --- 桌面图标拖动逻辑 ---
             // --- Desktop Icon Dragging Logic ---
             let isDraggingIcon = false;
             let currentDraggedIcon = null;
@@ -3015,10 +3229,13 @@ Services include：
             if (desktopIconsContainer) {
                 desktopIconsContainer.querySelectorAll('.desktop-icon').forEach(icon => {
                     // Set initial positions (from inline style)
+                    // 设置初始位置（来自内联样式）
                     icon.style.position = 'absolute'; // Ensure position is absolute for dragging
+                    // 确保位置是绝对的以便拖动
 
                     icon.addEventListener('mousedown', (e) => {
                         if (e.button !== 0) return; // Only allow left-click drag
+                        // 只允许左键拖动
                         isDraggingIcon = true;
                         currentDraggedIcon = icon;
                         initialMouseX = e.clientX;
@@ -3027,17 +3244,21 @@ Services include：
                         initialIconY = icon.offsetTop;
 
                         // Bring the icon to front while dragging (optional, but good UX)
+                        // 拖动时将图标置于最前（可选，但良好的用户体验）
                         currentDraggedIcon.style.zIndex = highestZIndex + 1; 
 
                         e.preventDefault(); // Prevent default browser drag behavior (e.g., ghost image)
-                        console.log(`Started dragging icon: ${icon.dataset.title}`);
+                        // 阻止默认的浏览器拖动行为（例如，幽灵图像）
+                        console.log(`开始拖动图标: ${icon.dataset.title}`);
                     });
 
                     // Handle icon click (separate from drag)
+                    // 处理图标点击（与拖动分开）
                     icon.addEventListener('click', (event) => {
                         // If it was a drag, don't open the window
+                        // 如果是拖动，则不要打开窗口
                         if (currentDraggedIcon === icon && (Math.abs(event.clientX - initialMouseX) > 5 || Math.abs(event.clientY - initialMouseY) > 5)) {
-                            console.log("Icon was dragged, preventing click action.");
+                            console.log("图标被拖动，阻止点击操作。");
                             return; 
                         }
 
@@ -3055,21 +3276,26 @@ Services include：
                         }
 
                         // Simulate click on the corresponding start menu item or button to trigger window opening logic
+                        // 模拟点击相应的开始菜单项或按钮以触发窗口打开逻辑
                         // For mazko.exe, directly open the about window
+                        // 对于 mazko.exe，直接打开关于窗口
                         if (section === 'about') {
-                            console.log('Desktop MAZKO icon clicked. currentLanguage:', currentLanguage);
+                            console.log('桌面 MAZKO 图标被点击。当前语言:', currentLanguage);
                             // Directly access aboutTitle and aboutContent from LANG_CONTENT
+                            // 直接从 LANG_CONTENT 访问 aboutTitle 和 aboutContent
                             const aboutTitleForWindow = LANG_CONTENT[currentLanguage]?.aboutTitle;
                             const aboutContentForWindow = LANG_CONTENT[currentLanguage]?.aboutContent;
 
                             if (aboutContentForWindow) { // Check if content exists
+                                // 检查内容是否存在
                                 openWindow('about', aboutTitleForWindow, LANG_CONTENT['en']?.aboutTitle, aboutContentForWindow, 'about', {}, true);
                             } else {
-                                console.error(`Error: 'about' content not found for language ${currentLanguage} or is undefined.`);
-                                openWindow('about', 'Error', 'Error', `<p class="text-xl text-red-400">Failed to load About MAZKO content.</p>`, 'about', {}, false);
+                                console.error(`错误：未找到关于 MAZKO 的内容，语言 ${currentLanguage} 或未定义。`);
+                                openWindow('about', '错误', '错误', `<p class="text-xl text-red-400">无法加载关于 MAZKO 的内容。</p>`, 'about', {}, false);
                             }
                         } else {
                             // Find the corresponding start menu item or button and click it
+                            // 查找相应的开始菜单项或按钮并点击它
                             const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
                             const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
                             if (startMenuItem) {
@@ -3077,7 +3303,7 @@ Services include：
                             } else if (startMenuFooterButton) {
                                 startMenuFooterButton.click();
                             } else {
-                                console.warn(`No start menu item or footer button found for section: ${section}`);
+                                console.warn(`未找到模块: ${section} 的开始菜单项或底部按钮`);
                             }
                         }
                     });
@@ -3094,10 +3320,12 @@ Services include：
                 let newY = initialIconY + dy;
 
                 // Boundary checks for dragging within mainDesktopArea
+                // 主桌面区域内拖动的边界检查
                 const desktopRect = mainDesktopArea.getBoundingClientRect();
                 const iconRect = currentDraggedIcon.getBoundingClientRect();
 
                 // Calculate bounds relative to the desktop area's top-left corner
+                // 计算相对于桌面区域左上角的边界
                 const minX = 0;
                 const minY = 0;
                 const maxX = desktopRect.width - iconRect.width;
@@ -3115,14 +3343,16 @@ Services include：
                     isDraggingIcon = false;
                     if (currentDraggedIcon) {
                         // Reset z-index if desired, or keep it high if windows can overlap icons
+                        // 如果需要，重置 z-index，或者如果窗口可以覆盖图标，则保持高 z-index
                         currentDraggedIcon.style.zIndex = 2; 
-                        console.log(`Stopped dragging icon: ${currentDraggedIcon.dataset.title}`);
+                        console.log(`停止拖动图标: ${currentDraggedIcon.dataset.title}`);
                     }
                     currentDraggedIcon = null;
                 }
             });
 
             // Handle window focus/blur to update title bar active state
+            // 处理窗口焦点/失焦以更新标题栏活动状态
             document.addEventListener('mousedown', (e) => {
                 const clickedWindow = e.target.closest('.os-window');
                 document.querySelectorAll('.os-window').forEach(win => {
@@ -3138,10 +3368,14 @@ Services include：
             });
 
             // Initial UI update based on default language
+            // 基于默认语言的初始UI更新
             updateCursors(); // Set cursors initially
+            // 初始设置光标
             updateUIForLanguage(); // Render text and initial assets
+            // 渲染文本和初始资产
             renderDynamicAssets(); // Render all initial icons
-            console.log('All event listeners attached and script initialization complete.');
+            // 渲染所有初始图标
+            console.log('所有事件监听器已附加，脚本初始化完成。');
         });
     </script>
 </body>
