@@ -219,8 +219,8 @@
 
         /* 开始按钮 - 高度细致的 Aero 风格，现在是蓝色调 */
         .start-button {
-            background: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%); /* 蓝色渐变 */
-            border: 2px solid var(--glass-border-light); /* 更厚、更明显的边框 */
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end)); /* 匹配状态栏的半透明渐变 */
+            border: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 50%; /* 圆形 */
             width: 48px; /* 稍大一些 */
             height: 48px; /* 稍大一些 */
@@ -231,7 +231,7 @@
             font-size: 0.9rem;
             font-weight: bold;
             text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* 更强的白色光晕 */
-            box-shadow: 0 6px 20px rgba(0,0,0,0.7), inset 0 2px 10px rgba(255,255,255,0.8); /* 更明显的阴影和内高光 */
+            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5), 0 6px 20px rgba(0,0,0,0.4); /* 匹配状态栏的阴影，调整外部阴影以突出 */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
             white-space: nowrap;
@@ -267,18 +267,19 @@
 
 
         .start-button:hover {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.9) 0%, rgba(0, 122, 204, 0.9) 100%);
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%); /* 悬停时稍微更不透明 */
             transform: translateY(-4px); /* 更明显的抬起效果 */
-            box-shadow: 0 8px 25px var(--fa-glow-blue), inset 0 2px 12px rgba(255,255,255,0.9);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 8px 25px var(--fa-glow-blue);
         }
         .start-button:hover::after {
             opacity: 1; /* 悬停时显示光晕 */
         }
 
         .start-button:active {
-            background: linear-gradient(to top, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
+            background: linear-gradient(to bottom, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 按下时反转渐变以获得按下效果 */
             transform: translateY(0);
-            box-shadow: inset 0 2px 10px rgba(0,0,0,0.9), inset 0 -2px 8px rgba(255,255,255,0.6);
+            box-shadow: inset 0 2px 10px rgba(0,0,0,0.7), inset 0 -2px 8px rgba(255,255,255,0.5);
             filter: brightness(0.9);
         }
 
@@ -543,13 +544,13 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, var(--fa-blue-gradient-medium-start) 0%, var(--fa-blue-gradient-medium-end) 100%); /* 蓝色渐变 */
-            border: 2px solid var(--glass-border-light);
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
+            border: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 15px;
             cursor: pointer;
             transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
             color: white;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6), inset 0 2px 8px rgba(255,255,255,0.5);
+            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5), 0 4px 15px rgba(0,0,0,0.4); /* 匹配状态栏的阴影，调整外部阴影以突出 */
             position: relative;
             overflow: hidden;
         }
@@ -566,15 +567,15 @@
         }
 
         .start-menu-footer-button:hover {
-            background: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%);
             transform: translateY(-4px);
-            box-shadow: 0 6px 20px var(--fa-glow-blue), inset 0 2px 10px rgba(255,255,255,0.7);
+            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 6px 20px var(--fa-glow-blue);
         }
 
         .start-menu-footer-button:active {
             transform: translateY(0);
-            background: linear-gradient(to top, var(--fa-blue-gradient-medium-start) 0%, var(--fa-blue-gradient-medium-end) 100%);
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), inset 0 -2px 6px rgba(255,255,255,0.5);
+            background: linear-gradient(to bottom, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), inset 0 -2px 6px rgba(255,255,255,0.5);
             filter: brightness(0.9);
         }
 
@@ -634,14 +635,14 @@
 
         /* 窗口标题栏 - 增强 Frutiger Aero 风格 */
         .os-window-title-bar {
-            background: var(--fa-title-active-gradient);
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 10px 18px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid var(--glass-border-dark);
+            border-bottom: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             cursor: grab;
             border-radius: 18px 18px 0 0;
             position: relative;
@@ -649,7 +650,7 @@
             font-weight: bold;
             color: white;
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.2), 0 4px 15px rgba(0,0,0,0.4); /* 添加外阴影 */
+            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5); /* 匹配状态栏的阴影 */
         }
         /* 标题栏内部玻璃高光 */
         .os-window-title-bar::after {
@@ -665,9 +666,9 @@
         }
 
         .os-window-title-bar.inactive {
-            background: var(--fa-title-inactive-gradient);
-            border-bottom: 1px solid rgba(0, 122, 204, 0.5);
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.1), 0 2px 8px rgba(0,0,0,0.3);
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.3) 0%, rgba(0, 122, 204, 0.2) 100%); /* 稍微更柔和的非激活渐变 */
+            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            box-shadow: inset 0 -1px 5px rgba(0,0,0,0.3);
         }
         .os-window-title-bar.inactive::after {
             background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 60%);
@@ -709,10 +710,10 @@
             cursor: pointer;
             transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
             
-            /* 新的默认样式，更像蓝色果冻 */
-            background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
-            border: 1px solid rgba(0, 191, 255, 0.7); /* 明确的蓝色边框 */
-            box-shadow: inset 0 1px 6px rgba(255,255,255,0.7), 0 2px 6px rgba(0,0,0,0.5), 0 0 8px rgba(0,191,255,0.4); /* 添加蓝色光晕 */
+            /* 新的默认样式，匹配状态栏的半透明效果 */
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏 */
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
+            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.3); /* 匹配状态栏的阴影，加上一些外部阴影 */
 
             position: relative;
             overflow: hidden;
@@ -734,22 +735,22 @@
         .os-window-controls .control-button:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.4) 100%); /* 悬停时变为蓝色渐变 */
-            border-color: rgba(0, 191, 255, 0.9);
-            box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 12px var(--fa-glow-blue); /* 更强的光晕 */
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%); /* 悬停时稍微更不透明 */
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(0,191,255,0.6); /* 更强的蓝色光晕 */
         }
         /* 关闭按钮的特殊悬停效果，如果需要红色 */
         .os-window-controls .control-button.close:hover {
-             background: linear-gradient(to bottom, rgba(255,0,0,0.6) 0%, rgba(180,0,0,0.5) 100%);
-             border-color: rgba(255,0,0,0.8);
-             box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 12px rgba(255,0,0,0.6);
+             background: linear-gradient(to top, rgba(255,0,0,0.5) 0%, rgba(180,0,0,0.4) 100%);
+             border-color: rgba(255,255,255,0.7);
+             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(255,0,0,0.6);
         }
 
         .os-window-controls .control-button:active {
             transform: scale(0.95);
             opacity: 1;
-            background: linear-gradient(to top, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%); /* 按下时恢复白色渐变，并有凹陷效果 */
-            box-shadow: inset 0 0 8px rgba(0,0,0,0.8), inset 0 -1px 4px rgba(255,255,255,0.5);
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.3) 0%, rgba(0, 122, 204, 0.2) 100%); /* 按下时反转渐变以获得按下效果 */
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), inset 0 -1px 4px rgba(255,255,255,0.4);
             filter: brightness(0.9);
         }
         .os-window-controls .control-button .icon-image {
@@ -766,6 +767,7 @@
             font-size: 1rem;
             line-height: 1.7;
             overflow: auto;
+            background-color: white; /* 设置窗口内容背景为白色 */
         }
 
         /* 每个窗口底部的状态栏 */
@@ -780,18 +782,18 @@
         }
 
         /* Markdown内容区专属样式 - 针对 Aero 可读性优化 */
-        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: white; border-bottom: 3px solid var(--primary-blue); padding-bottom: 0.5em; text-shadow: 0 0 10px rgba(255,255,255,0.6); }
-        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: white; text-shadow: 0 0 8px rgba(255,255,255,0.4); }
-        .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: white; text-shadow: 0 0 5px rgba(255,255,255,0.6); }
-        .os-window-content .markdown-content p { margin-bottom: 1.4em; opacity: 0.98; color: var(--text-color); }
-        .os-window-content .markdown-content ul, .os-window-content .markdown-content ol { margin-left: 2.5em; margin-bottom: 1.4em; list-style-type: disc; opacity: 0.95; color: var(--text-color); }
+        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: #333; border-bottom: 3px solid var(--primary-blue); padding-bottom: 0.5em; text-shadow: none; }
+        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: #444; text-shadow: none; }
+        .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: #555; text-shadow: none; }
+        .os-window-content .markdown-content p { margin-bottom: 1.4em; opacity: 1; color: #333; } /* 确保全不透明度和更深的颜色 */
+        .os-window-content .markdown-content ul, .os-window-content .markdown-content ol { margin-left: 2.5em; margin-bottom: 1.4em; list-style-type: disc; opacity: 1; color: #333; }
         .os-window-content .markdown-content li { margin-bottom: 0.8em; }
-        .os-window-content .markdown-content strong { font-weight: bold; color: white; text-shadow: 0 0 4px rgba(255,255,255,0.6); }
-        .os-window-content .markdown-content em { font-style: italic; opacity: 0.95; color: var(--text-color); }
-        .os-window-content .markdown-content a { color: var(--primary-blue); text-decoration: underline; text-shadow: 0 0 8px rgba(0,191,255,0.4); }
-        .os-window-content .markdown-content code { background-color: rgba(0,0,0,0.5); padding: 0.3em 0.6em; border-radius: 8px; font-family: monospace; font-size: 0.95em; border: 1px solid rgba(255,255,255,0.3); color: white; }
-        .os-window-content .markdown-content pre { background-color: rgba(0,0,0,0.6); padding: 1.5em; border-radius: 12px; overflow-x: auto; margin-bottom: 1.8em; border: 2px solid rgba(255,255,255,0.4); box-shadow: inset 0 0 8px rgba(0,0,0,0.6); color: white; }
-        .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 0.85; background-color: rgba(0,191,255,0.25); border-radius: 10px; padding-top: 1em; padding-bottom: 1em; color: var(--text-color); }
+        .os-window-content .markdown-content strong { font-weight: bold; color: #222; text-shadow: none; }
+        .os-window-content .markdown-content em { font-style: italic; opacity: 1; color: #444; }
+        .os-window-content .markdown-content a { color: var(--primary-blue); text-decoration: underline; text-shadow: none; }
+        .os-window-content .markdown-content code { background-color: #f0f0f0; padding: 0.3em 0.6em; border-radius: 8px; font-family: monospace; font-size: 0.95em; border: 1px solid #ddd; color: #333; }
+        .os-window-content .markdown-content pre { background-color: #f5f5f5; padding: 1.5em; border-radius: 12px; overflow-x: auto; margin-bottom: 1.8em; border: 1px solid #eee; box-shadow: inset 0 0 5px rgba(0,0,0,0.1); color: #333; }
+        .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 1; background-color: #f8f8f8; border-radius: 10px; padding-top: 1em; padding-bottom: 1em; color: #333; }
 
 
         /* 窗口弹出动画 - 更细腻 */
@@ -1037,7 +1039,7 @@
         /* 任务栏最小化窗口图标 - 更玻璃质感 */
         .taskbar-minimized-icon {
             background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end));
-            border: 1px solid var(--glass-border-light);
+            border: 1px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 12px;
             padding: 8px 12px;
             margin: 0 5px;
@@ -1047,7 +1049,7 @@
             gap: 8px;
             color: white;
             font-size: 0.9rem;
-            box-shadow: inset 0 1px 6px rgba(255,255,255,0.7), 0 2px 8px rgba(0,0,0,0.6);
+            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5), 0 2px 8px rgba(0,0,0,0.3); /* 匹配状态栏的阴影 */
             transition: all 0.25s ease;
             white-space: nowrap;
             max-width: 160px;
@@ -1070,16 +1072,16 @@
 
 
         .taskbar-minimized-icon:hover {
-            background: linear-gradient(to top, var(--fa-blue-gradient-medium-start), var(--fa-blue-gradient-medium-end));
+            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%);
             transform: translateY(-4px);
-            box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 15px rgba(0,0,0,0.7);
+            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 15px rgba(0,0,0,0.5);
         }
 
         /* 激活状态下的任务栏图标样式 */
         .taskbar-minimized-icon.active {
-            background: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
-            border-color: var(--primary-blue);
-            box-shadow: inset 0 1px 8px rgba(0,0,0,0.8), 0 0 12px var(--primary-blue);
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%);
+            border-color: rgba(255, 255, 255, 0.7);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), 0 0 12px var(--primary-blue);
             transform: translateY(0);
         }
         .taskbar-minimized-icon.active::before {
@@ -2312,13 +2314,11 @@ Services include:
                                                 <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
                                             ` : ''}
                                         </div>
-                                        ${currentWork.images.length > 1 ? `
-                                            <div class="gallery-thumbnails">
-                                                ${currentWork.images.map((imgSrc, index) => `
-                                                    <img src="${imgSrc}" alt="${currentWork.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
-                                                `).join('')}
-                                            </div>
-                                        ` : ''}
+                                        <div class="gallery-thumbnails">
+                                            ${currentWork.images.map((imgSrc, index) => `
+                                                <img src="${imgSrc}" alt="${currentWork.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
+                                            `).join('')}
+                                        </div>
                                         <h3>${currentWork.title}</h3>
                                         <p class="text-sm opacity-90 mb-2">${currentWork.category}</p>
                                         <p>${currentWork.description}</p>
