@@ -37,8 +37,16 @@
             --font-main: 'Inter', sans-serif; /* 默认使用 Inter 字体 */
 
             /* Frutiger Aero 专属渐变 - 更复杂和细腻 */
-            --fa-title-active-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.5) 100%); /* 更亮的激活标题栏渐变 */
-            --fa-title-inactive-gradient: linear-gradient(to bottom, rgba(0, 191, 255, 0.25) 0%, rgba(0, 122, 204, 0.25) 100%); /* 更柔和的非激活标题栏渐变 */
+            /* 统一的蓝色渐变变量 */
+            --fa-blue-gradient-strong-start: rgba(0, 191, 255, 0.8); /* 强的活动蓝色 */
+            --fa-blue-gradient-strong-end: rgba(0, 122, 204, 0.8); /* 强的活动深蓝 */
+            --fa-blue-gradient-medium-start: rgba(0, 191, 255, 0.5); /* 中等强度的蓝色 */
+            --fa-blue-gradient-medium-end: rgba(0, 122, 204, 0.5); /* 中等强度的深蓝 */
+            --fa-blue-gradient-translucent-start: rgba(0, 191, 255, 0.4); /* 半透明蓝色 */
+            --fa-blue-gradient-translucent-end: rgba(0, 122, 204, 0.4); /* 半透明深蓝 */
+
+            --fa-title-active-gradient: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%); /* 更亮的激活标题栏渐变 */
+            --fa-title-inactive-gradient: linear-gradient(to bottom, var(--fa-blue-gradient-medium-start) 0%, var(--fa-blue-gradient-medium-end) 100%); /* 更柔和的非激活标题栏渐变 */
             
             --fa-button-bg: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 100%); /* 更明显的按钮基础渐变 */
             --fa-button-hover-bg: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%); /* 悬停时更亮 */
@@ -195,7 +203,7 @@
             width: 100%; /* 全宽 */
             height: var(--taskbar-height); /* 固定高度 */
             /* 背景和边框调整以匹配状态栏 */
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.4)); /* 匹配状态栏渐变 */
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end)); /* 匹配状态栏渐变 */
             backdrop-filter: blur(20px); /* 更强的模糊效果 */
             -webkit-backdrop-filter: blur(20px); /* Safari 支持 */
             border-top: 1px solid var(--glass-border-light); /* 新蓝色边框 */
@@ -209,10 +217,10 @@
             position: fixed; /* 固定任务栏 */
         }
 
-        /* 开始按钮 - 高度细致的 Aero 风格 */
+        /* 开始按钮 - 高度细致的 Aero 风格，现在是蓝色调 */
         .start-button {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%); /* 更强的白色高光 */
-            border: 2px solid rgba(255, 255, 255, 0.8); /* 更厚、更明显的边框 */
+            background: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%); /* 蓝色渐变 */
+            border: 2px solid var(--glass-border-light); /* 更厚、更明显的边框 */
             border-radius: 50%; /* 圆形 */
             width: 48px; /* 稍大一些 */
             height: 48px; /* 稍大一些 */
@@ -222,7 +230,7 @@
             color: white; /* 文本颜色显式为白色 */
             font-size: 0.9rem;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8); /* 更强的蓝色光晕 */
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8); /* 更强的白色光晕 */
             box-shadow: 0 6px 20px rgba(0,0,0,0.7), inset 0 2px 10px rgba(255,255,255,0.8); /* 更明显的阴影和内高光 */
             cursor: pointer;
             transition: all 0.2s ease-in-out;
@@ -251,7 +259,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle at center, rgba(0,191,255,0.4) 0%, transparent 70%); /* 微妙的蓝色光晕 */
+            background: radial-gradient(circle at center, var(--fa-blue-gradient-strong-start) 0%, transparent 70%); /* 微妙的蓝色光晕 */
             opacity: 0;
             transition: opacity 0.3s ease;
             pointer-events: none;
@@ -259,16 +267,16 @@
 
 
         .start-button:hover {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.8) 0%, rgba(255,255,255,0.4) 100%);
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.9) 0%, rgba(0, 122, 204, 0.9) 100%);
             transform: translateY(-4px); /* 更明显的抬起效果 */
-            box-shadow: 0 8px 25px rgba(0, 191, 255, 0.9), inset 0 2px 12px rgba(255,255,255,0.9);
+            box-shadow: 0 8px 25px var(--fa-glow-blue), inset 0 2px 12px rgba(255,255,255,0.9);
         }
         .start-button:hover::after {
             opacity: 1; /* 悬停时显示光晕 */
         }
 
         .start-button:active {
-            background: linear-gradient(to top, rgba(255,255,255,0.7) 0%, rgba(255,255,255,0.3) 100%);
+            background: linear-gradient(to top, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
             transform: translateY(0);
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.9), inset 0 -2px 8px rgba(255,255,255,0.6);
             filter: brightness(0.9);
@@ -277,7 +285,7 @@
         .start-button .icon-image { /* 动态加载图片的尺寸 */
             width: 2em; /* 更大的图标尺寸 */
             height: 2em;
-            filter: drop-shadow(0 0 10px rgba(0, 191, 255, 0.8)); /* 更强的文本阴影等效于图像 */
+            filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.8)); /* 更强的文本阴影等效于图像 */
         }
 
         /* 任务栏图标（打开/最小化窗口） */
@@ -414,13 +422,13 @@
             display: flex;
         }
 
-        /* 开始菜单头部（带个人信息） - 更突出 */
+        /* 开始菜单头部（带个人信息） - 更突出，现在是蓝色调 */
         .start-menu-header {
             display: flex;
             align-items: center;
             padding: 15px;
             margin-bottom: 15px;
-            background: linear-gradient(to right, rgba(0,191,255,0.6) 0%, rgba(0,122,204,0.6) 100%);
+            background: linear-gradient(to right, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
             border-radius: 18px;
             border: 1px solid var(--glass-border-light);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), inset 0 -1px 5px rgba(255,255,255,0.4);
@@ -450,7 +458,7 @@
             color: white;
             font-size: 1.3rem;
             font-weight: bold;
-            text-shadow: 0 0 10px rgba(0, 191, 255, 0.8);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.8);
         }
 
         /* 开始菜单条目样式 - 更具交互性和光泽感 */
@@ -488,7 +496,7 @@
         }
 
         .start-menu-item:hover {
-            background: linear-gradient(to right, rgba(0, 191, 255, 0.7) 0%, rgba(0, 122, 204, 0.7) 100%);
+            background: linear-gradient(to right, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
             transform: translateX(10px);
             color: white;
             text-shadow: 0 0 12px rgba(255,255,255,1);
@@ -535,7 +543,7 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to bottom, rgba(0,191,255,0.5) 0%, rgba(0,122,204,0.2) 100%);
+            background: linear-gradient(to bottom, var(--fa-blue-gradient-medium-start) 0%, var(--fa-blue-gradient-medium-end) 100%); /* 蓝色渐变 */
             border: 2px solid var(--glass-border-light);
             border-radius: 15px;
             cursor: pointer;
@@ -558,14 +566,14 @@
         }
 
         .start-menu-footer-button:hover {
-            background: linear-gradient(to bottom, rgba(0,191,255,0.6) 0%, rgba(0,122,204,0.3) 100%);
+            background: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
             transform: translateY(-4px);
             box-shadow: 0 6px 20px var(--fa-glow-blue), inset 0 2px 10px rgba(255,255,255,0.7);
         }
 
         .start-menu-footer-button:active {
             transform: translateY(0);
-            background: linear-gradient(to top, rgba(0,191,255,0.5) 0%, rgba(0,122,204,0.2) 100%);
+            background: linear-gradient(to top, var(--fa-blue-gradient-medium-start) 0%, var(--fa-blue-gradient-medium-end) 100%);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), inset 0 -2px 6px rgba(255,255,255,0.5);
             filter: brightness(0.9);
         }
@@ -573,7 +581,7 @@
         .start-menu-footer-button .icon-image {
             width: 32px;
             height: 32px;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7));
         }
 
         /* 动画：菜单出现 - 从左下角放大淡入 */
@@ -641,7 +649,7 @@
             font-weight: bold;
             color: white;
             text-shadow: 0 1px 3px rgba(0,0,0,0.7);
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.2);
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.2), 0 4px 15px rgba(0,0,0,0.4); /* 添加外阴影 */
         }
         /* 标题栏内部玻璃高光 */
         .os-window-title-bar::after {
@@ -651,7 +659,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 60%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, transparent 60%); /* 更明显的光泽 */
             pointer-events: none;
             border-radius: inherit;
         }
@@ -659,7 +667,7 @@
         .os-window-title-bar.inactive {
             background: var(--fa-title-inactive-gradient);
             border-bottom: 1px solid rgba(0, 122, 204, 0.5);
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.1);
+            box-shadow: inset 0 1px 4px rgba(255,255,255,0.1), 0 2px 8px rgba(0,0,0,0.3);
         }
         .os-window-title-bar.inactive::after {
             background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 60%);
@@ -675,7 +683,7 @@
         .os-window-title-content .icon-image {
             width: 32px;
             height: 32px;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7)); /* 白色光晕 */
         }
 
         .os-window-title {
@@ -700,9 +708,12 @@
             color: white;
             cursor: pointer;
             transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
-            box-shadow: inset 0 1px 4px rgba(255,255,255,0.7), 0 1px 4px rgba(0,0,0,0.4);
-            border: 1px solid rgba(0, 191, 255, 0.6);
-            background: rgba(0,191,255,0.15);
+            
+            /* 新的默认样式，更像蓝色果冻 */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%);
+            border: 1px solid rgba(0, 191, 255, 0.7); /* 明确的蓝色边框 */
+            box-shadow: inset 0 1px 6px rgba(255,255,255,0.7), 0 2px 6px rgba(0,0,0,0.5), 0 0 8px rgba(0,191,255,0.4); /* 添加蓝色光晕 */
+
             position: relative;
             overflow: hidden;
         }
@@ -713,38 +724,38 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.3) 0%, transparent 60%);
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.4) 0%, transparent 60%);
             border-radius: 50%;
             opacity: 0.8;
             pointer-events: none;
         }
 
         /* 悬停/激活状态下的按钮颜色 */
-        .os-window-controls .control-button.close { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
-        .os-window-controls .control-button.minimize { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
-        .os-window-controls .control-button.maximize { background: rgba(0,191,255,0.15); border-color: rgba(0,191,255,0.6); }
-
         .os-window-controls .control-button:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
-            box-shadow: inset 0 1px 6px rgba(255,255,255,0.8), 0 2px 8px rgba(0,0,0,0.5);
-            background: rgba(0,191,255,0.3);
+            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.5) 0%, rgba(0, 122, 204, 0.4) 100%); /* 悬停时变为蓝色渐变 */
+            border-color: rgba(0, 191, 255, 0.9);
+            box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 12px var(--fa-glow-blue); /* 更强的光晕 */
         }
-        .os-window-controls .control-button.close:hover { background: rgba(0,191,255,0.3); border-color: rgba(0,191,255,0.8); }
-        .os-window-controls .control-button.minimize:hover { background: rgba(0,191,255,0.3); border-color: rgba(0,191,255,0.8); }
-        .os-window-controls .control-button.maximize:hover { background: rgba(0,191,255,0.3); border-color: rgba(0,191,255,0.8); }
+        /* 关闭按钮的特殊悬停效果，如果需要红色 */
+        .os-window-controls .control-button.close:hover {
+             background: linear-gradient(to bottom, rgba(255,0,0,0.6) 0%, rgba(180,0,0,0.5) 100%);
+             border-color: rgba(255,0,0,0.8);
+             box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 12px rgba(255,0,0,0.6);
+        }
 
         .os-window-controls .control-button:active {
             transform: scale(0.95);
             opacity: 1;
-            box-shadow: inset 0 0 6px rgba(0,0,0,0.7), inset 0 -1px 4px rgba(255,255,255,0.5);
+            background: linear-gradient(to top, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.1) 100%); /* 按下时恢复白色渐变，并有凹陷效果 */
+            box-shadow: inset 0 0 8px rgba(0,0,0,0.8), inset 0 -1px 4px rgba(255,255,255,0.5);
             filter: brightness(0.9);
-            background: rgba(0,191,255,0.08);
         }
         .os-window-controls .control-button .icon-image {
             width: 0.9em;
             height: 0.9em;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7)); /* 白色光晕 */
         }
 
         /* 窗口内容区 */
@@ -759,7 +770,7 @@
 
         /* 每个窗口底部的状态栏 */
         .os-window-status-bar {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.4) 0%, rgba(0, 122, 204, 0.4) 100%);
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%);
             border-top: 2px solid rgba(255, 255, 255, 0.5);
             padding: 10px 20px;
             color: white;
@@ -1025,7 +1036,7 @@
 
         /* 任务栏最小化窗口图标 - 更玻璃质感 */
         .taskbar-minimized-icon {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.4), rgba(0, 122, 204, 0.3));
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end));
             border: 1px solid var(--glass-border-light);
             border-radius: 12px;
             padding: 8px 12px;
@@ -1059,14 +1070,14 @@
 
 
         .taskbar-minimized-icon:hover {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.5), rgba(0, 122, 204, 0.4));
+            background: linear-gradient(to top, var(--fa-blue-gradient-medium-start), var(--fa-blue-gradient-medium-end));
             transform: translateY(-4px);
             box-shadow: inset 0 1px 8px rgba(255,255,255,0.8), 0 4px 15px rgba(0,0,0,0.7);
         }
 
         /* 激活状态下的任务栏图标样式 */
         .taskbar-minimized-icon.active {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.8) 0%, rgba(0, 122, 204, 0.8) 100%);
+            background: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
             border-color: var(--primary-blue);
             box-shadow: inset 0 1px 8px rgba(0,0,0,0.8), 0 0 12px var(--primary-blue);
             transform: translateY(0);
@@ -1248,6 +1259,114 @@
         html {
             scrollbar-width: thin;
             scrollbar-color: rgba(0, 191, 255, 0.9) rgba(255, 255, 255, 0.15);
+        }
+
+        /* --- 移动端适配 (max-width: 768px) --- */
+        @media (max-width: 768px) {
+            .os-window {
+                min-width: 90vw; /* 调整最小宽度 */
+                min-height: 50vh; /* 调整最小高度 */
+                width: 95vw !important; /* 强制窗口宽度为视口宽度的95% */
+                height: 80vh !important; /* 强制窗口高度为视口高度的80% */
+                left: 2.5vw !important; /* 居中 */
+                top: 5vh !important; /* 顶部留白 */
+                transform: none !important; /* 移除任何transform，确保位置正确 */
+                border-radius: 15px; /* 移动端可以小一点的圆角 */
+                box-shadow: 0 5px 20px rgba(0,0,0,0.5), inset 0 0 15px rgba(255,255,255,0.2);
+            }
+
+            .os-window.maximized {
+                border-radius: 0; /* 最大化时无圆角 */
+            }
+
+            .start-menu {
+                width: 95vw; /* 开始菜单占据大部分宽度 */
+                left: 2.5vw; /* 居中 */
+                padding: 15px; /* 调整内边距 */
+                border-radius: 20px;
+                max-height: calc(100% - var(--taskbar-height) - 20px); /* 适应移动端高度 */
+            }
+
+            .desktop-icon {
+                width: 80px; /* 减小桌面图标宽度 */
+                padding: 5px;
+            }
+
+            .desktop-icon .icon-image {
+                width: 50px; /* 减小图标图片尺寸 */
+                height: 50px;
+            }
+
+            .desktop-icon-label {
+                font-size: 0.8rem; /* 减小标签字体大小 */
+                margin-top: 5px;
+            }
+
+            .taskbar {
+                height: 44px; /* 任务栏高度可以略小 */
+            }
+
+            .start-button {
+                width: 40px; /* 开始按钮略小 */
+                height: 40px;
+            }
+
+            .start-button .icon-image {
+                width: 1.8em;
+                height: 1.8em;
+            }
+
+            .system-tray-icon {
+                font-size: 1rem; /* 系统托盘图标略小 */
+                padding: 6px;
+            }
+
+            .system-tray-icon .icon-image {
+                width: 1em;
+                height: 1em;
+            }
+
+            #current-time {
+                font-size: 0.8rem; /* 时间字体略小 */
+            }
+
+            .os-window-content {
+                padding: 15px; /* 窗口内容区内边距调整 */
+            }
+
+            .os-window-content .markdown-content h1 { font-size: 2em; }
+            .os-window-content .markdown-content h2 { font-size: 1.8em; }
+            .os-window-content .markdown-content h3 { font-size: 1.4em; }
+            .os-window-content .markdown-content p { font-size: 0.95rem; }
+
+            .works-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 作品集网格列数调整 */
+                gap: 15px;
+                padding: 10px;
+            }
+
+            .work-card img {
+                height: 120px; /* 作品卡片图片高度调整 */
+            }
+
+            .work-card-title {
+                font-size: 1rem;
+            }
+            .work-card-category {
+                font-size: 0.8rem;
+            }
+
+            .work-detail-content .gallery-main-image-container {
+                margin-bottom: 15px;
+            }
+            .work-detail-content .gallery-nav-button {
+                font-size: 1.5rem; /* 画廊导航按钮尺寸调整 */
+                padding: 10px;
+            }
+            .work-detail-content .gallery-thumbnail {
+                width: 80px; /* 缩略图尺寸调整 */
+                height: 60px;
+            }
         }
     </style>
 </head>
@@ -1540,150 +1659,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
 * **活动海报**：音乐节、游戏发布、艺术展览等主题海报。
 * **品牌视觉**：符合您品牌调性的独特图形元素和宣传图。
 * **数字插画**：用于网站、社交媒体或印刷品的定制插画。
-* **动态图形（基础）**：为海报添加简单的动画效果。
-
-**报价示例：**
-
-* **单页概念海报**：¥1200 - ¥4000 (根据复杂度和修订次数)
-* **系列视觉宣传图（3张）：**：¥3000 - ¥8000
-
-**项目周期**：通常为 0.5-2 周。
-`
-                        }
-                    ]
-                },
-
-                // 社交部分
-                socialsTitle: '社交媒体',
-                socialsDescription: '欢迎在以下平台关注我，与我互动。',
-                socialsLinks: [
-                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
-                    { name: 'Instagram', url: 'https://instagram.com/yourprofile', iconAssetKey: 'icon_instagram' },
-                    { name: 'ArtStation', url: 'https://artstation.com/yourprofile', iconAssetKey: 'icon_artstation' },
-                    { name: 'Behance', url: 'https://behance.net/yourprofile', iconAssetKey: 'icon_behance_square' },
-                    { name: '邮箱', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
-                ],
-
-                // 设置部分
-                settings: {
-                    title: '系统设置',
-                    description: '调整您的系统偏好设置。',
-                    options: [
-                        { id: 'language-toggle', type: 'language-toggle', label: '切换语言' }, // Added missing label
-                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: '显示桌面图标' },
-                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: '启用系统动画 (暂不可用)' },
-                        { id: 'reset-settings', type: 'button', label: '重置所有设置' }
-                    ]
-                },
-            },
-            // 添加英文内容以支持多语言
-            en: {
-                systemName: 'MAX OS',
-                systemVersion: 'v1.0.0',
-                welcomeMessage: 'Welcome to MAZKO\'s Virtual Terminal',
-                loadingMessage: 'Loading...',
-                errorLoadingContent: 'Failed to load content: ',
-                unknownModule: 'Unknown Module',
-                profileName: 'MAZKO',
-                startButton: 'Start',
-                // Desktop Icons / Menu Items
-                worksIcon: 'Works',
-                worksMenuItem: 'My Works',
-                charactersIcon: 'Characters',
-                charactersMenuItem: 'Characters Library',
-                mazkoExeIcon: 'MAZKO',
-                servicesIcon: 'Services',
-                servicesMenuItem: 'Services & Pricing',
-                socialsIcon: 'Socials',
-                socialsMenuItem: 'Social Media',
-                datacoreIcon: 'DATA CORE', // New data core icon text
-                datacoreMenuItem: '⧉ DATA.CORE ☍', // New data core menu item text
-                settingsMenuItem: 'System Settings',
-                shutdownMenuItem: 'Shutdown',
-                shutdownMessage: 'System is shutting down. Goodbye!', // Added missing translation
-
-                // Works Section
-                worksTitle: 'My Works',
-                worksClickPrompt: 'Click on a work to view details',
-                worksDetailsSuffix: ' Work Details',
-
-                // Characters Section
-                charactersTitle: 'Characters Library',
-                charactersDescription: 'Here are some characters I designed, from different worlds and stories.',
-
-                // About Section
-                aboutTitle: 'About MAZKO',
-                aboutContent: `
-# About MAZKO
-
-MAZKO is a digital artist specializing in **Cyberpunk, Y2K, PSX, and Glitch Art styles**.
-
-My creative fields include:
-
-* **3D Modeling & Rendering**: High-fidelity and low-poly models, focused on retro-futuristic aesthetics.
-* **Concept Art & Illustration**: Transforming abstract ideas into concrete visuals, with a unique cyberpunk vibe.
-* **Visual Effects & Animation**: Adding dynamic and immersive elements to your projects.
-* **User Interface Design**: Adhering to Frutiger Aero, Y2K, and other styles to create intuitive and aesthetically pleasing interfaces.
-
-I am dedicated to expressing thoughts on technology, the future, and nostalgia through art.
-
-**Contact me:**
-
-Feel free to contact me through the following methods to explore the endless possibilities of digital art.
-
-`,
-                // Data Core Section
-                datacoreTitle: '⧉ DATA.CORE ☍',
-                datacoreDescription: 'Explore my gallery of inspirations.',
-                datacoreEmpty: 'No inspiration images available here yet.',
-
-
-                // Services Section
-                services: {
-                    title: 'Services & Pricing',
-                    description: 'I offer the following digital art services. Each service is designed to meet your specific creative needs.',
-                    categories: [
-                        {
-                            id: 'character-modeling-category',
-                            name: 'Character Modeling & Design',
-                            nameEn: 'Character Modeling & Design',
-                            shortDescription: 'Creating unique and stylized 3D/2D characters.',
-                            detailContent: `
-# Character Modeling & Design
-
-I specialize in all types of character design from concept to final render, with a deep focus on **PSX style and low-poly**.
-
-Services include：
-
-* **Concept Sketches**: Providing multi-angle character concepts based on your ideas.
-* **3D Modeling**: Creating high and low-poly characters using tools like Blender/ZBrush.
-* **Texture Painting**: Using Substance Painter to give characters retro-pixel or sci-fi textures.
-* **Rigging & Basic Animation**: Providing basic character rigging and pose setup.
-
-**Pricing Examples:**
-
-* **PSX Style Low-Poly Character**: ¥1500 - ¥5000 (depending on detail complexity)
-* **Detailed Concept Character Illustration**: ¥800 - ¥3000 (depending on detail and background)
-
-**Project Cycle**: Typically 1-3 weeks.
-`
-                        },
-                        {
-                            id: 'poster-design-category',
-                            name: 'Poster & Visual Design',
-                            nameEn: 'Poster & Visual Design',
-                            shortDescription: '制作具有赛博朋克和故障艺术感的宣传海报。',
-                            detailContent: `
-# Poster & Visual Design
-
-I can create striking **Cyberpunk, Y2K, or Glitch Art style** posters and various visual promotional materials for you.
-
-Services include：
-
-* **活动海报**：音乐节、游戏发布、艺术展览等主题海报。
-* **品牌视觉**：符合您品牌调性的独特图形元素和宣传图。
-* **数字插画**：用于网站、社交媒体或印刷品的定制插画。
-* **动态图形（基础）**：为海报添加简单的动画效果。
+* **动态图形（基础））**：为海报添加简单的动画效果。
 
 **报价示例：**
 
@@ -1869,9 +1845,9 @@ Services include：
              */
             /**
              * @function updateUIForLanguage
-             * @description 根据当前语言设置更新所有UI文本。
-             * @returns {void}
-             */
+         * @description 根据当前语言设置更新所有UI文本。
+         * @returns {void}
+         */
             function updateUIForLanguage() {
                 const langData = LANG_CONTENT[currentLanguage];
 
@@ -1955,7 +1931,7 @@ Services include：
                     // 如果nameEn可用则使用，否则回退
                 } else {
                     // For main sections, use data-title-zh and data-title-en from desktop icons or menu items
-                    // 对于主要部分，使用桌面图标或菜单项中的data-title-zh和data-title-en
+                    // 对于主要部分，使用data-title-zh和data-title-en从桌面图标或菜单项
                     const desktopIcon = document.querySelector(`.desktop-icon[data-section="${section}"]`);
                     const startMenuItem = document.querySelector(`.start-menu-item[data-section="${section}"]`);
                     const startMenuFooterButton = document.querySelector(`.start-menu-footer-button[data-section="${section}"]`);
@@ -2356,14 +2332,14 @@ Services include：
                                 id: 'char-001',
                                 name: '星际漫游者',
                                 description: '一个孤独的星际旅行者，探索宇宙深处的奥秘。PSX风格，低多边形设计。',
-                                // 使用相对路径
+                                // 
                                 image: './assets/characters/char_001_image.png' 
                             },
                             {
                                 id: 'char-002',
                                 name: '都市忍者',
                                 description: '穿梭于霓虹都市阴影中的神秘忍者。',
-                                // 使用相对路径
+                                // 
                                 image: './assets/characters/char_002_image.png' 
                             }
                         ];
@@ -2482,18 +2458,30 @@ Services include：
                 // Store initial position and size for restore functionality
                 const desktopWidth = mainDesktopArea.offsetWidth;
                 const desktopHeight = mainDesktopArea.offsetHeight;
-                const defaultWidth = Math.min(desktopWidth * 0.7, 800); // Max 800px or 70%
-                const defaultHeight = Math.min(desktopHeight * 0.7, 600); // Max 600px or 70%
 
-                // Position new windows slightly offset from each other
-                const openWindows = document.querySelectorAll('.os-window:not(.minimized)');
-                let offsetX = 50 * (openWindows.length % 5); // Max 5 offsets before repeating
-                let offsetY = 50 * (openWindows.length % 5);
+                let defaultWidth, defaultHeight, offsetX, offsetY;
+
+                if (window.innerWidth <= 768) { // Mobile-specific sizing
+                    defaultWidth = window.innerWidth * 0.95;
+                    defaultHeight = window.innerHeight * 0.8;
+                    offsetX = (window.innerWidth - defaultWidth) / 2;
+                    offsetY = (window.innerHeight - defaultHeight) / 2 - (parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--taskbar-height')) || 48) / 2;
+                } else { // Desktop sizing
+                    defaultWidth = Math.min(desktopWidth * 0.7, 800); // Max 800px or 70%
+                    defaultHeight = Math.min(desktopHeight * 0.7, 600); // Max 600px or 70%
+                    // Position new windows slightly offset from each other
+                    const openWindows = document.querySelectorAll('.os-window:not(.minimized)');
+                    offsetX = 50 * (openWindows.length % 5); // Max 5 offsets before repeating
+                    offsetY = 50 * (openWindows.length % 5);
+                    offsetX += (desktopWidth / 2 - defaultWidth / 2);
+                    offsetY += (desktopHeight / 2 - defaultHeight / 2);
+                }
+
 
                 windowElement.style.width = initialProps.width || `${defaultWidth}px`;
                 windowElement.style.height = initialProps.height || `${defaultHeight}px`;
-                windowElement.style.left = initialProps.left || `${(desktopWidth / 2 - defaultWidth / 2) + offsetX}px`;
-                windowElement.style.top = initialProps.top || `${(desktopHeight / 2 - defaultHeight / 2) + offsetY}px`;
+                windowElement.style.left = initialProps.left || `${offsetX}px`;
+                windowElement.style.top = initialProps.top || `${offsetY}px`;
 
                 // Ensure window is within bounds after offset
                 if (parseFloat(windowElement.style.left) + parseFloat(windowElement.style.width) > desktopWidth) {
@@ -2694,39 +2682,39 @@ Services include：
                     taskbarIcon.classList.add('taskbar-minimized-icon');
                     taskbarIcon.dataset.windowId = windowId;
 
-                    // Initialize displayTitle with a safe fallback
-                    let displayTitle = String(title || 'Untitled Window'); // Ensure it's a string, even if title is null/undefined
+                    let displayTitle = String(title || 'Untitled Window'); // Start with the provided title, ensure it's a string and has a fallback
 
-                    // Attempt to get a more specific display title from language content if available
                     const langData = LANG_CONTENT[currentLanguage];
                     const section = windowElement.dataset.section;
 
                     if (langData && section) { // Ensure both langData and section are defined
                         if (langData[`${section}MenuItem`]) {
-                            displayTitle = String(langData[`${section}MenuItem`]); // Use the simplified menu item label
+                            displayTitle = langData[`${section}MenuItem`]; // Use the simplified menu item label
                         } else if (section === 'about' && langData.mazkoExeIcon) {
-                            displayTitle = String(langData.mazkoExeIcon);
+                            displayTitle = langData.mazkoExeIcon;
                         } else if (section.startsWith('service-category-')) {
                             const categoryId = section.replace('service-category-', '');
-                            if (langData.services && langData.services.categories) {
-                                const category = langData.services.categories.find(cat => cat.id === categoryId);
-                                if (category && category.name) {
-                                    displayTitle = String(category.name);
-                                    if (windowElement.dataset.windowTitle) { // Try to use actual window title if available
-                                        displayTitle = windowElement.dataset.windowTitle.split(' [')[0].trim();
-                                    }
-                                }
+                            const category = langData.services?.categories?.find(cat => cat.id === categoryId); // Use optional chaining
+                            if (category?.name) {
+                                displayTitle = category.name;
                             }
                         } else if (section.startsWith('work-detail-')) {
                             // For work-detail windows, the 'title' parameter already contains the full title
-                            // so no further modification needed here.
-                            displayTitle = String(title); // Ensure it's explicitly a string
+                            // which is usually in the format "Work Title [English Title]" or similar.
+                            // We need to trim the "[English Title]" part if present.
+                            const regex = /^(.*?)\s*\[.*?\]$/;
+                            const match = String(title).match(regex);
+                            if (match && match[1]) {
+                                displayTitle = match[1].trim();
+                            } else {
+                                displayTitle = String(title).trim();
+                            }
                         } else if (section === 'data-core') { // New logic for data-core
                             displayTitle = langData.datacoreIcon; // Use the short icon name
                         }
                     }
-                    // Final fallback to ensure displayTitle is always a non-empty string
-                    displayTitle = displayTitle.trim() || 'Untitled'; // Trim and ensure it's not empty
+                    // Final fallback to ensure displayTitle is always a non-empty string and trimmed
+                    displayTitle = displayTitle.trim() || 'Untitled';
 
                     taskbarIcon.innerHTML = `<span class="icon-placeholder" data-asset-key="icon_window_restore"></span> <span>${displayTitle}</span>`;
                     taskbarIconsContainer.appendChild(taskbarIcon);
@@ -2789,7 +2777,7 @@ Services include：
                     windowElement.style.left = windowElement.dataset.originalLeft;
                     windowElement.style.top = windowElement.dataset.originalTop;
                     windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
-                    windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
+                    windowElement.style.box-shadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
                     console.log(`窗口 "${windowElement.dataset.windowId}" 已从最大化恢复。`);
                 } else {
                     // Maximize
@@ -3036,7 +3024,7 @@ Services include：
                         case 'data-core': // New content rendering for Data Core
                             if (data && data.length > 0) {
                                 content = `
-                                    <h2 class="text-xl font-bold mb-4">${LANG_CONTENT[currentLanguage]?.datacoreTitle}</h2>
+                                    <h2 class="text-xl font-bold mb-4">${chineseTitle}</h2>
                                     <p>${LANG_CONTENT[currentLanguage]?.datacoreDescription}</p>
                                     <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 mt-4">
                                         ${data.map(image => `
