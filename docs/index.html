@@ -1694,6 +1694,147 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                         { id: 'reset-settings', type: 'button', label: '重置所有设置' }
                     ]
                 },
+            }, // End of zh language content
+            en: { // Add English content
+                systemName: 'MAX OS',
+                systemVersion: 'v1.0.0',
+                welcomeMessage: 'Welcome to MAZKO\'s Virtual Terminal',
+                loadingMessage: 'Loading...',
+                errorLoadingContent: 'Failed to load content: ',
+                unknownModule: 'Unknown Module',
+                profileName: 'MAZKO',
+                startButton: 'Start',
+                // Desktop Icons / Menu Items
+                worksIcon: 'Works',
+                worksMenuItem: 'My Works',
+                charactersIcon: 'Characters',
+                charactersMenuItem: 'Characters Library',
+                mazkoExeIcon: 'MAZKO',
+                servicesIcon: 'Services',
+                servicesMenuItem: 'Services & Pricing',
+                socialsIcon: 'Socials',
+                socialsMenuItem: 'Social Media',
+                datacoreIcon: 'DATA CORE',
+                datacoreMenuItem: 'DATA.CORE',
+                settingsMenuItem: 'System Settings',
+                shutdownMenuItem: 'Shutdown',
+                shutdownMessage: 'System is shutting down, Goodbye!',
+
+                // Works section
+                worksTitle: 'My Works',
+                worksClickPrompt: 'Click on a work to view details',
+                worksDetailsSuffix: ' Details',
+
+                // Characters section
+                charactersTitle: 'Characters Library',
+                charactersDescription: 'Here are some characters I\'ve designed, from different worlds and stories.',
+
+                // About section
+                aboutTitle: 'About MAZKO',
+                aboutContent: `
+# About MAZKO
+
+MAZKO is a digital artist focused on **Cyberpunk, Y2K, PSX, and Glitch Art styles**.
+
+My areas of expertise include:
+
+* **3D Models & Renders**: High-fidelity and low-poly models, with a focus on retro-futuristic aesthetics.
+* **Concept Art & Illustrations**: Transforming abstract ideas into concrete visuals with a unique cyberpunk atmosphere.
+* **Visual Effects & Animation**: Adding dynamic and immersive elements to your projects.
+* **User Interface Design**: Adhering to styles like Frutiger Aero, Y2K, to create intuitive and aesthetically pleasing interfaces.
+
+I am dedicated to expressing thoughts on technology, the future, and nostalgia through art.
+
+**Contact me:**
+
+Feel free to contact me through the following channels to explore the infinite possibilities of digital art together.
+
+`,
+                // Data Core section
+                datacoreTitle: 'DATA.CORE',
+                datacoreDescription: 'Explore my inspiration gallery.',
+                datacoreEmpty: 'No inspiration images here yet.',
+
+                // Services section
+                services: {
+                    title: 'Services & Pricing',
+                    description: 'I offer the following digital art services. Each service is designed to meet your specific creative needs.',
+                    categories: [
+                        {
+                            id: 'character-modeling-category',
+                            name: 'Character Modeling & Design',
+                            nameEn: 'Character Modeling & Design',
+                            shortDescription: 'Create unique and stylized 3D/2D characters.',
+                            detailContent: `
+# Character Modeling & Design
+
+I specialize in character design from concept to final render, with a particular focus on **PSX style and low-poly** domains.
+
+Services include:
+
+* **Concept Sketches**: Providing multi-angle character concepts based on your ideas.
+* **3D Modeling**: Creating high-poly and low-poly models using tools like Blender/ZBrush.
+* **Texture Painting**: Using Substance Painter to give characters retro pixelated or sci-fi textures.
+* **Rigging & Basic Animation**: Providing basic character rigging and pose setup.
+
+**Pricing Examples:**
+
+* **PSX Style Low-Poly Character**: ¥1500 - ¥5000 (depending on detail complexity)
+* **Detailed Concept Character Illustration**: ¥800 - ¥3000 (depending on detail and background)
+
+**Project Duration**: Typically 1-3 weeks.
+`
+                        },
+                        {
+                            id: 'poster-design-category',
+                            name: 'Poster & Visual Design',
+                            nameEn: 'Poster & Visual Design',
+                            shortDescription: 'Create promotional posters with a cyberpunk and glitch art feel.',
+                            detailContent: `
+# Poster & Visual Design
+
+I can create eye-catching posters and various visual promotional materials for you in **Cyberpunk, Y2K, or Glitch Art styles**.
+
+Services include:
+
+* **Event Posters**: Themed posters for music festivals, game releases, art exhibitions, etc.
+* **Brand Visuals**: Unique graphic elements and promotional images that align with your brand identity.
+* **Digital Illustrations**: Custom illustrations for websites, social media, or print.
+* **Motion Graphics (Basic)**: Adding simple animation effects to posters.
+
+**Pricing Examples:**
+
+* **Single-Page Concept Poster**: ¥1200 - ¥4000 (depending on complexity and revisions)
+* **Series of Visual Promotional Images (3 images)**: ¥3000 - ¥8000
+
+**Project Duration**: Typically 0.5-2 weeks.
+`
+                        }
+                    ]
+                },
+
+                // Socials section
+                socialsTitle: 'Social Media',
+                socialsDescription: 'Follow me on the platforms below to connect and interact.',
+                socialsLinks: [
+                    { name: 'Weibo', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
+                    { name: 'Instagram', url: 'https://instagram.com/yourprofile', iconAssetKey: 'icon_instagram' },
+                    { name: 'ArtStation', url: 'https://artstation.com/yourprofile', iconAssetKey: 'icon_artstation' },
+                    { name: 'Behance', url: 'https://behance.net/yourprofile', iconAssetKey: 'icon_behance_square' },
+                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
+                ],
+
+                // Settings section
+                settings: {
+                    title: 'System Settings',
+                    description: 'Adjust your system preferences.',
+                    options: [
+                        { id: 'language-toggle', type: 'language-toggle', label: 'Toggle Language' },
+                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: 'Show Desktop Icons' },
+                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: 'Enable System Animations (Unavailable)' },
+                        { id: 'reset-settings', type: 'button', label: 'Reset All Settings' }
+                    ]
+                },
             }
         };
 
@@ -1876,8 +2017,9 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     const langKey = item.dataset.langKey;
                     // Ensure both language versions exist before attempting to access
                     // 在尝试访问之前，请确保两种语言版本都存在
-                    const chineseLabel = LANG_CONTENT.zh[langKey] || '';
-                    const englishLabel = LANG_CONTENT.en[langKey] || '';
+                    // Changed to safely access properties with optional chaining in case langKey is missing in either language
+                    const chineseLabel = LANG_CONTENT.zh?.[langKey] || ''; 
+                    const englishLabel = LANG_CONTENT.en?.[langKey] || '';
 
                     const labelSpan = item.querySelector('.menu-item-label');
                     if (labelSpan) {
@@ -2777,7 +2919,7 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                     windowElement.style.left = windowElement.dataset.originalLeft;
                     windowElement.style.top = windowElement.dataset.originalTop;
                     windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
-                    windowElement.style.box-shadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
+                    windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
                     console.log(`窗口 "${windowElement.dataset.windowId}" 已从最大化恢复。`);
                 } else {
                     // Maximize
