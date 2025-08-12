@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>𝗠𝗔𝗫 _𝗢𝗦 _ [v¹․⁰․⁰]</title>
     <!-- Favicon - 使用一个简单的SVG作为示例 -->
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>\" type="image/svg+xml">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text x='0' y='14' font-size='16'>🌌</text></svg>\" type="image/svg+xml">
     <!-- 引入 Tailwind CSS CDN，用于快速构建和响应式布局 -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- 引入 Google Fonts - Inter 字体作为通用字体，如果需要 'Chocolate Classical Sans'，请在此处引入其 CDN 或本地路径 -->
@@ -17,33 +17,36 @@
         :root {
             /* 核心蓝色调色板 - 调整以匹配参考图片的高饱和蓝色 */
             --primary-blue: #00BFFF; /* 明亮的天空蓝，用于高光和激活状态 */
-            --dark-blue: #007ACC; /* 深蓝色，用于渐变和阴影 */
-            --light-blue: #CCEEFF; /* 非常浅的蓝色，用于细微高光和文本 */
-            --mid-blue: #3A92CE; /* 新增的中间蓝色，用于更平滑的渐变 */
-            --accent-glow-blue: #87CEEB; /* 更细腻、通透的蓝色光晕 */
+            --dark-blue: #008CFF; /* 深蓝色，BLUE值更高 */
+            --light-blue: #E0F5FF; /* 非常浅的蓝色，BLUE值更高 */
+            --mid-blue: #55B4FF; /* 新增的中间蓝色，BLUE值更高 */
+            --accent-glow-blue: #A3D9FF; /* 更细腻、通透的蓝色光晕，BLUE值更高 */
 
             /* Glassmorphism & 玻璃质感与半透明 - 增强真实 Aero 效果 */
-            --glass-border-light: rgba(0, 191, 255, 0.8); /* 更改为主蓝色，增加不透明度 */
-            --glass-border-dark: rgba(0, 122, 204, 0.8); /* 更改为深蓝色，增加不透明度 */
-            --glass-bg: rgba(255, 255, 255, 0.08); /* 更加细腻的白色背景 */
-            --glass-overlay-light: rgba(255, 255, 255, 0.2); /* 内部元素的更亮覆盖层 */
-            --glass-overlay-dark: rgba(0, 0, 0, 0.1); /* 微妙的黑色覆盖层，用于深度效果 */
+            --glass-border-light: rgba(0, 204, 255, 0.9); /* 更改为主蓝色，增加不透明度，BLUE值更高 */
+            --glass-border-dark: rgba(0, 140, 255, 0.9); /* 更改为深蓝色，增加不透明度，BLUE值更高 */
+            --glass-bg: rgba(255, 255, 255, 0.1); /* 更加细腻的白色背景，略微不透明 */
+            --glass-overlay-light: rgba(255, 255, 255, 0.3); /* 内部元素的更亮覆盖层，略微不透明 */
+            --glass-overlay-dark: rgba(0, 0, 0, 0.15); /* 微妙的黑色覆盖层，用于深度效果 */
 
             /* 背景 - 反映图片的鲜明且略暗的氛围 */
-            --background-dark: #10152B; /* 更深的、略带蓝色的背景 */
-            --text-color: #004D80; /* 更深的蓝色，用于一般文本（如主体、段落） */
+            --background-dark: #0A102A; /* 更深的、略带蓝色的背景 */
+            
+            /* 调整通用文本颜色为更深、更清晰的蓝色 */
+            --text-color: #005A9C; 
+            --content-text-blue: #004F90; /* 用于窗口内容内部的深蓝色文本 */
 
             /* 字体 - 保持 Inter 作为备选，优先使用经典 Aero 风格字体（如有） */
             --font-main: 'Inter', sans-serif; /* 默认使用 Inter 字体 */
 
             /* Frutiger Aero 专属渐变 - 更复杂和细腻 */
             /* 统一的蓝色渐变变量 */
-            --fa-blue-gradient-strong-start: rgba(0, 191, 255, 0.8); /* 强的活动蓝色 */
-            --fa-blue-gradient-strong-end: rgba(0, 122, 204, 0.8); /* 强的活动深蓝 */
-            --fa-blue-gradient-medium-start: rgba(0, 191, 255, 0.5); /* 中等强度的蓝色 */
-            --fa-blue-gradient-medium-end: rgba(0, 122, 204, 0.5); /* 中等强度的深蓝 */
-            --fa-blue-gradient-translucent-start: rgba(0, 191, 255, 0.4); /* 半透明蓝色 */
-            --fa-blue-gradient-translucent-end: rgba(0, 122, 204, 0.4); /* 半透明深蓝 */
+            --fa-blue-gradient-strong-start: rgba(0, 204, 255, 0.9); /* 强的活动蓝色，BLUE值更高 */
+            --fa-blue-gradient-strong-end: rgba(0, 140, 255, 0.9); /* 强的活动深蓝，BLUE值更高 */
+            --fa-blue-gradient-medium-start: rgba(0, 204, 255, 0.6); /* 中等强度的蓝色，BLUE值更高 */
+            --fa-blue-gradient-medium-end: rgba(0, 140, 255, 0.6); /* 中等强度的深蓝，BLUE值更高 */
+            --fa-blue-gradient-translucent-start: rgba(0, 204, 255, 0.5); /* 半透明蓝色，BLUE值更高 */
+            --fa-blue-gradient-translucent-end: rgba(0, 140, 255, 0.5); /* 半透明深蓝，BLUE值更高 */
 
             --fa-title-active-gradient: linear-gradient(to bottom, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%); /* 更亮的激活标题栏渐变 */
             --fa-title-inactive-gradient: linear-gradient(to bottom, var(--fa-blue-gradient-medium-start) 0%, var(--fa-blue-gradient-medium-end) 100%); /* 更柔和的非激活标题栏渐变 */
@@ -59,7 +62,7 @@
             /* 阴影与光晕 - 增强 Aero 质感的强度和扩散 */
             --fa-shadow-soft: 0 4px 15px rgba(0, 0, 0, 0.3); /* 略微柔和的阴影 */
             --fa-shadow-deep: 0 8px 20px rgba(0, 0, 0, 0.5); /* 更深的阴影，但扩散较少 */
-            --fa-glow-blue: 0 0 12px rgba(0, 191, 255, 0.8); /* 更强的蓝色光晕，匹配状态栏 */
+            --fa-glow-blue: 0 0 16px rgba(0, 204, 255, 0.9); /* 更强的蓝色光晕，匹配状态栏，BLUE值更高 */
             --fa-inner-highlight: inset 0 1px 6px rgba(255, 255, 255, 0.3); /* 微妙的内高光，用于光泽效果 */
             --fa-inner-shadow: inset 0 -1px 3px rgba(0, 0, 0, 0.15); /* 内阴影，用于深度效果 */
 
@@ -153,7 +156,7 @@
             left: 50%;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at center, rgba(0,191,255,0.5) 0%, transparent 65%); /* 更强的中心光晕 */
+            background: radial-gradient(circle at center, rgba(0,204,255,0.6) 0%, transparent 65%); /* 更强的中心光晕，BLUE值更高 */
             transform: translate(-50%, -50%);
             animation: pulse-glow 12s infinite alternate; /* 更快的光晕脉冲动画 */
             z-index: 2; /* 在噪点上方，在内容下方 */
@@ -219,7 +222,7 @@
 
         /* 开始按钮 - 高度细致的 Aero 风格，现在是蓝色调 */
         .start-button {
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end)); /* 匹配状态栏的半透明渐变 */
+            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
             border: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 50%; /* 圆形 */
             width: 48px; /* 稍大一些 */
@@ -267,7 +270,7 @@
 
 
         .start-button:hover {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%); /* 悬停时稍微更不透明 */
+            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* 悬停时稍微更不透明，BLUE值更高 */
             transform: translateY(-4px); /* 更明显的抬起效果 */
             border-color: rgba(255, 255, 255, 0.7);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 8px 25px var(--fa-glow-blue);
@@ -321,13 +324,13 @@
             color: white; /* 悬停时变为白色 */
             background-color: rgba(255,255,255,0.25); /* 更明显的悬停效果 */
             transform: translateY(-3px);
-            box-shadow: 0 4px 12px rgba(0, 191, 255, 0.4); /* 更强的蓝色光晕 */
+            box-shadow: 0 4px 12px rgba(0, 204, 255, 0.5); /* 更强的蓝色光晕，BLUE值更高 */
         }
         .system-tray-icon .icon-image { /* 动态加载图片的尺寸 */
             width: 1.2em;
             height: 1.2em;
             vertical-align: middle;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.6)); /* 更明显的光晕 */
+            filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.7)); /* 更明显的光晕，BLUE值更高 */
         }
 
         /* 桌面图标（快捷方式） */
@@ -377,7 +380,7 @@
             /* 悬停时为图标本身添加光晕 */
             filter: drop-shadow(0 0 8px var(--primary-blue))
                     drop-shadow(0 0 15px var(--accent-glow-blue))
-                    drop-shadow(0 0 25px rgba(0, 191, 255, 0.3));
+                    drop-shadow(0 0 25px rgba(0, 204, 255, 0.4)); /* BLUE值更高 */
         }
 
         .desktop-icon:active .icon-image {
@@ -401,7 +404,7 @@
             width: 380px;
             height: auto;
             max-height: calc(100% - var(--taskbar-height) - 40px);
-            background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.3), rgba(0, 122, 204, 0.2));
+            background: linear-gradient(to bottom right, rgba(0, 204, 255, 0.4), rgba(0, 140, 255, 0.3)); /* BLUE值更高 */
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 2px solid var(--glass-border-light);
@@ -509,7 +512,7 @@
             margin-right: 18px;
             width: 1.5em;
             height: 1.5em;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.8)); /* BLUE值更高 */
             transition: filter 0.2s ease;
         }
         .start-menu-item:hover .icon-image {
@@ -567,7 +570,7 @@
         }
 
         .start-menu-footer-button:hover {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%);
+            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
             transform: translateY(-4px);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 6px 20px var(--fa-glow-blue);
         }
@@ -600,12 +603,11 @@
         /* 窗口样式（保留玻璃质感） - Aero 重点 */
         .os-window {
             position: absolute;
-            background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.2), rgba(0, 122, 204, 0.1));
+            background: linear-gradient(to bottom right, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* BLUE值更高 */
             backdrop-filter: blur(35px);
             -webkit-backdrop-filter: blur(35px);
-            border: 2px solid var(--glass-border-light);
-            border-bottom: 2px solid var(--glass-border-dark);
-            border-right: 2px solid var(--glass-border-dark);
+            /* 统一边框，使其看起来像一个整体的玻璃块 */
+            border: 2px solid rgba(255, 255, 255, 0.4); 
             border-radius: 20px;
             box-shadow: 0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4);
             display: flex;
@@ -642,14 +644,14 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
+            border-bottom: none; /* 移除底部边框，与内容区无缝连接 */
             cursor: grab;
-            border-radius: 18px 18px 0 0;
+            border-radius: 20px 20px 0 0; /* 与窗口顶部圆角保持一致 */
             position: relative;
             font-size: 1.1rem;
             font-weight: bold;
             color: white;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+            /* text-shadow: 0 1px 3px rgba(0,0,0,0.7); /* Original shadow */
             box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5); /* 匹配状态栏的阴影 */
         }
         /* 标题栏内部玻璃高光 */
@@ -660,18 +662,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, rgba(255,255,255,0.12) 0%, transparent 60%); /* 更明显的光泽 */
+            background: linear-gradient(to bottom, rgba(255,255,255,0.15) 0%, transparent 60%); /* 更明显的光泽，略微不透明 */
             pointer-events: none;
             border-radius: inherit;
         }
 
         .os-window-title-bar.inactive {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.3) 0%, rgba(0, 122, 204, 0.2) 100%); /* 稍微更柔和的非激活渐变 */
-            border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+            background: linear-gradient(to top, rgba(0, 204, 255, 0.4) 0%, rgba(0, 140, 255, 0.3) 100%); /* 稍微更柔和的非激活渐变，BLUE值更高 */
+            border-bottom: none; /* 确保非活跃时也没有底部边框 */
             box-shadow: inset 0 -1px 5px rgba(0,0,0,0.3);
         }
         .os-window-title-bar.inactive::after {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.05) 0%, transparent 60%);
+            background: linear-gradient(to bottom, rgba(255,255,255,0.08) 0%, transparent 60%); /* 略微不透明 */
         }
 
         /* 窗口标题和Logo容器 */
@@ -689,7 +691,10 @@
 
         .os-window-title {
             color: white;
-            text-shadow: 0 1px 3px rgba(0,0,0,0.7);
+            /* Added glow effect similar to status bar branding */
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8), /* White glow for readability, stronger */
+                         0 0 12px rgba(0, 204, 255, 0.7), /* Blue glow, stronger and more blue */
+                         0 0 25px rgba(0, 204, 255, 0.5); /* Wider blue glow, stronger and more blue */
         }
 
         /* 窗口控制按钮（最小化、最大化、关闭） - 更小更突出 */
@@ -735,9 +740,9 @@
         .os-window-controls .control-button:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%); /* 悬停时稍微更不透明 */
+            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* 悬停时稍微更不透明，BLUE值更高 */
             border-color: rgba(255, 255, 255, 0.7);
-            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(0,191,255,0.6); /* 更强的蓝色光晕 */
+            box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(0,204,255,0.7); /* 更强的蓝色光晕，BLUE值更高 */
         }
         /* 关闭按钮的特殊悬停效果，如果需要红色 */
         .os-window-controls .control-button.close:hover {
@@ -749,7 +754,7 @@
         .os-window-controls .control-button:active {
             transform: scale(0.95);
             opacity: 1;
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.3) 0%, rgba(0, 122, 204, 0.2) 100%); /* 按下时反转渐变以获得按下效果 */
+            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.4) 0%, rgba(0, 140, 255, 0.3) 100%); /* 按下时反转渐变以获得按下效果，BLUE值更高 */
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), inset 0 -1px 4px rgba(255,255,255,0.4);
             filter: brightness(0.9);
         }
@@ -759,41 +764,41 @@
             filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.7)); /* 白色光晕 */
         }
 
-        /* 窗口内容区 */
+        /* 窗口内容区 - 美化与文本颜色调整 */
         .os-window-content {
             flex-grow: 1;
             padding: 25px;
-            color: var(--text-color);
+            /* 调整为更透明的白色背景，并设置深蓝色文本颜色 */
+            background-color: rgba(255, 255, 255, 0.92); /* 略微不透明 */
+            color: var(--content-text-blue); 
             font-size: 1rem;
             line-height: 1.7;
             overflow: auto;
-            background-color: white; /* 设置窗口内容背景为白色 */
-        }
-
-        /* 每个窗口底部的状态栏 */
-        .os-window-status-bar {
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%);
-            border-top: 2px solid rgba(255, 255, 255, 0.5);
-            padding: 10px 20px;
-            color: white;
-            text-align: right;
-            border-radius: 0 0 18px 18px;
-            box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5);
+            border-radius: 0; 
+            text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.05); /* subtle shadow for overall content */
         }
 
         /* Markdown内容区专属样式 - 针对 Aero 可读性优化 */
-        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: #333; border-bottom: 3px solid var(--primary-blue); padding-bottom: 0.5em; text-shadow: none; }
-        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: #444; text-shadow: none; }
-        .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: #555; text-shadow: none; }
-        .os-window-content .markdown-content p { margin-bottom: 1.4em; opacity: 1; color: #333; } /* 确保全不透明度和更深的颜色 */
-        .os-window-content .markdown-content ul, .os-window-content .markdown-content ol { margin-left: 2.5em; margin-bottom: 1.4em; list-style-type: disc; opacity: 1; color: #333; }
+        .os-window-content .markdown-content h1 { font-size: 2.4em; margin-bottom: 0.7em; color: #111; border-bottom: 3px solid var(--primary-blue); padding-bottom: 0.5em; text-shadow: 0 0 2px rgba(0, 0, 0, 0.2); }
+        .os-window-content .markdown-content h2 { font-size: 2em; margin-bottom: 0.6em; color: #222; text-shadow: 0 0 1px rgba(0, 0, 0, 0.1); }
+        .os-window-content .markdown-content h3 { font-size: 1.6em; margin-bottom: 0.5em; color: #333; text-shadow: 0 0 1px rgba(0, 0, 0, 0.08); }
+        .os-window-content .markdown-content p { margin-bottom: 1.4em; opacity: 1; color: var(--content-text-blue); text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.03); }
+        .os-window-content .markdown-content ul, .os-window-content .markdown-content ol { margin-left: 2.5em; margin-bottom: 1.4em; list-style-type: disc; opacity: 1; color: var(--content-text-blue); text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.03); }
         .os-window-content .markdown-content li { margin-bottom: 0.8em; }
-        .os-window-content .markdown-content strong { font-weight: bold; color: #222; text-shadow: none; }
-        .os-window-content .markdown-content em { font-style: italic; opacity: 1; color: #444; }
-        .os-window-content .markdown-content a { color: var(--primary-blue); text-decoration: underline; text-shadow: none; }
-        .os-window-content .markdown-content code { background-color: #f0f0f0; padding: 0.3em 0.6em; border-radius: 8px; font-family: monospace; font-size: 0.95em; border: 1px solid #ddd; color: #333; }
-        .os-window-content .markdown-content pre { background-color: #f5f5f5; padding: 1.5em; border-radius: 12px; overflow-x: auto; margin-bottom: 1.8em; border: 1px solid #eee; box-shadow: inset 0 0 5px rgba(0,0,0,0.1); color: #333; }
-        .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 1; background-color: #f8f8f8; border-radius: 10px; padding-top: 1em; padding-bottom: 1em; color: #333; }
+        .os-window-content .markdown-content strong { font-weight: bold; color: #111; text-shadow: 0 0 1px rgba(0, 0, 0, 0.1); }
+        .os-window-content .markdown-content em { font-style: italic; opacity: 1; color: var(--content-text-blue); text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.02); }
+        .os-window-content .markdown-content a { 
+            color: var(--dark-blue); /* 调整链接颜色，使其在亮背景下更清晰 */
+            text-decoration: underline; 
+            text-shadow: none; 
+            transition: color 0.2s ease;
+        }
+        .os-window-content .markdown-content a:hover {
+            color: var(--primary-blue); /* 悬停时链接颜色变亮 */
+        }
+        .os-window-content .markdown-content code { background-color: #f0f0f0; padding: 0.3em 0.6em; border-radius: 8px; font-family: monospace; font-size: 0.95em; border: 1px solid #ddd; color: #333; text-shadow: none; }
+        .os-window-content .markdown-content pre { background-color: #f5f5f5; padding: 1.5em; border-radius: 12px; overflow-x: auto; margin-bottom: 1.8em; border: 1px solid #eee; box-shadow: inset 0 0 5px rgba(0,0,0,0.1); color: #333; text-shadow: none; }
+        .os-window-content .markdown-content blockquote { border-left: 8px solid var(--primary-blue); padding-left: 2em; margin-left: 0; opacity: 1; background-color: #f8f8f8; border-radius: 10px; padding-top: 1em; padding-bottom: 1em; color: #333; text-shadow: none; }
 
 
         /* 窗口弹出动画 - 更细腻 */
@@ -817,7 +822,7 @@
         }
 
         .work-card {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* 略微不透明 */
             border: 2px solid var(--glass-border-light);
             border-bottom: 2px solid var(--glass-border-dark);
             border-right: 2px solid var(--glass-border-dark);
@@ -841,7 +846,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at top left, rgba(255,255,255,0.15) 0%, transparent 55%);
+            background: radial-gradient(circle at top left, rgba(255,255,255,0.18) 0%, transparent 55%); /* 略微不透明 */
             border-radius: inherit;
             pointer-events: none;
         }
@@ -852,7 +857,7 @@
             box-shadow: 0 8px 25px var(--fa-glow-blue), inset 0 0 15px rgba(255,255,255,0.3);
             border-color: var(--primary-blue);
             filter: brightness(1.2);
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.2), rgba(0, 122, 204, 0.1));
+            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* BLUE值更高 */
         }
 
         .work-card img {
@@ -873,12 +878,12 @@
             font-weight: bold;
             margin-top: 15px;
             color: white;
-            text-shadow: 0 0 8px rgba(0,191,255,0.4);
+            text-shadow: 0 0 8px rgba(0,204,255,0.5); /* BLUE值更高 */
         }
 
         .work-card-category {
             font-size: 0.9rem;
-            color: var(--text-color);
+            color: var(--content-text-blue); /* 调整为深蓝色 */
             opacity: 0.95;
             margin-top: 6px;
         }
@@ -932,7 +937,7 @@
         .work-detail-content .gallery-nav-button .icon-image {
             width: 2em;
             height: 2em;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.7)); /* BLUE值更高 */
         }
 
         .work-detail-content .gallery-nav-button.prev {
@@ -979,17 +984,17 @@
             color: white;
             margin-bottom: 15px;
             text-align: center;
-            text-shadow: 0 0 10px rgba(0,191,255,0.6);
+            text-shadow: 0 0 10px rgba(0,204,255,0.7); /* BLUE值更高 */
         }
         .work-detail-content p {
             margin-bottom: 15px;
             text-align: justify;
             font-size: 1rem;
-            color: var(--text-color);
+            color: var(--content-text-blue); /* 调整为深蓝色 */
         }
         .work-detail-content .category-tag {
             display: inline-block;
-            background-color: rgba(0, 191, 255, 0.5);
+            background-color: rgba(0, 204, 255, 0.6); /* BLUE值更高 */
             border: 1px solid var(--primary-blue);
             border-radius: 10px;
             padding: 6px 12px;
@@ -1000,7 +1005,7 @@
             box-shadow: inset 0 0 8px rgba(255,255,255,0.2);
         }
         .service-category-card {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* 略微不透明 */
             border: 2px solid var(--glass-border-light);
             border-bottom: 2px solid var(--glass-border-dark);
             border-right: 2px solid var(--glass-border-dark);
@@ -1033,7 +1038,7 @@
             box-shadow: 0 10px 25px var(--fa-glow-blue), inset 0 0 12px rgba(255,255,255,0.3);
             border-color: var(--primary-blue);
             filter: brightness(1.2);
-            background: linear-gradient(to right, rgba(0, 191, 255, 0.3), rgba(0, 122, 204, 0.2));
+            background: linear-gradient(to right, rgba(0, 204, 255, 0.4), rgba(0, 140, 255, 0.3)); /* BLUE值更高 */
         }
 
         /* 任务栏最小化窗口图标 - 更玻璃质感 */
@@ -1072,14 +1077,14 @@
 
 
         .taskbar-minimized-icon:hover {
-            background: linear-gradient(to top, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%);
+            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
             transform: translateY(-4px);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 15px rgba(0,0,0,0.5);
         }
 
         /* 激活状态下的任务栏图标样式 */
         .taskbar-minimized-icon.active {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.6) 0%, rgba(0, 122, 204, 0.5) 100%);
+            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
             border-color: rgba(255, 255, 255, 0.7);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), 0 0 12px var(--primary-blue);
             transform: translateY(0);
@@ -1092,7 +1097,7 @@
         .taskbar-minimized-icon .icon-image {
             width: 1.2em;
             height: 1.2em;
-            filter: drop-shadow(0 0 8px rgba(0, 191, 255, 0.7));
+            filter: drop-shadow(0 0 8px rgba(0, 204, 255, 0.8)); /* BLUE值更高 */
             transition: filter 0.2s ease;
         }
         .taskbar-minimized-icon.active .icon-image {
@@ -1121,7 +1126,7 @@
             left: 100%;
             top: 0;
             width: 250px;
-            background: linear-gradient(to bottom right, rgba(0, 191, 255, 0.35), rgba(0, 122, 204, 0.25));
+            background: linear-gradient(to bottom right, rgba(0, 204, 255, 0.45), rgba(0, 140, 255, 0.35)); /* BLUE值更高 */
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 2px solid var(--glass-border-light);
@@ -1211,7 +1216,7 @@
 
         /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 0.9), rgba(0, 122, 204, 0.9));
+            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.95), rgba(0, 140, 255, 0.95)); /* BLUE值更高 */
             border-radius: 15px;
             border: 4px solid rgba(255, 255, 255, 0.5);
             transition: background 0.2s ease, box-shadow 0.2s ease;
@@ -1220,13 +1225,13 @@
 
         /* 滑块悬停时 */
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, rgba(0, 191, 255, 1), rgba(0, 122, 204, 1));
-            box-shadow: inset 0 0 12px rgba(255,255,255,0.4), 0 0 20px rgba(0,191,255,0.8);
+            background: linear-gradient(to bottom, rgba(0, 204, 255, 1), rgba(0, 140, 255, 1)); /* BLUE值更高 */
+            box-shadow: inset 0 0 12px rgba(255,255,255,0.4), 0 0 20px rgba(0,204,255,0.9); /* BLUE值更高 */
         }
 
         /* 轨道背景 */
         ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.18); /* 略微不透明 */
             border-radius: 15px;
         }
 
@@ -1260,7 +1265,7 @@
         /* Firefox滚动条样式 */
         html {
             scrollbar-width: thin;
-            scrollbar-color: rgba(0, 191, 255, 0.9) rgba(255, 255, 255, 0.15);
+            scrollbar-color: rgba(0, 204, 255, 0.95) rgba(255, 255, 255, 0.18); /* BLUE值更高 */
         }
 
         /* --- 移动端适配 (max-width: 768px) --- */
@@ -1342,7 +1347,7 @@
             .os-window-content .markdown-content p { font-size: 0.95rem; }
 
             .works-grid {
-                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* 作品集网格列数调整 */
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1f r)); /* 作品集网格列数调整 */
                 gap: 15px;
                 padding: 10px;
             }
@@ -1369,6 +1374,36 @@
                 width: 80px; /* 缩略图尺寸调整 */
                 height: 60px;
             }
+        }
+
+        /* 窗口状态栏 */
+        .os-window-status-bar {
+            padding: 8px 18px;
+            display: flex;
+            justify-content: space-between; /* 调整为两端对齐 */
+            align-items: center;
+            font-size: 0.85rem;
+            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* 匹配窗口的柔和渐变，BLUE值更高 */
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(255, 255, 255, 0.3); /* 轻微的顶部边框 */
+            border-radius: 0 0 20px 20px; /* 与窗口底部圆角保持一致 */
+            color: var(--content-text-blue); /* 使用内容文本的深蓝色 */
+            text-shadow: 0 0 0.5px rgba(0, 0, 0, 0.05);
+            box-shadow: inset 0 1px 3px rgba(255, 255, 255, 0.1), inset 0 -1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .os-window-status-bar .status-text {
+            color: var(--content-text-blue); /* 状态文本颜色 */
+            opacity: 0.9;
+            font-weight: 500;
+        }
+
+        .os-window-status-bar .system-branding-text {
+            color: white; /* 品牌文字为白色，更醒目 */
+            font-weight: bold;
+            text-shadow: 0 0 6px rgba(255, 255, 255, 0.8); /* 白色光晕，更强 */
+            opacity: 0.9;
         }
     </style>
 </head>
@@ -1580,6 +1615,12 @@
                 shutdownMenuItem: '关机',
                 shutdownMessage: '系统正在关机，再见！', // Added missing translation
 
+                // Status bar specific
+                statusBarBranding: '⧉ мax 係統 ⸸ 𝙈𝙖𝙭 𝙊𝙎 [𝙑ᵉʳ¹․⁰․⁰]',
+                statusBarStatusReady: '就绪',
+                statusBarStatusDragging: '正在拖动窗口...',
+                statusBarStatusResizing: '正在调整窗口大小...',
+
                 // 作品集部分
                 worksTitle: '我的作品集',
                 worksClickPrompt: '点击作品查看详情',
@@ -1722,6 +1763,12 @@ MAZKO 是一位专注于 **赛博朋克、Y2K、PSX 和故障艺术风格** 的�
                 shutdownMenuItem: 'Shutdown',
                 shutdownMessage: 'System is shutting down, Goodbye!',
 
+                // Status bar specific
+                statusBarBranding: '⧉ мax 係統 ⸸ 𝙈𝙖𝙭 𝙊𝙎 [𝙑ᵉʳ¹․⁰․⁰]', // Same branding text for English
+                statusBarStatusReady: 'Ready',
+                statusBarStatusDragging: 'Dragging Window...',
+                statusBarStatusResizing: 'Resizing Window...',
+
                 // Works section
                 worksTitle: 'My Works',
                 worksClickPrompt: 'Click on a work to view details',
@@ -1770,9 +1817,9 @@ Feel free to contact me through the following channels to explore the infinite p
                             detailContent: `
 # Character Modeling & Design
 
-I specialize in character design from concept to final render, with a particular focus on **PSX style and low-poly** domains.
+我擅长从概念到最终渲染的各类角色设计，尤其是在 **PSX风格和低多边形** 领域有深入研究。
 
-Services include:
+服务包括：
 
 * **Concept Sketches**: Providing multi-angle character concepts based on your ideas.
 * **3D Modeling**: Creating high-poly and low-poly models using tools like Blender/ZBrush.
@@ -1815,26 +1862,26 @@ Services include:
                     ]
                 },
 
-                // Socials section
-                socialsTitle: 'Social Media',
-                socialsDescription: 'Follow me on the platforms below to connect and interact.',
+                // 社交部分
+                socialsTitle: '社交媒体',
+                socialsDescription: '欢迎在以下平台关注我，与我互动。',
                 socialsLinks: [
-                    { name: 'Weibo', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
+                    { name: '微博', url: 'https://weibo.com/yourprofile', iconAssetKey: 'icon_weibo' },
                     { name: 'Instagram', url: 'https://instagram.com/yourprofile', iconAssetKey: 'icon_instagram' },
                     { name: 'ArtStation', url: 'https://artstation.com/yourprofile', iconAssetKey: 'icon_artstation' },
                     { name: 'Behance', url: 'https://behance.net/yourprofile', iconAssetKey: 'icon_behance_square' },
-                    { name: 'Email', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
+                    { name: '邮箱', url: 'mailto:your.email@example.com', iconAssetKey: 'icon_envelope' }
                 ],
 
-                // Settings section
+                // 设置部分
                 settings: {
                     title: 'System Settings',
                     description: 'Adjust your system preferences.',
                     options: [
-                        { id: 'language-toggle', type: 'language-toggle', label: 'Toggle Language' },
-                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: 'Show Desktop Icons' },
-                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: 'Enable System Animations (Unavailable)' },
-                        { id: 'reset-settings', type: 'button', label: 'Reset All Settings' }
+                        { id: 'language-toggle', type: 'language-toggle', label: '切换语言' },
+                        { id: 'desktop-icons-toggle', type: 'toggle', checked: true, label: '显示桌面图标' },
+                        { id: 'enable-animations', type: 'toggle', checked: true, disabled: true, label: '启用系统动画 (暂不可用)' },
+                        { id: 'reset-settings', type: 'button', label: '重置所有设置' }
                     ]
                 },
             }
@@ -2224,7 +2271,7 @@ Services include:
                             contentHTML = marked.parse(LANG_CONTENT[currentLanguage]?.socialsDescription || '') + `
                                 <div class="flex flex-wrap gap-4 mt-4">
                                     ${data?.links.map(link => `
-                                        <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
+                                        <a href="${link.url}" target="_blank" class="flex items-center space-x-2 hover:text-primary-blue transition-colors">
                                             <span class="icon-placeholder" data-asset-key="${link.iconAssetKey}"></span>
                                             <span>${link.name}</span>
                                         </a>
@@ -2316,7 +2363,7 @@ Services include:
                                         </div>
                                         <div class="gallery-thumbnails">
                                             ${currentWork.images.map((imgSrc, index) => `
-                                                <img src="${imgSrc}" alt="${currentWork.title} thumbnail ${index + 1}" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
+                                                <img src="${imgSrc}" alt="${currentWork.title} 缩略图" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
                                             `).join('')}
                                         </div>
                                         <h3>${currentWork.title}</h3>
@@ -2565,6 +2612,11 @@ Services include:
                 if (titleBar) {
                     titleBar.classList.remove('inactive');
                 }
+                // Update status bar text to "Ready" when brought to front
+                const statusBarTextElement = windowElement.querySelector('.os-window-status-bar .status-text');
+                if (statusBarTextElement) {
+                    statusBarTextElement.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
+                }
             }
             /**
              * @function openWindow
@@ -2674,7 +2726,8 @@ Services include:
                         ${finalContent}
                     </div>
                     <div class="os-window-status-bar">
-                        ${LANG_CONTENT[currentLanguage].systemName} ${LANG_CONTENT[currentLanguage].systemVersion}
+                        <span class="status-text">${LANG_CONTENT[currentLanguage].statusBarStatusReady}</span>
+                        <span class="system-branding-text">${LANG_CONTENT[currentLanguage].statusBarBranding}</span>
                     </div>
                 `;
 
@@ -2696,6 +2749,7 @@ Services include:
 
                 // Make window draggable
                 const titleBar = windowElement.querySelector('.os-window-title-bar');
+                const statusBarTextElement = windowElement.querySelector('.os-window-status-bar .status-text'); // Get status text element
                 let isDraggingWindow = false; // Renamed to avoid conflict with desktop icon dragging
                 let offsetXWindow, offsetYWindow;
 
@@ -2706,6 +2760,9 @@ Services include:
                         offsetYWindow = e.clientY - windowElement.getBoundingClientRect().top;
                         titleBar.style.cursor = 'grabbing'; // Changed to grab cursor
                         bringToFront(windowElement); // Bring to front when dragging starts
+                        if (statusBarTextElement) { // Update status text
+                            statusBarTextElement.textContent = LANG_CONTENT[currentLanguage].statusBarStatusDragging;
+                        }
                         console.log(`开始拖动窗口 "${windowId}"。`);
                     });
                 } else {
@@ -2734,6 +2791,9 @@ Services include:
                     if (isDraggingWindow) {
                         isDraggingWindow = false;
                         if (titleBar) titleBar.style.cursor = 'grab'; // Changed to grab cursor
+                        if (statusBarTextElement) { // Reset status text
+                            statusBarTextElement.textContent = LANG_CONTENT[currentLanguage].statusBarStatusReady;
+                        }
                         console.log(`停止拖动窗口 "${windowId}"。`);
                     }
                 });
@@ -2898,7 +2958,9 @@ Services include:
                 windowElement.style.left = windowElement.dataset.originalLeft;
                 windowElement.style.top = windowElement.dataset.originalTop;
                 windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
-                windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
+                /* Adjusted shadow for restored window to match unified border */
+                // Corrected: Use camelCase for CSS property `boxShadow`
+                windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; 
                 bringToFront(windowElement);
                 console.log(`窗口 "${windowElement.dataset.windowId}" 已恢复。`);
                 setActiveTaskbarIcon(windowElement.dataset.windowId); // Set its taskbar icon as active
@@ -2919,7 +2981,9 @@ Services include:
                     windowElement.style.left = windowElement.dataset.originalLeft;
                     windowElement.style.top = windowElement.dataset.originalTop;
                     windowElement.style.borderRadius = '20px'; // Restore border-radius for Aero
-                    windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; // Restore shadow using updated glow variable
+                    /* Adjusted shadow for restored window to match unified border */
+                    // Corrected: Use camelCase for CSS property `boxShadow`
+                    windowElement.style.boxShadow = '0 10px 40px var(--fa-glow-blue), inset 0 0 25px rgba(255, 255, 255, 0.4)'; 
                     console.log(`窗口 "${windowElement.dataset.windowId}" 已从最大化恢复。`);
                 } else {
                     // Maximize
@@ -3151,7 +3215,7 @@ Services include:
                             content = marked.parse(data?.description || '') + `
                                 <div class="flex flex-wrap gap-4 mt-4">
                                     ${data?.links.map(link => `
-                                        <a href="${link.url}" target="_blank" class="flex items-center space-x-2 text-white hover:text-primary-blue transition-colors">
+                                        <a href="${link.url}" target="_blank" class="flex items-center space-x-2 hover:text-primary-blue transition-colors">
                                             <span class="icon-placeholder" data-asset-key="${link.iconAssetKey}"></span>
                                             <span>${link.name}</span>
                                         </a>
