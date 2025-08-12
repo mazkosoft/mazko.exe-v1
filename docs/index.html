@@ -2350,20 +2350,25 @@ Services include:
                             break;
                         case 'work-detail-' + winData.windowId.replace('work-detail-', ''):
                             if (currentWork) {
-                                let currentImageIndex = 0; // This state is lost on re-render, will default to 0
-                                // 此状态在重新渲染时丢失，将默认为 0
+                                // For re-opening, we might need to preserve the image index if possible, but default to 0
+                                // for simplicity here.
+                                let initialImageIndex = 0; 
                                 contentHTML = `
                                     <div class="work-detail-content">
                                         <div class="gallery-main-image-container">
-                                            <img src="${currentWork.images[currentImageIndex]}" alt="${currentWork.title}" class="gallery-main-image">
+                                            <img src="${currentWork.images[initialImageIndex]}" alt="${currentWork.title}" class="gallery-main-image">
                                             ${currentWork.images.length > 1 ? `
-                                                <button class="gallery-nav-button prev" data-direction="prev"><span class="icon-placeholder" data-asset-key="icon_chevron_left"></span></button>
-                                                <button class="gallery-nav-button next" data-direction="next"><span class="icon-placeholder" data-asset-key="icon_chevron_right"></span></button>
+                                                <button class="gallery-nav-button prev" data-direction="prev" title="上一张图片">
+                                                    <span class="icon-placeholder" data-asset-key="icon_chevron_left"></span>
+                                                </button>
+                                                <button class="gallery-nav-button next" data-direction="next" title="下一张图片">
+                                                    <span class="icon-placeholder" data-asset-key="icon_chevron_right"></span>
+                                                </button>
                                             ` : ''}
                                         </div>
                                         <div class="gallery-thumbnails">
                                             ${currentWork.images.map((imgSrc, index) => `
-                                                <img src="${imgSrc}" alt="${currentWork.title} 缩略图" class="gallery-thumbnail ${index === currentImageIndex ? 'active' : ''}" data-index="${index}">
+                                                <img src="${imgSrc}" alt="${currentWork.title} 缩略图" class="gallery-thumbnail ${index === initialImageIndex ? 'active' : ''}" data-index="${index}">
                                             `).join('')}
                                         </div>
                                         <h3>${currentWork.title}</h3>
@@ -3040,7 +3045,65 @@ Services include:
                     </div>
                 `;
                 
-                openWindow('work-detail-' + work.id, chineseTitle, englishTitle, detailContent, 'work-detail-' + work.id);
+                // Open the window and then attach gallery event listeners
+                openWindow('work-detail-' + work.id, chineseTitle, englishTitle, detailContent, 'work-detail-' + work.id)
+                    .then(detailWindowElement => {
+                        // Ensure window elements are present before attaching listeners
+                        if (detailWindowElement) {
+                            const mainImage = detailWindowElement.querySelector('.gallery-main-image');
+                            const prevButton = detailWindowElement.querySelector('.gallery-nav-button.prev');
+                            const nextButton = detailWindowElement.querySelector('.gallery-nav-button.next');
+                            const thumbnailsContainer = detailWindowElement.querySelector('.gallery-thumbnails');
+                            const thumbnails = detailWindowElement.querySelectorAll('.gallery-thumbnail');
+
+                            /**
+                             * @function updateGallery
+                             * @description Updates the main image and active thumbnail based on the current image index.
+                             * @returns {void}
+                             */
+                            const updateGallery = () => {
+                                if (mainImage) {
+                                    mainImage.src = work.images[currentImageIndex];
+                                    mainImage.alt = `${work.title} - 图片 ${currentImageIndex + 1}`;
+                                }
+                                thumbnails.forEach((thumb, index) => {
+                                    if (index === currentImageIndex) {
+                                        thumb.classList.add('active');
+                                    } else {
+                                        thumb.classList.remove('active');
+                                    }
+                                });
+                            };
+
+                            if (prevButton) {
+                                prevButton.addEventListener('click', () => {
+                                    currentImageIndex = (currentImageIndex - 1 + work.images.length) % work.images.length;
+                                    updateGallery();
+                                });
+                            }
+
+                            if (nextButton) {
+                                nextButton.addEventListener('click', () => {
+                                    currentImageIndex = (currentImageIndex + 1) % work.images.length;
+                                    updateGallery();
+                                });
+                            }
+
+                            if (thumbnailsContainer) {
+                                thumbnailsContainer.addEventListener('click', (e) => {
+                                    const clickedThumbnail = e.target.closest('.gallery-thumbnail');
+                                    if (clickedThumbnail) {
+                                        const newIndex = parseInt(clickedThumbnail.dataset.index, 10);
+                                        if (!isNaN(newIndex) && newIndex !== currentImageIndex) {
+                                            currentImageIndex = newIndex;
+                                            updateGallery();
+                                        }
+                                    }
+                                });
+                            }
+                            updateGallery(); // Initial display of the gallery
+                        }
+                    });
             }
 
             function openServiceCategoryDetail(category) {
