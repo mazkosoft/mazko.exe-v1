@@ -74,6 +74,10 @@
             --cursor-pointer: pointer;
 
             --desktop-image-url:  url('./assets/backgrounds/test_bg.jpg'); /* 桌面背景图片的CSS变量 */
+
+            /* 新增：扫描线纹理 */
+            --scanline-texture: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4'%3E%3Crect width='4' height='1' fill='rgba(255,255,255,0.08)'/%3E%3C/svg%3E");
+            --scanline-blend-mode: soft-light;
         }
 
         body {
@@ -124,14 +128,15 @@
         }
         /* 当背景图片激活时，隐藏伪元素 */
         .desktop-background-image-active {
-            background-image: var(--desktop-image-url) !important; /* 设置图片并确保其覆盖 */
-            background-color: transparent !important; /* 关键：确保底下没有实色 */
-            opacity: 1 !important; /* 确保完全不透明 */
-            filter: none !important; /* 无滤镜 */
+            background-image: var(--scanline-texture), var(--desktop-image-url) !important; /* Set image and ensure it covers */
+            background-color: transparent !important; /* Critical: ensure no solid color underneath */
+            opacity: 1 !important; /* Ensure full opacity */
+            filter: none !important; /* No filter */
+            background-blend-mode: var(--scanline-blend-mode);
         }
         .desktop-background-image-active::before,
         .desktop-background-image-active::after {
-            display: none !important; /* 确保伪元素被隐藏 */
+            display: none !important; /* Ensure pseudo-elements are hidden */
         }
 
         /* 模拟细微噪点/颗粒纹理 - Aero 必备 */
@@ -206,7 +211,8 @@
             width: 100%; /* 全宽 */
             height: var(--taskbar-height); /* 固定高度 */
             /* 背景和边框调整以匹配状态栏 */
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end)); /* 匹配状态栏渐变 */
+            background: var(--scanline-texture), linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end)); /* 匹配状态栏渐变 */
+            background-blend-mode: var(--scanline-blend-mode);
             backdrop-filter: blur(20px); /* 更强的模糊效果 */
             -webkit-backdrop-filter: blur(20px); /* Safari 支持 */
             border-top: 1px solid var(--glass-border-light); /* 新蓝色边框 */
@@ -222,7 +228,8 @@
 
         /* 开始按钮 - 高度细致的 Aero 风格，现在是蓝色调 */
         .start-button {
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
+            background: var(--scanline-texture), linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
+            background-blend-mode: var(--scanline-blend-mode);
             border: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 50%; /* 圆形 */
             width: 48px; /* 稍大一些 */
@@ -270,7 +277,8 @@
 
 
         .start-button:hover {
-            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* 悬停时稍微更不透明，BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* 悬停时稍微更不透明，BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             transform: translateY(-4px); /* 更明显的抬起效果 */
             border-color: rgba(255, 255, 255, 0.7);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 8px 25px var(--fa-glow-blue);
@@ -280,7 +288,8 @@
         }
 
         .start-button:active {
-            background: linear-gradient(to bottom, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 按下时反转渐变以获得按下效果 */
+            background: var(--scanline-texture), linear-gradient(to bottom, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 按下时反转渐变以获得按下效果 */
+            background-blend-mode: var(--scanline-blend-mode);
             transform: translateY(0);
             box-shadow: inset 0 2px 10px rgba(0,0,0,0.7), inset 0 -2px 8px rgba(255,255,255,0.5);
             filter: brightness(0.9);
@@ -404,7 +413,8 @@
             width: 380px;
             height: auto;
             max-height: calc(100% - var(--taskbar-height) - 40px);
-            background: linear-gradient(to bottom right, rgba(0, 204, 255, 0.4), rgba(0, 140, 255, 0.3)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom right, rgba(0, 204, 255, 0.4), rgba(0, 140, 255, 0.3)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 2px solid var(--glass-border-light);
@@ -428,11 +438,12 @@
 
         /* 开始菜单头部（带个人信息） - 更突出，现在是蓝色调 */
         .start-menu-header {
+            background: var(--scanline-texture), linear-gradient(to right, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             display: flex;
             align-items: center;
             padding: 15px;
             margin-bottom: 15px;
-            background: linear-gradient(to right, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
             border-radius: 18px;
             border: 1px solid var(--glass-border-light);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.5), inset 0 -1px 5px rgba(255,255,255,0.4);
@@ -500,7 +511,8 @@
         }
 
         .start-menu-item:hover {
-            background: linear-gradient(to right, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
+            background: var(--scanline-texture), linear-gradient(to right, var(--fa-blue-gradient-strong-start) 0%, var(--fa-blue-gradient-strong-end) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             transform: translateX(10px);
             color: white;
             text-shadow: 0 0 12px rgba(255,255,255,1);
@@ -541,13 +553,14 @@
 
         /* 开始菜单底部图标按钮的新样式 - 更果冻感 */
         .start-menu-footer-button {
+            background: var(--scanline-texture), linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
+            background-blend-mode: var(--scanline-blend-mode);
             width: 58px;
             height: 58px;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
             border: 2px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 15px;
             cursor: pointer;
@@ -570,14 +583,16 @@
         }
 
         .start-menu-footer-button:hover {
-            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             transform: translateY(-4px);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 6px 20px var(--fa-glow-blue);
         }
 
         .start-menu-footer-button:active {
             transform: translateY(0);
-            background: linear-gradient(to bottom, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%);
+            background: var(--scanline-texture), linear-gradient(to bottom, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), inset 0 -2px 6px rgba(255,255,255,0.5);
             filter: brightness(0.9);
         }
@@ -603,7 +618,8 @@
         /* 窗口样式（保留玻璃质感） - Aero 重点 */
         .os-window {
             position: absolute;
-            background: linear-gradient(to bottom right, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom right, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             backdrop-filter: blur(35px);
             -webkit-backdrop-filter: blur(35px);
             /* 统一边框，使其看起来像一个整体的玻璃块 */
@@ -637,7 +653,8 @@
 
         /* 窗口标题栏 - 增强 Frutiger Aero 风格 */
         .os-window-title-bar {
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
+            background: var(--scanline-texture), linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏的半透明渐变 */
+            background-blend-mode: var(--scanline-blend-mode);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             padding: 10px 18px;
@@ -668,7 +685,8 @@
         }
 
         .os-window-title-bar.inactive {
-            background: linear-gradient(to top, rgba(0, 204, 255, 0.4) 0%, rgba(0, 140, 255, 0.3) 100%); /* 稍微更柔和的非激活渐变，BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to top, rgba(0, 204, 255, 0.4) 0%, rgba(0, 140, 255, 0.3) 100%); /* 稍微更柔和的非激活渐变，BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             border-bottom: none; /* 确保非活跃时也没有底部边框 */
             box-shadow: inset 0 -1px 5px rgba(0,0,0,0.3);
         }
@@ -716,7 +734,8 @@
             transition: background-color 0.15s ease, transform 0.1s ease, box-shadow 0.15s ease;
             
             /* 新的默认样式，匹配状态栏的半透明效果 */
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏 */
+            background: var(--scanline-texture), linear-gradient(to top, var(--fa-blue-gradient-translucent-start) 0%, var(--fa-blue-gradient-translucent-end) 100%); /* 匹配状态栏 */
+            background-blend-mode: var(--scanline-blend-mode);
             border: 1px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             box-shadow: inset 0 -2px 8px rgba(0,0,0,0.5), 0 2px 6px rgba(0,0,0,0.3); /* 匹配状态栏的阴影，加上一些外部阴影 */
 
@@ -740,13 +759,15 @@
         .os-window-controls .control-button:hover {
             transform: scale(1.1);
             filter: brightness(1.2);
-            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* 悬停时稍微更不透明，BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* 悬停时稍微更不透明，BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             border-color: rgba(255, 255, 255, 0.7);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(0,204,255,0.7); /* 更强的蓝色光晕，BLUE值更高 */
         }
         /* 关闭按钮的特殊悬停效果，如果需要红色 */
         .os-window-controls .control-button.close:hover {
-             background: linear-gradient(to top, rgba(255,0,0,0.5) 0%, rgba(180,0,0,0.4) 100%);
+             background: var(--scanline-texture), linear-gradient(to top, rgba(255,0,0,0.5) 0%, rgba(180,0,0,0.4) 100%);
+             background-blend-mode: var(--scanline-blend-mode);
              border-color: rgba(255,255,255,0.7);
              box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 10px rgba(255,0,0,0.6);
         }
@@ -754,7 +775,8 @@
         .os-window-controls .control-button:active {
             transform: scale(0.95);
             opacity: 1;
-            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.4) 0%, rgba(0, 140, 255, 0.3) 100%); /* 按下时反转渐变以获得按下效果，BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(0, 204, 255, 0.4) 0%, rgba(0, 140, 255, 0.3) 100%); /* 按下时反转渐变以获得按下效果，BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), inset 0 -1px 4px rgba(255,255,255,0.4);
             filter: brightness(0.9);
         }
@@ -822,7 +844,8 @@
         }
 
         .work-card {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* 略微不透明 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* 略微不透明 */
+            background-blend-mode: var(--scanline-blend-mode);
             border: 2px solid var(--glass-border-light);
             border-bottom: 2px solid var(--glass-border-dark);
             border-right: 2px solid var(--glass-border-dark);
@@ -857,7 +880,8 @@
             box-shadow: 0 8px 25px var(--fa-glow-blue), inset 0 0 15px rgba(255,255,255,0.3);
             border-color: var(--primary-blue);
             filter: brightness(1.2);
-            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
         }
 
         .work-card img {
@@ -994,7 +1018,8 @@
         }
         .work-detail-content .category-tag {
             display: inline-block;
-            background-color: rgba(0, 204, 255, 0.6); /* BLUE值更高 */
+            background-color: var(--scanline-texture), rgba(0, 204, 255, 0.6); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             border: 1px solid var(--primary-blue);
             border-radius: 10px;
             padding: 6px 12px;
@@ -1005,7 +1030,8 @@
             box-shadow: inset 0 0 8px rgba(255,255,255,0.2);
         }
         .service-category-card {
-            background: linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* 略微不透明 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0.08)); /* 略微不透明 */
+            background-blend-mode: var(--scanline-blend-mode);
             border: 2px solid var(--glass-border-light);
             border-bottom: 2px solid var(--glass-border-dark);
             border-right: 2px solid var(--glass-border-dark);
@@ -1038,12 +1064,14 @@
             box-shadow: 0 10px 25px var(--fa-glow-blue), inset 0 0 12px rgba(255,255,255,0.3);
             border-color: var(--primary-blue);
             filter: brightness(1.2);
-            background: linear-gradient(to right, rgba(0, 204, 255, 0.4), rgba(0, 140, 255, 0.3)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to right, rgba(0, 204, 255, 0.4), rgba(0, 140, 255, 0.3)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
         }
 
         /* 任务栏最小化窗口图标 - 更玻璃质感 */
         .taskbar-minimized-icon {
-            background: linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end));
+            background: var(--scanline-texture), linear-gradient(to top, var(--fa-blue-gradient-translucent-start), var(--fa-blue-gradient-translucent-end));
+            background-blend-mode: var(--scanline-blend-mode);
             border: 1px solid rgba(255, 255, 255, 0.5); /* 匹配状态栏的边框 */
             border-radius: 12px;
             padding: 8px 12px;
@@ -1077,14 +1105,16 @@
 
 
         .taskbar-minimized-icon:hover {
-            background: linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to top, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             transform: translateY(-4px);
             box-shadow: inset 0 -2px 10px rgba(0,0,0,0.6), 0 4px 15px rgba(0,0,0,0.5);
         }
 
         /* 激活状态下的任务栏图标样式 */
         .taskbar-minimized-icon.active {
-            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(0, 204, 255, 0.7) 0%, rgba(0, 140, 255, 0.6) 100%); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             border-color: rgba(255, 255, 255, 0.7);
             box-shadow: inset 0 2px 8px rgba(0,0,0,0.7), 0 0 12px var(--primary-blue);
             transform: translateY(0);
@@ -1126,7 +1156,8 @@
             left: 100%;
             top: 0;
             width: 250px;
-            background: linear-gradient(to bottom right, rgba(0, 204, 255, 0.45), rgba(0, 140, 255, 0.35)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom right, rgba(0, 204, 255, 0.45), rgba(0, 140, 255, 0.35)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 2px solid var(--glass-border-light);
@@ -1185,7 +1216,8 @@
         }
 
         input:checked + .toggle-slider {
-            background: linear-gradient(to right, var(--primary-blue) 0%, var(--mid-blue) 100%);
+            background: var(--scanline-texture), linear-gradient(to right, var(--primary-blue) 0%, var(--mid-blue) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             border-color: var(--dark-blue);
         }
 
@@ -1216,7 +1248,8 @@
 
         /* 滚动条滑块 */
         ::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.95), rgba(0, 140, 255, 0.95)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(0, 204, 255, 0.95), rgba(0, 140, 255, 0.95)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             border-radius: 15px;
             border: 4px solid rgba(255, 255, 255, 0.5);
             transition: background 0.2s ease, box-shadow 0.2s ease;
@@ -1225,7 +1258,8 @@
 
         /* 滑块悬停时 */
         ::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(to bottom, rgba(0, 204, 255, 1), rgba(0, 140, 255, 1)); /* BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(0, 204, 255, 1), rgba(0, 140, 255, 1)); /* BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             box-shadow: inset 0 0 12px rgba(255,255,255,0.4), 0 0 20px rgba(0,204,255,0.9); /* BLUE值更高 */
         }
 
@@ -1237,7 +1271,8 @@
 
         /* 滚动条按钮（箭头） - 更突出更光泽 */
         ::-webkit-scrollbar-button {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%);
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             border-radius: 50%;
             height: 28px;
             width: 28px;
@@ -1248,14 +1283,16 @@
         }
 
         ::-webkit-scrollbar-button:hover {
-            background: linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.2) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             transform: scale(1.15);
             filter: brightness(1.3);
             box-shadow: inset 0 2px 10px rgba(255,255,255,1), 0 4px 15px rgba(0,0,0,0.8);
         }
 
         ::-webkit-scrollbar-button:active {
-            background: linear-gradient(to top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%);
+            background: var(--scanline-texture), linear-gradient(to top, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.15) 100%);
+            background-blend-mode: var(--scanline-blend-mode);
             transform: scale(0.9);
             opacity: 1;
             box-shadow: inset 0 0 10px rgba(0,0,0,0.9), inset 0 -2px 8px rgba(255,255,255,0.7);
@@ -1383,7 +1420,8 @@
             justify-content: space-between; /* 调整为两端对齐 */
             align-items: center;
             font-size: 0.85rem;
-            background: linear-gradient(to bottom, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* 匹配窗口的柔和渐变，BLUE值更高 */
+            background: var(--scanline-texture), linear-gradient(to bottom, rgba(0, 204, 255, 0.3), rgba(0, 140, 255, 0.2)); /* 匹配窗口的柔和渐变，BLUE值更高 */
+            background-blend-mode: var(--scanline-blend-mode);
             backdrop-filter: blur(10px);
             -webkit-backdrop-filter: blur(10px);
             border-top: 1px solid rgba(255, 255, 255, 0.3); /* 轻微的顶部边框 */
@@ -2016,6 +2054,7 @@ Services include:
                     // Re-apply default background gradients if no image is set
                     // 如果没有设置图像，则重新应用默认背景渐变
                     desktopBackground.style.backgroundImage = `
+                        var(--scanline-texture),
                         radial-gradient(circle at 10% 90%, rgba(0,191,255,0.3) 0%, transparent 45%),
                         radial-gradient(circle at 90% 10%, rgba(0,191,255,0.3) 0%, transparent 45%),
                         radial-gradient(ellipse at center, rgba(0,122,204,0.15) 0%, transparent 55%),
@@ -2023,6 +2062,7 @@ Services include:
                     `;
                     desktopBackground.style.opacity = '0.95';
                     desktopBackground.style.filter = 'brightness(0.9) contrast(1.1)';
+                    desktopBackground.style.backgroundBlendMode = 'var(--scanline-blend-mode)';
                     console.log('未指定桌面背景图像，回退到渐变。');
                 }
             }
